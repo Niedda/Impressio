@@ -31,6 +31,8 @@ namespace Impressio.Models
 
     public override string Table { get { return "Print"; } }
 
+    public override int Identity { get; set; }
+
     public int FkPrintPaper { get; set; }
 
     public Paper Paper
@@ -88,7 +90,11 @@ namespace Impressio.Models
     public int PaperUsePer { get; set; }
 
     public bool IsPredefined { get; set; }
+    
+    public string Name { get; set; }
 
+    public int FkOrder { get; set; }
+    
     public decimal? PaperCostTotal
     {
       get { return ((PaperPricePer * (PaperAddition + 100)) * (PaperAmount / 1000)) / 100; }
@@ -98,30 +104,20 @@ namespace Impressio.Models
     {
       get
       {
+        double total = 0;
+
         if (ClickCost != null)
         {
-          double total = ClickCost.Cost * PrintAmount;
+          total = ClickCost.Cost * PrintAmount;
 
           if (PrintType == 1)
           {
             return (total * 2).GetInt();
           }
-          return total.GetInt();
         }
-        return null;
+        return total.GetInt();
       }
     }
-
-    public override List<Print> Objects
-    {
-      get { return _prints; }
-    }
-
-    public override int Identity { get; set; }
-
-    public string Name { get; set; }
-
-    public int FkOrder { get; set; }
 
     public int PositionTotal
     {
@@ -159,6 +155,8 @@ namespace Impressio.Models
     {
       _predefinedPrints.Clear();
     }
+
+    public override List<Print> Objects { get { return _prints; } }
 
     public override void SetObject()
     {

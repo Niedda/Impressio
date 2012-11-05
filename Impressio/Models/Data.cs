@@ -70,6 +70,7 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
+      Identity = Database.Reader[IdentityColumn].GetInt();
       FkOrder = Database.Reader["FkDataOrder"].GetInt();
       Name = Database.Reader["PositionName"] as string;
       PositionTotal = Database.Reader["PositionTotal"].GetInt();
@@ -142,10 +143,7 @@ namespace Impressio.Models
       get { return PricePerQuantity*Quantity; }
     }
 
-    public override List<DataPosition> Objects
-    {
-      get { return _dataPositions; }
-    }
+    public override List<DataPosition> Objects { get { return _dataPositions; } }
 
     public override void SetObject()
     {

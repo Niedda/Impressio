@@ -43,7 +43,10 @@ namespace Impressio.Models
 
     public List<FinishPosition> FinishPositions
     {
-      get { return _finishPosition.LoadObjectList(FinishPosition.Columns.FkFinishFinishPosition, Identity); }
+      get
+      {
+        return _finishPosition ?? (_finishPosition = new FinishPosition().LoadObjectList(FinishPosition.Columns.FkFinishFinishPosition, Identity));
+      }
     }
 
     public Type Type
@@ -70,11 +73,12 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Name = Database.Reader["PositionName"] as string;
-      FkOrder = Database.Reader["FkFinishOrder"].GetInt();
-      IsPredefined = (bool)Database.Reader["IsPredefined"];
-      Remark = Database.Reader["Remark"] as string;
-      PositionTotal = Database.Reader["PositionTotal"].GetInt();
+      Identity = Database.Reader[IdentityColumn].GetInt();
+      Name = Database.Reader[Columns.PositionName.ToString()] as string;
+      FkOrder = Database.Reader[Columns.FkFinishOrder.ToString()].GetInt();
+      IsPredefined = (bool)Database.Reader[Columns.IsPredefined.ToString()];
+      Remark = Database.Reader[Columns.Remark.ToString()] as string;
+      PositionTotal = Database.Reader[Columns.PositionTotal.ToString()].GetInt();
     }
 
     public override void SetObjectList()
@@ -101,7 +105,7 @@ namespace Impressio.Models
                };
     }
 
-    private readonly FinishPosition _finishPosition = new FinishPosition();
+    private List<FinishPosition> _finishPosition;
 
     private readonly List<Finish> _finishes = new List<Finish>();
 
@@ -122,7 +126,7 @@ namespace Impressio.Models
     }
 
     #endregion
-    
+
     public override int Identity { get; set; }
 
     public override string IdentityColumn { get { return "FinishPositionId"; } }
@@ -148,13 +152,12 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Description = Database.Reader["Description"] as string;
-      FkFinishFinishPosition = Database.Reader["FkFinishFinishPosition"].GetInt();
-      Identity = Database.Reader["FinishPositionId"].GetInt();
-      IsPredefined = (bool)Database.Reader["IsPredefined"];
-      PricePerQuantity = Database.Reader["PricePerQuantity"].GetInt();
-      PriceTotal = Database.Reader["PositionTotal"].GetInt();
-      Quantity = Database.Reader["Quantity"].GetInt();
+      Identity = Database.Reader[IdentityColumn].GetInt();
+      Description = Database.Reader[Columns.Description.ToString()] as string;
+      FkFinishFinishPosition = Database.Reader[Columns.FkFinishFinishPosition.ToString()].GetInt();
+      PricePerQuantity = Database.Reader[Columns.PricePerQuantity.ToString()].GetInt();
+      PriceTotal = Database.Reader[Columns.PriceTotal.ToString()].GetInt();
+      Quantity = Database.Reader[Columns.Quantity.ToString()].GetInt();
     }
 
     public override void SetObjectList()

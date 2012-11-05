@@ -262,9 +262,7 @@ namespace Impressio.Models
     private string _dateCreated;
 
     private string _userCreated;
-
-    private readonly Company _company = new Company();
-
+    
     private List<Address> _address;
 
     private List<Client> _client;
