@@ -9,15 +9,17 @@ namespace Impressio.Views
 {
   public partial class DeliveryView : XtraForm
   {
-    private readonly DeliveryControl _deliveryControl = new DeliveryControl();
-    private readonly DeliveryOverviewControl _deliveryOverviewControl = new DeliveryOverviewControl();
-    public Order Order;
-
     public DeliveryView()
     {
       InitializeComponent();
     }
 
+    public Order Order = new Order();
+
+    private readonly DeliveryControl _deliveryControl = new DeliveryControl();
+
+    private readonly DeliveryOverviewControl _deliveryOverviewControl = new DeliveryOverviewControl();
+    
     private void DeliveryViewLoad(object sender, EventArgs e)
     {
       _deliveryOverviewControl.Order = Order;
@@ -46,13 +48,11 @@ namespace Impressio.Views
 
     private void NavPrintLinkClicked(object sender, NavBarLinkEventArgs e)
     {
-      var delivery = _deliveryOverviewControl.viewDelivery.GetFocusedRow() as Delivery;
-
-      if (delivery != null)
+      if (_deliveryOverviewControl.FocusedRow != null)
       {
         var report = new DeliveryReport
                        {
-                         deliveryBindingSource = {DataSource = delivery,},
+                         deliveryBindingSource = {DataSource = _deliveryOverviewControl.FocusedRow,},
                        };
         report.ShowPreview();
       }

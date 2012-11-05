@@ -25,30 +25,6 @@ namespace Impressio.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=bizzi_asus\\SQLEXPRESS;Database=foernuft;User Id=user;Password=2104;")]
-        public string connectionString {
-            get {
-                return ((string)(this["connectionString"]));
-            }
-            set {
-                this["connectionString"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\bizzi\\Desktop\\Development\\AAA Digital Rape")]
-        public string logPath {
-            get {
-                return ((string)(this["logPath"]));
-            }
-            set {
-                this["logPath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool exceptionMode {
             get {
@@ -68,18 +44,6 @@ namespace Impressio.Properties {
             }
             set {
                 this["User"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\bizzi\\testfolder\\")]
-        public string folderPath {
-            get {
-                return ((string)(this["folderPath"]));
-            }
-            set {
-                this["folderPath"] = value;
             }
         }
         
@@ -116,6 +80,43 @@ namespace Impressio.Properties {
             }
             set {
                 this["PathToCompactDb"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\r\n\t\t\t\t\tServer=bizzi_asus\\SQLEXPRESS;Database=foernuft;User Id=user;Password=2104;" +
+            "\r\n\t\t\t\t")]
+        public string connectionString {
+            get {
+                return ((string)(this["connectionString"]));
+            }
+            set {
+                this["connectionString"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\r\n\t\t\t\t\tC:\\Users\\bizzi\\Desktop\\Development\\AAA Digital Rape\r\n\t\t\t\t")]
+        public string logPath {
+            get {
+                return ((string)(this["logPath"]));
+            }
+            set {
+                this["logPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\r\n\t\t\t\t\tC:\\Users\\bizzi\\testfolder\\\r\n\t\t\t\t")]
+        public string folderPath {
+            get {
+                return ((string)(this["folderPath"]));
+            }
+            set {
+                this["folderPath"] = value;
             }
         }
     }

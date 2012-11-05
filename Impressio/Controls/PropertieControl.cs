@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
+using Impressio.Models;
+using Impressio.Models.Database;
 using Impressio.Properties;
 
 namespace Impressio.Controls
 {
-  public partial class PropertieControl : ControlBase
+  public partial class PropertieControl : ControlBase, IControl
   {
     public PropertieControl()
     {
@@ -13,6 +15,7 @@ namespace Impressio.Controls
 
     public void ReloadControl()
     {
+      _isLoaded = false;
       database.Text = Settings.Default.databaseEngine;
       logger.Text = Settings.Default.loggerEngine;
       dbConnectionString.Text = Settings.Default.connectionString;
@@ -20,8 +23,15 @@ namespace Impressio.Controls
       logFolderPath.Text = Settings.Default.logPath;
       pathData.Text = Settings.Default.folderPath;
       exceptionMode.Checked = Settings.Default.exceptionMode;
-      pathToCompactDb.Text = Settings.Default.PathToCompactDb;
+      _isLoaded = true;
     }
+
+    public bool ValidateControl()
+    {
+      return !ErrorProvider.HasErrors;
+    }
+
+    private bool _isLoaded;
 
     private void PropertieControlLoad(object sender, EventArgs e)
     {
@@ -54,12 +64,16 @@ namespace Impressio.Controls
 
     private void ExceptionModeCheckedChanged(object sender, EventArgs e)
     {
-      Settings.Default.exceptionMode = exceptionMode.Checked;
-      Settings.Default.Save();
+      if (_isLoaded)
+      {
+        Settings.Default.exceptionMode = exceptionMode.Checked;
+        Settings.Default.Save();
+      }
     }
 
     private void UserEditValueChanged(object sender, EventArgs e)
     {
+      ErrorProvider.ClearErrors();
       CheckEditor(user);
 
       if (!ErrorProvider.HasErrors)
@@ -85,26 +99,22 @@ namespace Impressio.Controls
 
     private void DatabaseSelectedIndexChanged(object sender, EventArgs e)
     {
-      Settings.Default.databaseEngine = database.Text;
-      Settings.Default.Save();
+      if(_isLoaded && database.Text == "compact" )
+      {
+        var compact = new SqlCompactDatabase();
+
+        if(!compact.CreateNewCompactDatabase("myDatabase"))
+        {
+          ErrorProvider.SetError(database, "Fehler bei der Erstellung der Datenbank");
+          database.SelectedIndex = 1;
+        }
+      }
     }
 
     private void LoggerSelectedIndexChanged(object sender, EventArgs e)
     {
       Settings.Default.loggerEngine = logger.Text;
       Settings.Default.Save();
-    }
-
-    private void PathToCompactDbEnter(object sender, EventArgs e)
-    {
-      DialogResult result = folderBrowser.ShowDialog();
-
-      if (result == DialogResult.OK)
-      {
-        Settings.Default.PathToCompactDb = folderBrowser.SelectedPath;
-        pathToCompactDb.Text = folderBrowser.SelectedPath;
-        Settings.Default.Save();
-      }
     }
   }
 }

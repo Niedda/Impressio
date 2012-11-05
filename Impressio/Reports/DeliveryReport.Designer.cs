@@ -47,11 +47,11 @@ namespace Impressio.Reports
       this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
       this.footerLabel = new DevExpress.XtraReports.UI.XRLabel();
       this.greetsLabel = new DevExpress.XtraReports.UI.XRLabel();
+      this.deliveryBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
       this.Detail1 = new DevExpress.XtraReports.UI.DetailBand();
       this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
       this.xrLabel6 = new DevExpress.XtraReports.UI.XRLabel();
-      this.deliveryBindingSource = new System.Windows.Forms.BindingSource(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.deliveryBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
       // 
@@ -235,6 +235,10 @@ namespace Impressio.Reports
       this.greetsLabel.StylePriority.UseFont = false;
       this.greetsLabel.Text = "Mit freundlichen Grüssen";
       // 
+      // deliveryBindingSource
+      // 
+      this.deliveryBindingSource.DataSource = typeof(Impressio.Models.Delivery);
+      // 
       // DetailReport
       // 
       this.DetailReport.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -249,36 +253,28 @@ namespace Impressio.Reports
       this.Detail1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrLabel6,
             this.xrLabel5});
-      this.Detail1.HeightF = 34.375F;
+      this.Detail1.HeightF = 45.83333F;
       this.Detail1.Name = "Detail1";
       // 
       // xrLabel5
       // 
       this.xrLabel5.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "DeliveryPositions.Position")});
-      this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(3.178914E-05F, 0F);
+      this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(141.6667F, 10.00001F);
       this.xrLabel5.Name = "xrLabel5";
-      this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-      this.xrLabel5.SizeF = new System.Drawing.SizeF(452.0833F, 23F);
-      this.xrLabel5.StylePriority.UseTextAlignment = false;
+      this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+      this.xrLabel5.SizeF = new System.Drawing.SizeF(245.8333F, 23F);
       this.xrLabel5.Text = "xrLabel5";
-      this.xrLabel5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
       // 
       // xrLabel6
       // 
       this.xrLabel6.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "DeliveryPositions.Quantity")});
-      this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(550F, 0F);
+      this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(550F, 10.00001F);
       this.xrLabel6.Name = "xrLabel6";
-      this.xrLabel6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+      this.xrLabel6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
       this.xrLabel6.SizeF = new System.Drawing.SizeF(100F, 23F);
-      this.xrLabel6.StylePriority.UseTextAlignment = false;
       this.xrLabel6.Text = "xrLabel6";
-      this.xrLabel6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-      // 
-      // deliveryBindingSource
-      // 
-      this.deliveryBindingSource.DataSource = typeof(Delivery);
       // 
       // DeliveryReport
       // 
@@ -314,10 +310,10 @@ namespace Impressio.Reports
     private DevExpress.XtraReports.UI.XRLabel xrLabel3;
     private DevExpress.XtraReports.UI.XRLabel xrLabel2;
     private DevExpress.XtraReports.UI.XRLabel xrLabel1;
+    public System.Windows.Forms.BindingSource deliveryBindingSource;
     private DevExpress.XtraReports.UI.DetailReportBand DetailReport;
     private DevExpress.XtraReports.UI.DetailBand Detail1;
     private DevExpress.XtraReports.UI.XRLabel xrLabel6;
     private DevExpress.XtraReports.UI.XRLabel xrLabel5;
-    public System.Windows.Forms.BindingSource deliveryBindingSource;
   }
 }

@@ -15,6 +15,7 @@ namespace Impressio.Models.Database
     DbDataReader Reader { get; set; }
 
     string LastAddedValue { get; }
+
     DbCommand SetCommand();
 
     void AddParameter(string parameter, object value);
@@ -22,10 +23,6 @@ namespace Impressio.Models.Database
     void CheckConnection();
 
     void CloseReader();
-
-    int InsertSql(string table, Dictionary<string, string> cols);
-
-    bool UpdateSql(string table, Dictionary<string, string> cols, string id, string idCol);
 
     bool UpadatSql<T>(DatabaseObjectBase<T> databaseObject);
 

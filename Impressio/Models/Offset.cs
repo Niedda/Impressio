@@ -29,12 +29,21 @@ namespace Impressio.Models
 
     #endregion
 
-    private readonly Machine _machine = new Machine();
+    public override int Identity { get; set; }
 
-    private readonly List<Offset> _offsets = new List<Offset>();
-    private readonly Paper _paper = new Paper();
-    private readonly List<Offset> _predefinedOffset = new List<Offset>();
-    private int _positionTotal;
+    public string Name { get; set; }
+
+    public int PositionTotal
+    {
+      get
+      {
+        _positionTotal = PrintTotal + PaperCostTotal;
+        return _positionTotal;
+      }
+      set { _positionTotal = value; }
+    }
+
+    public int FkOrder { get; set; }
 
     public int PaperPricePer { get; set; }
 
@@ -92,10 +101,9 @@ namespace Impressio.Models
       {
         if (FkOffsetPaper != 0)
         {
-          _paper.Identity = FkOffsetPaper;
-          return (Paper) _paper.LoadSingleObject();
+          return _paper ?? (_paper = (Paper) new Paper { Identity = FkOffsetPaper, }.LoadSingleObject());
         }
-        return new Paper();
+        return null;
       }
     }
 
@@ -107,10 +115,9 @@ namespace Impressio.Models
       {
         if (FkOffsetMachine != 0)
         {
-          _machine.Identity = FkOffsetMachine;
-          return (Machine) _machine.LoadSingleObject();
+          return _machine ?? (_machine = (Machine)new Machine {Identity = FkOffsetMachine}.LoadSingleObject());
         }
-        return new Machine();
+        return null;
       }
     }
 
@@ -150,37 +157,18 @@ namespace Impressio.Models
 
     public override List<Offset> Objects
     {
-      get { return _offsets; }
-    }
-
-    #region IPosition Members
-
-    public override int Identity { get; set; }
-
-    public string Name { get; set; }
-
-    public int PositionTotal
-    {
       get
       {
-        _positionTotal = PrintTotal + PaperCostTotal;
-        return _positionTotal;
+        return _offsets;
       }
-      set { _positionTotal = value; }
     }
-
-    public int FkOrder { get; set; }
-
+    
     public Type Type
     {
       get { return Type.Offsetdruck; }
       set { }
     }
-
-    #endregion
-
-    #region IPredefined<Offset> Members
-
+    
     public void LoadPredefined()
     {
       var offset = new Offset();
@@ -196,9 +184,7 @@ namespace Impressio.Models
     {
       _predefinedOffset.Clear();
     }
-
-    #endregion
-
+    
     public override void SetObject()
     {
       Identity = Database.Reader["OffsetId"].GetInt();
@@ -250,6 +236,16 @@ namespace Impressio.Models
     {
       _offsets.Clear();
     }
+
+    private Machine _machine;
+
+    private readonly List<Offset> _offsets = new List<Offset>();
+
+    private Paper _paper;
+
+    private readonly List<Offset> _predefinedOffset = new List<Offset>();
+
+    private int _positionTotal;
   }
 
   public class Machine : DatabaseObjectBase<Machine>
@@ -271,15 +267,9 @@ namespace Impressio.Models
 
     public override int Identity { get; set; }
 
-    public override string IdentityColumn
-    {
-      get { return "MachineId"; }
-    }
+    public override string IdentityColumn { get { return "MachineId"; } }
 
-    public override string Table
-    {
-      get { return "Machine"; }
-    }
+    public override string Table { get { return "Machine"; } }
 
     public int PricePerColor { get; set; }
 
@@ -291,19 +281,16 @@ namespace Impressio.Models
 
     public int PlateCost { get; set; }
 
-    public override List<Machine> Objects
-    {
-      get { return _machines; }
-    }
+    public override List<Machine> Objects { get { return _machines; } }
 
     public override void SetObject()
     {
       Identity = Database.Reader["MachineId"].GetInt();
-      Name = Database.Reader["Name"] as string;
-      Speed = Database.Reader["Speed"].GetInt();
-      PricePerColor = Database.Reader["PricePerColor"].GetInt();
-      PlateCost = Database.Reader["PlateCost"].GetInt();
-      PricePerHour = Database.Reader["PricePerHour"].GetInt();
+      Name = Database.Reader[Columns.Name.ToString()] as string;
+      Speed = Database.Reader[Columns.Speed.ToString()].GetInt();
+      PricePerColor = Database.Reader[Columns.PricePerColor.ToString()].GetInt();
+      PlateCost = Database.Reader[Columns.PlateCost.ToString()].GetInt();
+      PricePerHour = Database.Reader[Columns.PricePerHour.ToString()].GetInt();
     }
 
     public override void SetObjectList()

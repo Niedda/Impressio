@@ -21,24 +21,11 @@ namespace Impressio.Models
 
     #endregion
 
-    private readonly Address _address = new Address();
-    private readonly Client _client = new Client();
-    private readonly Company _company = new Company();
-    private readonly List<Delivery> _deliveries = new List<Delivery>();
-    private readonly DeliveryPosition _deliveryPosition = new DeliveryPosition();
-    private readonly Order _order = new Order();
-
     public override int Identity { get; set; }
 
-    public override string IdentityColumn
-    {
-      get { return "DeliveryId"; }
-    }
+    public override string IdentityColumn { get { return "DeliveryId"; } }
 
-    public override string Table
-    {
-      get { return "Delivery"; }
-    }
+    public override string Table { get { return "Delivery"; } }
 
     public int FkDeliveryCompany { get; set; }
 
@@ -56,10 +43,9 @@ namespace Impressio.Models
       {
         if (FkDeliveryOrder != 0)
         {
-          _order.Identity = FkDeliveryOrder;
-          return (Order) _order.LoadSingleObject();
+          return _order ?? (_order = (Order)new Order { Identity = FkDeliveryOrder }.LoadSingleObject());
         }
-        return new Order();
+        return null;
       }
     }
 
@@ -69,10 +55,9 @@ namespace Impressio.Models
       {
         if (FkDeliveryCompany != 0)
         {
-          _company.Identity = FkDeliveryCompany;
-          return (Company) _company.LoadSingleObject();
+          return _company ?? (_company = (Company)new Company { Identity = FkDeliveryCompany }.LoadSingleObject());
         }
-        return new Company();
+        return null;
       }
     }
 
@@ -82,10 +67,9 @@ namespace Impressio.Models
       {
         if (FkDeliveryClient != 0)
         {
-          _client.Identity = FkDeliveryClient;
-          return (Client) _client.LoadSingleObject();
+          return _client ?? (_client = (Client)new Client { Identity = FkDeliveryClient }.LoadSingleObject());
         }
-        return new Client();
+        return null;
       }
     }
 
@@ -95,25 +79,23 @@ namespace Impressio.Models
       {
         if (FkDeliveryAddress != 0)
         {
-          _address.Identity = FkDeliveryAddress;
-          return (Address) _address.LoadSingleObject();
+          return _address ?? (_address = (Address)new Address { Identity = FkDeliveryAddress }.LoadSingleObject());
         }
-        return new Address();
+        return null;
       }
     }
 
-    public override List<Delivery> Objects
-    {
-      get { return _deliveries; }
-    }
+    public override List<Delivery> Objects { get { return _deliveries; } }
 
     public List<Client> AvaibleClients
     {
       get
       {
-        return FkDeliveryCompany != 0
-                 ? _client.LoadObjectList(Client.Columns.FkClientCompany, FkDeliveryCompany)
-                 : new List<Client>();
+        if (FkDeliveryCompany != 0)
+        {
+          return _clients ?? (_clients = new Client().LoadObjectList(Client.Columns.FkClientCompany, FkDeliveryCompany));
+        }
+        return null;
       }
     }
 
@@ -121,9 +103,11 @@ namespace Impressio.Models
     {
       get
       {
-        return FkDeliveryCompany != 0
-                 ? _address.LoadObjectList(Address.Columns.FkAddressCompany, FkDeliveryCompany)
-                 : new List<Address>();
+        if (FkDeliveryCompany != 0)
+        {
+          return _addresses ?? (_addresses = new Address().LoadObjectList(Address.Columns.FkAddressCompany, FkDeliveryCompany));
+        }
+        return null;
       }
     }
 
@@ -131,9 +115,7 @@ namespace Impressio.Models
     {
       get
       {
-        return Identity != 0
-                 ? _deliveryPosition.LoadObjectList(DeliveryPosition.Columns.FkDeliveryPositionDelivery, Identity)
-                 : new List<DeliveryPosition>();
+        return Identity != 0 ? (_deliveryPosition ?? (_deliveryPosition = new DeliveryPosition().LoadObjectList(DeliveryPosition.Columns.FkDeliveryPositionDelivery, Identity))) : null;
       }
     }
 
@@ -170,6 +152,22 @@ namespace Impressio.Models
     {
       _deliveries.Clear();
     }
+
+    private Company _company;
+
+    private Order _order;
+
+    private Address _address;
+
+    private Client _client;
+
+    private List<DeliveryPosition> _deliveryPosition;
+
+    private List<Address> _addresses;
+
+    private List<Client> _clients;
+
+    private readonly List<Delivery> _deliveries = new List<Delivery>();
   }
 
   public class DeliveryPosition : DatabaseObjectBase<DeliveryPosition>
@@ -184,10 +182,6 @@ namespace Impressio.Models
     }
 
     #endregion
-
-    private readonly List<DeliveryPosition> _deliveryPositions = new List<DeliveryPosition>();
-
-    private readonly Description _description = new Description();
 
     public override int Identity { get; set; }
 
@@ -242,5 +236,9 @@ namespace Impressio.Models
       List<Description> descriptions = _description.LoadObjectList(Description.Columns.FkDescriptionOrder, id);
       return (from des in descriptions select des.JobTitle).Distinct().ToList();
     }
+
+    private readonly List<DeliveryPosition> _deliveryPositions = new List<DeliveryPosition>();
+
+    private readonly Description _description = new Description();
   }
 }

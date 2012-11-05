@@ -214,6 +214,7 @@
     <Compile Include="Controls\StateControl.Designer.cs">
       <DependentUpon>StateControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\DatabaseConfig.cs" />
     <Compile Include="Models\Database\DatabaseObject\QueryBuilder.cs" />
     <Compile Include="Models\IControl.cs" />
     <Compile Include="Models\IGridControl.cs" />
@@ -469,6 +470,10 @@
       <DependentUpon>PropertiesMainView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <Content Include="Models\Database\DatabaseConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Models\Database\Scripts\dbImpressio.sqlce">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

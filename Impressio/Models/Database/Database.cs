@@ -12,7 +12,11 @@ namespace Impressio.Models.Database
   {
     public string ConnectionString
     {
-      get { return Settings.Default.connectionString; }
+      get
+      {
+        
+        return Settings.Default.connectionString;
+      }
       set
       {
         Settings.Default.connectionString = value;
@@ -55,13 +59,6 @@ namespace Impressio.Models.Database
         Reader.Close();
       }
     }
-
-    public abstract int InsertSql(string table, Dictionary<string, string> cols);
-
-    public abstract bool UpdateSql(string table, Dictionary<string, string> cols, string id, string idCol);
-
-
-    //new Methods
 
     public virtual void AddParameter(string parameter, object value)
     {

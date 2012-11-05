@@ -1,38 +1,36 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
-              GeneratedClassNamespace="Impressio.Properties" GeneratedClassName="Settings">
-	<Profiles />
-	<Settings>
-		<Setting Name="connectionString" Type="System.String" Scope="User">
-			<Value Profile="(Default)">
-				Server=bizzi_asus\SQLEXPRESS;Database=foernuft;User Id=user;Password=2104;
-			</Value>
-		</Setting>
-		<Setting Name="logPath" Type="System.String" Scope="User">
-			<Value Profile="(Default)">
-				C:\Users\bizzi\Desktop\Development\AAA Digital Rape
-			</Value>
-		</Setting>
-		<Setting Name="exceptionMode" Type="System.Boolean" Scope="User">
-			<Value Profile="(Default)">True</Value>
-		</Setting>
-		<Setting Name="User" Type="System.String" Scope="User">
-			<Value Profile="(Default)">Fabrizio</Value>
-		</Setting>
-		<Setting Name="folderPath" Type="System.String" Scope="User">
-			<Value Profile="(Default)">
-				C:\Users\bizzi\testfolder\
-			</Value>
-		</Setting>
-		<Setting Name="databaseEngine" Type="System.String" Scope="User">
-			<Value Profile="(Default)">mssql</Value>
-		</Setting>
-		<Setting Name="loggerEngine" Type="System.String" Scope="User">
-			<Value Profile="(Default)">file</Value>
-		</Setting>
-		<Setting Name="PathToCompactDb" Type="System.String" Scope="User">
-			<Value Profile="(Default)" />
-		</Setting>
-	</Settings>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Impressio.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="exceptionMode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="User" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Fabrizio</Value>
+    </Setting>
+    <Setting Name="databaseEngine" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mssql</Value>
+    </Setting>
+    <Setting Name="loggerEngine" Type="System.String" Scope="User">
+      <Value Profile="(Default)">file</Value>
+    </Setting>
+    <Setting Name="PathToCompactDb" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="connectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+					Server=bizzi_asus\SQLEXPRESS;Database=foernuft;User Id=user;Password=2104;
+				</Value>
+    </Setting>
+    <Setting Name="logPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+					C:\Users\bizzi\Desktop\Development\AAA Digital Rape
+				</Value>
+    </Setting>
+    <Setting Name="folderPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+					C:\Users\bizzi\testfolder\
+				</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

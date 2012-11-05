@@ -23,20 +23,11 @@ namespace Impressio.Models
 
     #endregion
 
-    private readonly List<Client> _clients = new List<Client>();
-    private readonly Gender _gender = new Gender();
-
     public override int Identity { get; set; }
 
-    public override string IdentityColumn
-    {
-      get { return "ClientId"; }
-    }
+    public override string IdentityColumn { get { return "ClientId"; } }
 
-    public override string Table
-    {
-      get { return "Client"; }
-    }
+    public override string Table { get { return "Client"; } }
 
     public int FkClientCompany { get; set; }
 
@@ -65,33 +56,14 @@ namespace Impressio.Models
       {
         if (FkClientGender != 0)
         {
-          _gender.Identity = FkClientGender;
-          return (Gender) _gender.LoadSingleObject();
+          return _gender ?? (_gender = (Gender)( new Gender {Identity = FkClientGender}.LoadSingleObject()));
         }
-        return new Gender();
+        return null;
       }
     }
 
-    public override List<Client> Objects
-    {
-      get { return _clients; }
-    }
-
-    public Dictionary<string, string> GetDictionary()
-    {
-      return new Dictionary<string, string>
-               {
-                 {"@LastName", LastName},
-                 {"@FirstName", FirstName},
-                 {"@Mail", Mail},
-                 {"@Remark", Remark},
-                 {"@Phone", Phone},
-                 {"@Mobile", Mobile},
-                 {"@FkClientCompany", FkClientCompany.ToString()},
-                 {"@FkClientGender", FkClientGender.ToString()}
-               };
-    }
-
+    public override List<Client> Objects { get { return _clients; } }
+    
     public override void SetObject()
     {
       Identity = Database.Reader["ClientId"].GetInt();
@@ -131,5 +103,9 @@ namespace Impressio.Models
                  {Columns.FkClientGender, FkClientGender}
                };
     }
+
+    private Gender _gender;
+
+    private readonly List<Client> _clients = new List<Client>();
   }
 }

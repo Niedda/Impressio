@@ -18,22 +18,11 @@ namespace Impressio.Models
 
     #endregion
 
-    private readonly Address _address = new Address();
-
-    private readonly Client _client = new Client();
-    private readonly List<Company> _companies = new List<Company>();
-
     public override int Identity { get; set; }
 
-    public override string IdentityColumn
-    {
-      get { return "CompanyId"; }
-    }
+    public override string IdentityColumn { get { return "CompanyId"; } }
 
-    public override string Table
-    {
-      get { return "Company"; }
-    }
+    public override string Table { get { return "Company"; } }
 
     public string CompanyName { get; set; }
 
@@ -43,18 +32,21 @@ namespace Impressio.Models
 
     public List<Client> Clients
     {
-      get { return _client.LoadObjectList(Client.Columns.FkClientCompany, Identity); }
+      get
+      {
+        return _client ?? (_client = new Client().LoadObjectList(Client.Columns.FkClientCompany, Identity));
+      }
     }
 
     public List<Address> Addresses
     {
-      get { return _address.LoadObjectList(Address.Columns.FkAddressCompany, Identity); }
+      get
+      {
+        return _address ?? (_address = new Address().LoadObjectList(Address.Columns.FkAddressCompany, Identity));
+      }
     }
 
-    public override List<Company> Objects
-    {
-      get { return _companies; }
-    }
+    public override List<Company> Objects { get { return _companies; } }
 
     public override void SetObject()
     {
@@ -85,5 +77,11 @@ namespace Impressio.Models
     {
       throw new NotImplementedException();
     }
+
+    private List<Address> _address;
+
+    private List<Client> _client;
+
+    private readonly List<Company> _companies = new List<Company>();
   }
 }

@@ -15,27 +15,16 @@ namespace Impressio.Models
     }
 
     #endregion
-
-    private readonly List<Gender> _genders = new List<Gender>();
-
+    
     public override int Identity { get; set; }
 
-    public override string IdentityColumn
-    {
-      get { return "GenderId"; }
-    }
+    public override string IdentityColumn { get { return "GenderId"; } }
 
-    public override string Table
-    {
-      get { return "Gender"; }
-    }
+    public override string Table { get { return "Gender"; } }
 
     public string Name { get; set; }
 
-    public override List<Gender> Objects
-    {
-      get { return _genders; }
-    }
+    public override List<Gender> Objects { get { return _genders; } }
 
     public override void SetObject()
     {
@@ -57,5 +46,7 @@ namespace Impressio.Models
                  {Columns.Name, Name},
                };
     }
+
+    private readonly List<Gender> _genders = new List<Gender>();
   }
 }

@@ -31,20 +31,12 @@ namespace Impressio.Models
     }
 
     #endregion
-
-    private readonly List<Paper> _papers = new List<Paper>();
-
+    
     public override int Identity { get; set; }
 
-    public override string IdentityColumn
-    {
-      get { return "PaperId"; }
-    }
+    public override string IdentityColumn { get { return "PaperId"; } }
 
-    public override string Table
-    {
-      get { return "Paper"; }
-    }
+    public override string Table { get { return "Paper"; } }
 
     public string Name { get; set; }
 
@@ -234,5 +226,7 @@ namespace Impressio.Models
         return false;
       }
     }
+    
+    private readonly List<Paper> _papers = new List<Paper>();
   }
 }

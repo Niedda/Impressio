@@ -29,32 +29,11 @@ namespace Impressio.Models
 
     #endregion
 
-    private readonly Address _address = new Address();
-
-    private readonly Client _client = new Client();
-    private readonly Company _company = new Company();
-    private readonly Data _data = new Data();
-    private readonly Description _description = new Description();
-    private readonly Finish _finish = new Finish();
-    private readonly Offset _offset = new Offset();
-    private readonly List<Order> _orders = new List<Order>();
-    private readonly Print _print = new Print();
-    private readonly State _state = new State();
-    private string _dateCreated;
-
-    private string _userCreated;
-
     public override int Identity { get; set; }
 
-    public override string IdentityColumn
-    {
-      get { return "Order"; }
-    }
+    public override string IdentityColumn { get { return "OrderId"; } }
 
-    public override string Table
-    {
-      get { return "Order"; }
-    }
+    public override string Table { get { return "Order"; } }
 
     public int FkOrderCompany { get; set; }
 
@@ -65,7 +44,7 @@ namespace Impressio.Models
       get
       {
         _state.Identity = FkOrderState;
-        return (State) _state.LoadSingleObject();
+        return (State)_state.LoadSingleObject();
       }
     }
 
@@ -116,10 +95,9 @@ namespace Impressio.Models
       {
         if (FkOrderClient != 0)
         {
-          _client.Identity = FkOrderClient;
-          return (Client) _client.LoadSingleObject();
+          return (Client)new Client { Identity = FkOrderClient }.LoadSingleObject();
         }
-        return new Client();
+        return null;
       }
     }
 
@@ -129,10 +107,9 @@ namespace Impressio.Models
       {
         if (FkOrderAddress != 0)
         {
-          _address.Identity = FkOrderAddress;
-          return (Address) _address.LoadSingleObject();
+          return (Address)new Address { Identity = FkOrderAddress }.LoadSingleObject();
         }
-        return new Address();
+        return null;
       }
     }
 
@@ -140,8 +117,7 @@ namespace Impressio.Models
     {
       get
       {
-        _company.Identity = FkOrderCompany;
-        return (Company) _company.LoadSingleObject();
+        return (Company)new Company { Identity = FkOrderClient }.LoadSingleObject();
       }
     }
 
@@ -152,37 +128,58 @@ namespace Impressio.Models
 
     public List<Client> AvaibleClients
     {
-      get { return _client.LoadObjectList(Client.Columns.FkClientCompany, FkOrderCompany); }
+      get
+      {
+        return _client ?? (_client = new Client().LoadObjectList(Client.Columns.FkClientCompany, FkOrderCompany));
+      }
     }
 
     public List<Address> AvaibleAddress
     {
-      get { return _address.LoadObjectList(Address.Columns.FkAddressCompany, FkOrderCompany); }
+      get
+      {
+        return _address ?? (_address = new Address().LoadObjectList(Address.Columns.FkAddressCompany, FkOrderCompany));
+      }
     }
 
     public List<Data> Datas
     {
-      get { return _data.LoadObjectList(Data.Columns.FkDataOrder, Identity); }
+      get
+      {
+        return _data ?? (_data = new Data().LoadObjectList(Data.Columns.FkDataOrder, Identity));
+      }
     }
 
     public List<Finish> Finishes
     {
-      get { return _finish.LoadObjectList(Finish.Columns.FkFinishOrder, Identity); }
+      get
+      {
+        return _finish ?? (_finish = new Finish().LoadObjectList(Finish.Columns.FkFinishOrder, Identity));
+      }
     }
 
     public List<Print> Prints
     {
-      get { return _print.LoadObjectList(Print.Columns.FkPrintOrder, Identity); }
+      get
+      {
+        return _print ?? (_print = new Print().LoadObjectList(Print.Columns.FkPrintOrder, Identity));
+      }
     }
 
     public List<Offset> Offsets
     {
-      get { return _offset.LoadObjectList(Offset.Columns.FkOffsetOrder, Identity); }
+      get
+      {
+        return _offsets ?? (_offsets = (new Offset().LoadObjectList(Offset.Columns.FkOffsetOrder, Identity)));
+      }
     }
 
     public List<Description> Descriptions
     {
-      get { return _description.LoadObjectList(Description.Columns.FkDescriptionOrder, Identity); }
+      get
+      {
+        return _description ?? (_description = new Description().LoadObjectList(Description.Columns.FkDescriptionOrder, Identity));
+      }
     }
 
     public override void SetObject()
@@ -197,7 +194,7 @@ namespace Impressio.Models
       FkOrderState = Database.Reader["FkOrderState"].GetInt();
       FkOrderAddress = Database.Reader["FkOrderAddress"].GetInt();
       FkOrderClient = Database.Reader["FkOrderClient"].GetInt();
-      IsPredefined = (bool) Database.Reader["IsPredefined"];
+      IsPredefined = (bool)Database.Reader["IsPredefined"];
     }
 
     public override void SetObjectList()
@@ -244,7 +241,7 @@ namespace Impressio.Models
       {
         var report = new OrderReport
                        {
-                         orderBindingSource = {DataSource = this}
+                         orderBindingSource = { DataSource = this }
                        };
         report.ShowPreview();
       }
@@ -256,11 +253,35 @@ namespace Impressio.Models
       {
         var report = new OfferReport
                        {
-                         orderBindingSourcew = {DataSource = this}
+                         orderBindingSourcew = { DataSource = this }
                        };
         report.ShowPreview();
       }
     }
+
+    private string _dateCreated;
+
+    private string _userCreated;
+
+    private readonly Company _company = new Company();
+
+    private List<Address> _address;
+
+    private List<Client> _client;
+
+    private List<Data> _data;
+
+    private List<Description> _description;
+
+    private List<Finish> _finish;
+
+    private List<Offset> _offsets;
+
+    private List<Print> _print;
+
+    private readonly State _state = new State();
+
+    private readonly List<Order> _orders = new List<Order>();
   }
 
   public class State : DatabaseObjectBase<State>
@@ -274,19 +295,11 @@ namespace Impressio.Models
 
     #endregion
 
-    private readonly List<State> _states = new List<State>();
-
     public override int Identity { get; set; }
 
-    public override string IdentityColumn
-    {
-      get { return "StateId"; }
-    }
+    public override string IdentityColumn { get { return "StateId"; } }
 
-    public override string Table
-    {
-      get { return "State"; }
-    }
+    public override string Table { get { return "State"; } }
 
     public string StateName { get; set; }
 
@@ -320,5 +333,7 @@ namespace Impressio.Models
                  {Columns.StateName, StateName},
                };
     }
+
+    private readonly List<State> _states = new List<State>();
   }
 }

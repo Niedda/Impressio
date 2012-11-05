@@ -20,52 +20,37 @@ namespace Impressio.Models
 
     #endregion
 
-    private readonly DataPosition _dataPosition = new DataPosition();
-    private readonly List<Data> _datas = new List<Data>();
-    private readonly List<Data> _predefinedData = new List<Data>();
+    public override string IdentityColumn { get { return "DataId"; } }
 
-    public override string IdentityColumn
-    {
-      get { return "DataId"; }
-    }
+    public override string Table { get { return "Data"; } }
 
-    public override string Table
-    {
-      get { return "Data"; }
-    }
+    public override int Identity { get; set; }
+
+    public int FkOrder { get; set; }
+
+    public string Name { get; set; }
+
+    public int PositionTotal { get; set; }
 
     public bool IsPredefined { get; set; }
 
     public string Remark { get; set; }
 
-    public override List<Data> Objects
-    {
-      get { return _datas; }
-    }
+    public override List<Data> Objects { get { return _datas; } }
 
     public List<DataPosition> DataPositions
     {
-      get { return _dataPosition.LoadObjectList(DataPosition.Columns.FkDataDataPosition, Identity); }
+      get
+      {
+        return _dataPosition ?? (_dataPosition = new DataPosition().LoadObjectList(DataPosition.Columns.FkDataDataPosition, Identity));
+      }
     }
-
-    #region IPosition Members
-
-    public override int Identity { get; set; }
-
-    public int FkOrder { get; set; }
-    public string Name { get; set; }
-
-    public int PositionTotal { get; set; }
-
+    
     public Type Type
     {
       get { return Type.Datenaufbereitung; }
       set { }
     }
-
-    #endregion
-
-    #region IPredefined<Data> Members
 
     public void LoadPredefined()
     {
@@ -82,8 +67,6 @@ namespace Impressio.Models
     {
       _predefinedData.Clear();
     }
-
-    #endregion
 
     public override void SetObject()
     {
@@ -117,6 +100,12 @@ namespace Impressio.Models
     {
       _datas.Clear();
     }
+
+    private List<DataPosition> _dataPosition;
+
+    private readonly List<Data> _datas = new List<Data>();
+
+    private readonly List<Data> _predefinedData = new List<Data>();
   }
 
   public class DataPosition : DatabaseObjectBase<DataPosition>
@@ -134,18 +123,11 @@ namespace Impressio.Models
 
     #endregion
 
-    private readonly List<DataPosition> _dataPositions = new List<DataPosition>();
     public override int Identity { get; set; }
 
-    public override string IdentityColumn
-    {
-      get { return "DataPositionId"; }
-    }
+    public override string IdentityColumn { get { return "DataPositionId"; } }
 
-    public override string Table
-    {
-      get { return "DataPosition"; }
-    }
+    public override string Table { get { return "DataPosition"; } }
 
     public int Quantity { get; set; }
 
@@ -155,7 +137,7 @@ namespace Impressio.Models
 
     public int PricePerQuantity { get; set; }
 
-    public int PositionTotal
+    public int PositionTotal 
     {
       get { return PricePerQuantity*Quantity; }
     }
@@ -197,5 +179,7 @@ namespace Impressio.Models
     {
       _dataPositions.Clear();
     }
+
+    private readonly List<DataPosition> _dataPositions = new List<DataPosition>();
   }
 }

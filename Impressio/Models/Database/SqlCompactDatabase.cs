@@ -14,23 +14,11 @@ namespace Impressio.Models.Database
 {
   internal class SqlCompactDatabase : Database
   {
-    private const string Filename = "Impressio.sdf";
-
-    private const string Password = "admin";
-
-    private readonly string _compactConnectionString = string.Format(@"DataSource='{0}\{1}'; Password='{2}';",
-                                                                     PathToDatabase, Filename, Password);
-
     private SqlCeConnection _connection;
-
-    public SqlCompactDatabase()
-    {
-      CheckForDatabase();
-    }
 
     public override DbConnection DbConnection
     {
-      get { return _connection ?? (_connection = new SqlCeConnection(_compactConnectionString)); }
+      get { return _connection ?? (_connection = new SqlCeConnection(ConnectionString)); }
     }
 
     public override string LastAddedValue
@@ -38,49 +26,9 @@ namespace Impressio.Models.Database
       get { return "SELECT @@Identity"; }
     }
 
-    private static string PathToDatabase
-    {
-      get
-      {
-        if (string.IsNullOrWhiteSpace(Settings.Default.PathToCompactDb))
-        {
-          var folderDialog = new FolderBrowserDialog();
-          DialogResult folderResult = folderDialog.ShowDialog();
-
-          if (folderResult == DialogResult.OK)
-          {
-            Settings.Default.PathToCompactDb = folderDialog.SelectedPath;
-            return folderDialog.SelectedPath;
-          }
-          return string.Empty;
-        }
-        return Settings.Default.PathToCompactDb;
-      }
-      set
-      {
-        Settings.Default.PathToCompactDb = value;
-        Settings.Default.Save();
-      }
-    }
-
-    private string _pathToScript
-    {
-      get
-      {
-        var fileDialog = new OpenFileDialog {Filter = "Sql Compact Script (*.sqlce)|*.sqlce"};
-        DialogResult fileResult = fileDialog.ShowDialog();
-
-        if (fileResult == DialogResult.OK)
-        {
-          return fileDialog.FileName;
-        }
-        return null;
-      }
-    }
-
     public override DbCommand SetCommand()
     {
-      Command = new SqlCeCommand(CommandString, (SqlCeConnection) DbConnection);
+      Command = new SqlCeCommand(CommandString, (SqlCeConnection)DbConnection);
       return Command;
     }
 
@@ -93,7 +41,7 @@ namespace Impressio.Models.Database
     {
       if (value is bool)
       {
-        return ((bool) value) ? "1" : "0";
+        return ((bool)value) ? "1" : "0";
       }
       return value.ToString();
     }
@@ -101,94 +49,6 @@ namespace Impressio.Models.Database
     public override void AddParameter(string parameter, object value)
     {
       Command.Parameters.Add(new SqlCeParameter(string.Format("@{0}", parameter), value));
-    }
-
-    public override int InsertSql(string table, Dictionary<string, string> cols)
-    {
-      List<KeyValuePair<string, string>> setNull =
-        (from a in cols where a.Value == null || string.IsNullOrEmpty(a.Value) select a).ToList();
-
-      try
-      {
-        foreach (var keyValuePair in setNull)
-        {
-          cols.Remove(keyValuePair.Key);
-        }
-
-        CheckConnection();
-        CommandString = "INSERT INTO [" + table + "] ({0}) VALUES ({1})";
-
-        while (cols.Values.Contains(null))
-        {
-          KeyValuePair<string, string> item = cols.First(c => c.Value == null);
-          cols.Remove(item.Key);
-        }
-
-        string val = string.Join(",", cols.Keys.ToArray());
-        string param = val.Replace("@", "");
-
-        CommandString = string.Format(CommandString, param, val);
-        var comm = new SqlCeCommand(CommandString, (SqlCeConnection) DbConnection);
-
-        foreach (var value in cols.Where(c => c.Value != null))
-        {
-          comm.Parameters.Add(new SqlCeParameter(value.Key, value.Value));
-        }
-        comm.ExecuteNonQuery();
-        comm.CommandText = "SELECT @@IDENTITY";
-        return Convert.ToInt32(comm.ExecuteNonQuery());
-      }
-      catch (Exception exception)
-      {
-        ServiceLocator.Instance.Logger.WriteToLog(exception.ToString());
-        return 0;
-      }
-    }
-
-    public override bool UpdateSql(string table, Dictionary<string, string> cols, string id, string idCol)
-    {
-      List<KeyValuePair<string, string>> setNull =
-        (from a in cols where a.Value == null || string.IsNullOrEmpty(a.Value) select a).ToList();
-
-      try
-      {
-        CheckConnection();
-
-        foreach (var keyValuePair in setNull)
-        {
-          cols.Remove(keyValuePair.Key);
-        }
-
-        CommandString = string.Format("UPDATE [{0}] SET ", table);
-        string app = "{0} = {1},";
-
-        foreach (var col in cols)
-        {
-          CommandString += string.Format(app, col.Key.Replace("@", ""), col.Key);
-        }
-
-        string cm = CommandString.Remove(CommandString.Length - 1, 1);
-        app = string.Format(" WHERE {0} = {1}", idCol, id);
-        CommandString = cm + app;
-        var comm = new SqlCeCommand(CommandString, (SqlCeConnection) DbConnection);
-
-        foreach (var value in cols)
-        {
-          comm.Parameters.Add(new SqlCeParameter(value.Key, value.Value));
-        }
-        foreach (var keyValuePair in setNull)
-        {
-          comm.Parameters.Add(new SqlCeParameter(keyValuePair.Key, DBNull.Value));
-        }
-
-        comm.ExecuteNonQuery();
-        return true;
-      }
-      catch (Exception exception)
-      {
-        ServiceLocator.Instance.Logger.WriteToLog(exception.ToString());
-        return false;
-      }
     }
 
     public override int InsertSql<T>(DatabaseObjectBase<T> databaseObject)
@@ -227,32 +87,43 @@ namespace Impressio.Models.Database
         return 0;
       }
     }
-
-    public bool CheckForDatabase()
+    
+    public bool CreateNewCompactDatabase(string databaseName)
     {
-      if (!File.Exists(PathToDatabase + @"\" + Filename))
+      var folderDialog = new FolderBrowserDialog { ShowNewFolderButton = true,Description = "Wo soll die Datenbank gespeichert werden?"};
+      var result = folderDialog.ShowDialog();
+
+      if (result == DialogResult.OK)
       {
-        var database = new SqlCeEngine(_compactConnectionString);
-        database.CreateDatabase();
+        var fileDialog = new OpenFileDialog { Filter = "Sql Compact Script (*.sqlce)|*.sqlce", Title = "Pfad zum Script"};
+        var fileResult = fileDialog.ShowDialog();
 
-        string scripts = File.ReadAllText(_pathToScript).Replace(Environment.NewLine, " ");
-        string[] commands = Regex.Split(scripts, "GO");
-        CheckConnection();
-
-        try
+        if (fileResult == DialogResult.OK)
         {
-          foreach (string command in commands.Where(command => !string.IsNullOrWhiteSpace(command)))
+          Settings.Default.connectionString = string.Format(@"Data Source = '{0}\{1}.sdf'; Persist Security Info = False;", folderDialog.SelectedPath, databaseName);
+          new SqlCeEngine(Settings.Default.connectionString).CreateDatabase();
+          string scripts = File.ReadAllText(fileDialog.FileName).Replace(Environment.NewLine, " ");
+          string[] commands = Regex.Split(scripts, "GO");
+
+          try
           {
-            CommandString = command;
-            SetCommand().ExecuteNonQuery();
+            CheckConnection();
+
+            foreach (var command in commands.Where(command => !string.IsNullOrWhiteSpace(command)))
+            {
+              CommandString = command;
+              SetCommand().ExecuteNonQuery();
+            }
+            return true;
+          }
+          catch (Exception exception)
+          {
+            ServiceLocator.Instance.Logger.WriteToLog(exception.ToString());
+            return false;
           }
         }
-        catch (Exception exception)
-        {
-          ServiceLocator.Instance.Logger.WriteToLog(exception.ToString());
-        }
       }
-      return true;
+      return false;
     }
   }
 }

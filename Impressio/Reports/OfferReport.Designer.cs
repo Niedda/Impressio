@@ -31,7 +31,6 @@ namespace Impressio.Reports
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OfferReport));
       this.Detail = new DevExpress.XtraReports.UI.DetailBand();
       this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
       this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
@@ -55,7 +54,6 @@ namespace Impressio.Reports
       this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
       this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
       this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
-      this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
       this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
       this.xrLabel13 = new DevExpress.XtraReports.UI.XRLabel();
       ((System.ComponentModel.ISupportInitialize)(this.orderBindingSourcew)).BeginInit();
@@ -191,7 +189,7 @@ namespace Impressio.Reports
       // 
       // orderBindingSourcew
       // 
-      this.orderBindingSourcew.DataSource = typeof(Order);
+      this.orderBindingSourcew.DataSource = typeof(Impressio.Models.Order);
       // 
       // ReportHeader
       // 
@@ -203,8 +201,7 @@ namespace Impressio.Reports
             this.xrLabel4,
             this.xrLabel3,
             this.xrLabel2,
-            this.xrLabel1,
-            this.xrPictureBox1});
+            this.xrLabel1});
       this.ReportHeader.HeightF = 385.4167F;
       this.ReportHeader.Name = "ReportHeader";
       // 
@@ -315,14 +312,6 @@ namespace Impressio.Reports
       this.xrLabel1.Text = "xrLabel1";
       this.xrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
       // 
-      // xrPictureBox1
-      // 
-      this.xrPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("xrPictureBox1.Image")));
-      this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
-      this.xrPictureBox1.Name = "xrPictureBox1";
-      this.xrPictureBox1.SizeF = new System.Drawing.SizeF(278.5714F, 90.625F);
-      this.xrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.Squeeze;
-      // 
       // ReportFooter
       // 
       this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
@@ -374,7 +363,6 @@ namespace Impressio.Reports
     private DevExpress.XtraReports.UI.XRLabel xrLabel3;
     private DevExpress.XtraReports.UI.XRLabel xrLabel2;
     private DevExpress.XtraReports.UI.XRLabel xrLabel1;
-    private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox1;
     private DevExpress.XtraReports.UI.XRLabel xrLabel8;
     private DevExpress.XtraReports.UI.XRLabel xrLabel9;
     private DevExpress.XtraReports.UI.XRLabel xrLabel12;

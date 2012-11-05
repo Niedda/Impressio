@@ -20,20 +20,17 @@ namespace Impressio.Models
 
     #endregion
 
-    private readonly FinishPosition _finishPosition = new FinishPosition();
+    public override string IdentityColumn { get { return "FinishId"; } }
 
-    private readonly List<Finish> _finishes = new List<Finish>();
-    private readonly List<Finish> _predefinedFinishes = new List<Finish>();
+    public override string Table { get { return "Finish"; } }
 
-    public override string IdentityColumn
-    {
-      get { return "FinishId"; }
-    }
+    public override int Identity { get; set; }
 
-    public override string Table
-    {
-      get { return "Finish"; }
-    }
+    public int FkOrder { get; set; }
+
+    public int PositionTotal { get; set; }
+
+    public string Name { get; set; }
 
     public string Remark { get; set; }
 
@@ -49,24 +46,11 @@ namespace Impressio.Models
       get { return _finishPosition.LoadObjectList(FinishPosition.Columns.FkFinishFinishPosition, Identity); }
     }
 
-    #region IPosition Members
-
-    public override int Identity { get; set; }
-
-    public int FkOrder { get; set; }
-
-    public int PositionTotal { get; set; }
-    public string Name { get; set; }
-
     public Type Type
     {
       get { return Type.Weiterverarbeitung; }
       set { }
     }
-
-    #endregion
-
-    #region IPredefined<Finish> Members
 
     public void LoadPredefined()
     {
@@ -84,13 +68,11 @@ namespace Impressio.Models
       ClearObjectList();
     }
 
-    #endregion
-
     public override void SetObject()
     {
       Name = Database.Reader["PositionName"] as string;
       FkOrder = Database.Reader["FkFinishOrder"].GetInt();
-      IsPredefined = (bool) Database.Reader["IsPredefined"];
+      IsPredefined = (bool)Database.Reader["IsPredefined"];
       Remark = Database.Reader["Remark"] as string;
       PositionTotal = Database.Reader["PositionTotal"].GetInt();
     }
@@ -118,6 +100,12 @@ namespace Impressio.Models
                  {Columns.IsPredefined, IsPredefined},
                };
     }
+
+    private readonly FinishPosition _finishPosition = new FinishPosition();
+
+    private readonly List<Finish> _finishes = new List<Finish>();
+
+    private readonly List<Finish> _predefinedFinishes = new List<Finish>();
   }
 
   public class FinishPosition : DatabaseObjectBase<FinishPosition>
@@ -134,20 +122,12 @@ namespace Impressio.Models
     }
 
     #endregion
-
-    private readonly List<FinishPosition> _finishPositions = new List<FinishPosition>();
-
+    
     public override int Identity { get; set; }
 
-    public override string IdentityColumn
-    {
-      get { return "FinishPositionId"; }
-    }
+    public override string IdentityColumn { get { return "FinishPositionId"; } }
 
-    public override string Table
-    {
-      get { return "FinishPosition"; }
-    }
+    public override string Table { get { return "FinishPosition"; } }
 
     public int FkFinishFinishPosition { get; set; }
 
@@ -171,7 +151,7 @@ namespace Impressio.Models
       Description = Database.Reader["Description"] as string;
       FkFinishFinishPosition = Database.Reader["FkFinishFinishPosition"].GetInt();
       Identity = Database.Reader["FinishPositionId"].GetInt();
-      IsPredefined = (bool) Database.Reader["IsPredefined"];
+      IsPredefined = (bool)Database.Reader["IsPredefined"];
       PricePerQuantity = Database.Reader["PricePerQuantity"].GetInt();
       PriceTotal = Database.Reader["PositionTotal"].GetInt();
       Quantity = Database.Reader["Quantity"].GetInt();
@@ -195,5 +175,7 @@ namespace Impressio.Models
                  {Columns.Quantity, Quantity},
                };
     }
+
+    private readonly List<FinishPosition> _finishPositions = new List<FinishPosition>();
   }
 }

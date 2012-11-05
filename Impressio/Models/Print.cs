@@ -27,21 +27,9 @@ namespace Impressio.Models
 
     #endregion
 
-    private readonly ClickCost _clickCost = new ClickCost();
-    private readonly Paper _paper = new Paper();
-    private readonly List<Print> _predefinedPrints = new List<Print>();
-    private readonly List<Print> _prints = new List<Print>();
-    private int _positionTotal;
+    public override string IdentityColumn { get { return "PrintId"; } }
 
-    public override string IdentityColumn
-    {
-      get { return "PrintId"; }
-    }
-
-    public override string Table
-    {
-      get { return "Print"; }
-    }
+    public override string Table { get { return "Print"; } }
 
     public int FkPrintPaper { get; set; }
 
@@ -51,10 +39,9 @@ namespace Impressio.Models
       {
         if (FkPrintPaper != 0)
         {
-          _paper.Identity = FkPrintPaper;
-          return (Paper) _paper.LoadSingleObject();
+          return _paper ?? (_paper = (Paper)new Paper { Identity = FkPrintPaper }.LoadSingleObject());
         }
-        return new Paper();
+        return null;
       }
     }
 
@@ -66,10 +53,9 @@ namespace Impressio.Models
       {
         if (FkPrintClickCost != 0)
         {
-          _clickCost.Identity = FkPrintClickCost;
-          return (ClickCost) _clickCost.LoadSingleObject();
+          return _clickCost ?? (_clickCost = (ClickCost)new ClickCost { Identity = FkPrintClickCost }.LoadSingleObject());
         }
-        return new ClickCost();
+        return null;
       }
     }
 
@@ -105,7 +91,7 @@ namespace Impressio.Models
 
     public decimal? PaperCostTotal
     {
-      get { return ((PaperPricePer*(PaperAddition + 100))*(PaperAmount/1000))/100; }
+      get { return ((PaperPricePer * (PaperAddition + 100)) * (PaperAmount / 1000)) / 100; }
     }
 
     public decimal? PrintCostTotal
@@ -114,11 +100,11 @@ namespace Impressio.Models
       {
         if (ClickCost != null)
         {
-          double total = ClickCost.Cost*PrintAmount;
+          double total = ClickCost.Cost * PrintAmount;
 
           if (PrintType == 1)
           {
-            return (total*2).GetInt();
+            return (total * 2).GetInt();
           }
           return total.GetInt();
         }
@@ -131,9 +117,8 @@ namespace Impressio.Models
       get { return _prints; }
     }
 
-    #region IPosition Members
-
     public override int Identity { get; set; }
+
     public string Name { get; set; }
 
     public int FkOrder { get; set; }
@@ -148,11 +133,11 @@ namespace Impressio.Models
         }
         if (PaperCostTotal != null)
         {
-          return _positionTotal = PaperCostTotal.GetInt();
+          return PaperCostTotal.GetInt();
         }
-        return _positionTotal = PrintCostTotal.GetInt();
+        return PrintCostTotal.GetInt();
       }
-      set { _positionTotal = value; }
+      set {  }
     }
 
     public Type Type
@@ -161,10 +146,6 @@ namespace Impressio.Models
       set { }
     }
 
-    #endregion
-
-    #region IPredefined<Print> Members
-
     public void LoadPredefined()
     {
       var prints = new Print();
@@ -172,22 +153,17 @@ namespace Impressio.Models
       _predefinedPrints.AddRange(prints.Objects);
     }
 
-    public List<Print> PredefinedObjects
-    {
-      get { return _predefinedPrints; }
-    }
+    public List<Print> PredefinedObjects { get { return _predefinedPrints; } }
 
     public void ClearPredefinedObjects()
     {
       _predefinedPrints.Clear();
     }
 
-    #endregion
-
     public override void SetObject()
     {
-      IsPredefined = (bool) Database.Reader["IsPredefined"];
-      Identity = (int) Database.Reader["PrintId"];
+      IsPredefined = (bool)Database.Reader["IsPredefined"];
+      Identity = (int)Database.Reader["PrintId"];
       FkPrintClickCost = Database.Reader["FkPrintClickCost"].GetInt();
       FkOrder = Database.Reader["FkPrintOrder"].GetInt();
       FkPrintPaper = Database.Reader["FkPrintPaper"].GetInt();
@@ -230,6 +206,14 @@ namespace Impressio.Models
     {
       _prints.Clear();
     }
+
+    private ClickCost _clickCost;
+
+    private Paper _paper;
+    
+    private readonly List<Print> _predefinedPrints = new List<Print>();
+
+    private readonly List<Print> _prints = new List<Print>();
   }
 
   public class ClickCost : DatabaseObjectBase<ClickCost>
@@ -244,20 +228,11 @@ namespace Impressio.Models
 
     #endregion
 
-    private readonly List<ClickCost> _clickCosts = new List<ClickCost>();
-    private double _cost;
-
     public override int Identity { get; set; }
 
-    public override string IdentityColumn
-    {
-      get { return "ClickCostId"; }
-    }
+    public override string IdentityColumn { get { return "ClickCostId"; } }
 
-    public override string Table
-    {
-      get { return "ClickCost"; }
-    }
+    public override string Table { get { return "ClickCost"; } }
 
     public string Name { get; set; }
 
@@ -277,10 +252,7 @@ namespace Impressio.Models
       }
     }
 
-    public override List<ClickCost> Objects
-    {
-      get { return _clickCosts; }
-    }
+    public override List<ClickCost> Objects { get { return _clickCosts; } }
 
     public override void SetObject()
     {
@@ -309,5 +281,9 @@ namespace Impressio.Models
     {
       _clickCosts.Clear();
     }
+
+    private readonly List<ClickCost> _clickCosts = new List<ClickCost>();
+
+    private double _cost;
   }
 }

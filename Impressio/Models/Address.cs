@@ -22,7 +22,6 @@ namespace Impressio.Models
 
     #endregion
 
-    private readonly List<Address> _addresses = new List<Address>();
     public override int Identity { get; set; }
 
     public override string IdentityColumn
@@ -85,12 +84,14 @@ namespace Impressio.Models
     {
       var address = new Address();
       address.SetObject();
-      Objects.Add(address);
+      _addresses.Add(address);
     }
 
     public override void ClearObjectList()
     {
       _addresses.Clear();
     }
+
+    private readonly List<Address> _addresses = new List<Address>();
   }
 }

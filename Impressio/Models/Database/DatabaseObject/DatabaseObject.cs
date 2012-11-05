@@ -50,14 +50,14 @@ namespace Impressio.Models.Database.DatabaseObject
         try
         {
           DatabaseInstance.CheckConnection();
-          DatabaseInstance.CommandString =
-            DatabaseInstance.CommandString =
-            string.Format("select * from {0} where {1} = @{1}", databaseObject.Table, databaseObject.IdentityColumn);
+          DatabaseInstance.CommandString = string.Format("select * from {0} where {1} = @{1}", DatabaseInstance.GetEscapedTableName(databaseObject.Table), databaseObject.IdentityColumn);
           DatabaseInstance.SetCommand();
           DatabaseInstance.AddParameter(databaseObject.IdentityColumn, databaseObject.Identity);
           DatabaseInstance.Reader = DatabaseInstance.Command.ExecuteReader();
-          DatabaseInstance.Reader.Read();
-          databaseObject.SetObject();
+          while (DatabaseInstance.Reader.Read())
+          {
+            databaseObject.SetObject();
+          }
 
           return databaseObject;
         }

@@ -18,9 +18,6 @@ namespace Impressio.Models
 
     #endregion
 
-    private readonly List<Position> _positions = new List<Position>();
-    private readonly List<Position> _predefinedPositions = new List<Position>();
-
     public override int Identity { get; set; }
 
     public override string IdentityColumn
@@ -93,12 +90,7 @@ namespace Impressio.Models
 
     public Type Type { get; set; }
 
-    public override List<Position> Objects
-    {
-      get { return _positions; }
-    }
-
-    #region IPredefined<Position> Members
+    public override List<Position> Objects { get { return _positions; } }
 
     public void LoadPredefined()
     {
@@ -112,17 +104,12 @@ namespace Impressio.Models
       _predefinedPositions.AddRange(position.LoadObjectList(Columns.IsPredefined, true));
     }
 
-    public List<Position> PredefinedObjects
-    {
-      get { return _predefinedPositions; }
-    }
+    public List<Position> PredefinedObjects { get { return _predefinedPositions; } }
 
     public void ClearPredefinedObjects()
     {
       _predefinedPositions.Clear();
     }
-
-    #endregion
 
     public override void SetObject()
     {
@@ -172,6 +159,10 @@ namespace Impressio.Models
     {
       _positions.Clear();
     }
+
+    private readonly List<Position> _positions = new List<Position>();
+
+    private readonly List<Position> _predefinedPositions = new List<Position>();
   }
 
   public enum Type

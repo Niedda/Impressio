@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraNavBar;
 using Impressio.Models;
+using Impressio.Models.Database;
 using Impressio.Models.Database.DatabaseObject;
 
 namespace Impressio.Views
@@ -10,14 +11,11 @@ namespace Impressio.Views
     private CustomerView _customerView = new CustomerView();
 
     private OrdersView _ordersView = new OrdersView();
+
     private PropertiesMainView _propertiesMainView = new PropertiesMainView();
 
     public MainView()
     {
-      var query = new QueryBuilder("", new Query(Address.Columns.City, DatabaseOperator.Equal, 2));
-      query.AppendJoin("table", DatabaseJoin.InnerJoin, Address.Columns.AddressId, Company.Columns.CompanyName);
-      query.SetQuery();
-
       InitializeComponent();
     }
 

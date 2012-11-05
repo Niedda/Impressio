@@ -20,22 +20,11 @@ namespace Impressio.Models
 
     #endregion
 
-    private readonly List<Description> _descriptions = new List<Description>();
-
-    private readonly Detail _detail = new Detail();
-    private readonly List<Description> _predefinedDescriptions = new List<Description>();
-
     public override int Identity { get; set; }
 
-    public override string IdentityColumn
-    {
-      get { return "DescriptionId"; }
-    }
+    public override string IdentityColumn { get { return "DescriptionId"; } }
 
-    public override string Table
-    {
-      get { return "Description"; }
-    }
+    public override string Table { get { return "Description"; } }
 
     public string JobTitle { get; set; }
 
@@ -54,10 +43,11 @@ namespace Impressio.Models
 
     public List<Detail> Details
     {
-      get { return Identity != 0 ? _detail.LoadObjectList(Detail.Columns.FkDetailDescription, Identity) : new List<Detail>(); }
+      get
+      {
+        return Identity != 0 ? _detail.LoadObjectList(Detail.Columns.FkDetailDescription, Identity) : new List<Detail>();
+      }
     }
-
-    #region IPredefined<Description> Members
 
     public void LoadPredefined()
     {
@@ -74,8 +64,6 @@ namespace Impressio.Models
     {
       _predefinedDescriptions.Clear();
     }
-
-    #endregion
 
     public override void SetObject()
     {
@@ -109,6 +97,12 @@ namespace Impressio.Models
     {
       _descriptions.Clear();
     }
+    
+    private readonly List<Description> _descriptions = new List<Description>();
+
+    private readonly Detail _detail = new Detail();
+
+    private readonly List<Description> _predefinedDescriptions = new List<Description>();
   }
 
   public class Detail : DatabaseObjectBase<Detail>
@@ -124,20 +118,12 @@ namespace Impressio.Models
     }
 
     #endregion
-
-    private readonly List<Detail> _details = new List<Detail>();
-
+    
     public override int Identity { get; set; }
 
-    public override string IdentityColumn
-    {
-      get { return "DetailId"; }
-    }
+    public override string IdentityColumn { get { return "DetailId"; } }
 
-    public override string Table
-    {
-      get { return "Detail"; }
-    }
+    public override string Table { get { return "Detail"; } }
 
     public int FkDetailDescription { get; set; }
 
@@ -147,10 +133,7 @@ namespace Impressio.Models
 
     public int Arrange { get; set; }
 
-    public override List<Detail> Objects
-    {
-      get { return _details; }
-    }
+    public override List<Detail> Objects { get { return _details; } }
 
     public override void SetObject()
     {
@@ -178,5 +161,7 @@ namespace Impressio.Models
                  {Columns.FkDetailDescription, FkDetailDescription},
                };
     }
+
+    private readonly List<Detail> _details = new List<Detail>();
   }
 }
