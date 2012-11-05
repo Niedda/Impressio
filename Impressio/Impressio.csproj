@@ -1,0 +1,595 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{97FA1D0D-FE7A-4C47-BD25-02603064C14D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Impressio</RootNamespace>
+    <AssemblyName>Impressio</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\bizzi\Desktop\Impressio output\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>27AF8D9693BB5246F20E533DB9FA9893DB26148A</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Impressio_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Charts.v10.2.Core, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v10.2.Core, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v10.2.Core, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraBars.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraNavBar.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPivotGrid.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraRichEdit.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="Npgsql">
+      <HintPath>..\Externals\npgsql\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SqlServerCe, Version=3.5.1.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System.Data.SqlServerCe.Entity, Version=3.5.1.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Microsoft SQL Server Compact Edition\v3.5\System.Data.SqlServerCe.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\AddressControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AddressControl.Designer.cs">
+      <DependentUpon>AddressControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClickCostControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ClickCostControl.Designer.cs">
+      <DependentUpon>ClickCostControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClientControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ClientControl.Designer.cs">
+      <DependentUpon>ClientControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CompanyControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CompanyControl.Designer.cs">
+      <DependentUpon>CompanyControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataControl.Designer.cs">
+      <DependentUpon>DataControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DeliveryControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DeliveryControl.Designer.cs">
+      <DependentUpon>DeliveryControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DeliveryOverviewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DeliveryOverviewControl.Designer.cs">
+      <DependentUpon>DeliveryOverviewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DescriptionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DescriptionControl.Designer.cs">
+      <DependentUpon>DescriptionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FinishControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\FinishControl.Designer.cs">
+      <DependentUpon>FinishControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GenderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\GenderControl.Designer.cs">
+      <DependentUpon>GenderControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MachineControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MachineControl.Designer.cs">
+      <DependentUpon>MachineControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OffsetControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OffsetControl.Designer.cs">
+      <DependentUpon>OffsetControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OrdersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OrdersControl.Designer.cs">
+      <DependentUpon>OrdersControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PaperControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PaperControl.Designer.cs">
+      <DependentUpon>PaperControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PositionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PositionControl.Designer.cs">
+      <DependentUpon>PositionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PredefinedPositionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PredefinedPositionControl.Designer.cs">
+      <DependentUpon>PredefinedPositionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PrintControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PrintControl.Designer.cs">
+      <DependentUpon>PrintControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PropertieControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PropertieControl.Designer.cs">
+      <DependentUpon>PropertieControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StateControl.Designer.cs">
+      <DependentUpon>StateControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\DatabaseObject\QueryBuilder.cs" />
+    <Compile Include="Models\IControl.cs" />
+    <Compile Include="Models\IGridControl.cs" />
+    <Compile Include="Models\IPosition.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\Data.cs" />
+    <Compile Include="Models\Database\DatabaseObject\DatabaseObject.cs" />
+    <Compile Include="Models\Database\DatabaseObject\DatabaseObjectBase.cs" />
+    <Compile Include="Models\Database\Database.cs" />
+    <Compile Include="Models\Database\IDatabase.cs" />
+    <Compile Include="Models\Database\PostgreSqlDatabase.cs" />
+    <Compile Include="Models\Database\SqlCompactDatabase.cs" />
+    <Compile Include="Models\Database\SqlServerDatabase.cs" />
+    <Compile Include="Models\Delivery.cs" />
+    <Compile Include="Models\Description.cs" />
+    <Compile Include="Models\Finish.cs" />
+    <Compile Include="Controls\ControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Models\Database\DatabaseObject\IDatabaseObject.cs" />
+    <Compile Include="Models\Gender.cs" />
+    <Compile Include="Models\IPredefined.cs" />
+    <Compile Include="Models\Log\DatabaseLogger.cs" />
+    <Compile Include="Models\Log\FileLogger.cs" />
+    <Compile Include="Models\Log\ILogger.cs" />
+    <Compile Include="Models\Offset.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Paper.cs" />
+    <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\Print.cs" />
+    <Compile Include="Models\ServiceLocator.cs" />
+    <Compile Include="Models\Tools\Tools.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DeliveryReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DeliveryReport.Designer.cs">
+      <DependentUpon>DeliveryReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\OfferReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\OfferReport.Designer.cs">
+      <DependentUpon>OfferReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\OrderReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\OrderReport.Designer.cs">
+      <DependentUpon>OrderReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClickCostView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ClickCostView.Designer.cs">
+      <DependentUpon>ClickCostView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomerView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CustomerView.Designer.cs">
+      <DependentUpon>CustomerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DeliveryView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DeliveryView.Designer.cs">
+      <DependentUpon>DeliveryView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DescriptionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DescriptionView.Designer.cs">
+      <DependentUpon>DescriptionView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmptyView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\EmptyView.Designer.cs">
+      <DependentUpon>EmptyView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GenderView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\GenderView.Designer.cs">
+      <DependentUpon>GenderView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MachineView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MachineView.Designer.cs">
+      <DependentUpon>MachineView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrdersView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\OrdersView.Designer.cs">
+      <DependentUpon>OrdersView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PaperView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PaperView.Designer.cs">
+      <DependentUpon>PaperView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PositionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PositionView.Designer.cs">
+      <DependentUpon>PositionView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MainView.Designer.cs">
+      <DependentUpon>MainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PredefinedPositionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PredefinedPositionView.Designer.cs">
+      <DependentUpon>PredefinedPositionView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PropertiesMainView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PropertiesMainView.Designer.cs">
+      <DependentUpon>PropertiesMainView.cs</DependentUpon>
+    </Compile>
+    <None Include="Properties\DataSources\Impressio.Models.Address1.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Client1.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Position1.datasource" />
+    <None Include="Views\Resources\stift.png" />
+    <None Include="Views\Resources\Logo.png" />
+    <None Include="Views\Resources\state.png" />
+    <EmbeddedResource Include="Controls\AddressControl.resx">
+      <DependentUpon>AddressControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ClickCostControl.resx">
+      <DependentUpon>ClickCostControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ClientControl.resx">
+      <DependentUpon>ClientControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CompanyControl.resx">
+      <DependentUpon>CompanyControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DataControl.resx">
+      <DependentUpon>DataControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DeliveryControl.resx">
+      <DependentUpon>DeliveryControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DeliveryOverviewControl.resx">
+      <DependentUpon>DeliveryOverviewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DescriptionControl.resx">
+      <DependentUpon>DescriptionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\FinishControl.resx">
+      <DependentUpon>FinishControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GenderControl.resx">
+      <DependentUpon>GenderControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MachineControl.resx">
+      <DependentUpon>MachineControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OffsetControl.resx">
+      <DependentUpon>OffsetControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OrdersControl.resx">
+      <DependentUpon>OrdersControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PaperControl.resx">
+      <DependentUpon>PaperControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PositionControl.resx">
+      <DependentUpon>PositionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PredefinedPositionControl.resx">
+      <DependentUpon>PredefinedPositionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PrintControl.resx">
+      <DependentUpon>PrintControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PropertieControl.resx">
+      <DependentUpon>PropertieControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StateControl.resx">
+      <DependentUpon>StateControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliveryReport.resx">
+      <DependentUpon>DeliveryReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\OfferReport.resx">
+      <DependentUpon>OfferReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\OrderReport.resx">
+      <DependentUpon>OrderReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ClickCostView.resx">
+      <DependentUpon>ClickCostView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CustomerView.resx">
+      <DependentUpon>CustomerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DeliveryView.resx">
+      <DependentUpon>DeliveryView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DescriptionView.resx">
+      <DependentUpon>DescriptionView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\EmptyView.resx">
+      <DependentUpon>EmptyView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\GenderView.resx">
+      <DependentUpon>GenderView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MachineView.resx">
+      <DependentUpon>MachineView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\OrdersView.resx">
+      <DependentUpon>OrdersView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PaperView.resx">
+      <DependentUpon>PaperView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PositionView.resx">
+      <DependentUpon>PositionView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainView.resx">
+      <DependentUpon>MainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PredefinedPositionView.resx">
+      <DependentUpon>PredefinedPositionView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PropertiesMainView.resx">
+      <DependentUpon>PropertiesMainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <Content Include="Models\Database\Scripts\dbImpressio.sqlce">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\DataSources\Impressio.Models.State.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Address.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.ClickCost.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Client.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Company.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Data.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.DataPosition.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Delivery.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.DeliveryPosition.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Description.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Detail.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.FinishPosition.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Gender.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.IOrderPosition.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Machine.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Order.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Paper.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Position.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Type.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\person.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\address.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\company.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\remark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\data.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\print.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\finish.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\pen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\printer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\word.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\properties.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\delivery.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Resources\copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\Database\Scripts\dbImpressio.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Resources\gender.png" />
+    <None Include="Views\Resources\excel.png" />
+    <None Include="Views\Resources\paper.png" />
+    <None Include="Views\Resources\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
