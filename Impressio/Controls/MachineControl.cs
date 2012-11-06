@@ -3,20 +3,16 @@ using System.ComponentModel;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
   public partial class MachineControl : ControlBase, IControl, IGridControl<Machine>
   {
-    private readonly Machine _machine = new Machine();
-
     public MachineControl()
     {
       InitializeComponent();
     }
-
-    #region IControl Members
 
     public void ReloadControl()
     {
@@ -29,16 +25,7 @@ namespace Impressio.Controls
     {
       return ValidateRow();
     }
-
-    #endregion
-
-    #region IGridControl<Machine> Members
-
-    public Machine FocusedRow
-    {
-      get { return viewMachine.GetFocusedRow() as Machine; }
-    }
-
+    
     public void DeleteRow()
     {
       FocusedRow.DeleteObject();
@@ -64,7 +51,12 @@ namespace Impressio.Controls
       }
     }
 
-    #endregion
+    public Machine FocusedRow
+    {
+      get { return viewMachine.GetFocusedRow() as Machine; }
+    }
+
+    private readonly Machine _machine = new Machine();
 
     private void MachineControlLoad(object sender, EventArgs e)
     {

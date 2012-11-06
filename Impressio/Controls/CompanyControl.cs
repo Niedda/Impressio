@@ -4,20 +4,16 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
   public partial class CompanyControl : ControlBase, IControl, IGridControl<Company>
   {
-    private readonly Company _company = new Company();
-
     public CompanyControl()
     {
       InitializeComponent();
     }
-
-    #region IControl Members
 
     public void ReloadControl()
     {
@@ -29,15 +25,6 @@ namespace Impressio.Controls
     public bool ValidateControl()
     {
       return ValidateRow();
-    }
-
-    #endregion
-
-    #region IGridControl<Company> Members
-
-    public Company FocusedRow
-    {
-      get { return viewCompany.GetFocusedRow() as Company; }
     }
 
     public void DeleteRow()
@@ -67,7 +54,12 @@ namespace Impressio.Controls
       }
     }
 
-    #endregion
+    public Company FocusedRow
+    {
+      get { return viewCompany.GetFocusedRow() as Company; }
+    }
+    
+    private readonly Company _company = new Company();
 
     private void CompanyControlLoad(object sender, EventArgs e)
     {

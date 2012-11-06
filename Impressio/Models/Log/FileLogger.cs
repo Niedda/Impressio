@@ -23,11 +23,11 @@ namespace Impressio.Models.Log
         logWriter.Close();
       }
 
-      if (Settings.Default.exceptionMode)
-      {
-        MessageBox.Show(exception, "Fehler bei der Ausführung", MessageBoxButtons.OK, MessageBoxIcon.Warning,
-                        MessageBoxDefaultButton.Button1);
-      }
+      //if (Settings.Default.exceptionMode)
+      //{
+      //  MessageBox.Show(exception, "Fehler bei der Ausführung", MessageBoxButtons.OK, MessageBoxIcon.Warning,
+      //                  MessageBoxDefaultButton.Button1);
+      //}
     }
 
     #endregion

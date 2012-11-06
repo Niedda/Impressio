@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using Impressio.Models.Database.DatabaseObject;
 using Impressio.Models.Tools;
 using Impressio.Properties;
 using Impressio.Reports;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
@@ -184,26 +184,19 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader["OrderId"].GetInt();
-      _dateCreated = Database.Reader["DateCreated"] as string;
-      DateModified = Database.Reader["DateModified"] as string;
-      _userCreated = Database.Reader["UserCreated"] as string;
-      UserModified = Database.Reader["UserModified"] as string;
-      OrderName = Database.Reader["OrderName"] as string;
-      FkOrderCompany = Database.Reader["FkOrderCompany"].GetInt();
-      FkOrderState = Database.Reader["FkOrderState"].GetInt();
-      FkOrderAddress = Database.Reader["FkOrderAddress"].GetInt();
-      FkOrderClient = Database.Reader["FkOrderClient"].GetInt();
-      IsPredefined = (bool)Database.Reader["IsPredefined"];
+      Identity = Database.Reader[IdentityColumn].GetInt();
+      _dateCreated = Database.Reader[Columns.DateCreated.ToString()] as string;
+      DateModified = Database.Reader[Columns.DateModified.ToString()] as string;
+      _userCreated = Database.Reader[Columns.UserCreated.ToString()] as string;
+      UserModified = Database.Reader[Columns.UserModified.ToString()] as string;
+      OrderName = Database.Reader[Columns.OrderName.ToString()] as string;
+      FkOrderCompany = Database.Reader[Columns.FkOrderCompany.ToString()].GetInt();
+      FkOrderState = Database.Reader[Columns.FkOrderState.ToString()].GetInt();
+      FkOrderAddress = Database.Reader[Columns.FkOrderAddress.ToString()].GetInt();
+      FkOrderClient = Database.Reader[Columns.FkOrderClient.ToString()].GetInt();
+      IsPredefined = (bool)Database.Reader[Columns.IsPredefined.ToString()];
     }
-
-    public override void SetObjectList()
-    {
-      var order = new Order();
-      order.SetObject();
-      _orders.Add(order);
-    }
-
+    
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>
@@ -308,17 +301,10 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader["StateId"].GetInt();
-      StateName = Database.Reader["StateName"] as string;
+      Identity = Database.Reader[IdentityColumn].GetInt();
+      StateName = Database.Reader[Columns.StateName.ToString()] as string;
     }
-
-    public override void SetObjectList()
-    {
-      var state = new State();
-      state.SetObject();
-      _states.Add(state);
-    }
-
+    
     public override void ClearObjectList()
     {
       _states.Clear();

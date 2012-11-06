@@ -13,18 +13,12 @@ namespace Impressio.Views
 
     private void NavMachineLinkClicked(object sender, NavBarLinkEventArgs e)
     {
-      new MachineView
-        {
-          MdiParent = Program.MainView,
-        }.Show();
+      new MachineView().Show();
     }
 
     private void NavDescriptionLinkClicked(object sender, NavBarLinkEventArgs e)
     {
-      new DescriptionView
-        {
-          MdiParent = Program.MainView,
-        }.Show();
+      new DescriptionView().Show();
     }
 
     private void NavPaperLinkClicked(object sender, NavBarLinkEventArgs e)
@@ -37,18 +31,12 @@ namespace Impressio.Views
 
     private void NavClickCostLinkClicked(object sender, NavBarLinkEventArgs e)
     {
-      new ClickCostView
-        {
-          MdiParent = Program.MainView,
-        }.Show();
+      new ClickCostView().Show();
     }
 
     private void NavGenderLinkClicked(object sender, NavBarLinkEventArgs e)
     {
-      new GenderView
-        {
-          MdiParent = Program.MainView,
-        }.Show();
+      new GenderView().Show();
     }
 
     private void NavPositionLinkClicked(object sender, NavBarLinkEventArgs e)
@@ -58,17 +46,20 @@ namespace Impressio.Views
 
     private void NavPropertiesLinkClicked(object sender, NavBarLinkEventArgs e)
     {
-      var dia = new EmptyView();
+      var dia = new EmptyView
+                  {
+                    Width = 570, 
+                    Height = 450,
+                    MinimumSize = new System.Drawing.Size(570, 450),
+                    MaximumSize = new System.Drawing.Size(570,450),
+                  };
       dia.mainPanel.Controls.Add(new PropertieControl());
       dia.Show();
     }
 
     private void NavStateLinkClicked(object sender, NavBarLinkEventArgs e)
     {
-      var dia = new EmptyView
-                  {
-                    MdiParent = Program.MainView,
-                  };
+      var dia = new EmptyView();
       dia.mainPanel.Controls.Add(new StateControl());
       dia.Show();
     }

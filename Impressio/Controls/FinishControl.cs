@@ -5,21 +5,16 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
   public partial class FinishControl : ControlBase, IControl, IGridControl<FinishPosition>
   {
-    private readonly FinishPosition _finishPosition = new FinishPosition();
-    public Finish Finish;
-
     public FinishControl()
     {
       InitializeComponent();
     }
-
-    #region IControl Members
 
     public void ReloadControl()
     {
@@ -45,15 +40,6 @@ namespace Impressio.Controls
       return false;
     }
 
-    #endregion
-
-    #region IGridControl<FinishPosition> Members
-
-    public FinishPosition FocusedRow
-    {
-      get { return viewFinish.GetFocusedRow() as FinishPosition; }
-    }
-
     public void DeleteRow()
     {
       viewFinish.DeleteSelectedRows();
@@ -75,7 +61,14 @@ namespace Impressio.Controls
       }
     }
 
-    #endregion
+    public FinishPosition FocusedRow
+    {
+      get { return viewFinish.GetFocusedRow() as FinishPosition; }
+    }
+
+    public Finish Finish;
+
+    private readonly FinishPosition _finishPosition = new FinishPosition();
 
     private void FinishControlLoad(object sender, EventArgs e)
     {

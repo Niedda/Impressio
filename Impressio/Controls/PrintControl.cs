@@ -1,25 +1,19 @@
 ﻿using System;
 using System.ComponentModel;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
 using Impressio.Models.Tools;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
   public partial class PrintControl : ControlBase, IControl
   {
-    private readonly ClickCost _clickCost = new ClickCost();
-
-    private readonly Paper _paper = new Paper();
-    public Print Print = new Print();
-    private bool _isLoaded;
-
     public PrintControl()
     {
       InitializeComponent();
     }
-
-    #region IControl Members
+    
+    public Print Print = new Print();
 
     public void ReloadControl()
     {
@@ -60,8 +54,6 @@ namespace Impressio.Controls
       return true;
     }
 
-    #endregion
-
     public void GetPrint()
     {
       if (_isLoaded)
@@ -94,6 +86,12 @@ namespace Impressio.Controls
       }
     }
 
+    private bool _isLoaded;
+
+    private readonly ClickCost _clickCost = new ClickCost();
+
+    private readonly Paper _paper = new Paper();
+    
     private void PrintControlLoad(object sender, EventArgs e)
     {
       ReloadControl();

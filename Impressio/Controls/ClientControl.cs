@@ -4,23 +4,16 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
   public partial class ClientControl : ControlBase, IControl, IGridControl<Client>
   {
-    private readonly Client _client = new Client();
-
-    private readonly Gender _gender = new Gender();
-    public Company Company = new Company();
-
     public ClientControl()
     {
       InitializeComponent();
     }
-
-    #region IControl Members
 
     public void ReloadControl()
     {
@@ -34,15 +27,6 @@ namespace Impressio.Controls
     public bool ValidateControl()
     {
       return ValidateRow();
-    }
-
-    #endregion
-
-    #region IGridControl<Client> Members
-
-    public Client FocusedRow
-    {
-      get { return viewClients.GetFocusedRow() as Client; }
     }
 
     public void DeleteRow()
@@ -67,7 +51,16 @@ namespace Impressio.Controls
       }
     }
 
-    #endregion
+    public Client FocusedRow
+    {
+      get { return viewClients.GetFocusedRow() as Client; }
+    }
+
+    public Company Company = new Company();
+
+    private readonly Client _client = new Client();
+
+    private readonly Gender _gender = new Gender();
 
     private void ClientControlLoad(object sender, EventArgs e)
     {

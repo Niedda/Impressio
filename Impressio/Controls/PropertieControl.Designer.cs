@@ -1,4 +1,6 @@
-﻿namespace Impressio.Controls
+﻿using System.Windows.Forms;
+
+namespace Impressio.Controls
 {
   partial class PropertieControl
   {
@@ -30,33 +32,36 @@
     {
       this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
       this.dbConnectionString = new DevExpress.XtraEditors.MemoEdit();
-      this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
-      this.logFolderPath = new DevExpress.XtraEditors.TextEdit();
-      this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-      this.exceptionMode = new DevExpress.XtraEditors.CheckEdit();
       this.user = new DevExpress.XtraEditors.TextEdit();
       this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
       this.pathData = new DevExpress.XtraEditors.TextEdit();
       this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
-      this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
       this.database = new DevExpress.XtraEditors.ComboBoxEdit();
-      this.logger = new DevExpress.XtraEditors.ComboBoxEdit();
-      this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
-      ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
+      this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+      this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+      this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+      this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+      this.compactName = new DevExpress.XtraEditors.TextEdit();
+      this.databaseCheckResult = new DevExpress.XtraEditors.LabelControl();
+      this.createCompactDb = new DevExpress.XtraEditors.SimpleButton();
+      this.checkDatabaseSetting = new DevExpress.XtraEditors.SimpleButton();
       ((System.ComponentModel.ISupportInitialize)(this.dbConnectionString.Properties)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.logFolderPath.Properties)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.exceptionMode.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.user.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pathData.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.database.Properties)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.logger.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+      this.xtraTabControl1.SuspendLayout();
+      this.xtraTabPage2.SuspendLayout();
+      this.xtraTabPage1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.compactName.Properties)).BeginInit();
       this.SuspendLayout();
       // 
       // labelControl1
       // 
-      this.labelControl1.Location = new System.Drawing.Point(62, 56);
+      this.labelControl1.Appearance.ForeColor = System.Drawing.Color.Navy;
+      this.labelControl1.Location = new System.Drawing.Point(23, 25);
       this.labelControl1.Name = "labelControl1";
       this.labelControl1.Size = new System.Drawing.Size(140, 13);
       this.labelControl1.TabIndex = 0;
@@ -64,56 +69,24 @@
       // 
       // dbConnectionString
       // 
-      this.dbConnectionString.Location = new System.Drawing.Point(249, 53);
+      this.dbConnectionString.Location = new System.Drawing.Point(23, 48);
       this.dbConnectionString.Name = "dbConnectionString";
-      this.dbConnectionString.Size = new System.Drawing.Size(424, 67);
+      this.dbConnectionString.Size = new System.Drawing.Size(488, 132);
       this.dbConnectionString.TabIndex = 2;
       this.dbConnectionString.EditValueChanged += new System.EventHandler(this.DbConnectionStringEditValueChanged);
       // 
-      // labelControl2
-      // 
-      this.labelControl2.Location = new System.Drawing.Point(62, 140);
-      this.labelControl2.Name = "labelControl2";
-      this.labelControl2.Size = new System.Drawing.Size(83, 13);
-      this.labelControl2.TabIndex = 3;
-      this.labelControl2.Text = "Pfad zum Log File";
-      // 
-      // logFolderPath
-      // 
-      this.logFolderPath.Location = new System.Drawing.Point(249, 137);
-      this.logFolderPath.Name = "logFolderPath";
-      this.logFolderPath.Size = new System.Drawing.Size(424, 20);
-      this.logFolderPath.TabIndex = 4;
-      this.logFolderPath.Enter += new System.EventHandler(this.LogFolderPathEnter);
-      // 
-      // labelControl3
-      // 
-      this.labelControl3.Location = new System.Drawing.Point(62, 311);
-      this.labelControl3.Name = "labelControl3";
-      this.labelControl3.Size = new System.Drawing.Size(76, 13);
-      this.labelControl3.TabIndex = 5;
-      this.labelControl3.Text = "Exception Mode";
-      // 
-      // exceptionMode
-      // 
-      this.exceptionMode.Location = new System.Drawing.Point(247, 308);
-      this.exceptionMode.Name = "exceptionMode";
-      this.exceptionMode.Properties.Caption = "";
-      this.exceptionMode.Size = new System.Drawing.Size(152, 19);
-      this.exceptionMode.TabIndex = 6;
-      this.exceptionMode.CheckedChanged += new System.EventHandler(this.ExceptionModeCheckedChanged);
-      // 
       // user
       // 
-      this.user.Location = new System.Drawing.Point(249, 205);
+      this.user.Location = new System.Drawing.Point(18, 41);
       this.user.Name = "user";
-      this.user.Size = new System.Drawing.Size(424, 20);
+      this.user.Size = new System.Drawing.Size(497, 20);
       this.user.TabIndex = 8;
       this.user.EditValueChanged += new System.EventHandler(this.UserEditValueChanged);
       // 
       // labelControl4
       // 
-      this.labelControl4.Location = new System.Drawing.Point(62, 208);
+      this.labelControl4.Appearance.ForeColor = System.Drawing.Color.Navy;
+      this.labelControl4.Location = new System.Drawing.Point(18, 22);
       this.labelControl4.Name = "labelControl4";
       this.labelControl4.Size = new System.Drawing.Size(22, 13);
       this.labelControl4.TabIndex = 7;
@@ -121,7 +94,8 @@
       // 
       // labelControl5
       // 
-      this.labelControl5.Location = new System.Drawing.Point(62, 174);
+      this.labelControl5.Appearance.ForeColor = System.Drawing.Color.Navy;
+      this.labelControl5.Location = new System.Drawing.Point(18, 91);
       this.labelControl5.Name = "labelControl5";
       this.labelControl5.Size = new System.Drawing.Size(89, 13);
       this.labelControl5.TabIndex = 9;
@@ -129,99 +103,135 @@
       // 
       // pathData
       // 
-      this.pathData.Location = new System.Drawing.Point(249, 171);
+      this.pathData.Location = new System.Drawing.Point(18, 112);
       this.pathData.Name = "pathData";
-      this.pathData.Size = new System.Drawing.Size(424, 20);
+      this.pathData.Size = new System.Drawing.Size(497, 20);
       this.pathData.TabIndex = 10;
       this.pathData.Enter += new System.EventHandler(this.PathDataEnter);
       // 
       // labelControl6
       // 
-      this.labelControl6.Location = new System.Drawing.Point(62, 242);
+      this.labelControl6.Appearance.ForeColor = System.Drawing.Color.Navy;
+      this.labelControl6.Location = new System.Drawing.Point(23, 204);
       this.labelControl6.Name = "labelControl6";
       this.labelControl6.Size = new System.Drawing.Size(52, 13);
       this.labelControl6.TabIndex = 11;
       this.labelControl6.Text = "Datenbank";
       // 
-      // labelControl7
-      // 
-      this.labelControl7.Location = new System.Drawing.Point(62, 277);
-      this.labelControl7.Name = "labelControl7";
-      this.labelControl7.Size = new System.Drawing.Size(68, 13);
-      this.labelControl7.TabIndex = 12;
-      this.labelControl7.Text = "Logger Engine";
-      // 
       // database
       // 
-      this.database.Location = new System.Drawing.Point(249, 239);
+      this.database.Location = new System.Drawing.Point(23, 225);
       this.database.Name = "database";
       this.database.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
       this.database.Properties.Items.AddRange(new object[] {
-            "compact",
             "mssql",
-            "posql"});
+            "posql",
+            "compact"});
       this.database.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-      this.database.Size = new System.Drawing.Size(424, 20);
+      this.database.Size = new System.Drawing.Size(259, 20);
       this.database.TabIndex = 13;
       this.database.SelectedIndexChanged += new System.EventHandler(this.DatabaseSelectedIndexChanged);
       // 
-      // logger
+      // xtraTabControl1
       // 
-      this.logger.Location = new System.Drawing.Point(249, 274);
-      this.logger.Name = "logger";
-      this.logger.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-      this.logger.Properties.Items.AddRange(new object[] {
-            "file",
-            "database"});
-      this.logger.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-      this.logger.Size = new System.Drawing.Size(424, 20);
-      this.logger.TabIndex = 14;
-      this.logger.SelectedIndexChanged += new System.EventHandler(this.LoggerSelectedIndexChanged);
+      this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
+      this.xtraTabControl1.Name = "xtraTabControl1";
+      this.xtraTabControl1.SelectedTabPage = this.xtraTabPage2;
+      this.xtraTabControl1.Size = new System.Drawing.Size(859, 429);
+      this.xtraTabControl1.TabIndex = 16;
+      this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage1,
+            this.xtraTabPage2});
       // 
-      // labelControl8
+      // xtraTabPage2
       // 
-      this.labelControl8.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.labelControl8.Appearance.ForeColor = System.Drawing.Color.Red;
-      this.labelControl8.Location = new System.Drawing.Point(62, 395);
-      this.labelControl8.Name = "labelControl8";
-      this.labelControl8.Size = new System.Drawing.Size(460, 14);
-      this.labelControl8.TabIndex = 15;
-      this.labelControl8.Text = "Programm muss neu gestartet werden damit Änderungen wirksam werden";
+      this.xtraTabPage2.Controls.Add(this.labelControl4);
+      this.xtraTabPage2.Controls.Add(this.user);
+      this.xtraTabPage2.Controls.Add(this.labelControl5);
+      this.xtraTabPage2.Controls.Add(this.pathData);
+      this.xtraTabPage2.Name = "xtraTabPage2";
+      this.xtraTabPage2.Size = new System.Drawing.Size(853, 403);
+      this.xtraTabPage2.Text = "Benutzer";
+      // 
+      // xtraTabPage1
+      // 
+      this.xtraTabPage1.Controls.Add(this.labelControl2);
+      this.xtraTabPage1.Controls.Add(this.compactName);
+      this.xtraTabPage1.Controls.Add(this.databaseCheckResult);
+      this.xtraTabPage1.Controls.Add(this.createCompactDb);
+      this.xtraTabPage1.Controls.Add(this.checkDatabaseSetting);
+      this.xtraTabPage1.Controls.Add(this.dbConnectionString);
+      this.xtraTabPage1.Controls.Add(this.labelControl1);
+      this.xtraTabPage1.Controls.Add(this.labelControl6);
+      this.xtraTabPage1.Controls.Add(this.database);
+      this.xtraTabPage1.Name = "xtraTabPage1";
+      this.xtraTabPage1.Size = new System.Drawing.Size(853, 403);
+      this.xtraTabPage1.Text = "Datenbank";
+      // 
+      // labelControl2
+      // 
+      this.labelControl2.Appearance.ForeColor = System.Drawing.Color.Navy;
+      this.labelControl2.Location = new System.Drawing.Point(23, 276);
+      this.labelControl2.Name = "labelControl2";
+      this.labelControl2.Size = new System.Drawing.Size(144, 13);
+      this.labelControl2.TabIndex = 18;
+      this.labelControl2.Text = "Name für Compact Datenbank";
+      // 
+      // compactName
+      // 
+      this.compactName.Location = new System.Drawing.Point(23, 297);
+      this.compactName.Name = "compactName";
+      this.compactName.Size = new System.Drawing.Size(259, 20);
+      this.compactName.TabIndex = 17;
+      // 
+      // databaseCheckResult
+      // 
+      this.databaseCheckResult.Location = new System.Drawing.Point(23, 302);
+      this.databaseCheckResult.Name = "databaseCheckResult";
+      this.databaseCheckResult.Size = new System.Drawing.Size(0, 13);
+      this.databaseCheckResult.TabIndex = 16;
+      // 
+      // createCompactDb
+      // 
+      this.createCompactDb.Location = new System.Drawing.Point(341, 294);
+      this.createCompactDb.Name = "createCompactDb";
+      this.createCompactDb.Size = new System.Drawing.Size(170, 23);
+      this.createCompactDb.TabIndex = 15;
+      this.createCompactDb.Text = "Compact Datenbank erstellen";
+      this.createCompactDb.Click += new System.EventHandler(this.CreateCompactDbClick);
+      // 
+      // checkDatabaseSetting
+      // 
+      this.checkDatabaseSetting.Location = new System.Drawing.Point(374, 222);
+      this.checkDatabaseSetting.Name = "checkDatabaseSetting";
+      this.checkDatabaseSetting.Size = new System.Drawing.Size(137, 23);
+      this.checkDatabaseSetting.TabIndex = 14;
+      this.checkDatabaseSetting.Text = "Einstellungen prüfen";
+      this.checkDatabaseSetting.Click += new System.EventHandler(this.CheckDatabaseSettingClick);
       // 
       // PropertieControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.Controls.Add(this.labelControl8);
-      this.Controls.Add(this.logger);
-      this.Controls.Add(this.database);
-      this.Controls.Add(this.labelControl7);
-      this.Controls.Add(this.labelControl6);
-      this.Controls.Add(this.pathData);
-      this.Controls.Add(this.labelControl5);
-      this.Controls.Add(this.user);
-      this.Controls.Add(this.labelControl4);
-      this.Controls.Add(this.exceptionMode);
-      this.Controls.Add(this.labelControl3);
-      this.Controls.Add(this.logFolderPath);
-      this.Controls.Add(this.labelControl2);
-      this.Controls.Add(this.dbConnectionString);
-      this.Controls.Add(this.labelControl1);
+      this.Controls.Add(this.xtraTabControl1);
       this.Name = "PropertieControl";
-      this.Size = new System.Drawing.Size(809, 353);
+      this.Size = new System.Drawing.Size(859, 429);
       this.Load += new System.EventHandler(this.PropertieControlLoad);
-      ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
+      this.Validating += new System.ComponentModel.CancelEventHandler(this.PropertieControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.dbConnectionString.Properties)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.logFolderPath.Properties)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.exceptionMode.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.user.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pathData.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.database.Properties)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.logger.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+      this.xtraTabControl1.ResumeLayout(false);
+      this.xtraTabPage2.ResumeLayout(false);
+      this.xtraTabPage2.PerformLayout();
+      this.xtraTabPage1.ResumeLayout(false);
+      this.xtraTabPage1.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.compactName.Properties)).EndInit();
       this.ResumeLayout(false);
-      this.PerformLayout();
 
     }
 
@@ -229,19 +239,20 @@
 
     private DevExpress.XtraEditors.LabelControl labelControl1;
     private DevExpress.XtraEditors.MemoEdit dbConnectionString;
-    private DevExpress.XtraEditors.LabelControl labelControl2;
     private System.Windows.Forms.FolderBrowserDialog folderBrowser;
-    private DevExpress.XtraEditors.TextEdit logFolderPath;
-    private DevExpress.XtraEditors.LabelControl labelControl3;
-    private DevExpress.XtraEditors.CheckEdit exceptionMode;
     private DevExpress.XtraEditors.TextEdit user;
     private DevExpress.XtraEditors.LabelControl labelControl4;
     private DevExpress.XtraEditors.LabelControl labelControl5;
     private DevExpress.XtraEditors.TextEdit pathData;
     private DevExpress.XtraEditors.LabelControl labelControl6;
-    private DevExpress.XtraEditors.LabelControl labelControl7;
     private DevExpress.XtraEditors.ComboBoxEdit database;
-    private DevExpress.XtraEditors.ComboBoxEdit logger;
-    private DevExpress.XtraEditors.LabelControl labelControl8;
+    private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
+    private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+    private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+    private DevExpress.XtraEditors.SimpleButton createCompactDb;
+    private DevExpress.XtraEditors.SimpleButton checkDatabaseSetting;
+    private DevExpress.XtraEditors.LabelControl databaseCheckResult;
+    private DevExpress.XtraEditors.TextEdit compactName;
+    private DevExpress.XtraEditors.LabelControl labelControl2;
   }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Impressio.Models.Database.DatabaseObject;
 using Impressio.Models.Tools;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
@@ -71,20 +71,13 @@ namespace Impressio.Models
     public override void SetObject()
     {
       Identity = Database.Reader[IdentityColumn].GetInt();
-      FkOrder = Database.Reader["FkDataOrder"].GetInt();
-      Name = Database.Reader["PositionName"] as string;
-      PositionTotal = Database.Reader["PositionTotal"].GetInt();
-      Remark = Database.Reader["Remark"] as string;
-      IsPredefined = (bool) Database.Reader["IsPredefined"];
+      FkOrder = Database.Reader[Columns.FkDataOrder.ToString()].GetInt();
+      Name = Database.Reader[Columns.PositionName.ToString()] as string;
+      PositionTotal = Database.Reader[Columns.PositionTotal.ToString()].GetInt();
+      Remark = Database.Reader[Columns.Remark.ToString()] as string;
+      IsPredefined = (bool) Database.Reader[Columns.IsPredefined.ToString()];
     }
-
-    public override void SetObjectList()
-    {
-      var data = new Data();
-      data.SetObject();
-      _datas.Add(data);
-    }
-
+    
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>
@@ -147,20 +140,13 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Description = Database.Reader["Description"] as string;
-      FkDataDataPosition = Database.Reader["FkDataDataPosition"].GetInt();
-      Quantity = Database.Reader["Quantity"].GetInt();
-      PricePerQuantity = Database.Reader["PricePerQuantity"].GetInt();
-      Identity = Database.Reader["DataPositionId"].GetInt();
+      Description = Database.Reader[Columns.Description.ToString()] as string;
+      FkDataDataPosition = Database.Reader[Columns.FkDataDataPosition.ToString()].GetInt();
+      Quantity = Database.Reader[Columns.Quantity.ToString()].GetInt();
+      PricePerQuantity = Database.Reader[Columns.PricePerQuantity.ToString()].GetInt();
+      Identity = Database.Reader[IdentityColumn].GetInt();
     }
-
-    public override void SetObjectList()
-    {
-      var dataPosition = new DataPosition();
-      dataPosition.SetObject();
-      _dataPositions.Add(dataPosition);
-    }
-
+    
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>

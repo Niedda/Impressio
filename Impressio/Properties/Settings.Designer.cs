@@ -25,18 +25,6 @@ namespace Impressio.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool exceptionMode {
-            get {
-                return ((bool)(this["exceptionMode"]));
-            }
-            set {
-                this["exceptionMode"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Fabrizio")]
         public string User {
             get {
@@ -49,18 +37,6 @@ namespace Impressio.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("mssql")]
-        public string databaseEngine {
-            get {
-                return ((string)(this["databaseEngine"]));
-            }
-            set {
-                this["databaseEngine"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("file")]
         public string loggerEngine {
             get {
@@ -68,31 +44,6 @@ namespace Impressio.Properties {
             }
             set {
                 this["loggerEngine"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string PathToCompactDb {
-            get {
-                return ((string)(this["PathToCompactDb"]));
-            }
-            set {
-                this["PathToCompactDb"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n\t\t\t\t\tServer=bizzi_asus\\SQLEXPRESS;Database=foernuft;User Id=user;Password=2104;" +
-            "\r\n\t\t\t\t")]
-        public string connectionString {
-            get {
-                return ((string)(this["connectionString"]));
-            }
-            set {
-                this["connectionString"] = value;
             }
         }
         

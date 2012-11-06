@@ -3,21 +3,16 @@ using System.ComponentModel;
 using System.Linq;
 using DevExpress.XtraGrid.Views.Base;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
   public partial class DataControl : ControlBase, IControl, IGridControl<DataPosition>
   {
-    private readonly DataPosition _dataPosition = new DataPosition();
-    public Data Data = new Data();
-
     public DataControl()
     {
       InitializeComponent();
     }
-
-    #region IControl Members
 
     public void ReloadControl()
     {
@@ -47,16 +42,7 @@ namespace Impressio.Controls
       }
       return false;
     }
-
-    #endregion
-
-    #region IGridControl<DataPosition> Members
-
-    public DataPosition FocusedRow
-    {
-      get { return viewData.GetFocusedRow() as DataPosition; }
-    }
-
+    
     public void DeleteRow()
     {
       FocusedRow.DeleteObject();
@@ -79,7 +65,14 @@ namespace Impressio.Controls
       }
     }
 
-    #endregion
+    public DataPosition FocusedRow
+    {
+      get { return viewData.GetFocusedRow() as DataPosition; }
+    }
+
+    public Data Data = new Data();
+
+    private readonly DataPosition _dataPosition = new DataPosition();
 
     private void DataControlLoad(object sender, EventArgs e)
     {

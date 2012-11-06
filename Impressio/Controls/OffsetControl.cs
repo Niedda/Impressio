@@ -1,24 +1,17 @@
 ﻿using System;
 using System.ComponentModel;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
 using Impressio.Models.Tools;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
   public partial class OffsetControl : ControlBase, IControl
   {
-    private readonly Machine _machine = new Machine();
-    private readonly Paper _paper = new Paper();
-    public Offset Offset = new Offset();
-    private bool _isLoaded;
-
     public OffsetControl()
     {
       InitializeComponent();
     }
-
-    #region IControl Members
 
     public void ReloadControl()
     {
@@ -55,8 +48,6 @@ namespace Impressio.Controls
       return true;
     }
 
-    #endregion
-
     public void GetOffset()
     {
       if (_isLoaded)
@@ -79,6 +70,13 @@ namespace Impressio.Controls
         priceTotal.Value = Offset.PaperCostTotal + Offset.PrintTotal;
       }
     }
+    private readonly Machine _machine = new Machine();
+
+    private readonly Paper _paper = new Paper();
+
+    public Offset Offset = new Offset();
+
+    private bool _isLoaded;
 
     private void OffsetControlLoad(object sender, EventArgs e)
     {
@@ -94,7 +92,7 @@ namespace Impressio.Controls
     {
       if (paperSearchLookUp.EditValue != null && _isLoaded)
       {
-        Offset.FkOffsetPaper = (int) paperSearchLookUp.EditValue;
+        Offset.FkOffsetPaper = (int)paperSearchLookUp.EditValue;
 
         if (Offset.Paper != null)
         {
@@ -111,7 +109,7 @@ namespace Impressio.Controls
     {
       if (paperQuantity.Value != 0 && paperUsePer.Value != 0 && _isLoaded)
       {
-        offsetPaperQuantity.Value = paperQuantity.Value*paperUsePer.Value;
+        offsetPaperQuantity.Value = paperQuantity.Value * paperUsePer.Value;
         paperCostTotal.Value = Offset.PaperCostTotal;
       }
     }
@@ -120,7 +118,7 @@ namespace Impressio.Controls
     {
       if (_isLoaded)
       {
-        Offset.FkOffsetMachine = (int) offsetMachineSearchLookUp.EditValue;
+        Offset.FkOffsetMachine = (int)offsetMachineSearchLookUp.EditValue;
       }
     }
 
@@ -128,7 +126,7 @@ namespace Impressio.Controls
     {
       if (_isLoaded)
       {
-        offsetPrintQuantity.Value = offsetColorAmount.Value*offsetPaperQuantity.Value;
+        offsetPrintQuantity.Value = offsetColorAmount.Value * offsetPaperQuantity.Value;
       }
     }
 

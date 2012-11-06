@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Impressio.Models.Database.DatabaseObject;
 using Impressio.Models.Tools;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
@@ -187,30 +187,23 @@ namespace Impressio.Models
     
     public override void SetObject()
     {
-      Identity = Database.Reader["OffsetId"].GetInt();
-      FkOffsetPaper = Database.Reader["FkOffsetPaper"].GetInt();
-      FkOffsetMachine = Database.Reader["FkOffsetMachine"].GetInt();
-      PaperAddition = Database.Reader["PaperAddition"].GetInt();
-      PaperPricePer = Database.Reader["PaperPricePer"].GetInt();
-      PaperQuantity = Database.Reader["PaperQuantity"].GetInt();
-      PaperUsePer = Database.Reader["PaperUsePer"].GetInt();
-      PrintType = Database.Reader["PrintType"].GetInt();
-      ColorAmount = Database.Reader["ColorAmount"].GetInt();
-      PrintQuantity = Database.Reader["PrintQuantity"].GetInt();
-      OffsetQuantity = Database.Reader["OffsetQuantity"].GetInt();
-      FkOrder = Database.Reader["FkOffsetOrder"].GetInt();
-      Name = Database.Reader["PositionName"] as string;
-      PositionTotal = Database.Reader["PositionTotal"].GetInt();
+      Identity = Database.Reader[IdentityColumn].GetInt();
+      FkOffsetPaper = Database.Reader[Columns.FkOffsetPaper.ToString()].GetInt();
+      FkOffsetMachine = Database.Reader[Columns.FkOffsetMachine.ToString()].GetInt();
+      PaperAddition = Database.Reader[Columns.PaperAddition.ToString()].GetInt();
+      PaperPricePer = Database.Reader[Columns.PaperPricePer.ToString()].GetInt();
+      PaperQuantity = Database.Reader[Columns.PaperQuantity.ToString()].GetInt();
+      PaperUsePer = Database.Reader[Columns.PaperUsePer.ToString()].GetInt();
+      PrintType = Database.Reader[Columns.PrintType.ToString()].GetInt();
+      ColorAmount = Database.Reader[Columns.ColorAmount.ToString()].GetInt();
+      PrintQuantity = Database.Reader[Columns.PrintQuantity.ToString()].GetInt();
+      OffsetQuantity = Database.Reader[Columns.OffsetQuantity.ToString()].GetInt();
+      FkOrder = Database.Reader[Columns.FkOffsetOrder.ToString()].GetInt();
+      Name = Database.Reader[Columns.PositionName.ToString()] as string;
+      PositionTotal = Database.Reader[Columns.PositionTotal.ToString()].GetInt();
       Type = Type.Offsetdruck;
     }
-
-    public override void SetObjectList()
-    {
-      var offset = new Offset();
-      offset.SetObject();
-      _offsets.Add(offset);
-    }
-
+    
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>
@@ -285,21 +278,14 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader["MachineId"].GetInt();
+      Identity = Database.Reader[IdentityColumn].GetInt();
       Name = Database.Reader[Columns.Name.ToString()] as string;
       Speed = Database.Reader[Columns.Speed.ToString()].GetInt();
       PricePerColor = Database.Reader[Columns.PricePerColor.ToString()].GetInt();
       PlateCost = Database.Reader[Columns.PlateCost.ToString()].GetInt();
       PricePerHour = Database.Reader[Columns.PricePerHour.ToString()].GetInt();
     }
-
-    public override void SetObjectList()
-    {
-      var machine = new Machine();
-      machine.SetObject();
-      _machines.Add(machine);
-    }
-
+    
     public override void ClearObjectList()
     {
       _machines.Clear();

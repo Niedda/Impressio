@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Impressio.Models.Database.DatabaseObject;
 using Impressio.Models.Tools;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
@@ -67,20 +67,13 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader["DescriptionId"].GetInt();
-      JobTitle = Database.Reader["JobTitle"] as string;
-      Arrange = Database.Reader["Arrange"].GetInt();
-      FkDescriptionOrder = Database.Reader["FkDescriptionOrder"].GetInt();
-      Price = Database.Reader["Price"].GetInt();
+      Identity = Database.Reader[IdentityColumn].GetInt();
+      JobTitle = Database.Reader[Columns.JobTitle.ToString()] as string;
+      Arrange = Database.Reader[Columns.Arrange.ToString()].GetInt();
+      FkDescriptionOrder = Database.Reader[Columns.FkDescriptionOrder.ToString()].GetInt();
+      Price = Database.Reader[Columns.Price.ToString()].GetInt();
     }
-
-    public override void SetObjectList()
-    {
-      var description = new Description();
-      description.SetObject();
-      _descriptions.Add(description);
-    }
-
+    
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>
@@ -137,20 +130,13 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      DetailContent = Database.Reader["DetailContent"] as string;
-      Identity = Database.Reader["DetailId"].GetInt();
-      Arrange = Database.Reader["Arrange"].GetInt();
-      DetailTitle = Database.Reader["DetailTitle"] as string;
-      FkDetailDescription = Database.Reader["FkDetailDescription"].GetInt();
+      DetailContent = Database.Reader[Columns.DetailContent.ToString()] as string;
+      Identity = Database.Reader[IdentityColumn].GetInt();
+      Arrange = Database.Reader[Columns.Arrange.ToString()].GetInt();
+      DetailTitle = Database.Reader[Columns.DetailTitle.ToString()] as string;
+      FkDetailDescription = Database.Reader[Columns.FkDetailDescription.ToString()].GetInt();
     }
-
-    public override void SetObjectList()
-    {
-      var detail = new Detail();
-      detail.SetObject();
-      _details.Add(detail);
-    }
-
+    
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>

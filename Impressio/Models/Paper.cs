@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Data.OleDb;
 using System.IO;
 using System.Linq;
-using Impressio.Models.Database.DatabaseObject;
 using Impressio.Models.Tools;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
@@ -108,29 +108,22 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader["PaperId"].GetInt();
-      Price1 = Database.Reader["Price1"].GetInt();
-      Price2 = Database.Reader["Price2"].GetInt();
-      Price3 = Database.Reader["Price3"].GetInt();
-      Price4 = Database.Reader["Price4"].GetInt();
-      Amount1 = Database.Reader["Amount1"].GetInt();
-      Amount2 = Database.Reader["Amount2"].GetInt();
-      Amount3 = Database.Reader["Amount3"].GetInt();
-      Direction = Database.Reader["Direction"].GetInt();
-      ItemNumber = Database.Reader["ItemNumber"].GetInt();
-      SizeB = Database.Reader["SizeB"].GetInt();
-      SizeL = Database.Reader["SizeL"].GetInt();
-      Name = Database.Reader["PaperName"] as string;
-      Weight = Database.Reader["Weight"].GetInt();
+      Identity = Database.Reader[IdentityColumn].GetInt();
+      Price1 = Database.Reader[Columns.Price1.ToString()].GetInt();
+      Price2 = Database.Reader[Columns.Price2.ToString()].GetInt();
+      Price3 = Database.Reader[Columns.Price3.ToString()].GetInt();
+      Price4 = Database.Reader[Columns.Price4.ToString()].GetInt();
+      Amount1 = Database.Reader[Columns.Amount1.ToString()].GetInt();
+      Amount2 = Database.Reader[Columns.Amount2.ToString()].GetInt();
+      Amount3 = Database.Reader[Columns.Amount3.ToString()].GetInt();
+      Direction = Database.Reader[Columns.Direction.ToString()].GetInt();
+      ItemNumber = Database.Reader[Columns.ItemNumber.ToString()].GetInt();
+      SizeB = Database.Reader[Columns.SizeB.ToString()].GetInt();
+      SizeL = Database.Reader[Columns.SizeL.ToString()].GetInt();
+      Name = Database.Reader[Columns.PaperName.ToString()] as string;
+      Weight = Database.Reader[Columns.Weight.ToString()].GetInt();
     }
-
-    public override void SetObjectList()
-    {
-      var paper = new Paper();
-      paper.SetObject();
-      _papers.Add(paper);
-    }
-
+    
     public override void ClearObjectList()
     {
       _papers.Clear();
@@ -207,7 +200,7 @@ namespace Impressio.Models
 
             if (paper.ItemNumber != 0)
             {
-              Paper exists =
+              var exists =
                 (from pap in paper.Objects where pap.ItemNumber == paper.ItemNumber select pap).FirstOrDefault();
               if (exists != null)
               {
@@ -222,7 +215,7 @@ namespace Impressio.Models
       }
       catch (Exception exception)
       {
-        ServiceLocator.Instance.Logger.WriteToLog(exception.ToString());
+        ExceptionHandler.Instance.WriteToLog(exception.ToString());
         return false;
       }
     }

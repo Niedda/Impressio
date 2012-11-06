@@ -49,7 +49,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(784, 461);
       this.Controls.Add(this.mainPanel);
-      this.MinimumSize = new System.Drawing.Size(800, 500);
+      this.MinimumSize = new System.Drawing.Size(500, 350);
       this.Name = "EmptyView";
       this.ShowIcon = false;
       ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).EndInit();

@@ -4,21 +4,16 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
   public partial class DeliveryControl : ControlBase, IControl, IGridControl<DeliveryPosition>
   {
-    private readonly DeliveryPosition _deliveryPosition = new DeliveryPosition();
-    public Delivery Delivery;
-
     public DeliveryControl()
     {
       InitializeComponent();
     }
-
-    #region IControl Members
 
     public void ReloadControl()
     {
@@ -51,15 +46,6 @@ namespace Impressio.Controls
       return false;
     }
 
-    #endregion
-
-    #region IGridControl<DeliveryPosition> Members
-
-    public DeliveryPosition FocusedRow
-    {
-      get { return viewDeliveryPosition.GetFocusedRow() as DeliveryPosition; }
-    }
-
     public void DeleteRow()
     {
       FocusedRow.DeleteObject();
@@ -82,7 +68,14 @@ namespace Impressio.Controls
       }
     }
 
-    #endregion
+    public DeliveryPosition FocusedRow
+    {
+      get { return viewDeliveryPosition.GetFocusedRow() as DeliveryPosition; }
+    }
+
+    public Delivery Delivery;
+
+    private readonly DeliveryPosition _deliveryPosition = new DeliveryPosition();
 
     private void DeliveryControlLoad(object sender, EventArgs e)
     {

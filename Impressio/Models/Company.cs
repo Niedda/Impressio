@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Impressio.Models.Database.DatabaseObject;
 using Impressio.Models.Tools;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
@@ -56,13 +56,6 @@ namespace Impressio.Models
       Remark = Database.Reader["Remark"] as string;
     }
 
-    public override void SetObjectList()
-    {
-      var company = new Company();
-      company.SetObject();
-      _companies.Add(company);
-    }
-
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>
@@ -75,7 +68,17 @@ namespace Impressio.Models
 
     public bool HasOrders()
     {
-      throw new NotImplementedException();
+      try
+      {
+        var query = new Query(Order.Columns.FkOrderCompany, new DatabaseOperator(DatabaseOperator.Operator.Equal), Identity);
+        var queryBuilder = new QueryBuilder("Order", query);
+        Database.Reader = queryBuilder.GetQuery().ExecuteReader();
+        return Database.Reader.HasRows;
+      }
+      finally
+      {
+        Database.Reader.Close();
+      }
     }
 
     private List<Address> _address;

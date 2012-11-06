@@ -30,7 +30,7 @@ namespace Impressio.Controls
           }
           break;
         case "Int32":
-          if ((int) value <= 0)
+          if (Convert.ToInt32(value) <= 0)
           {
             column.View.SetColumnError(column, "Bitte einen gültigen Wert angeben", ErrorType.Warning);
           }

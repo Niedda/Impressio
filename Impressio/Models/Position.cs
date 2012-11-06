@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Impressio.Models.Database.DatabaseObject;
 using Impressio.Models.Tools;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
@@ -117,17 +117,7 @@ namespace Impressio.Models
       Name = Database.Reader[Columns.PositionName.ToString()] as string;
       PriceTotal = Database.Reader[Columns.PositionTotal.ToString()].GetInt();
     }
-
-    public override void SetObjectList()
-    {
-      var position = new Position
-                       {
-                         Type = Type,
-                       };
-      position.SetObject();
-      _positions.Add(position);
-    }
-
+    
     public override Dictionary<Enum, object> GetObject()
     {
       var dic = new Dictionary<Enum, object>

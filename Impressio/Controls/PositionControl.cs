@@ -6,26 +6,19 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
 using Impressio.Models.Tools;
 using Impressio.Views;
+using Subvento.DatabaseObject;
 using Type = Impressio.Models.Type;
 
 namespace Impressio.Controls
 {
   public partial class PositionControl : ControlBase, IControl, IGridControl<Position>
   {
-    private readonly Position _position = new Position();
-
-    private readonly State _state = new State();
-    public Order Order = new Order();
-
     public PositionControl()
     {
       InitializeComponent();
     }
-
-    #region IControl Members
 
     public void ReloadControl()
     {
@@ -74,15 +67,6 @@ namespace Impressio.Controls
       return !ErrorProvider.HasErrors && ValidateRow();
     }
 
-    #endregion
-
-    #region IGridControl<Position> Members
-
-    public Position FocusedRow
-    {
-      get { return viewPosition.GetFocusedRow() as Position; }
-    }
-
     public void DeleteRow()
     {
       FocusedRow.DeleteObject();
@@ -104,8 +88,6 @@ namespace Impressio.Controls
         FocusedRow.Identity = FocusedRow.SaveObject();
       }
     }
-
-    #endregion
 
     public void OpenPosition()
     {
@@ -159,6 +141,17 @@ namespace Impressio.Controls
         }
       }
     }
+
+    public Position FocusedRow
+    {
+      get { return viewPosition.GetFocusedRow() as Position; }
+    }
+
+    public Order Order = new Order();
+
+    private readonly Position _position = new Position();
+
+    private readonly State _state = new State();
 
     private void PositionControlLoad(object sender, EventArgs e)
     {

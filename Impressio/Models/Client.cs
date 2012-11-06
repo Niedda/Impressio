@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Impressio.Models.Database.DatabaseObject;
 using Impressio.Models.Tools;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
@@ -76,14 +76,7 @@ namespace Impressio.Models
       FkClientCompany = Database.Reader["FkClientCompany"].GetInt();
       FkClientGender = Database.Reader["FkClientGender"].GetInt();
     }
-
-    public override void SetObjectList()
-    {
-      var client = new Client();
-      client.SetObject();
-      _clients.Add(client);
-    }
-
+    
     public override void ClearObjectList()
     {
       _clients.Clear();

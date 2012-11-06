@@ -1,29 +1,32 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraNavBar;
-using Impressio.Models;
-using Impressio.Models.Database;
-using Impressio.Models.Database.DatabaseObject;
+using Subvento;
 
 namespace Impressio.Views
 {
   public partial class MainView : XtraForm
   {
+    public MainView()
+    {
+      InitializeComponent();
+
+      if (!ServiceLocator.Instance.Usable())
+      {
+        //TODO connection check
+      }
+    }
+
     private CustomerView _customerView = new CustomerView();
 
     private OrdersView _ordersView = new OrdersView();
 
     private PropertiesMainView _propertiesMainView = new PropertiesMainView();
 
-    public MainView()
-    {
-      InitializeComponent();
-    }
-
     private void NavCompanyLinkClicked(object sender, NavBarLinkEventArgs e)
     {
       if (_customerView.IsDisposed)
       {
-        _customerView = new CustomerView {MdiParent = this};
+        _customerView = new CustomerView { MdiParent = this };
         _customerView.Show();
       }
       else
@@ -51,7 +54,7 @@ namespace Impressio.Views
     {
       if (_propertiesMainView.IsDisposed)
       {
-        _propertiesMainView = new PropertiesMainView {MdiParent = this,};
+        _propertiesMainView = new PropertiesMainView();
         _propertiesMainView.Show();
       }
       else

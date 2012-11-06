@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Impressio.Models.Database.DatabaseObject;
 using Impressio.Models.Tools;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
@@ -123,19 +123,12 @@ namespace Impressio.Models
     {
       Identity = Database.Reader[IdentityColumn].GetInt();
       FkDeliveryCompany = Database.Reader[Columns.FkDeliveryCompany.ToString()].GetInt();
-      FkDeliveryAddress = Database.Reader["FkDeliveryAddress"].GetInt();
-      FkDeliveryClient = Database.Reader["FkDeliveryClient"].GetInt();
-      FkDeliveryOrder = Database.Reader["FkDeliveryOrder"].GetInt();
-      DeliveryDate = Convert.ToDateTime(Database.Reader["DeliveryDate"]);
+      FkDeliveryAddress = Database.Reader[Columns.FkDeliveryAddress.ToString()].GetInt();
+      FkDeliveryClient = Database.Reader[Columns.FkDeliveryClient.ToString()].GetInt();
+      FkDeliveryOrder = Database.Reader[Columns.FkDeliveryOrder.ToString()].GetInt();
+      DeliveryDate = Convert.ToDateTime(Database.Reader[Columns.DeliveryDate.ToString()]);
     }
-
-    public override void SetObjectList()
-    {
-      var delivery = new Delivery();
-      delivery.SetObject();
-      _deliveries.Add(delivery);
-    }
-
+    
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>
@@ -190,10 +183,7 @@ namespace Impressio.Models
       get { return "DeliveryPositionId"; }
     }
 
-    public override string Table
-    {
-      get { return "DeliveryPosition"; }
-    }
+    public override string Table { get { return "DeliveryPosition"; } }
 
     public int FkDeliveryPositionDelivery { get; set; }
 
@@ -208,19 +198,12 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader["DeliveryPositionId"].GetInt();
-      Quantity = Database.Reader["Quantity"].GetInt();
-      Position = Database.Reader["DeliveryPosition"] as string;
-      FkDeliveryPositionDelivery = Database.Reader["FkDeliveryPositionDelivery"].GetInt();
+      Identity = Database.Reader[IdentityColumn].GetInt();
+      Quantity = Database.Reader[Columns.Quantity.ToString()].GetInt();
+      Position = Database.Reader[Columns.DeliveryPosition.ToString()] as string;
+      FkDeliveryPositionDelivery = Database.Reader[Columns.FkDeliveryPositionDelivery.ToString()].GetInt();
     }
-
-    public override void SetObjectList()
-    {
-      var deliveryPosition = new DeliveryPosition();
-      deliveryPosition.SetObject();
-      _deliveryPositions.Add(deliveryPosition);
-    }
-
+    
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>

@@ -3,20 +3,16 @@ using System.ComponentModel;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
   public partial class StateControl : ControlBase, IControl, IGridControl<State>
   {
-    private readonly State _state = new State();
-
     public StateControl()
     {
       InitializeComponent();
     }
-
-    #region IControl Members
 
     public void ReloadControl()
     {
@@ -28,15 +24,6 @@ namespace Impressio.Controls
     public bool ValidateControl()
     {
       return ValidateRow();
-    }
-
-    #endregion
-
-    #region IGridControl<State> Members
-
-    public State FocusedRow
-    {
-      get { return viewState.GetFocusedRow() as State; }
     }
 
     public void DeleteRow()
@@ -59,7 +46,12 @@ namespace Impressio.Controls
       }
     }
 
-    #endregion
+    public State FocusedRow
+    {
+      get { return viewState.GetFocusedRow() as State; }
+    }
+
+    private readonly State _state = new State();
 
     private void StateControlLoad(object sender, EventArgs e)
     {

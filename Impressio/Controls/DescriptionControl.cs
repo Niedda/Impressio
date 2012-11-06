@@ -5,27 +5,16 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
   public partial class DescriptionControl : ControlBase, IControl, IGridControl<Description>
   {
-    private readonly Description _description = new Description();
-    public bool IsPredefinedMode;
-    public Order Order = new Order();
-
     public DescriptionControl()
     {
       InitializeComponent();
     }
-
-    public Detail FocusedRowDetail
-    {
-      get { return viewDetail.GetFocusedRow() as Detail; }
-    }
-
-    #region IControl Members
 
     public void ReloadControl()
     {
@@ -52,16 +41,7 @@ namespace Impressio.Controls
     {
       return ValidateRow() && ValidateDetailRow();
     }
-
-    #endregion
-
-    #region IGridControl<Description> Members
-
-    public Description FocusedRow
-    {
-      get { return viewDescription.GetFocusedRow() as Description; }
-    }
-
+    
     public void DeleteRow()
     {
       FocusedRow.DeleteObject();
@@ -89,8 +69,6 @@ namespace Impressio.Controls
       }
     }
 
-    #endregion
-
     public void DeleteDetailRow()
     {
       FocusedRowDetail.DeleteObject();
@@ -117,6 +95,22 @@ namespace Impressio.Controls
         FocusedRowDetail.Identity = FocusedRowDetail.SaveObject();
       }
     }
+
+    public Description FocusedRow
+    {
+      get { return viewDescription.GetFocusedRow() as Description; }
+    }
+
+    public Detail FocusedRowDetail
+    {
+      get { return viewDetail.GetFocusedRow() as Detail; }
+    }
+
+    public bool IsPredefinedMode;
+
+    public Order Order = new Order();
+
+    private readonly Description _description = new Description();
 
     private void DescriptionControlLoad(object sender, EventArgs e)
     {
@@ -158,13 +152,13 @@ namespace Impressio.Controls
 
     private void DescriptionMoveUpEditClick(object sender, EventArgs e)
     {
-      GridView view = viewDescription;
-      int index = view.FocusedRowHandle;
+      var view = viewDescription;
+      var index = view.FocusedRowHandle;
 
       if (index > 0 && !view.IsNewItemRow(index))
       {
-        object rowArrange1 = viewDescription.GetRowCellValue(index, colArrange);
-        object rowArrange2 = viewDescription.GetRowCellValue(index - 1, colArrange);
+        var rowArrange1 = viewDescription.GetRowCellValue(index, colArrange);
+        var rowArrange2 = viewDescription.GetRowCellValue(index - 1, colArrange);
 
         viewDescription.SetRowCellValue(index, colArrange, rowArrange2);
         viewDescription.SetRowCellValue(index - 1, colArrange, rowArrange1);
@@ -178,13 +172,13 @@ namespace Impressio.Controls
 
     private void DescriptionMoveDownEditClick(object sender, EventArgs e)
     {
-      GridView view = viewDescription;
-      int index = view.FocusedRowHandle;
+      var view = viewDescription;
+      var index = view.FocusedRowHandle;
 
       if (index < view.DataRowCount - 1 && !view.IsNewItemRow(index))
       {
-        object val1 = viewDescription.GetRowCellValue(index, colArrange);
-        object val2 = viewDescription.GetRowCellValue(index + 1, colArrange);
+        var val1 = viewDescription.GetRowCellValue(index, colArrange);
+        var val2 = viewDescription.GetRowCellValue(index + 1, colArrange);
 
         viewDescription.SetRowCellValue(index, colArrange, val2);
         viewDescription.SetRowCellValue(index + 1, colArrange, val1);
@@ -200,19 +194,19 @@ namespace Impressio.Controls
     {
       if (!IsPredefinedMode)
       {
-        Description predef =
+        var predef =
           (from det in _description.PredefinedObjects where det.JobTitle == e.Value as string select det).
             FirstOrDefault();
 
         if (predef != null)
         {
-          Description newDescription = predef;
+          var newDescription = predef;
           newDescription.Identity = 0;
           newDescription.FkDescriptionOrder = _description.FkDescriptionOrder;
           newDescription.Arrange = viewDescription.RowCount + 1;
           newDescription.Identity = newDescription.SaveObject();
 
-          foreach (Detail detail in predef.Details)
+          foreach (var detail in predef.Details)
           {
             detail.Identity = 0;
             detail.FkDetailDescription = predef.Identity;
@@ -248,13 +242,13 @@ namespace Impressio.Controls
 
     private void DetailMoveUpEditClick(object sender, EventArgs e)
     {
-      GridView view = viewDetail;
-      int index = view.FocusedRowHandle;
+      var view = viewDetail;
+      var index = view.FocusedRowHandle;
 
       if (index > 0 && !view.IsNewItemRow(index))
       {
-        object val1 = view.GetRowCellValue(index, colArrangeDetail);
-        object val2 = view.GetRowCellValue(index - 1, colArrangeDetail);
+        var val1 = view.GetRowCellValue(index, colArrangeDetail);
+        var val2 = view.GetRowCellValue(index - 1, colArrangeDetail);
 
         view.SetRowCellValue(index, colArrangeDetail, val2);
         view.SetRowCellValue(index - 1, colArrangeDetail, val1);
@@ -268,13 +262,13 @@ namespace Impressio.Controls
 
     private void DetailMoveDownEditClick(object sender, EventArgs e)
     {
-      GridView view = viewDetail;
-      int index = view.FocusedRowHandle;
+      var view = viewDetail;
+      var index = view.FocusedRowHandle;
 
       if (index < view.DataRowCount - 1 && !view.IsNewItemRow(index))
       {
-        object val1 = view.GetRowCellValue(index, colArrangeDetail);
-        object val2 = view.GetRowCellValue(index + 1, colArrangeDetail);
+        var val1 = view.GetRowCellValue(index, colArrangeDetail);
+        var val2 = view.GetRowCellValue(index + 1, colArrangeDetail);
 
         view.SetRowCellValue(index, colArrangeDetail, val2);
         view.SetRowCellValue(index + 1, colArrangeDetail, val1);

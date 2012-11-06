@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Impressio.Models.Database.DatabaseObject;
 using Impressio.Models.Tools;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
@@ -28,17 +28,10 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader["GenderId"].GetInt();
-      Name = Database.Reader["Gender"] as string;
+      Identity = Database.Reader[IdentityColumn].GetInt();
+      Name = Database.Reader[Columns.Name.ToString()] as string;
     }
-
-    public override void SetObjectList()
-    {
-      var gender = new Gender();
-      gender.SetObject();
-      _genders.Add(gender);
-    }
-
+    
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>

@@ -83,6 +83,9 @@
     <Reference Include="Npgsql">
       <HintPath>..\Externals\npgsql\Npgsql.dll</HintPath>
     </Reference>
+    <Reference Include="Subvento">
+      <HintPath>..\..\Subvento\Subvento\bin\Debug\Subvento.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SqlServerCe, Version=3.5.1.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
@@ -214,8 +217,6 @@
     <Compile Include="Controls\StateControl.Designer.cs">
       <DependentUpon>StateControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Database\DatabaseConfig.cs" />
-    <Compile Include="Models\Database\DatabaseObject\QueryBuilder.cs" />
     <Compile Include="Models\IControl.cs" />
     <Compile Include="Models\IGridControl.cs" />
     <Compile Include="Models\IPosition.cs" />
@@ -223,20 +224,12 @@
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Data.cs" />
-    <Compile Include="Models\Database\DatabaseObject\DatabaseObject.cs" />
-    <Compile Include="Models\Database\DatabaseObject\DatabaseObjectBase.cs" />
-    <Compile Include="Models\Database\Database.cs" />
-    <Compile Include="Models\Database\IDatabase.cs" />
-    <Compile Include="Models\Database\PostgreSqlDatabase.cs" />
-    <Compile Include="Models\Database\SqlCompactDatabase.cs" />
-    <Compile Include="Models\Database\SqlServerDatabase.cs" />
     <Compile Include="Models\Delivery.cs" />
     <Compile Include="Models\Description.cs" />
     <Compile Include="Models\Finish.cs" />
     <Compile Include="Controls\ControlBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Models\Database\DatabaseObject\IDatabaseObject.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\IPredefined.cs" />
     <Compile Include="Models\Log\DatabaseLogger.cs" />
@@ -247,7 +240,6 @@
     <Compile Include="Models\Paper.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Print.cs" />
-    <Compile Include="Models\ServiceLocator.cs" />
     <Compile Include="Models\Tools\Tools.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -470,13 +462,6 @@
       <DependentUpon>PropertiesMainView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <Content Include="Models\Database\DatabaseConfig.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Models\Database\Scripts\dbImpressio.sqlce">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Properties\DataSources\Impressio.Models.State.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.Address.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.ClickCost.datasource" />
@@ -558,9 +543,6 @@
     <None Include="Views\Resources\copy.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\Database\Scripts\dbImpressio.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Views\Resources\gender.png" />
     <None Include="Views\Resources\excel.png" />
     <None Include="Views\Resources\paper.png" />

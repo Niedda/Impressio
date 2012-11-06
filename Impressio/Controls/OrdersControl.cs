@@ -4,23 +4,17 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
 using Impressio.Views;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
   public partial class OrdersControl : ControlBase, IControl, IGridControl<Order>
   {
-    private readonly Company _company = new Company();
-    private readonly State _state = new State();
-    public Order Order = new Order();
-
     public OrdersControl()
     {
       InitializeComponent();
     }
-
-    #region IControl Members
 
     public void ReloadControl()
     {
@@ -36,15 +30,6 @@ namespace Impressio.Controls
     public bool ValidateControl()
     {
       return ValidateRow();
-    }
-
-    #endregion
-
-    #region IGridControl<Order> Members
-
-    public Order FocusedRow
-    {
-      get { return viewOrder.GetFocusedRow() as Order; }
     }
 
     public void DeleteRow()
@@ -69,8 +54,6 @@ namespace Impressio.Controls
         FocusedRow.Identity = FocusedRow.SaveObject();
       }
     }
-
-    #endregion
 
     public void OpenOrder()
     {
@@ -98,6 +81,17 @@ namespace Impressio.Controls
         FocusedRow.LoadOrderOffer();
       }
     }
+    
+    public Order FocusedRow
+    {
+      get { return viewOrder.GetFocusedRow() as Order; }
+    }
+
+    public Order Order = new Order();
+
+    private readonly Company _company = new Company();
+    
+    private readonly State _state = new State();
 
     private void OrderControlLoad(object sender, EventArgs e)
     {

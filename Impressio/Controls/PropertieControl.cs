@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.DXErrorProvider;
 using Impressio.Models;
-using Impressio.Models.Database;
 using Impressio.Properties;
+using Subvento;
+using Subvento.Configuration;
+using Subvento.Database;
 
 namespace Impressio.Controls
 {
-  public partial class PropertieControl : ControlBase, IControl
+  public partial class PropertieControl : XtraUserControl, IControl
   {
     public PropertieControl()
     {
@@ -15,44 +20,27 @@ namespace Impressio.Controls
 
     public void ReloadControl()
     {
-      _isLoaded = false;
-      database.Text = Settings.Default.databaseEngine;
-      logger.Text = Settings.Default.loggerEngine;
-      dbConnectionString.Text = Settings.Default.connectionString;
+      database.Text = ServiceLocator.ConfigFile.DatabaseEngine;
+      dbConnectionString.Text = ServiceLocator.ConfigFile.ConnectionString;
       user.Text = Settings.Default.User;
-      logFolderPath.Text = Settings.Default.logPath;
       pathData.Text = Settings.Default.folderPath;
-      exceptionMode.Checked = Settings.Default.exceptionMode;
-      _isLoaded = true;
     }
 
     public bool ValidateControl()
     {
-      return !ErrorProvider.HasErrors;
+      return !_errorProvider.HasErrors;
     }
 
-    private bool _isLoaded;
+    private readonly DXErrorProvider _errorProvider = new DXErrorProvider();
 
     private void PropertieControlLoad(object sender, EventArgs e)
     {
       ReloadControl();
     }
 
-    private void LogFolderPathEnter(object sender, EventArgs e)
-    {
-      DialogResult result = folderBrowser.ShowDialog();
-
-      if (result == DialogResult.OK)
-      {
-        Settings.Default.logPath = folderBrowser.SelectedPath;
-        logFolderPath.Text = folderBrowser.SelectedPath;
-        Settings.Default.Save();
-      }
-    }
-
     private void PathDataEnter(object sender, EventArgs e)
     {
-      DialogResult result = folderBrowser.ShowDialog();
+      var result = folderBrowser.ShowDialog();
 
       if (result == DialogResult.OK)
       {
@@ -62,59 +50,57 @@ namespace Impressio.Controls
       }
     }
 
-    private void ExceptionModeCheckedChanged(object sender, EventArgs e)
-    {
-      if (_isLoaded)
-      {
-        Settings.Default.exceptionMode = exceptionMode.Checked;
-        Settings.Default.Save();
-      }
-    }
-
     private void UserEditValueChanged(object sender, EventArgs e)
     {
-      ErrorProvider.ClearErrors();
-      CheckEditor(user);
-
-      if (!ErrorProvider.HasErrors)
-      {
-        Settings.Default.User = user.Text;
-        Settings.Default.Save();
-      }
+      _errorProvider.SetError(user, string.IsNullOrEmpty(user.Text) ? "Bitte einen Namen vergeben." : "");
     }
 
     private void DbConnectionStringEditValueChanged(object sender, EventArgs e)
     {
-      if (!string.IsNullOrEmpty(dbConnectionString.Text))
-      {
-        ErrorProvider.ClearErrors();
-        Settings.Default.connectionString = dbConnectionString.Text;
-        Settings.Default.Save();
-      }
-      else
-      {
-        ErrorProvider.SetError(dbConnectionString, "Bitte eine Angabe machen");
-      }
+      ServiceLocator.ConfigFile.ConnectionString = dbConnectionString.Text;
+      ServiceLocator.ConfigFile.SaveConfig();
     }
 
     private void DatabaseSelectedIndexChanged(object sender, EventArgs e)
     {
-      if(_isLoaded && database.Text == "compact" )
-      {
-        var compact = new SqlCompactDatabase();
+      ServiceLocator.ConfigFile.DatabaseEngine = database.Text;
+      ServiceLocator.ConfigFile.SaveConfig();
+    }
 
-        if(!compact.CreateNewCompactDatabase("myDatabase"))
-        {
-          ErrorProvider.SetError(database, "Fehler bei der Erstellung der Datenbank");
-          database.SelectedIndex = 1;
-        }
+    private void CheckDatabaseSettingClick(object sender, EventArgs e)
+    {
+      ServiceLocator.ResetDatabase();
+
+      if (ServiceLocator.Instance.Usable())
+      {
+        databaseCheckResult.Text = "Datenbank erfolgreich überprüft.";
+        databaseCheckResult.ForeColor = Color.Green;
+      }
+      else
+      {
+        databaseCheckResult.Text = "Fehler bei der Überprüfung.";
+        databaseCheckResult.ForeColor = Color.Red;
       }
     }
 
-    private void LoggerSelectedIndexChanged(object sender, EventArgs e)
+    private void CreateCompactDbClick(object sender, EventArgs e)
     {
-      Settings.Default.loggerEngine = logger.Text;
-      Settings.Default.Save();
+      if (!string.IsNullOrEmpty(compactName.Text))
+      {
+        SqlCompactDatabase.CreateNewCompactDatabase(compactName.Text);
+        ReloadControl();
+        ServiceLocator.ResetDatabase();
+        _errorProvider.SetError(compactName, "");
+      }
+      else
+      {
+        _errorProvider.SetError(compactName, "Bitte einen Namen für die Datenbank wählen.");
+      }
+    }
+
+    private void PropertieControlValidating(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+      e.Cancel = !ValidateControl();
     }
   }
 }

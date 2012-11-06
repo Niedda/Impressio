@@ -4,18 +4,18 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraNavBar;
 using Impressio.Controls;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Views
 {
   public partial class PaperView : XtraForm
   {
-    private readonly PaperControl _paperControl = new PaperControl();
-
     public PaperView()
     {
       InitializeComponent();
     }
+
+    private readonly PaperControl _paperControl = new PaperControl();
 
     private void PaperViewLoad(object sender, EventArgs e)
     {
@@ -30,7 +30,7 @@ namespace Impressio.Views
 
     private void NavImportExcelLinkClicked(object sender, NavBarLinkEventArgs e)
     {
-      DialogResult result = openExcelDialog.ShowDialog();
+      var result = openExcelDialog.ShowDialog();
 
       if (result == DialogResult.OK)
       {

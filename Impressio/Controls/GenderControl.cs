@@ -3,20 +3,16 @@ using System.ComponentModel;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
   public partial class GenderControl : ControlBase, IControl, IGridControl<Gender>
   {
-    private readonly Gender _gender = new Gender();
-
     public GenderControl()
     {
       InitializeComponent();
     }
-
-    #region IControl Members
 
     public void ReloadControl()
     {
@@ -28,16 +24,7 @@ namespace Impressio.Controls
     {
       return ValidateRow();
     }
-
-    #endregion
-
-    #region IGridControl<Gender> Members
-
-    public Gender FocusedRow
-    {
-      get { return viewGender.GetFocusedRow() as Gender; }
-    }
-
+    
     public void DeleteRow()
     {
       FocusedRow.DeleteObject();
@@ -59,7 +46,12 @@ namespace Impressio.Controls
       }
     }
 
-    #endregion
+    public Gender FocusedRow
+    {
+      get { return viewGender.GetFocusedRow() as Gender; }
+    }
+
+    private readonly Gender _gender = new Gender();
 
     private void GenderControlLoad(object sender, EventArgs e)
     {

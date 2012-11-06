@@ -3,20 +3,16 @@ using System.ComponentModel;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
   public partial class ClickCostControl : ControlBase, IControl, IGridControl<ClickCost>
   {
-    private readonly ClickCost _clickCost = new ClickCost();
-
     public ClickCostControl()
     {
       InitializeComponent();
     }
-
-    #region IControl Members
 
     public void ReloadControl()
     {
@@ -29,16 +25,7 @@ namespace Impressio.Controls
     {
       return ValidateRow();
     }
-
-    #endregion
-
-    #region IGridControl<ClickCost> Members
-
-    public ClickCost FocusedRow
-    {
-      get { return viewClickCost.GetFocusedRow() as ClickCost; }
-    }
-
+    
     public void DeleteRow()
     {
       FocusedRow.DeleteObject();
@@ -58,7 +45,12 @@ namespace Impressio.Controls
       viewClickCost.SetFocusedRowCellValue(colIdentity, FocusedRow.SaveObject());
     }
 
-    #endregion
+    public ClickCost FocusedRow
+    {
+      get { return viewClickCost.GetFocusedRow() as ClickCost; }
+    }
+
+    private readonly ClickCost _clickCost = new ClickCost();
 
     private void ClickCostControlLoad(object sender, EventArgs e)
     {

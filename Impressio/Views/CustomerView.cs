@@ -4,24 +4,26 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraNavBar;
 using Impressio.Controls;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Views
 {
   public partial class CustomerView : XtraForm
   {
-    private readonly AddressControl _addressControl = new AddressControl();
-    private readonly ClientControl _clientControl = new ClientControl();
-    private readonly CompanyControl _companyControl = new CompanyControl();
-
-    private Control _activeControl;
-
-    private Company _company = new Company();
-
     public CustomerView()
     {
       InitializeComponent();
     }
+
+    private Company _company = new Company();
+
+    private readonly AddressControl _addressControl = new AddressControl();
+    
+    private readonly ClientControl _clientControl = new ClientControl();
+    
+    private readonly CompanyControl _companyControl = new CompanyControl();
+    
+    private Control _activeControl;
 
     private void CustomerViewLoad(object sender, EventArgs e)
     {

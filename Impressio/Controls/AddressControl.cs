@@ -4,21 +4,16 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
-using Impressio.Models.Database.DatabaseObject;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
   public partial class AddressControl : ControlBase, IControl, IGridControl<Address>
   {
-    private readonly Address _address = new Address();
-    public Company Company = new Company();
-
     public AddressControl()
     {
       InitializeComponent();
     }
-
-    #region IControl Members
 
     public void ReloadControl()
     {
@@ -30,15 +25,6 @@ namespace Impressio.Controls
     public bool ValidateControl()
     {
       return ValidateRow();
-    }
-
-    #endregion
-
-    #region IGridControl<Address> Members
-
-    public Address FocusedRow
-    {
-      get { return viewAddress.GetFocusedRow() as Address; }
     }
 
     public void DeleteRow()
@@ -62,8 +48,15 @@ namespace Impressio.Controls
         FocusedRow.Identity = FocusedRow.SaveObject();
       }
     }
+    
+    public Address FocusedRow
+    {
+      get { return viewAddress.GetFocusedRow() as Address; }
+    }
 
-    #endregion
+    public Company Company = new Company();
+
+    private readonly Address _address = new Address();
 
     private void AddressControlLoad(object sender, EventArgs e)
     {

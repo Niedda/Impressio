@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Impressio.Models.Database.DatabaseObject;
 using Impressio.Models.Tools;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
@@ -21,18 +21,12 @@ namespace Impressio.Models
     }
 
     #endregion
-
+    
     public override int Identity { get; set; }
 
-    public override string IdentityColumn
-    {
-      get { return "AddressId"; }
-    }
+    public override string IdentityColumn { get { return "AddressId"; } }
 
-    public override string Table
-    {
-      get { return "Address"; }
-    }
+    public override string Table { get { return "Address"; } }
 
     public int FkAddressCompany { get; set; }
 
@@ -51,10 +45,7 @@ namespace Impressio.Models
       get { return string.Format("{0} {1}  {2} {3}", Street, StreetNumber, ZipCode, City); }
     }
 
-    public override List<Address> Objects
-    {
-      get { return _addresses; }
-    }
+    public override List<Address> Objects { get { return _addresses; } }
 
     public override void SetObject()
     {
@@ -78,13 +69,6 @@ namespace Impressio.Models
                  {Columns.ZipCode, ZipCode.SetStringDbNull()},
                  {Columns.Addition, Addition.SetStringDbNull()},
                };
-    }
-
-    public override void SetObjectList()
-    {
-      var address = new Address();
-      address.SetObject();
-      _addresses.Add(address);
     }
 
     public override void ClearObjectList()
