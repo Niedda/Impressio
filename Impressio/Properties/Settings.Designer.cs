@@ -70,5 +70,17 @@ namespace Impressio.Properties {
                 this["folderPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public string lookAndFeel {
+            get {
+                return ((string)(this["lookAndFeel"]));
+            }
+            set {
+                this["lookAndFeel"] = value;
+            }
+        }
     }
 }

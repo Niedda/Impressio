@@ -25,6 +25,7 @@ namespace Impressio.Controls
       dbConnectionString.Text = ServiceLocator.ConfigFile.ConnectionString;
       user.Text = Settings.Default.User;
       pathData.Text = Settings.Default.folderPath;
+      lookAndFeel.Text = Settings.Default.lookAndFeel;
     }
 
     public bool ValidateControl()
@@ -102,6 +103,13 @@ namespace Impressio.Controls
     private void PropertieControlValidating(object sender, System.ComponentModel.CancelEventArgs e)
     {
       e.Cancel = !ValidateControl();
+    }
+
+    private void LookAndFeelSelectedIndexChanged(object sender, EventArgs e)
+    {
+      Settings.Default.lookAndFeel = lookAndFeel.Text;
+      Settings.Default.Save();
+      DevExpress.LookAndFeel.UserLookAndFeel.Default.SkinName = Settings.Default.lookAndFeel;
     }
   }
 }

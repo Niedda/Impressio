@@ -68,6 +68,8 @@ namespace Impressio.Controls
     {
       if (Offset != null)
       {
+        _isLoaded = false;
+
         machineBindingSource.DataSource = _machine.LoadObjectList();
         paperBindingSource.DataSource = _paper.LoadObjectList();
         Offset.LoadSingleObject();
@@ -119,9 +121,11 @@ namespace Impressio.Controls
         paperCostTotal.Value = Offset.PaperCostTotal;
         offsetPrintTotal.Value = Offset.PrintTotal;
         priceTotal.Value = Offset.PaperCostTotal + Offset.PrintTotal;
+
+        Offset.SaveObject();
       }
     }
-
+    
     private readonly Machine _machine = new Machine();
 
     private readonly Paper _paper = new Paper();
@@ -144,8 +148,6 @@ namespace Impressio.Controls
     {
       if (paperSearchLookUp.EditValue != null && _isLoaded)
       {
-        Offset.FkOffsetPaper = (int)paperSearchLookUp.EditValue;
-
         if (Offset.Paper != null)
         {
           labelPricePaper.Text += string.Format("{0}{1}{0}{2} ab {3} Bogen{0}{4} ab {5} Bogen{0}{6} ab {7} Bogen",
@@ -153,6 +155,7 @@ namespace Impressio.Controls
                                                 Offset.Paper.Amount1, Offset.Paper.Price3, Offset.Paper.Amount2,
                                                 Offset.Paper.Price4, Offset.Paper.Amount3);
           paperPricePer.Value = Offset.Paper.Price1;
+          GetOffset();
         }
       }
     }
@@ -163,15 +166,13 @@ namespace Impressio.Controls
       {
         offsetPaperQuantity.Value = paperQuantity.Value * paperUsePer.Value;
         paperCostTotal.Value = Offset.PaperCostTotal;
+        GetOffset();
       }
     }
 
     private void OffsetMachineSearchLookUpEditValueChanged(object sender, EventArgs e)
     {
-      if (_isLoaded)
-      {
-        Offset.FkOffsetMachine = (int)offsetMachineSearchLookUp.EditValue;
-      }
+      GetOffset();
     }
 
     private void OffsetColorAmountEditValueChanged(object sender, EventArgs e)
@@ -179,6 +180,7 @@ namespace Impressio.Controls
       if (_isLoaded)
       {
         offsetPrintQuantity.Value = offsetColorAmount.Value * offsetPaperQuantity.Value;
+        GetOffset();
       }
     }
 

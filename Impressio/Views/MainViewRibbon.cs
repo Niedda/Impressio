@@ -5,6 +5,7 @@ using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using Impressio.Controls;
 using Impressio.Models;
+using Type = Impressio.Models.Type;
 
 namespace Impressio.Views
 {
@@ -39,8 +40,18 @@ namespace Impressio.Views
 
     private PredefinedPositionControl _predefinedPositionControl;
 
+    private DataControl _dataControl;
+
+    private PrintControl _printControl;
+
+    private OffsetControl _offsetControl;
+
+    private FinishControl _finishControl;
+
     private RibbonPage _customPage;
-    
+
+    private RibbonPage _positionPage;
+
     private void SetControl<T>(ref T control) where T : Control, new()
     {
       if (control == null)
@@ -87,15 +98,27 @@ namespace Impressio.Views
           _companyControl = new CompanyControl();
           mainPanel.Controls.Add(_companyControl);
         }
+        if (_positionPage != null)
+        {
+          _positionPage.Dispose();
+        }
         _companyControl.BringToFront();
       }
       else if (ribbon.SelectedPage == ribbonPageOrder)
       {
+        if (_positionPage != null)
+        {
+          _positionPage.Dispose();
+        }
         DeleteCustomRibbon();
         _ordersControl.BringToFront();
       }
       else if (ribbon.SelectedPage == ribbonPageProperties)
       {
+        if (_positionPage != null)
+        {
+          _positionPage.Dispose();
+        }
         DeleteCustomRibbon();
         if (_propertieControl == null)
         {
@@ -103,6 +126,11 @@ namespace Impressio.Views
           mainPanel.Controls.Add(_propertieControl);
         }
         _propertieControl.BringToFront();
+      }
+      else if (ribbon.SelectedPage == _positionPage)
+      {
+        DeleteCustomRibbon();
+        _predefinedPositionControl.BringToFront();
       }
     }
 
@@ -196,7 +224,7 @@ namespace Impressio.Views
     private void PredefinedPositionsItemClick(object sender, ItemClickEventArgs e)
     {
       SetControl(ref _predefinedPositionControl);
-      SetCustomRibbon(_predefinedPositionControl);
+      SetPositionRibbon();
     }
 
     private void OpenOrderItemClick(object sender, ItemClickEventArgs e)
@@ -207,6 +235,99 @@ namespace Impressio.Views
     private void DeleteOrderItemClick(object sender, ItemClickEventArgs e)
     {
       _ordersControl.DeleteRow();
+    }
+
+    public string RibbonGroupName { get { return "Vordefinierte Positionen"; } }
+
+    public void SetPositionRibbon()
+    {
+      var deleteButton = new BarButtonItem
+      {
+        Caption = "Löschen",
+        Id = 2,
+        LargeGlyph = Properties.Resources.delete,
+        LargeWidth = 80,
+        Name = "positionDelete",
+      };
+      deleteButton.ItemClick += DeleteRow;
+
+      var refreshButton = new BarButtonItem
+      {
+        Caption = "Aktualisieren",
+        Id = 3,
+        LargeGlyph = Properties.Resources.refresh,
+        LargeWidth = 80,
+        Name = "positionRefresh"
+      };
+      refreshButton.ItemClick += ReloadControl;
+
+      var openPosition = new BarButtonItem
+      {
+        Caption = "Position öffnen",
+        Id = 1,
+        LargeGlyph = Properties.Resources.open,
+        LargeWidth = 80,
+        Name = "positionOpen"
+      };
+      openPosition.ItemClick += OpenPosition;
+
+      var pageGroup = new RibbonPageGroup
+      {
+        Text = "Vordefinierte Positionen",
+        Name = "predefinedPositionPageGroup"
+      };
+      pageGroup.ItemLinks.Add(refreshButton);
+      pageGroup.ItemLinks.Add(deleteButton);
+      pageGroup.ItemLinks.Add(openPosition);
+
+      _positionPage = new RibbonPage
+                        {
+                          Text = "Positionen",
+                        };
+      _positionPage.Groups.Add(pageGroup);
+      ribbon.Pages.Add(_positionPage);
+      ribbon.SelectedPage = _positionPage;
+    }
+
+    public void DeleteRow(object sender, ItemClickEventArgs e)
+    {
+      _predefinedPositionControl.DeleteRow();
+    }
+
+    public void ReloadControl(object sender, ItemClickEventArgs e)
+    {
+      _predefinedPositionControl.ReloadControl();
+    }
+
+    public void OpenPosition(object sender, ItemClickEventArgs e)
+    {
+      switch (_predefinedPositionControl.FocusedRow.Type)
+      {
+        case Type.Datenaufbereitung:
+          SetControl(ref _dataControl);
+          _dataControl.Data = new Data { Identity = _predefinedPositionControl.FocusedRow.Identity };
+          _dataControl.ReloadControl();
+          SetCustomRibbon(_dataControl);
+          break;
+        case Type.Digitaldruck:
+          SetControl(ref _printControl);
+          _printControl.Print = new Print { Identity = _predefinedPositionControl.FocusedRow.Identity };
+          _printControl.ReloadControl();
+          SetCustomRibbon(_printControl);
+          break;
+        case Type.Offsetdruck:
+          SetControl(ref _offsetControl);
+          _offsetControl.Offset = new Offset { Identity = _predefinedPositionControl.FocusedRow.Identity };
+          _offsetControl.ReloadControl();
+          SetCustomRibbon(_offsetControl);
+          break;
+        case Type.Weiterverarbeitung:
+          SetControl(ref _finishControl);
+          _finishControl.Finish = new Finish { Identity = _predefinedPositionControl.FocusedRow.Identity };
+          _finishControl.ReloadControl();
+          SetCustomRibbon(_finishControl);
+          break;
+      }
     }
   }
 }

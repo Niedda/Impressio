@@ -82,11 +82,11 @@ namespace Impressio.Models
     {
       return new Dictionary<Enum, object>
                {
-                 {Columns.FkDataOrder, FkOrder.ToString()},
-                 {Columns.IsPredefined, IsPredefined.ToString()},
+                 {Columns.FkDataOrder, FkOrder.SetIntDbNull()},
+                 {Columns.IsPredefined, IsPredefined},
                  {Columns.PositionName, Name},
-                 {Columns.PositionTotal, PositionTotal.ToString()},
-                 {Columns.Remark, Remark},
+                 {Columns.PositionTotal, PositionTotal},
+                 {Columns.Remark, Remark.SetStringDbNull()},
                };
     }
 
@@ -112,7 +112,7 @@ namespace Impressio.Models
       Description,
       Quantity,
       PricePerQuantity,
-      PositionTotal,
+      PriceTotal,
     }
 
     #endregion
@@ -155,7 +155,7 @@ namespace Impressio.Models
                  {Columns.Description, Description},
                  {Columns.Quantity, Quantity.ToString()},
                  {Columns.PricePerQuantity, PricePerQuantity.ToString()},
-                 {Columns.PositionTotal, PositionTotal.ToString()},
+                 {Columns.PriceTotal, PositionTotal.ToString()},
                };
     }
 

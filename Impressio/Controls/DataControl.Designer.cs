@@ -30,14 +30,11 @@ namespace Impressio.Controls
         /// </summary>
         private void InitializeComponent()
         {
-      this.components = new System.ComponentModel.Container();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.remarkEdit = new DevExpress.XtraEditors.MemoEdit();
-      this.nameEdit = new DevExpress.XtraEditors.TextEdit();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-      this.labelName = new DevExpress.XtraEditors.LabelControl();
       this.gridData = new DevExpress.XtraGrid.GridControl();
-      this.dataPositionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.dataPositionBindingSource = new System.Windows.Forms.BindingSource();
       this.viewData = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -49,7 +46,6 @@ namespace Impressio.Controls
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       this.groupBox1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.remarkEdit.Properties)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.nameEdit.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dataPositionBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewData)).BeginInit();
@@ -58,56 +54,39 @@ namespace Impressio.Controls
       // groupBox1
       // 
       this.groupBox1.Controls.Add(this.remarkEdit);
-      this.groupBox1.Controls.Add(this.nameEdit);
       this.groupBox1.Controls.Add(this.labelControl2);
-      this.groupBox1.Controls.Add(this.labelName);
       this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
       this.groupBox1.Location = new System.Drawing.Point(0, 0);
       this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(794, 137);
+      this.groupBox1.Size = new System.Drawing.Size(791, 111);
       this.groupBox1.TabIndex = 0;
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Datenaufbereitung";
       // 
       // remarkEdit
       // 
-      this.remarkEdit.Location = new System.Drawing.Point(138, 77);
+      this.remarkEdit.Location = new System.Drawing.Point(126, 37);
       this.remarkEdit.Name = "remarkEdit";
       this.remarkEdit.Size = new System.Drawing.Size(332, 42);
       this.remarkEdit.TabIndex = 3;
       this.remarkEdit.EditValueChanged += new System.EventHandler(this.RemarkEditEditValueChanged);
       // 
-      // nameEdit
-      // 
-      this.nameEdit.Location = new System.Drawing.Point(138, 33);
-      this.nameEdit.Name = "nameEdit";
-      this.nameEdit.Size = new System.Drawing.Size(332, 20);
-      this.nameEdit.TabIndex = 2;
-      // 
       // labelControl2
       // 
-      this.labelControl2.Location = new System.Drawing.Point(34, 80);
+      this.labelControl2.Location = new System.Drawing.Point(22, 40);
       this.labelControl2.Name = "labelControl2";
       this.labelControl2.Size = new System.Drawing.Size(65, 13);
       this.labelControl2.TabIndex = 1;
       this.labelControl2.Text = "Bemerkungen";
       // 
-      // labelName
-      // 
-      this.labelName.Location = new System.Drawing.Point(31, 36);
-      this.labelName.Name = "labelName";
-      this.labelName.Size = new System.Drawing.Size(68, 13);
-      this.labelName.TabIndex = 0;
-      this.labelName.Text = "Positionsname";
-      // 
       // gridData
       // 
       this.gridData.DataSource = this.dataPositionBindingSource;
       this.gridData.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.gridData.Location = new System.Drawing.Point(0, 137);
+      this.gridData.Location = new System.Drawing.Point(0, 111);
       this.gridData.MainView = this.viewData;
       this.gridData.Name = "gridData";
-      this.gridData.Size = new System.Drawing.Size(794, 236);
+      this.gridData.Size = new System.Drawing.Size(791, 270);
       this.gridData.TabIndex = 1;
       this.gridData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewData});
@@ -135,8 +114,8 @@ namespace Impressio.Controls
       this.viewData.OptionsView.ShowGroupPanel = false;
       this.viewData.RowHeight = 30;
       this.viewData.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.ViewDataCellValueChanged);
+      this.viewData.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewDataInvalidRowException);
       this.viewData.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewDataValidateRow);
-      this.viewData.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.ViewDataRowUpdated);
       // 
       // colIdentity
       // 
@@ -205,14 +184,13 @@ namespace Impressio.Controls
       this.Controls.Add(this.gridData);
       this.Controls.Add(this.groupBox1);
       this.Name = "DataControl";
-      this.Size = new System.Drawing.Size(794, 373);
+      this.Size = new System.Drawing.Size(791, 381);
       this.Load += new System.EventHandler(this.DataControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.DataControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.remarkEdit.Properties)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.nameEdit.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.dataPositionBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewData)).EndInit();
@@ -224,9 +202,7 @@ namespace Impressio.Controls
 
         private System.Windows.Forms.GroupBox groupBox1;
         private DevExpress.XtraEditors.MemoEdit remarkEdit;
-        private DevExpress.XtraEditors.TextEdit nameEdit;
         private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.LabelControl labelName;
         private DevExpress.XtraGrid.GridControl gridData;
         private DevExpress.XtraGrid.Views.Grid.GridView viewData;
         private System.Windows.Forms.BindingSource dataPositionBindingSource;

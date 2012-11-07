@@ -41,7 +41,11 @@ namespace Impressio.Models
       {
         if (FkPrintPaper != 0)
         {
-          return _paper ?? (_paper = (Paper)new Paper { Identity = FkPrintPaper }.LoadSingleObject());
+          if (_paper == null || _paper.Identity != FkPrintPaper)
+          {
+            return (_paper = (Paper)new Paper { Identity = FkPrintPaper }.LoadSingleObject());
+          }
+          return _paper;
         }
         return null;
       }
@@ -55,7 +59,11 @@ namespace Impressio.Models
       {
         if (FkPrintClickCost != 0)
         {
-          return _clickCost ?? (_clickCost = (ClickCost)new ClickCost { Identity = FkPrintClickCost }.LoadSingleObject());
+          if (_clickCost == null || _clickCost.Identity != FkPrintClickCost)
+          {
+            return (_clickCost = (ClickCost)new ClickCost { Identity = FkPrintClickCost }.LoadSingleObject());
+          }
+          return _clickCost;
         }
         return null;
       }
@@ -90,17 +98,22 @@ namespace Impressio.Models
     public int PaperUsePer { get; set; }
 
     public bool IsPredefined { get; set; }
-    
+
     public string Name { get; set; }
 
     public int FkOrder { get; set; }
-    
-    public decimal? PaperCostTotal
+
+    public decimal PaperCostTotal
     {
-      get { return ((PaperPricePer * (PaperAddition + 100)) * (PaperAmount / 1000)) / 100; }
+      get
+      {
+        var paperPrice = ((decimal)PaperPricePer / 1000);
+        var addition = (decimal)PaperAddition / 100 + 1;
+        return PaperAmount * addition * paperPrice;
+      }
     }
 
-    public decimal? PrintCostTotal
+    public decimal PrintCostTotal
     {
       get
       {
@@ -123,17 +136,9 @@ namespace Impressio.Models
     {
       get
       {
-        if (PrintCostTotal != null && PaperCostTotal != null)
-        {
-          (PrintCostTotal + PaperCostTotal).GetInt();
-        }
-        if (PaperCostTotal != null)
-        {
-          return PaperCostTotal.GetInt();
-        }
-        return PrintCostTotal.GetInt();
+        return (PrintCostTotal + PaperCostTotal).GetInt();
       }
-      set {  }
+      set { }
     }
 
     public Type Type
@@ -173,7 +178,7 @@ namespace Impressio.Models
       PaperPricePer = Database.Reader[Columns.PaperPrice.ToString()].GetInt();
       Name = Database.Reader[Columns.PositionName.ToString()] as string;
     }
-    
+
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>
@@ -201,7 +206,7 @@ namespace Impressio.Models
     private ClickCost _clickCost;
 
     private Paper _paper;
-    
+
     private readonly List<Print> _predefinedPrints = new List<Print>();
 
     private readonly List<Print> _prints = new List<Print>();
@@ -251,7 +256,7 @@ namespace Impressio.Models
       Name = Database.Reader[Columns.ClickName.ToString()] as string;
       Cost = Convert.ToDouble(Database.Reader[Columns.ClickCost.ToString()]);
     }
-    
+
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>

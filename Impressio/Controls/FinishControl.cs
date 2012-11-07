@@ -6,7 +6,6 @@ using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
 using Subvento.DatabaseObject;
 
@@ -90,20 +89,15 @@ namespace Impressio.Controls
         _finishPosition.ClearObjectList();
         finishPositionBindingSource.DataSource = _finishPosition.LoadObjectList(FinishPosition.Columns.FkFinishFinishPosition, Finish.Identity);
 
-        nameEdit.Text = Finish.Name;
         remarkEdit.Text = Finish.Remark;
       }
     }
 
     public bool ValidateControl()
     {
-      CheckEditor(nameEdit);
-
       if (ValidateRow() && !ErrorProvider.HasErrors)
       {
-        Finish.Name = nameEdit.Text;
-        Finish.PositionTotal = _finishPosition.Objects.Sum(position => position.PriceTotal);
-        Finish.SaveObject();
+
         return true;
       }
       return false;
@@ -111,8 +105,8 @@ namespace Impressio.Controls
 
     public void DeleteRow()
     {
-      viewFinish.DeleteSelectedRows();
       FocusedRow.DeleteObject();
+      viewFinish.DeleteSelectedRows();
     }
 
     public bool ValidateRow()
@@ -126,7 +120,10 @@ namespace Impressio.Controls
     {
       if (FocusedRow != null)
       {
+        FocusedRow.FkFinishFinishPosition = Finish.Identity;
         FocusedRow.Identity = FocusedRow.SaveObject();
+        Finish.PositionTotal = _finishPosition.Objects.Sum(position => position.PriceTotal);
+        Finish.SaveObject();
       }
     }
 
@@ -162,6 +159,11 @@ namespace Impressio.Controls
     private void ViewFinishValidateRow(object sender, ValidateRowEventArgs e)
     {
       e.Valid = ValidateRow();
+
+      if (e.Valid)
+      {
+        UpdateRow();
+      }
     }
 
     private void ViewFinishInvalidRowException(object sender, InvalidRowExceptionEventArgs e)
@@ -169,14 +171,10 @@ namespace Impressio.Controls
       e.ExceptionMode = ExceptionMode.NoAction;
     }
 
-    private void ViewFinishInitNewRow(object sender, InitNewRowEventArgs e)
+    private void RemarkEditEditValueChanged(object sender, EventArgs e)
     {
-      viewFinish.SetFocusedRowCellValue(colFkFinishFinishPosition, Finish.Identity);
-    }
-
-    private void ViewFinishRowUpdated(object sender, RowObjectEventArgs e)
-    {
-      UpdateRow();
+      Finish.Remark = remarkEdit.Text;
+      Finish.SaveObject();
     }
   }
 }

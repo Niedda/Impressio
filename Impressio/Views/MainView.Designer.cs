@@ -35,9 +35,7 @@
       this.navCompany = new DevExpress.XtraNavBar.NavBarItem();
       this.navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
       this.navProperties = new DevExpress.XtraNavBar.NavBarItem();
-      this.applicationMenu1 = new DevExpress.XtraBars.Ribbon.ApplicationMenu();
       ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.applicationMenu1)).BeginInit();
       this.SuspendLayout();
       // 
       // navBarControl1
@@ -53,7 +51,6 @@
             this.navCompany,
             this.navProperties});
       this.navBarControl1.Location = new System.Drawing.Point(0, 0);
-      this.navBarControl1.LookAndFeel.SkinName = "Black";
       this.navBarControl1.Name = "navBarControl1";
       this.navBarControl1.OptionsNavPane.ExpandedWidth = 140;
       this.navBarControl1.Padding = new System.Windows.Forms.Padding(1);
@@ -115,10 +112,6 @@
       this.navProperties.SmallImage = global::Impressio.Properties.Resources.properties;
       this.navProperties.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavPropertiesLinkClicked);
       // 
-      // applicationMenu1
-      // 
-      this.applicationMenu1.Name = "applicationMenu1";
-      // 
       // MainView
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -126,13 +119,11 @@
       this.ClientSize = new System.Drawing.Size(244, 246);
       this.Controls.Add(this.navBarControl1);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.LookAndFeel.SkinName = "Black";
       this.MinimumSize = new System.Drawing.Size(260, 285);
       this.Name = "MainView";
       this.ShowIcon = false;
       this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
       ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.applicationMenu1)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -142,7 +133,6 @@
     private DevExpress.XtraNavBar.NavBarControl navBarControl1;
     private DevExpress.XtraNavBar.NavBarGroup navBarGroup1;
     private DevExpress.XtraNavBar.NavBarItem navOrder;
-    private DevExpress.XtraBars.Ribbon.ApplicationMenu applicationMenu1;
     private DevExpress.XtraNavBar.NavBarItem navCompany;
     private DevExpress.XtraNavBar.NavBarGroup navBarGroup2;
     private DevExpress.XtraNavBar.NavBarItem navProperties;

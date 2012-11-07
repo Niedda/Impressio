@@ -30,7 +30,6 @@ namespace Impressio.Controls
     /// </summary>
     private void InitializeComponent()
     {
-      this.components = new System.ComponentModel.Container();
       DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
       DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
       DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -48,7 +47,7 @@ namespace Impressio.Controls
       this.paperPricePer = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
       this.paperSearchLookUp = new DevExpress.XtraEditors.SearchLookUpEdit();
-      this.paperBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.paperBindingSource = new System.Windows.Forms.BindingSource();
       this.viewPaper = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -82,7 +81,7 @@ namespace Impressio.Controls
       this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
       this.offsetMachineSearchLookUp = new DevExpress.XtraEditors.SearchLookUpEdit();
-      this.machineBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.machineBindingSource = new System.Windows.Forms.BindingSource();
       this.viewMachine = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity1 = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -135,7 +134,7 @@ namespace Impressio.Controls
       this.groupControl1.Controls.Add(this.paperSearchLookUp);
       this.groupControl1.Location = new System.Drawing.Point(2, 3);
       this.groupControl1.Name = "groupControl1";
-      this.groupControl1.Size = new System.Drawing.Size(2286, 199);
+      this.groupControl1.Size = new System.Drawing.Size(2327, 199);
       this.groupControl1.TabIndex = 0;
       this.groupControl1.Text = "Papier";
       // 
@@ -176,11 +175,15 @@ namespace Impressio.Controls
       this.paperUsePer.Name = "paperUsePer";
       this.paperUsePer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.paperUsePer.Properties.DisplayFormat.FormatString = "N00";
+      this.paperUsePer.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.paperUsePer.Properties.EditFormat.FormatString = "N00";
+      this.paperUsePer.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.paperUsePer.Properties.IsFloatValue = false;
       this.paperUsePer.Properties.Mask.EditMask = "N00";
       this.paperUsePer.Size = new System.Drawing.Size(100, 20);
       this.paperUsePer.TabIndex = 10;
-      this.paperUsePer.EditValueChanged += new System.EventHandler(this.PaperQuantityEditValueChanged);
+      this.paperUsePer.EditValueChanged += new System.EventHandler(this.EditorsValidated);
       this.paperUsePer.Validated += new System.EventHandler(this.EditorsValidated);
       // 
       // labelControl5
@@ -210,6 +213,10 @@ namespace Impressio.Controls
       this.paperQuantity.Name = "paperQuantity";
       this.paperQuantity.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.paperQuantity.Properties.DisplayFormat.FormatString = "N00";
+      this.paperQuantity.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.paperQuantity.Properties.EditFormat.FormatString = "N00";
+      this.paperQuantity.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.paperQuantity.Properties.IsFloatValue = false;
       this.paperQuantity.Properties.Mask.EditMask = "N00";
       this.paperQuantity.Size = new System.Drawing.Size(100, 20);
@@ -252,10 +259,15 @@ namespace Impressio.Controls
       this.paperAddition.Name = "paperAddition";
       this.paperAddition.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.paperAddition.Properties.DisplayFormat.FormatString = "N00";
+      this.paperAddition.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.paperAddition.Properties.EditFormat.FormatString = "N00";
+      this.paperAddition.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.paperAddition.Properties.IsFloatValue = false;
       this.paperAddition.Properties.Mask.EditMask = "N00";
       this.paperAddition.Size = new System.Drawing.Size(100, 20);
       this.paperAddition.TabIndex = 3;
+      this.paperAddition.EditValueChanged += new System.EventHandler(this.EditorsValidated);
       this.paperAddition.Validated += new System.EventHandler(this.EditorsValidated);
       // 
       // paperPricePer
@@ -269,10 +281,15 @@ namespace Impressio.Controls
       this.paperPricePer.Name = "paperPricePer";
       this.paperPricePer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.paperPricePer.Properties.DisplayFormat.FormatString = "c";
+      this.paperPricePer.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.paperPricePer.Properties.EditFormat.FormatString = "c";
+      this.paperPricePer.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.paperPricePer.Properties.IsFloatValue = false;
       this.paperPricePer.Properties.Mask.EditMask = "N00";
       this.paperPricePer.Size = new System.Drawing.Size(100, 20);
       this.paperPricePer.TabIndex = 2;
+      this.paperPricePer.EditValueChanged += new System.EventHandler(this.EditorsValidated);
       this.paperPricePer.Validated += new System.EventHandler(this.EditorsValidated);
       // 
       // labelControl1
@@ -465,7 +482,7 @@ namespace Impressio.Controls
       this.groupControl2.Controls.Add(this.offsetPrintType);
       this.groupControl2.Location = new System.Drawing.Point(2, 208);
       this.groupControl2.Name = "groupControl2";
-      this.groupControl2.Size = new System.Drawing.Size(2286, 250);
+      this.groupControl2.Size = new System.Drawing.Size(2327, 250);
       this.groupControl2.TabIndex = 1;
       this.groupControl2.Text = "Druck";
       // 
@@ -532,10 +549,15 @@ namespace Impressio.Controls
       this.offsetPrintQuantity.Name = "offsetPrintQuantity";
       this.offsetPrintQuantity.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.offsetPrintQuantity.Properties.DisplayFormat.FormatString = "N00";
+      this.offsetPrintQuantity.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.offsetPrintQuantity.Properties.EditFormat.FormatString = "N00";
+      this.offsetPrintQuantity.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.offsetPrintQuantity.Properties.IsFloatValue = false;
       this.offsetPrintQuantity.Properties.Mask.EditMask = "N00";
       this.offsetPrintQuantity.Size = new System.Drawing.Size(100, 20);
       this.offsetPrintQuantity.TabIndex = 18;
+      this.offsetPrintQuantity.EditValueChanged += new System.EventHandler(this.EditorsValidated);
       this.offsetPrintQuantity.Validated += new System.EventHandler(this.EditorsValidated);
       // 
       // labelControl11
@@ -557,11 +579,15 @@ namespace Impressio.Controls
       this.offsetPaperQuantity.Name = "offsetPaperQuantity";
       this.offsetPaperQuantity.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.offsetPaperQuantity.Properties.DisplayFormat.FormatString = "N00";
+      this.offsetPaperQuantity.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.offsetPaperQuantity.Properties.EditFormat.FormatString = "N00";
+      this.offsetPaperQuantity.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.offsetPaperQuantity.Properties.IsFloatValue = false;
       this.offsetPaperQuantity.Properties.Mask.EditMask = "N00";
       this.offsetPaperQuantity.Size = new System.Drawing.Size(100, 20);
       this.offsetPaperQuantity.TabIndex = 16;
-      this.offsetPaperQuantity.EditValueChanged += new System.EventHandler(this.OffsetColorAmountEditValueChanged);
+      this.offsetPaperQuantity.EditValueChanged += new System.EventHandler(this.EditorsValidated);
       this.offsetPaperQuantity.Validated += new System.EventHandler(this.EditorsValidated);
       // 
       // labelControl10
@@ -591,6 +617,10 @@ namespace Impressio.Controls
       this.offsetColorAmount.Name = "offsetColorAmount";
       this.offsetColorAmount.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.offsetColorAmount.Properties.DisplayFormat.FormatString = "N00";
+      this.offsetColorAmount.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.offsetColorAmount.Properties.EditFormat.FormatString = "N00";
+      this.offsetColorAmount.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.offsetColorAmount.Properties.IsFloatValue = false;
       this.offsetColorAmount.Properties.Mask.EditMask = "N00";
       this.offsetColorAmount.Size = new System.Drawing.Size(100, 20);
@@ -737,7 +767,7 @@ namespace Impressio.Controls
       this.Controls.Add(this.groupControl1);
       this.MinimumSize = new System.Drawing.Size(800, 500);
       this.Name = "OffsetControl";
-      this.Size = new System.Drawing.Size(885, 500);
+      this.Size = new System.Drawing.Size(800, 500);
       this.Load += new System.EventHandler(this.OffsetControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.OffsetControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

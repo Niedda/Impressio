@@ -38,15 +38,15 @@
       this.colFkOrder = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colPriceTotal = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colType = new DevExpress.XtraGrid.Columns.GridColumn();
+      this.typeCombo = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
       this.colIsPredefined = new DevExpress.XtraGrid.Columns.GridColumn();
       this.typeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-      this.typeCombo = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPosition)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.positionBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewPosition)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.typeBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.typeCombo)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.typeBindingSource)).BeginInit();
       this.SuspendLayout();
       // 
       // gridPosition
@@ -58,7 +58,7 @@
       this.gridPosition.Name = "gridPosition";
       this.gridPosition.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.typeCombo});
-      this.gridPosition.Size = new System.Drawing.Size(898, 373);
+      this.gridPosition.Size = new System.Drawing.Size(791, 345);
       this.gridPosition.TabIndex = 0;
       this.gridPosition.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewPosition});
@@ -92,7 +92,6 @@
       this.viewPosition.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewPositionInitNewRow);
       this.viewPosition.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewPositionInvalidRowException);
       this.viewPosition.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewPositionValidateRow);
-      this.viewPosition.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.ViewPositionRowUpdated);
       // 
       // colIdentity
       // 
@@ -123,9 +122,17 @@
       // 
       // colPriceTotal
       // 
-      this.colPriceTotal.FieldName = "PositionTotal";
+      this.colPriceTotal.Caption = "Preis Total";
+      this.colPriceTotal.DisplayFormat.FormatString = "c";
+      this.colPriceTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.colPriceTotal.FieldName = "PriceTotal";
       this.colPriceTotal.Name = "colPriceTotal";
+      this.colPriceTotal.OptionsColumn.AllowEdit = false;
+      this.colPriceTotal.OptionsColumn.AllowFocus = false;
+      this.colPriceTotal.OptionsColumn.ReadOnly = true;
       this.colPriceTotal.OptionsColumn.ShowInCustomizationForm = false;
+      this.colPriceTotal.Visible = true;
+      this.colPriceTotal.VisibleIndex = 2;
       // 
       // colType
       // 
@@ -135,6 +142,14 @@
       this.colType.Name = "colType";
       this.colType.Visible = true;
       this.colType.VisibleIndex = 1;
+      // 
+      // typeCombo
+      // 
+      this.typeCombo.AutoHeight = false;
+      this.typeCombo.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+      this.typeCombo.DropDownRows = 4;
+      this.typeCombo.Name = "typeCombo";
       // 
       // colIsPredefined
       // 
@@ -146,28 +161,20 @@
       // 
       this.typeBindingSource.DataSource = typeof(Impressio.Models.Type);
       // 
-      // typeCombo
-      // 
-      this.typeCombo.AutoHeight = false;
-      this.typeCombo.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-      this.typeCombo.DropDownRows = 4;
-      this.typeCombo.Name = "typeCombo";
-      // 
       // PredefinedPositionControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridPosition);
       this.Name = "PredefinedPositionControl";
-      this.Size = new System.Drawing.Size(898, 373);
+      this.Size = new System.Drawing.Size(791, 345);
       this.Load += new System.EventHandler(this.PredefinedPositionControlLoad);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPosition)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.positionBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewPosition)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.typeBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.typeCombo)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.typeBindingSource)).EndInit();
       this.ResumeLayout(false);
 
     }

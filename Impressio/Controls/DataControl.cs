@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using Impressio.Models;
 using Subvento.DatabaseObject;
@@ -84,26 +85,24 @@ namespace Impressio.Controls
     {
       if (Data != null)
       {
+        _isLoaded = false;
+
         _dataPosition.ClearObjectList();
         Data.LoadSingleObject();
-        nameEdit.Text = Data.Name;
         remarkEdit.Text = Data.Remark;
         dataPositionBindingSource.DataSource = _dataPosition.LoadObjectList(DataPosition.Columns.FkDataDataPosition,
                                                                             Data.Identity);
         viewData.RefreshData();
+
+        _isLoaded = true;
       }
     }
 
     public bool ValidateControl()
     {
-      CheckEditor(nameEdit);
-
-      if (ValidateRow() && !ErrorProvider.HasErrors)
+      if (ValidateRow())
       {
-        Data.Name = nameEdit.Text;
-        Data.Remark = remarkEdit.Text;
-        Data.PositionTotal = _dataPosition.Objects.Sum(data => data.PositionTotal);
-        Data.SaveObject();
+        GetData();
         return true;
       }
       return false;
@@ -136,9 +135,21 @@ namespace Impressio.Controls
       get { return viewData.GetFocusedRow() as DataPosition; }
     }
 
-    public Data Data = new Data();
+    public Data Data;
 
     private readonly DataPosition _dataPosition = new DataPosition();
+
+    private bool _isLoaded;
+
+    private void GetData()
+    {
+      if (_isLoaded)
+      {
+        Data.Remark = remarkEdit.Text;
+        Data.PositionTotal = _dataPosition.Objects.Sum(data => data.PositionTotal);
+        Data.SaveObject();
+      }
+    }
 
     private void DataControlLoad(object sender, EventArgs e)
     {
@@ -148,6 +159,11 @@ namespace Impressio.Controls
     private void ViewDataValidateRow(object sender, ValidateRowEventArgs e)
     {
       e.Valid = ValidateRow();
+
+      if(e.Valid)
+      {
+        UpdateRow();
+      }
     }
 
     private void ViewDataCellValueChanged(object sender, CellValueChangedEventArgs e)
@@ -165,15 +181,14 @@ namespace Impressio.Controls
       e.Cancel = !ValidateControl();
     }
 
-    private void ViewDataRowUpdated(object sender, RowObjectEventArgs e)
-    {
-      UpdateRow();
-    }
-
     private void RemarkEditEditValueChanged(object sender, EventArgs e)
     {
-      Data.Remark = remarkEdit.Text;
-      Data.SaveObject();
+      GetData();
+    }
+
+    private void ViewDataInvalidRowException(object sender, InvalidRowExceptionEventArgs e)
+    {
+      e.ExceptionMode = ExceptionMode.NoAction;
     }
   }
 }

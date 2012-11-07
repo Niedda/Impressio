@@ -30,16 +30,15 @@ namespace Impressio.Controls
         /// </summary>
         private void InitializeComponent()
         {
-      this.components = new System.ComponentModel.Container();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.amountPrint = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
       this.lookUpClickCost = new DevExpress.XtraEditors.LookUpEdit();
-      this.clickCostBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.clickCostBindingSource = new System.Windows.Forms.BindingSource();
       this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
       this.lookUpPaper = new DevExpress.XtraEditors.SearchLookUpEdit();
-      this.paperBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.paperBindingSource = new System.Windows.Forms.BindingSource();
       this.paperView = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -98,7 +97,7 @@ namespace Impressio.Controls
       // 
       // labelControl2
       // 
-      this.labelControl2.Location = new System.Drawing.Point(19, 55);
+      this.labelControl2.Location = new System.Drawing.Point(17, 33);
       this.labelControl2.Name = "labelControl2";
       this.labelControl2.Size = new System.Drawing.Size(43, 13);
       this.labelControl2.TabIndex = 2;
@@ -115,6 +114,10 @@ namespace Impressio.Controls
       this.amountPrint.Name = "amountPrint";
       this.amountPrint.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.amountPrint.Properties.DisplayFormat.FormatString = "N00";
+      this.amountPrint.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.amountPrint.Properties.EditFormat.FormatString = "N00";
+      this.amountPrint.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.amountPrint.Properties.IsFloatValue = false;
       this.amountPrint.Properties.Mask.EditMask = "N00";
       this.amountPrint.Size = new System.Drawing.Size(93, 20);
@@ -123,7 +126,7 @@ namespace Impressio.Controls
       // 
       // labelControl3
       // 
-      this.labelControl3.Location = new System.Drawing.Point(19, 102);
+      this.labelControl3.Location = new System.Drawing.Point(17, 80);
       this.labelControl3.Name = "labelControl3";
       this.labelControl3.Size = new System.Drawing.Size(37, 13);
       this.labelControl3.TabIndex = 4;
@@ -131,7 +134,7 @@ namespace Impressio.Controls
       // 
       // labelControl5
       // 
-      this.labelControl5.Location = new System.Drawing.Point(274, 102);
+      this.labelControl5.Location = new System.Drawing.Point(272, 80);
       this.labelControl5.Name = "labelControl5";
       this.labelControl5.Size = new System.Drawing.Size(41, 13);
       this.labelControl5.TabIndex = 6;
@@ -159,7 +162,7 @@ namespace Impressio.Controls
       this.lookUpClickCost.Properties.ValueMember = "Identity";
       this.lookUpClickCost.Size = new System.Drawing.Size(334, 20);
       this.lookUpClickCost.TabIndex = 8;
-      this.lookUpClickCost.EditValueChanged += new System.EventHandler(this.LookUpClickCostEditValueChanged);
+      this.lookUpClickCost.EditValueChanged += new System.EventHandler(this.FieldsEditValueChanged);
       // 
       // clickCostBindingSource
       // 
@@ -167,7 +170,7 @@ namespace Impressio.Controls
       // 
       // labelControl6
       // 
-      this.labelControl6.Location = new System.Drawing.Point(19, 50);
+      this.labelControl6.Location = new System.Drawing.Point(18, 50);
       this.labelControl6.Name = "labelControl6";
       this.labelControl6.Size = new System.Drawing.Size(30, 13);
       this.labelControl6.TabIndex = 10;
@@ -345,7 +348,7 @@ namespace Impressio.Controls
       // 
       // labelControl7
       // 
-      this.labelControl7.Location = new System.Drawing.Point(19, 138);
+      this.labelControl7.Location = new System.Drawing.Point(18, 138);
       this.labelControl7.Name = "labelControl7";
       this.labelControl7.Size = new System.Drawing.Size(84, 13);
       this.labelControl7.TabIndex = 12;
@@ -362,6 +365,10 @@ namespace Impressio.Controls
       this.amountPaper.Name = "amountPaper";
       this.amountPaper.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.amountPaper.Properties.DisplayFormat.FormatString = "N00";
+      this.amountPaper.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.amountPaper.Properties.EditFormat.FormatString = "N00";
+      this.amountPaper.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.amountPaper.Properties.IsFloatValue = false;
       this.amountPaper.Properties.Mask.EditMask = "N00";
       this.amountPaper.Size = new System.Drawing.Size(93, 20);
@@ -386,7 +393,7 @@ namespace Impressio.Controls
       this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
       this.groupControl1.Location = new System.Drawing.Point(0, 0);
       this.groupControl1.Name = "groupControl1";
-      this.groupControl1.Size = new System.Drawing.Size(800, 182);
+      this.groupControl1.Size = new System.Drawing.Size(0, 182);
       this.groupControl1.TabIndex = 14;
       this.groupControl1.Text = "Papier";
       // 
@@ -419,6 +426,10 @@ namespace Impressio.Controls
       this.usePerPaper.Name = "usePerPaper";
       this.usePerPaper.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.usePerPaper.Properties.DisplayFormat.FormatString = "N00";
+      this.usePerPaper.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.usePerPaper.Properties.EditFormat.FormatString = "N00";
+      this.usePerPaper.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.usePerPaper.Properties.IsFloatValue = false;
       this.usePerPaper.Properties.Mask.EditMask = "N00";
       this.usePerPaper.Size = new System.Drawing.Size(93, 20);
@@ -427,7 +438,7 @@ namespace Impressio.Controls
       // 
       // paperTotal
       // 
-      this.paperTotal.Location = new System.Drawing.Point(559, 138);
+      this.paperTotal.Location = new System.Drawing.Point(558, 138);
       this.paperTotal.Name = "paperTotal";
       this.paperTotal.Size = new System.Drawing.Size(69, 13);
       this.paperTotal.TabIndex = 18;
@@ -435,7 +446,7 @@ namespace Impressio.Controls
       // 
       // labelControl11
       // 
-      this.labelControl11.Location = new System.Drawing.Point(274, 138);
+      this.labelControl11.Location = new System.Drawing.Point(273, 138);
       this.labelControl11.Name = "labelControl11";
       this.labelControl11.Size = new System.Drawing.Size(34, 13);
       this.labelControl11.TabIndex = 21;
@@ -443,7 +454,7 @@ namespace Impressio.Controls
       // 
       // labelControl1
       // 
-      this.labelControl1.Location = new System.Drawing.Point(19, 94);
+      this.labelControl1.Location = new System.Drawing.Point(18, 94);
       this.labelControl1.Name = "labelControl1";
       this.labelControl1.Size = new System.Drawing.Size(71, 13);
       this.labelControl1.TabIndex = 20;
@@ -460,6 +471,10 @@ namespace Impressio.Controls
       this.additionPaper.Name = "additionPaper";
       this.additionPaper.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.additionPaper.Properties.DisplayFormat.FormatString = "N00";
+      this.additionPaper.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.additionPaper.Properties.EditFormat.FormatString = "N00";
+      this.additionPaper.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.additionPaper.Properties.IsFloatValue = false;
       this.additionPaper.Properties.Mask.EditMask = "N00";
       this.additionPaper.Size = new System.Drawing.Size(93, 20);
@@ -468,7 +483,7 @@ namespace Impressio.Controls
       // 
       // paperPriceLabel
       // 
-      this.paperPriceLabel.Location = new System.Drawing.Point(559, 50);
+      this.paperPriceLabel.Location = new System.Drawing.Point(558, 50);
       this.paperPriceLabel.Name = "paperPriceLabel";
       this.paperPriceLabel.Size = new System.Drawing.Size(58, 13);
       this.paperPriceLabel.TabIndex = 18;
@@ -485,6 +500,10 @@ namespace Impressio.Controls
       this.pricePerPaper.Name = "pricePerPaper";
       this.pricePerPaper.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.pricePerPaper.Properties.DisplayFormat.FormatString = "c";
+      this.pricePerPaper.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.pricePerPaper.Properties.EditFormat.FormatString = "c";
+      this.pricePerPaper.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.pricePerPaper.Properties.IsFloatValue = false;
       this.pricePerPaper.Properties.Mask.EditMask = "N00";
       this.pricePerPaper.Size = new System.Drawing.Size(93, 20);
@@ -493,7 +512,7 @@ namespace Impressio.Controls
       // 
       // labelControl8
       // 
-      this.labelControl8.Location = new System.Drawing.Point(274, 94);
+      this.labelControl8.Location = new System.Drawing.Point(273, 94);
       this.labelControl8.Name = "labelControl8";
       this.labelControl8.Size = new System.Drawing.Size(67, 13);
       this.labelControl8.TabIndex = 14;
@@ -519,7 +538,7 @@ namespace Impressio.Controls
       // 
       // labelControl9
       // 
-      this.labelControl9.Location = new System.Drawing.Point(559, 175);
+      this.labelControl9.Location = new System.Drawing.Point(557, 153);
       this.labelControl9.Name = "labelControl9";
       this.labelControl9.Size = new System.Drawing.Size(24, 13);
       this.labelControl9.TabIndex = 16;
@@ -540,7 +559,7 @@ namespace Impressio.Controls
       this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
       this.groupControl2.Location = new System.Drawing.Point(0, 182);
       this.groupControl2.Name = "groupControl2";
-      this.groupControl2.Size = new System.Drawing.Size(800, 218);
+      this.groupControl2.Size = new System.Drawing.Size(0, 0);
       this.groupControl2.TabIndex = 15;
       this.groupControl2.Text = "Druck";
       // 
@@ -559,6 +578,7 @@ namespace Impressio.Controls
       this.typePrint.Size = new System.Drawing.Size(111, 20);
       this.typePrint.TabIndex = 21;
       this.typePrint.SelectedIndexChanged += new System.EventHandler(this.FieldsEditValueChanged);
+      this.typePrint.EditValueChanged += new System.EventHandler(this.FieldsEditValueChanged);
       // 
       // printCostTotal
       // 
@@ -580,7 +600,7 @@ namespace Impressio.Controls
       // 
       // printTotal
       // 
-      this.printTotal.Location = new System.Drawing.Point(559, 102);
+      this.printTotal.Location = new System.Drawing.Point(557, 80);
       this.printTotal.Name = "printTotal";
       this.printTotal.Size = new System.Drawing.Size(63, 13);
       this.printTotal.TabIndex = 19;
@@ -592,11 +612,8 @@ namespace Impressio.Controls
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.groupControl2);
       this.Controls.Add(this.groupControl1);
-      this.MaximumSize = new System.Drawing.Size(650, 360);
-      this.MinimumSize = new System.Drawing.Size(800, 400);
       this.Name = "PrintControl";
-      this.Size = new System.Drawing.Size(800, 400);
-      this.Load += new System.EventHandler(this.PrintControlLoad);
+      this.Size = new System.Drawing.Size(0, 0);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.PrintControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.amountPrint.Properties)).EndInit();

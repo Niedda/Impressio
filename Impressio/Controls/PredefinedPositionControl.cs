@@ -130,6 +130,7 @@ namespace Impressio.Controls
     {
       if (FocusedRow != null)
       {
+        FocusedRow.IsPredefined = true;
         FocusedRow.Identity = FocusedRow.SaveObject();
       }
     }
@@ -200,17 +201,17 @@ namespace Impressio.Controls
 
     private void ViewPositionValidateRow(object sender, ValidateRowEventArgs e)
     {
-      e.Valid = !ValidateRow();
+      e.Valid = ValidateRow();
+
+      if(e.Valid)
+      {
+        UpdateRow();
+      }
     }
 
     private void ViewPositionInvalidRowException(object sender, InvalidRowExceptionEventArgs e)
     {
       e.ExceptionMode = ExceptionMode.NoAction;
-    }
-
-    private void ViewPositionRowUpdated(object sender, RowObjectEventArgs e)
-    {
-      UpdateRow();
     }
 
     private void ViewPositionInitNewRow(object sender, InitNewRowEventArgs e)

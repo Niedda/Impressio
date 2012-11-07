@@ -53,7 +53,7 @@
       this.gridCompany.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
       this.gridCompany.Name = "gridCompany";
       this.gridCompany.ShowOnlyPredefinedDetails = true;
-      this.gridCompany.Size = new System.Drawing.Size(828, 320);
+      this.gridCompany.Size = new System.Drawing.Size(791, 381);
       this.gridCompany.TabIndex = 0;
       this.gridCompany.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewCompany,
@@ -131,7 +131,7 @@
       this.Controls.Add(this.gridCompany);
       this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
       this.Name = "CompanyControl";
-      this.Size = new System.Drawing.Size(828, 320);
+      this.Size = new System.Drawing.Size(791, 381);
       this.Load += new System.EventHandler(this.CompanyControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.CompanyControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

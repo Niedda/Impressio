@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Impressio.Properties;
 using Impressio.Views;
 
 namespace Impressio
@@ -14,6 +15,9 @@ namespace Impressio
     [STAThread]
     private static void Main()
     {
+      DevExpress.UserSkins.OfficeSkins.Register();
+      DevExpress.UserSkins.BonusSkins.Register();
+      DevExpress.LookAndFeel.UserLookAndFeel.Default.SkinName = Settings.Default.lookAndFeel;
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
       Application.Run(new MainViewRibbon());

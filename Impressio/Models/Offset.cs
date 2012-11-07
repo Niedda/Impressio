@@ -101,7 +101,11 @@ namespace Impressio.Models
       {
         if (FkOffsetPaper != 0)
         {
-          return _paper ?? (_paper = (Paper) new Paper { Identity = FkOffsetPaper, }.LoadSingleObject());
+          if(_paper == null || _paper.Identity == FkOffsetPaper)
+          {
+            return (_paper = (Paper)new Paper { Identity = FkOffsetPaper, }.LoadSingleObject());
+          }
+          return _paper;
         }
         return null;
       }
@@ -115,7 +119,11 @@ namespace Impressio.Models
       {
         if (FkOffsetMachine != 0)
         {
-          return _machine ?? (_machine = (Machine)new Machine {Identity = FkOffsetMachine}.LoadSingleObject());
+          if(_machine == null || FkOffsetMachine != _machine.Identity)
+          {
+            return (_machine = (Machine)new Machine { Identity = FkOffsetMachine }.LoadSingleObject());
+          }
+          return _machine;
         }
         return null;
       }
@@ -128,20 +136,25 @@ namespace Impressio.Models
         if (Machine != null)
         {
           int total;
+
+          var quantity = (decimal)OffsetQuantity / Machine.Speed * Machine.PricePerHour;
+
           if (PrintType == 0)
           {
-            total = (OffsetQuantity/Machine.Speed*Machine.PricePerHour) +
-                    (ColorAmount*(Machine.PlateCost + Machine.PricePerColor));
+            var color = (decimal)ColorAmount * (Machine.PlateCost + Machine.PricePerColor);
+            total = (int)(quantity + color);
+            total = (OffsetQuantity / Machine.Speed * Machine.PricePerHour) +
+                    (ColorAmount * (Machine.PlateCost + Machine.PricePerColor));
           }
           else if (PrintType == 1 || PrintType == 2)
           {
-            total = (OffsetQuantity/Machine.Speed*Machine.PricePerHour)*2 +
-                    (ColorAmount*(Machine.PlateCost + Machine.PricePerColor));
+            var color = (decimal)ColorAmount * (Machine.PlateCost + Machine.PricePerColor);
+            total = (int)(2 * quantity + color);
           }
           else
           {
-            total = (OffsetQuantity/Machine.Speed*Machine.PricePerHour)*2 +
-                    (ColorAmount*(Machine.PlateCost*2 + Machine.PricePerColor));
+            var color = (decimal)ColorAmount * (Machine.PlateCost * 2 + Machine.PricePerColor);
+            total = (int)(2 * quantity + color);
           }
 
           return total;
@@ -152,7 +165,12 @@ namespace Impressio.Models
 
     public int PaperCostTotal
     {
-      get { return (PaperPricePer*(PaperAddition + 100)*(PaperQuantity/1000))/100; }
+      get
+      {
+        var additon = (decimal)PaperAddition / 100 + 1;
+        var quantity = (decimal)PaperQuantity / 1000;
+        return (int)(PaperPricePer * quantity * additon);
+      }
     }
 
     public override List<Offset> Objects
@@ -162,13 +180,13 @@ namespace Impressio.Models
         return _offsets;
       }
     }
-    
+
     public Type Type
     {
       get { return Type.Offsetdruck; }
       set { }
     }
-    
+
     public void LoadPredefined()
     {
       var offset = new Offset();
@@ -184,7 +202,7 @@ namespace Impressio.Models
     {
       _predefinedOffset.Clear();
     }
-    
+
     public override void SetObject()
     {
       Identity = Database.Reader[IdentityColumn].GetInt();
@@ -201,9 +219,10 @@ namespace Impressio.Models
       FkOrder = Database.Reader[Columns.FkOffsetOrder.ToString()].GetInt();
       Name = Database.Reader[Columns.PositionName.ToString()] as string;
       PositionTotal = Database.Reader[Columns.PositionTotal.ToString()].GetInt();
+      IsPredefined = (bool) Database.Reader[Columns.IsPredefined.ToString()];
       Type = Type.Offsetdruck;
     }
-    
+
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>
@@ -285,7 +304,7 @@ namespace Impressio.Models
       PlateCost = Database.Reader[Columns.PlateCost.ToString()].GetInt();
       PricePerHour = Database.Reader[Columns.PricePerHour.ToString()].GetInt();
     }
-    
+
     public override void ClearObjectList()
     {
       _machines.Clear();

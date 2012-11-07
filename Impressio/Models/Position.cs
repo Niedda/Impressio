@@ -209,7 +209,7 @@ namespace Impressio.Models
     }
 
     public List<Position> PredefinedObjects { get { return _predefinedPositions; } }
-    
+
     public void ClearPredefinedObjects()
     {
       _predefinedPositions.Clear();
@@ -221,7 +221,7 @@ namespace Impressio.Models
       Name = Database.Reader[Columns.PositionName.ToString()] as string;
       PriceTotal = Database.Reader[Columns.PositionTotal.ToString()].GetInt();
     }
-    
+
     public override Dictionary<Enum, object> GetObject()
     {
       var dic = new Dictionary<Enum, object>
@@ -233,16 +233,16 @@ namespace Impressio.Models
       switch (Type)
       {
         case Type.Datenaufbereitung:
-          dic.Add(Data.Columns.FkDataOrder, FkOrder);
+          dic.Add(Data.Columns.FkDataOrder, FkOrder.SetIntDbNull());
           break;
         case Type.Offsetdruck:
-          dic.Add(Offset.Columns.FkOffsetOrder, FkOrder);
+          dic.Add(Offset.Columns.FkOffsetOrder, FkOrder.SetIntDbNull());
           break;
         case Type.Digitaldruck:
-          dic.Add(Print.Columns.FkPrintOrder, FkOrder);
+          dic.Add(Print.Columns.FkPrintOrder, FkOrder.SetIntDbNull());
           break;
         case Type.Weiterverarbeitung:
-          dic.Add(Finish.Columns.FkFinishOrder, FkOrder);
+          dic.Add(Finish.Columns.FkFinishOrder, FkOrder.SetIntDbNull());
           break;
       }
 

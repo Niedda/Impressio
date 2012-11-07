@@ -28,9 +28,8 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.components = new System.ComponentModel.Container();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainViewRibbon));
       this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
-      this.orderOverview = new DevExpress.XtraBars.BarButtonItem();
       this.openOrder = new DevExpress.XtraBars.BarButtonItem();
       this.copyOrder = new DevExpress.XtraBars.BarButtonItem();
       this.deleteOrder = new DevExpress.XtraBars.BarButtonItem();
@@ -62,7 +61,6 @@
       this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
       this.mainPanel = new DevExpress.XtraEditors.PanelControl();
-      this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
       this.SuspendLayout();
@@ -78,7 +76,6 @@
       this.ribbon.ExpandCollapseItem.Name = "";
       this.ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbon.ExpandCollapseItem,
-            this.orderOverview,
             this.openOrder,
             this.copyOrder,
             this.deleteOrder,
@@ -108,18 +105,10 @@
             this.ribbonPageProperties});
       this.ribbon.SelectedPage = this.ribbonPageOrder;
       this.ribbon.ShowToolbarCustomizeItem = false;
-      this.ribbon.Size = new System.Drawing.Size(692, 149);
+      this.ribbon.Size = new System.Drawing.Size(694, 145);
       this.ribbon.StatusBar = this.ribbonStatusBar;
       this.ribbon.Toolbar.ShowCustomizeItem = false;
       this.ribbon.SelectedPageChanged += new System.EventHandler(this.RibbonSelectedPageChanged);
-      // 
-      // orderOverview
-      // 
-      this.orderOverview.Caption = "Übersicht";
-      this.orderOverview.Id = 1;
-      this.orderOverview.LargeGlyph = global::Impressio.Properties.Resources.remark;
-      this.orderOverview.LargeWidth = 80;
-      this.orderOverview.Name = "orderOverview";
       // 
       // openOrder
       // 
@@ -302,7 +291,6 @@
       // 
       this.ribbonPageGroup1.AllowMinimize = false;
       this.ribbonPageGroup1.ItemLinks.Add(this.refreshOrder);
-      this.ribbonPageGroup1.ItemLinks.Add(this.orderOverview);
       this.ribbonPageGroup1.ItemLinks.Add(this.openOrder);
       this.ribbonPageGroup1.ItemLinks.Add(this.copyOrder);
       this.ribbonPageGroup1.ItemLinks.Add(this.deleteOrder);
@@ -381,32 +369,30 @@
       // 
       // ribbonStatusBar
       // 
-      this.ribbonStatusBar.Location = new System.Drawing.Point(0, 356);
+      this.ribbonStatusBar.Location = new System.Drawing.Point(0, 348);
       this.ribbonStatusBar.Name = "ribbonStatusBar";
       this.ribbonStatusBar.Ribbon = this.ribbon;
-      this.ribbonStatusBar.Size = new System.Drawing.Size(692, 23);
+      this.ribbonStatusBar.Size = new System.Drawing.Size(694, 31);
       // 
       // mainPanel
       // 
       this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.mainPanel.Location = new System.Drawing.Point(0, 149);
+      this.mainPanel.Location = new System.Drawing.Point(0, 145);
       this.mainPanel.Name = "mainPanel";
-      this.mainPanel.Size = new System.Drawing.Size(692, 207);
+      this.mainPanel.Size = new System.Drawing.Size(694, 203);
       this.mainPanel.TabIndex = 2;
-      // 
-      // defaultLookAndFeel
-      // 
-      this.defaultLookAndFeel.LookAndFeel.SkinName = "Black";
       // 
       // MainViewRibbon
       // 
+      this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.True;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(692, 379);
+      this.ClientSize = new System.Drawing.Size(694, 379);
       this.Controls.Add(this.mainPanel);
       this.Controls.Add(this.ribbonStatusBar);
       this.Controls.Add(this.ribbon);
-      this.MinimumSize = new System.Drawing.Size(698, 380);
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+      this.MinimumSize = new System.Drawing.Size(696, 380);
       this.Name = "MainViewRibbon";
       this.Ribbon = this.ribbon;
       this.StatusBar = this.ribbonStatusBar;
@@ -424,7 +410,6 @@
     private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageOrder;
     private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
     private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
-    private DevExpress.XtraBars.BarButtonItem orderOverview;
     private DevExpress.XtraBars.BarButtonItem openOrder;
     private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageCustomer;
     private DevExpress.XtraBars.BarButtonItem copyOrder;
@@ -453,6 +438,5 @@
     private DevExpress.XtraBars.BarButtonItem clickCosts;
     private DevExpress.XtraBars.BarButtonItem genders;
     private DevExpress.XtraBars.BarButtonItem state;
-    private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
   }
 }
