@@ -47,7 +47,7 @@
       this.gridGender.Location = new System.Drawing.Point(0, 0);
       this.gridGender.MainView = this.viewGender;
       this.gridGender.Name = "gridGender";
-      this.gridGender.Size = new System.Drawing.Size(914, 434);
+      this.gridGender.Size = new System.Drawing.Size(821, 339);
       this.gridGender.TabIndex = 0;
       this.gridGender.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewGender});
@@ -101,7 +101,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridGender);
       this.Name = "GenderControl";
-      this.Size = new System.Drawing.Size(914, 434);
+      this.Size = new System.Drawing.Size(821, 339);
       this.Load += new System.EventHandler(this.GenderControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.GenderControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

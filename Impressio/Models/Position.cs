@@ -90,22 +90,126 @@ namespace Impressio.Models
 
     public Type Type { get; set; }
 
+    public void LoadPositions()
+    {
+      //TODO find a better solution
+      Position position;
+
+      foreach (var predefinedObject in new Data().LoadObjectList(Data.Columns.FkDataOrder, Identity))
+      {
+        position = new Position
+        {
+          Identity = predefinedObject.Identity,
+          Type = Type.Datenaufbereitung,
+          Name = predefinedObject.Name,
+          PriceTotal = predefinedObject.PositionTotal
+        };
+        _positions.Add(position);
+      }
+
+      foreach (var objects in new Offset().LoadObjectList(Offset.Columns.FkOffsetOrder, Identity))
+      {
+        position = new Position
+        {
+          Identity = objects.Identity,
+          Type = Type.Offsetdruck,
+          Name = objects.Name,
+          PriceTotal = objects.PositionTotal
+        };
+        _positions.Add(position);
+      }
+
+      foreach (var objects in new Print().LoadObjectList(Print.Columns.FkPrintOrder, Identity))
+      {
+        position = new Position
+        {
+          Identity = objects.Identity,
+          Type = Type.Digitaldruck,
+          Name = objects.Name,
+          PriceTotal = objects.PositionTotal
+        };
+        _positions.Add(position);
+      }
+
+      foreach (var predefinedObject in new Finish().LoadObjectList(Finish.Columns.FkFinishOrder, Identity))
+      {
+        position = new Position
+        {
+          Identity = predefinedObject.Identity,
+          Type = Type.Weiterverarbeitung,
+          Name = predefinedObject.Name,
+          PriceTotal = predefinedObject.PositionTotal
+        };
+        _positions.Add(position);
+      }
+    }
+
     public override List<Position> Objects { get { return _positions; } }
 
     public void LoadPredefined()
     {
-      var position = new Position {Type = Type.Datenaufbereitung};
-      _predefinedPositions.AddRange(position.LoadObjectList(Columns.IsPredefined, true));
-      position = new Position {Type = Type.Digitaldruck};
-      _predefinedPositions.AddRange(position.LoadObjectList(Columns.IsPredefined, true));
-      position = new Position {Type = Type.Offsetdruck};
-      _predefinedPositions.AddRange(position.LoadObjectList(Columns.IsPredefined, true));
-      position = new Position {Type = Type.Weiterverarbeitung};
-      _predefinedPositions.AddRange(position.LoadObjectList(Columns.IsPredefined, true));
+      //TODO find a better solution
+      Position position;
+
+      var data = new Data();
+      data.LoadPredefined();
+      foreach (var predefinedObject in data.PredefinedObjects)
+      {
+        position = new Position
+        {
+          Identity = predefinedObject.Identity,
+          Type = Type.Datenaufbereitung,
+          Name = predefinedObject.Name,
+          PriceTotal = predefinedObject.PositionTotal
+        };
+        _predefinedPositions.Add(position);
+      }
+
+      var offset = new Offset();
+      offset.LoadPredefined();
+      foreach (var predefinedObject in offset.PredefinedObjects)
+      {
+        position = new Position
+                    {
+                      Identity = predefinedObject.Identity,
+                      Type = Type.Offsetdruck,
+                      Name = predefinedObject.Name,
+                      PriceTotal = predefinedObject.PositionTotal
+                    };
+        _predefinedPositions.Add(position);
+      }
+
+      var print = new Print();
+      print.LoadPredefined();
+      foreach (var predefinedObject in print.PredefinedObjects)
+      {
+        position = new Position
+        {
+          Identity = predefinedObject.Identity,
+          Type = Type.Digitaldruck,
+          Name = predefinedObject.Name,
+          PriceTotal = predefinedObject.PositionTotal
+        };
+        _predefinedPositions.Add(position);
+      }
+
+      var finish = new Finish();
+      finish.LoadPredefined();
+      foreach (var predefinedObject in finish.PredefinedObjects)
+      {
+        position = new Position
+        {
+          Identity = predefinedObject.Identity,
+          Type = Type.Weiterverarbeitung,
+          Name = predefinedObject.Name,
+          PriceTotal = predefinedObject.PositionTotal
+        };
+        _predefinedPositions.Add(position);
+      }
     }
 
     public List<Position> PredefinedObjects { get { return _predefinedPositions; } }
-
+    
     public void ClearPredefinedObjects()
     {
       _predefinedPositions.Clear();

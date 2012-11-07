@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using DevExpress.XtraBars;
+using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using Impressio.Models;
@@ -7,12 +10,75 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class StateControl : ControlBase, IControl, IGridControl<State>
+  public partial class StateControl : ControlBase, IControl, IGridControl<State>, IRibbon
   {
     public StateControl()
     {
       InitializeComponent();
     }
+
+    #region Ribbon
+
+    public string RibbonGroupName { get { return "Auftragsstatus"; } }
+
+    public List<BarButtonItem> Buttons
+    {
+      get
+      {
+        return _buttons ?? (_buttons = LoadButtons());
+      }
+    }
+
+    public RibbonPageGroup GetRibbon()
+    {
+      var pageGroup = new RibbonPageGroup
+      {
+        Text = "Auftragsstatus",
+        Name = "statePageGroup"
+      };
+      pageGroup.ItemLinks.AddRange(Buttons.ToArray());
+
+      return pageGroup;
+    }
+
+    private List<BarButtonItem> _buttons;
+
+    private List<BarButtonItem> LoadButtons()
+    {
+      var deleteButton = new BarButtonItem
+      {
+        Caption = "Löschen",
+        Id = 1,
+        LargeGlyph = Properties.Resources.delete,
+        LargeWidth = 80,
+        Name = "sateDelete",
+      };
+      deleteButton.ItemClick += DeleteRow;
+
+      var refreshButton = new BarButtonItem
+      {
+        Caption = "Aktualisieren",
+        Id = 2,
+        LargeGlyph = Properties.Resources.refresh,
+        LargeWidth = 80,
+        Name = "stateRefresh"
+      };
+      refreshButton.ItemClick += ReloadControl;
+
+      return new List<BarButtonItem> { deleteButton, refreshButton };
+    }
+
+    public void DeleteRow(object sender, ItemClickEventArgs e)
+    {
+      DeleteRow();
+    }
+
+    public void ReloadControl(object sender, ItemClickEventArgs e)
+    {
+      ReloadControl();
+    }
+
+    #endregion
 
     public void ReloadControl()
     {

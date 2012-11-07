@@ -25,16 +25,11 @@ namespace Impressio.Controls
       if (Order != null)
       {
         _position.ClearObjectList();
-        _position.Type = Type.Datenaufbereitung;
-        _position.LoadObjectList(_position.FkOrderColumn, Order.Identity);
-        _position.Type = Type.Digitaldruck;
-        _position.LoadObjectList(_position.FkOrderColumn, Order.Identity);
-        _position.Type = Type.Offsetdruck;
-        _position.LoadObjectList(_position.FkOrderColumn, Order.Identity);
-        _position.Type = Type.Weiterverarbeitung;
-        _position.LoadObjectList(_position.FkOrderColumn, Order.Identity);
+        _position.Identity = Order.Identity;
+        _position.LoadPositions();
 
-        typeCombo.Items.AddRange(Enum.GetNames(typeof (Type)));
+        typeCombo.Items.Clear();
+        typeCombo.Items.AddEnum(typeof(Type));
         positionBindingSource.DataSource = _position.Objects;
         stateBindingSource.DataSource = _state.LoadObjectList();
         clientBindingSource.DataSource = Order.AvaibleClients;
@@ -48,6 +43,8 @@ namespace Impressio.Controls
         userEdited.Text = Order.UserModified;
         dateEdited.Text = Order.DateModified;
         dateCreated.Text = Order.DateCreated;
+
+        viewPosition.RefreshData();
       }
     }
 
@@ -93,7 +90,7 @@ namespace Impressio.Controls
     {
       if (FocusedRow != null)
       {
-        var view = new EmptyView {Text = string.Format("{0}: {1}", FocusedRow.Type, Order.OrderName)};
+        var view = new EmptyView { Text = string.Format("{0}: {1}", FocusedRow.Type, Order.OrderName) };
 
 
         switch (FocusedRow.Type)
@@ -215,7 +212,7 @@ namespace Impressio.Controls
             switch (position.Type)
             {
               case Type.Datenaufbereitung:
-                var data = new Data {Identity = position.Identity,};
+                var data = new Data { Identity = position.Identity, };
                 data.LoadSingleObject();
                 List<DataPosition> dataPositions = data.DataPositions;
                 data.Identity = 0;
@@ -231,7 +228,7 @@ namespace Impressio.Controls
                 }
                 break;
               case Type.Weiterverarbeitung:
-                var finish = new Finish {Identity = position.Identity,};
+                var finish = new Finish { Identity = position.Identity, };
                 finish.LoadSingleObject();
                 List<FinishPosition> finishPositions = finish.FinishPositions;
                 finish.Identity = 0;
@@ -247,7 +244,7 @@ namespace Impressio.Controls
                 }
                 break;
               case Type.Digitaldruck:
-                var print = new Print {Identity = position.Identity,};
+                var print = new Print { Identity = position.Identity, };
                 print.LoadSingleObject();
                 print.Identity = 0;
                 print.FkOrder = Order.Identity;
@@ -255,7 +252,7 @@ namespace Impressio.Controls
                 id = print.SaveObject();
                 break;
               case Type.Offsetdruck:
-                var offset = new Offset {Identity = position.Identity,};
+                var offset = new Offset { Identity = position.Identity, };
                 offset.LoadSingleObject();
                 offset.Identity = 0;
                 offset.FkOrder = Order.Identity;
@@ -272,7 +269,10 @@ namespace Impressio.Controls
 
     private void TypeComboEditValueChanging(object sender, ChangingEventArgs e)
     {
-      e.Cancel = !viewPosition.IsNewItemRow(viewPosition.FocusedRowHandle);
+      if(!viewPosition.IsNewItemRow(viewPosition.FocusedRowHandle))
+      {
+        e.Cancel = true;
+      }
     }
   }
 }

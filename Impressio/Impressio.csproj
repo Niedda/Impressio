@@ -50,8 +50,7 @@
     <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>logoimpressio.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>27AF8D9693BB5246F20E533DB9FA9893DB26148A</ManifestCertificateThumbprint>
@@ -65,6 +64,7 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="DevExpress.Charts.v10.2.Core, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -232,6 +232,7 @@
     </Compile>
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\IPredefined.cs" />
+    <Compile Include="Models\IRibbon.cs" />
     <Compile Include="Models\Log\DatabaseLogger.cs" />
     <Compile Include="Models\Log\FileLogger.cs" />
     <Compile Include="Models\Log\ILogger.cs" />
@@ -307,6 +308,18 @@
     </Compile>
     <Compile Include="Views\MachineView.Designer.cs">
       <DependentUpon>MachineView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainViewRibbon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MainViewRibbon.Designer.cs">
+      <DependentUpon>MainViewRibbon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderRibbonView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\OrderRibbonView.Designer.cs">
+      <DependentUpon>OrderRibbonView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\OrdersView.cs">
       <SubType>Form</SubType>
@@ -443,6 +456,12 @@
     <EmbeddedResource Include="Views\MachineView.resx">
       <DependentUpon>MachineView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainViewRibbon.resx">
+      <DependentUpon>MainViewRibbon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\OrderRibbonView.resx">
+      <DependentUpon>OrderRibbonView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\OrdersView.resx">
       <DependentUpon>OrdersView.cs</DependentUpon>
     </EmbeddedResource>
@@ -543,6 +562,17 @@
     <None Include="Views\Resources\copy.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\open.png" />
+    <None Include="Resources\printglyph.png" />
+    <None Include="Resources\printer2.png" />
+    <None Include="Resources\person.png" />
+    <None Include="Resources\position.png" />
+    <None Include="Resources\description.png" />
+    <None Include="Resources\paperplane.png" />
+    <None Include="Resources\offsetprint.png" />
+    <None Include="Resources\coins.png" />
+    <None Include="Resources\gender.png" />
+    <Content Include="logoimpressio.ico" />
     <Content Include="Views\Resources\gender.png" />
     <None Include="Views\Resources\excel.png" />
     <None Include="Views\Resources\paper.png" />

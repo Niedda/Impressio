@@ -1,18 +1,69 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using DevExpress.XtraBars;
+using DevExpress.XtraBars.Ribbon;
 using Impressio.Models;
 using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class PrintControl : ControlBase, IControl
+  public partial class PrintControl : ControlBase, IControl, IRibbon
   {
     public PrintControl()
     {
       InitializeComponent();
     }
     
+    #region Ribbon
+
+    public string RibbonGroupName { get { return "Digitaldruck"; } }
+
+    public List<BarButtonItem> Buttons
+    {
+      get
+      {
+        return _buttons ?? (_buttons = LoadButtons());
+      }
+    }
+
+    public RibbonPageGroup GetRibbon()
+    {
+      var pageGroup = new RibbonPageGroup
+      {
+        Text = "Offsetdruck",
+        Name = "printPageGroup"
+      };
+      pageGroup.ItemLinks.AddRange(Buttons.ToArray());
+
+      return pageGroup;
+    }
+
+    private List<BarButtonItem> _buttons;
+
+    private List<BarButtonItem> LoadButtons()
+    {
+      var refreshButton = new BarButtonItem
+      {
+        Caption = "Aktualisieren",
+        Id = 2,
+        LargeGlyph = Properties.Resources.refresh,
+        LargeWidth = 80,
+        Name = "printRefresh"
+      };
+      refreshButton.ItemClick += ReloadControl;
+
+      return new List<BarButtonItem> { refreshButton };
+    }
+
+    public void ReloadControl(object sender, ItemClickEventArgs e)
+    {
+      ReloadControl();
+    }
+
+    #endregion
+
     public Print Print = new Print();
 
     public void ReloadControl()

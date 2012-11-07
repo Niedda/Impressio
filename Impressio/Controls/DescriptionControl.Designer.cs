@@ -30,9 +30,10 @@ namespace Impressio.Controls
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
       this.gridDescription = new DevExpress.XtraGrid.GridControl();
-      this.descriptionBindingSource = new System.Windows.Forms.BindingSource();
+      this.descriptionBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewDescription = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colJobTitel = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -47,7 +48,7 @@ namespace Impressio.Controls
       this.colPredefinedDescription = new DevExpress.XtraGrid.Columns.GridColumn();
       this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
       this.gridDetail = new DevExpress.XtraGrid.GridControl();
-      this.detailsBindingSource = new System.Windows.Forms.BindingSource();
+      this.detailsBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentityDetail = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colFkDetailDescription = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -83,7 +84,7 @@ namespace Impressio.Controls
       this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
       this.groupControl1.Location = new System.Drawing.Point(0, 0);
       this.groupControl1.Name = "groupControl1";
-      this.groupControl1.Size = new System.Drawing.Size(914, 166);
+      this.groupControl1.Size = new System.Drawing.Size(847, 166);
       this.groupControl1.TabIndex = 0;
       this.groupControl1.Text = "Positionen";
       // 
@@ -98,7 +99,7 @@ namespace Impressio.Controls
             this.predefinedDescriptionCombo,
             this.descriptionMoveUpEdit,
             this.descriptionMoveDownEdit});
-      this.gridDescription.Size = new System.Drawing.Size(910, 142);
+      this.gridDescription.Size = new System.Drawing.Size(843, 142);
       this.gridDescription.TabIndex = 0;
       this.gridDescription.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewDescription});
@@ -238,7 +239,7 @@ namespace Impressio.Controls
       this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
       this.groupControl2.Location = new System.Drawing.Point(0, 166);
       this.groupControl2.Name = "groupControl2";
-      this.groupControl2.Size = new System.Drawing.Size(914, 268);
+      this.groupControl2.Size = new System.Drawing.Size(847, 207);
       this.groupControl2.TabIndex = 1;
       this.groupControl2.Text = "Inhalt von Position";
       // 
@@ -252,7 +253,7 @@ namespace Impressio.Controls
       this.gridDetail.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.detailMoveUpEdit,
             this.detailMoveDownEdit});
-      this.gridDetail.Size = new System.Drawing.Size(910, 244);
+      this.gridDetail.Size = new System.Drawing.Size(843, 183);
       this.gridDetail.TabIndex = 0;
       this.gridDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewDetail});
@@ -369,7 +370,7 @@ namespace Impressio.Controls
       this.splitterControl1.Dock = System.Windows.Forms.DockStyle.Top;
       this.splitterControl1.Location = new System.Drawing.Point(0, 166);
       this.splitterControl1.Name = "splitterControl1";
-      this.splitterControl1.Size = new System.Drawing.Size(914, 5);
+      this.splitterControl1.Size = new System.Drawing.Size(847, 6);
       this.splitterControl1.TabIndex = 2;
       this.splitterControl1.TabStop = false;
       // 
@@ -382,7 +383,7 @@ namespace Impressio.Controls
       this.Controls.Add(this.groupControl1);
       this.MinimumSize = new System.Drawing.Size(450, 300);
       this.Name = "DescriptionControl";
-      this.Size = new System.Drawing.Size(914, 434);
+      this.Size = new System.Drawing.Size(847, 373);
       this.Load += new System.EventHandler(this.DescriptionControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.DescriptionControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

@@ -36,8 +36,9 @@
       this.navPrintOverview = new DevExpress.XtraNavBar.NavBarItem();
       this.navPrintOffer = new DevExpress.XtraNavBar.NavBarItem();
       this.navRefresh = new DevExpress.XtraNavBar.NavBarItem();
-      this.ordersControl = new Impressio.Controls.OrdersControl();
+      this.mainPanel = new DevExpress.XtraEditors.PanelControl();
       ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
       this.SuspendLayout();
       // 
       // navBarControl1
@@ -123,25 +124,26 @@
       this.navRefresh.SmallImage = global::Impressio.Properties.Resources.refresh;
       this.navRefresh.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavRefreshLinkClicked);
       // 
-      // ordersControl
+      // mainPanel
       // 
-      this.ordersControl.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.ordersControl.Location = new System.Drawing.Point(180, 0);
-      this.ordersControl.Name = "ordersControl";
-      this.ordersControl.Size = new System.Drawing.Size(604, 461);
-      this.ordersControl.TabIndex = 1;
+      this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.mainPanel.Location = new System.Drawing.Point(180, 0);
+      this.mainPanel.Name = "mainPanel";
+      this.mainPanel.Size = new System.Drawing.Size(604, 461);
+      this.mainPanel.TabIndex = 1;
       // 
       // OrdersView
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(784, 461);
-      this.Controls.Add(this.ordersControl);
+      this.Controls.Add(this.mainPanel);
       this.Controls.Add(this.navBarControl1);
       this.MinimumSize = new System.Drawing.Size(800, 500);
       this.Name = "OrdersView";
       this.ShowIcon = false;
       ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -154,8 +156,8 @@
     private DevExpress.XtraNavBar.NavBarItem navCopyOrder;
     private DevExpress.XtraNavBar.NavBarItem navDeleteOrder;
     private DevExpress.XtraNavBar.NavBarItem navPrintOverview;
-    private Controls.OrdersControl ordersControl;
     private DevExpress.XtraNavBar.NavBarItem navPrintOffer;
     private DevExpress.XtraNavBar.NavBarItem navRefresh;
+    private DevExpress.XtraEditors.PanelControl mainPanel;
   }
 }

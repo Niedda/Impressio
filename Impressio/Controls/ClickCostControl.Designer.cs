@@ -52,7 +52,7 @@
       this.gridClickCost.Name = "gridClickCost";
       this.gridClickCost.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemSpinEdit1});
-      this.gridClickCost.Size = new System.Drawing.Size(883, 306);
+      this.gridClickCost.Size = new System.Drawing.Size(821, 373);
       this.gridClickCost.TabIndex = 0;
       this.gridClickCost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewClickCost});
@@ -142,7 +142,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridClickCost);
       this.Name = "ClickCostControl";
-      this.Size = new System.Drawing.Size(883, 306);
+      this.Size = new System.Drawing.Size(821, 373);
       this.Load += new System.EventHandler(this.ClickCostControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.ClickCostControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

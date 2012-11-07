@@ -16,6 +16,7 @@ namespace Impressio.Controls
     public PropertieControl()
     {
       InitializeComponent();
+      Dock = DockStyle.Fill;
     }
 
     public void ReloadControl()

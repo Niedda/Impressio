@@ -28,8 +28,9 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.gridPosition = new DevExpress.XtraGrid.GridControl();
-      this.positionBindingSource = new System.Windows.Forms.BindingSource();
+      this.positionBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewPosition = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -37,17 +38,15 @@
       this.colFkOrder = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colPriceTotal = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colType = new DevExpress.XtraGrid.Columns.GridColumn();
-      this.typeLookUp = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-      this.typeBindingSource = new System.Windows.Forms.BindingSource();
       this.colIsPredefined = new DevExpress.XtraGrid.Columns.GridColumn();
-      this.typeComobEdit = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+      this.typeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.typeCombo = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPosition)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.positionBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewPosition)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.typeLookUp)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.typeBindingSource)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.typeComobEdit)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.typeCombo)).BeginInit();
       this.SuspendLayout();
       // 
       // gridPosition
@@ -58,9 +57,8 @@
       this.gridPosition.MainView = this.viewPosition;
       this.gridPosition.Name = "gridPosition";
       this.gridPosition.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.typeComobEdit,
-            this.typeLookUp});
-      this.gridPosition.Size = new System.Drawing.Size(705, 374);
+            this.typeCombo});
+      this.gridPosition.Size = new System.Drawing.Size(898, 373);
       this.gridPosition.TabIndex = 0;
       this.gridPosition.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewPosition});
@@ -132,27 +130,11 @@
       // colType
       // 
       this.colType.Caption = "Typ";
-      this.colType.ColumnEdit = this.typeLookUp;
-      this.colType.FieldName = "Type.Name";
+      this.colType.ColumnEdit = this.typeCombo;
+      this.colType.FieldName = "Type";
       this.colType.Name = "colType";
       this.colType.Visible = true;
       this.colType.VisibleIndex = 1;
-      // 
-      // typeLookUp
-      // 
-      this.typeLookUp.AutoHeight = false;
-      this.typeLookUp.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-      this.typeLookUp.DataSource = this.typeBindingSource;
-      this.typeLookUp.DisplayMember = "Name";
-      this.typeLookUp.Name = "typeLookUp";
-      this.typeLookUp.NullText = "";
-      this.typeLookUp.ValueMember = "Name";
-      this.typeLookUp.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.TypeLookUpEditValueChanging);
-      // 
-      // typeBindingSource
-      // 
-      this.typeBindingSource.DataSource = typeof(Impressio.Models.Type);
       // 
       // colIsPredefined
       // 
@@ -160,17 +142,17 @@
       this.colIsPredefined.Name = "colIsPredefined";
       this.colIsPredefined.OptionsColumn.ShowInCustomizationForm = false;
       // 
-      // typeComobEdit
+      // typeBindingSource
       // 
-      this.typeComobEdit.AutoHeight = false;
-      this.typeComobEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+      this.typeBindingSource.DataSource = typeof(Impressio.Models.Type);
+      // 
+      // typeCombo
+      // 
+      this.typeCombo.AutoHeight = false;
+      this.typeCombo.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-      this.typeComobEdit.Items.AddRange(new object[] {
-            "Datenaufbereitung",
-            "Digitaldruck",
-            "Offsetdruck",
-            "Weiterverarbeitung"});
-      this.typeComobEdit.Name = "typeComobEdit";
+      this.typeCombo.DropDownRows = 4;
+      this.typeCombo.Name = "typeCombo";
       // 
       // PredefinedPositionControl
       // 
@@ -178,15 +160,14 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridPosition);
       this.Name = "PredefinedPositionControl";
-      this.Size = new System.Drawing.Size(705, 374);
+      this.Size = new System.Drawing.Size(898, 373);
       this.Load += new System.EventHandler(this.PredefinedPositionControlLoad);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPosition)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.positionBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewPosition)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.typeLookUp)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.typeBindingSource)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.typeComobEdit)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.typeCombo)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -202,9 +183,8 @@
     private DevExpress.XtraGrid.Columns.GridColumn colFkOrder;
     private DevExpress.XtraGrid.Columns.GridColumn colPriceTotal;
     private DevExpress.XtraGrid.Columns.GridColumn colType;
-    private DevExpress.XtraEditors.Repository.RepositoryItemComboBox typeComobEdit;
-    private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit typeLookUp;
     private System.Windows.Forms.BindingSource typeBindingSource;
     private DevExpress.XtraGrid.Columns.GridColumn colIsPredefined;
+    private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox typeCombo;
   }
 }

@@ -59,7 +59,7 @@ namespace Impressio.Controls
     {
       if (FocusedRow != null)
       {
-        new PositionView
+        new OrderRibbonView
           {
             Order = FocusedRow,
           }.Show();

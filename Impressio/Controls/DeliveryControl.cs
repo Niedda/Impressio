@@ -1,29 +1,115 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using DevExpress.XtraBars;
+using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
+using Impressio.Reports;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class DeliveryControl : ControlBase, IControl, IGridControl<DeliveryPosition>
+  public partial class DeliveryControl : ControlBase, IControl, IGridControl<DeliveryPosition>, IRibbon
   {
     public DeliveryControl()
     {
       InitializeComponent();
     }
 
+    #region Ribbon
+
+    public string RibbonGroupName { get { return "Lieferschein"; } }
+
+    public List<BarButtonItem> Buttons
+    {
+      get
+      {
+        return _buttons ?? (_buttons = LoadButtons());
+      }
+    }
+
+    public RibbonPageGroup GetRibbon()
+    {
+      var pageGroup = new RibbonPageGroup
+      {
+        Text = "Lieferschein",
+        Name = "deliveryPageGroup"
+      };
+      pageGroup.ItemLinks.AddRange(Buttons.ToArray());
+
+      return pageGroup;
+    }
+
+    private List<BarButtonItem> _buttons;
+
+    private List<BarButtonItem> LoadButtons()
+    {
+      var deleteDelivery = new BarButtonItem
+      {
+        Caption = "Löschen",
+        Id = 1,
+        LargeGlyph = Properties.Resources.delete,
+        LargeWidth = 80,
+        Name = "deliveryOpen"
+      };
+      deleteDelivery.ItemClick += DeleteRow;
+
+      var refreshButton = new BarButtonItem
+      {
+        Caption = "Aktualisieren",
+        Id = 2,
+        LargeGlyph = Properties.Resources.refresh,
+        LargeWidth = 80,
+        Name = "deliveryRefresh"
+      };
+      refreshButton.ItemClick += ReloadControl;
+
+      var printDelivery = new BarButtonItem
+      {
+        Caption = "Drucken",
+        Id = 3,
+        LargeGlyph = Properties.Resources.printer2,
+        LargeWidth = 80,
+        Name = "printDelivery"
+      };
+      refreshButton.ItemClick += PrintDelivery;
+
+      return new List<BarButtonItem> { refreshButton, deleteDelivery, printDelivery };
+    }
+
+    public void PrintDelivery(object sender, ItemClickEventArgs e)
+    {
+      var report = new DeliveryReport
+      {
+        deliveryBindingSource = { DataSource = Delivery, },
+      };
+      report.ShowPreview();
+    }
+
+    public void ReloadControl(object sender, ItemClickEventArgs e)
+    {
+      ReloadControl();
+    }
+
+    public void DeleteRow(object sender, ItemClickEventArgs e)
+    {
+      DeleteRow();
+    }
+
+    #endregion
+
     public void ReloadControl()
     {
       if (Delivery != null)
       {
         _deliveryPosition.ClearObjectList();
+        Delivery.LoadSingleObject();
         clientBindingSource.DataSource = Delivery.AvaibleClients;
         addressBindingSource.DataSource = Delivery.AvaibleAddresses;
-        deliveryPositionBindingSource.DataSource =
-          _deliveryPosition.LoadObjectList(DeliveryPosition.Columns.FkDeliveryPositionDelivery, Delivery.Identity);
+        deliveryPositionBindingSource.DataSource = _deliveryPosition.LoadObjectList(DeliveryPosition.Columns.FkDeliveryPositionDelivery, Delivery.Identity);
 
         positionComboEdit.Items.AddRange(_deliveryPosition.LoadDescriptions(Delivery.FkDeliveryOrder));
 

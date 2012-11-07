@@ -30,14 +30,15 @@ namespace Impressio.Controls
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.gridDelivery = new DevExpress.XtraGrid.GridControl();
-      this.deliveryBindingSource = new System.Windows.Forms.BindingSource();
+      this.deliveryBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewDelivery = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colFkDeliveryCompany = new DevExpress.XtraGrid.Columns.GridColumn();
       this.companySearchLookUp = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
-      this.companyBindingSource = new System.Windows.Forms.BindingSource();
+      this.companyBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity1 = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -71,7 +72,7 @@ namespace Impressio.Controls
       this.gridDelivery.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.deliveryDateEdit,
             this.companySearchLookUp});
-      this.gridDelivery.Size = new System.Drawing.Size(914, 306);
+      this.gridDelivery.Size = new System.Drawing.Size(847, 373);
       this.gridDelivery.TabIndex = 0;
       this.gridDelivery.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewDelivery});
@@ -243,7 +244,7 @@ namespace Impressio.Controls
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridDelivery);
       this.Name = "DeliveryOverviewControl";
-      this.Size = new System.Drawing.Size(914, 306);
+      this.Size = new System.Drawing.Size(847, 373);
       this.Load += new System.EventHandler(this.DeliveryOverviewControlLoad);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridDelivery)).EndInit();

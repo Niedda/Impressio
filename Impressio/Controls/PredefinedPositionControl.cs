@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using DevExpress.XtraBars;
+using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
@@ -9,19 +12,98 @@ using Type = Impressio.Models.Type;
 
 namespace Impressio.Controls
 {
-  public partial class PredefinedPositionControl : ControlBase, IControl, IGridControl<Position>
+  public partial class PredefinedPositionControl : ControlBase, IControl, IGridControl<Position>, IRibbon
   {
     public PredefinedPositionControl()
     {
       InitializeComponent();
     }
 
+    #region Ribbon
+
+    public string RibbonGroupName { get { return "Vordefinierte Positionen"; } }
+
+    public List<BarButtonItem> Buttons
+    {
+      get
+      {
+        return _buttons ?? (_buttons = LoadButtons());
+      }
+    }
+
+    public RibbonPageGroup GetRibbon()
+    {
+      var pageGroup = new RibbonPageGroup
+      {
+        Text = "Vordefinierte Positionen",
+        Name = "predefinedPositionPageGroup"
+      };
+      pageGroup.ItemLinks.AddRange(Buttons.ToArray());
+
+      return pageGroup;
+    }
+
+    private List<BarButtonItem> _buttons;
+
+    private List<BarButtonItem> LoadButtons()
+    {
+      var deleteButton = new BarButtonItem
+      {
+        Caption = "Löschen",
+        Id = 2,
+        LargeGlyph = Properties.Resources.delete,
+        LargeWidth = 80,
+        Name = "positionDelete",
+      };
+      deleteButton.ItemClick += DeleteRow;
+
+      var refreshButton = new BarButtonItem
+      {
+        Caption = "Aktualisieren",
+        Id = 3,
+        LargeGlyph = Properties.Resources.refresh,
+        LargeWidth = 80,
+        Name = "positionRefresh"
+      };
+      refreshButton.ItemClick += ReloadControl;
+
+      var importButton = new BarButtonItem
+      {
+        Caption = "Position öffnen",
+        Id = 1,
+        LargeGlyph = Properties.Resources.open,
+        LargeWidth = 80,
+        Name = "positionOpen"
+      };
+      importButton.ItemClick += OpenPosition;
+
+      return new List<BarButtonItem> { deleteButton, refreshButton, importButton };
+    }
+
+    public void DeleteRow(object sender, ItemClickEventArgs e)
+    {
+      DeleteRow();
+    }
+
+    public void ReloadControl(object sender, ItemClickEventArgs e)
+    {
+      ReloadControl();
+    }
+    
+    public void OpenPosition(object sender, ItemClickEventArgs e)
+    {
+      OpenPosition();
+    }
+
+    #endregion
+
     public void ReloadControl()
     {
       _position.ClearPredefinedObjects();
+      typeCombo.Items.Clear();
+      typeCombo.Items.AddEnum(typeof(Type));
       _position.LoadPredefined();
       positionBindingSource.DataSource = _position.PredefinedObjects;
-      typeBindingSource.DataSource = Enum.GetNames(typeof (Type));
       viewPosition.RefreshData();
     }
 
@@ -124,14 +206,6 @@ namespace Impressio.Controls
     private void ViewPositionInvalidRowException(object sender, InvalidRowExceptionEventArgs e)
     {
       e.ExceptionMode = ExceptionMode.NoAction;
-    }
-
-    private void TypeLookUpEditValueChanging(object sender, ChangingEventArgs e)
-    {
-      if (viewPosition.FocusedColumn == colType && !viewPosition.IsNewItemRow(viewPosition.FocusedRowHandle))
-      {
-        e.Cancel = true;
-      }
     }
 
     private void ViewPositionRowUpdated(object sender, RowObjectEventArgs e)

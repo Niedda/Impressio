@@ -47,7 +47,7 @@
       this.gridState.Location = new System.Drawing.Point(0, 0);
       this.gridState.MainView = this.viewState;
       this.gridState.Name = "gridState";
-      this.gridState.Size = new System.Drawing.Size(705, 349);
+      this.gridState.Size = new System.Drawing.Size(821, 339);
       this.gridState.TabIndex = 0;
       this.gridState.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewState});
@@ -104,7 +104,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridState);
       this.Name = "StateControl";
-      this.Size = new System.Drawing.Size(705, 349);
+      this.Size = new System.Drawing.Size(821, 339);
       this.Load += new System.EventHandler(this.StateControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.StateControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

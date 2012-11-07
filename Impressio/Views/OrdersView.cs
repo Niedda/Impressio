@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraNavBar;
+using Impressio.Controls;
 
 namespace Impressio.Views
 {
@@ -8,11 +9,14 @@ namespace Impressio.Views
     public OrdersView()
     {
       InitializeComponent();
+      mainPanel.Controls.Add(_ordersControl);
     }
+
+    private readonly OrdersControl _ordersControl = new OrdersControl();
 
     private void NavDeleteOrderLinkClicked(object sender, NavBarLinkEventArgs e)
     {
-      ordersControl.DeleteRow();
+      _ordersControl.DeleteRow();
     }
 
     private void NavCopyOrderLinkClicked(object sender, NavBarLinkEventArgs e)
@@ -22,22 +26,22 @@ namespace Impressio.Views
 
     private void NavOpenOrderLinkClicked(object sender, NavBarLinkEventArgs e)
     {
-      ordersControl.OpenOrder();
+      _ordersControl.OpenOrder();
     }
 
     private void NavPrintOverviewLinkClicked(object sender, NavBarLinkEventArgs e)
     {
-      ordersControl.LoadReport();
+      _ordersControl.LoadReport();
     }
 
     private void NavPrintOfferLinkClicked(object sender, NavBarLinkEventArgs e)
     {
-      ordersControl.LoadOffer();
+      _ordersControl.LoadOffer();
     }
 
     private void NavRefreshLinkClicked(object sender, NavBarLinkEventArgs e)
     {
-      ordersControl.ReloadControl();
+      _ordersControl.ReloadControl();
     }
   }
 }

@@ -30,13 +30,14 @@ namespace Impressio.Controls
         /// </summary>
         private void InitializeComponent()
         {
+      this.components = new System.ComponentModel.Container();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.remarkEdit = new DevExpress.XtraEditors.MemoEdit();
       this.nameEdit = new DevExpress.XtraEditors.TextEdit();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.labelName = new DevExpress.XtraEditors.LabelControl();
       this.gridData = new DevExpress.XtraGrid.GridControl();
-      this.dataPositionBindingSource = new System.Windows.Forms.BindingSource();
+      this.dataPositionBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewData = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -63,7 +64,7 @@ namespace Impressio.Controls
       this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
       this.groupBox1.Location = new System.Drawing.Point(0, 0);
       this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(914, 137);
+      this.groupBox1.Size = new System.Drawing.Size(794, 137);
       this.groupBox1.TabIndex = 0;
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Datenaufbereitung";
@@ -106,7 +107,7 @@ namespace Impressio.Controls
       this.gridData.Location = new System.Drawing.Point(0, 137);
       this.gridData.MainView = this.viewData;
       this.gridData.Name = "gridData";
-      this.gridData.Size = new System.Drawing.Size(914, 169);
+      this.gridData.Size = new System.Drawing.Size(794, 236);
       this.gridData.TabIndex = 1;
       this.gridData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewData});
@@ -204,7 +205,7 @@ namespace Impressio.Controls
       this.Controls.Add(this.gridData);
       this.Controls.Add(this.groupBox1);
       this.Name = "DataControl";
-      this.Size = new System.Drawing.Size(914, 306);
+      this.Size = new System.Drawing.Size(794, 373);
       this.Load += new System.EventHandler(this.DataControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.DataControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

@@ -30,8 +30,9 @@ namespace Impressio.Controls
         /// </summary>
         private void InitializeComponent()
         {
+      this.components = new System.ComponentModel.Container();
       this.gridFinish = new DevExpress.XtraGrid.GridControl();
-      this.finishPositionBindingSource = new System.Windows.Forms.BindingSource();
+      this.finishPositionBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewFinish = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -62,7 +63,7 @@ namespace Impressio.Controls
       this.gridFinish.Location = new System.Drawing.Point(0, 134);
       this.gridFinish.MainView = this.viewFinish;
       this.gridFinish.Name = "gridFinish";
-      this.gridFinish.Size = new System.Drawing.Size(914, 300);
+      this.gridFinish.Size = new System.Drawing.Size(847, 239);
       this.gridFinish.TabIndex = 0;
       this.gridFinish.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewFinish});
@@ -162,7 +163,7 @@ namespace Impressio.Controls
       this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
       this.groupBox1.Location = new System.Drawing.Point(0, 0);
       this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(914, 134);
+      this.groupBox1.Size = new System.Drawing.Size(847, 134);
       this.groupBox1.TabIndex = 1;
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Weiterverarbeitung";
@@ -204,7 +205,7 @@ namespace Impressio.Controls
       this.Controls.Add(this.gridFinish);
       this.Controls.Add(this.groupBox1);
       this.Name = "FinishControl";
-      this.Size = new System.Drawing.Size(914, 434);
+      this.Size = new System.Drawing.Size(847, 373);
       this.Load += new System.EventHandler(this.FinishControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.FinishControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

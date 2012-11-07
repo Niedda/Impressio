@@ -36,8 +36,8 @@
       this.navOpenPosition = new DevExpress.XtraNavBar.NavBarItem();
       this.navOpenDescription = new DevExpress.XtraNavBar.NavBarItem();
       this.navOpenDelivery = new DevExpress.XtraNavBar.NavBarItem();
-      this.navRefreshPosition = new DevExpress.XtraNavBar.NavBarItem();
       this.navDeletePosition = new DevExpress.XtraNavBar.NavBarItem();
+      this.navRefreshPosition = new DevExpress.XtraNavBar.NavBarItem();
       this.navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
       this.navPrintOffer = new DevExpress.XtraNavBar.NavBarItem();
       this.navPrintOrder = new DevExpress.XtraNavBar.NavBarItem();
@@ -137,13 +137,6 @@
       this.navOpenDelivery.SmallImage = global::Impressio.Properties.Resources.delivery;
       this.navOpenDelivery.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavOpenDeliveryLinkClicked);
       // 
-      // navRefreshPosition
-      // 
-      this.navRefreshPosition.Caption = "Aktualisieren";
-      this.navRefreshPosition.Name = "navRefreshPosition";
-      this.navRefreshPosition.SmallImage = global::Impressio.Properties.Resources.refresh;
-      this.navRefreshPosition.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavRefreshPositionLinkClicked);
-      // 
       // navDeletePosition
       // 
       this.navDeletePosition.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -152,6 +145,13 @@
       this.navDeletePosition.Name = "navDeletePosition";
       this.navDeletePosition.SmallImage = global::Impressio.Properties.Resources.delete;
       this.navDeletePosition.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavDeletePositionLinkClicked);
+      // 
+      // navRefreshPosition
+      // 
+      this.navRefreshPosition.Caption = "Aktualisieren";
+      this.navRefreshPosition.Name = "navRefreshPosition";
+      this.navRefreshPosition.SmallImage = global::Impressio.Properties.Resources.refresh;
+      this.navRefreshPosition.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavRefreshPositionLinkClicked);
       // 
       // navBarGroup2
       // 

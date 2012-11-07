@@ -1,18 +1,84 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using DevExpress.XtraBars;
+using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraGrid.Views.Base;
 using Impressio.Models;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class DataControl : ControlBase, IControl, IGridControl<DataPosition>
+  public partial class DataControl : ControlBase, IControl, IGridControl<DataPosition>, IRibbon
   {
     public DataControl()
     {
       InitializeComponent();
     }
+
+    #region Ribbon
+
+    public string RibbonGroupName { get { return "Datenaufbereitung"; } }
+
+    public List<BarButtonItem> Buttons
+    {
+      get
+      {
+        return _buttons ?? (_buttons = LoadButtons());
+      }
+    }
+
+    public RibbonPageGroup GetRibbon()
+    {
+      var pageGroup = new RibbonPageGroup
+      {
+        Text = "Datenaufbereitung",
+        Name = "dataPageGroup"
+      };
+      pageGroup.ItemLinks.AddRange(Buttons.ToArray());
+
+      return pageGroup;
+    }
+
+    private List<BarButtonItem> _buttons;
+
+    private List<BarButtonItem> LoadButtons()
+    {
+      var deleteButton = new BarButtonItem
+                           {
+                             Caption = "Löschen",
+                             Id = 1,
+                             LargeGlyph = Properties.Resources.delete,
+                             LargeWidth = 80,
+                             Name = "dataDeletePosition",
+                           };
+      deleteButton.ItemClick += DeleteRow;
+
+      var refreshButton = new BarButtonItem
+                            {
+                              Caption = "Aktualisieren",
+                              Id = 2,
+                              LargeGlyph = Properties.Resources.refresh,
+                              LargeWidth = 80,
+                              Name = "dataRefresh"
+                            };
+      refreshButton.ItemClick += ReloadControl;
+
+      return new List<BarButtonItem> {deleteButton, refreshButton};
+    }
+
+    public void ReloadControl(object sender, ItemClickEventArgs e)
+    {
+      ReloadControl();
+    }
+
+    public void DeleteRow(object sender, ItemClickEventArgs e)
+    {
+      DeleteRow();
+    }
+
+    #endregion
 
     public void ReloadControl()
     {

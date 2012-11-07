@@ -32,6 +32,7 @@ namespace Impressio.Controls
       if (!FocusedRow.HasOrders())
       {
         FocusedRow.DeleteObject();
+        viewCompany.DeleteSelectedRows();
       }
       else
       {

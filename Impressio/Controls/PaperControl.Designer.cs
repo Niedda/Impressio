@@ -30,8 +30,9 @@ namespace Impressio.Controls
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.gridPaper = new DevExpress.XtraGrid.GridControl();
-      this.paperBindingSource = new System.Windows.Forms.BindingSource();
+      this.paperBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewPaper = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -70,7 +71,7 @@ namespace Impressio.Controls
       this.gridPaper.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.directionComobBox,
             this.directionLookUp});
-      this.gridPaper.Size = new System.Drawing.Size(705, 349);
+      this.gridPaper.Size = new System.Drawing.Size(898, 373);
       this.gridPaper.TabIndex = 0;
       this.gridPaper.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewPaper});
@@ -290,7 +291,7 @@ namespace Impressio.Controls
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridPaper);
       this.Name = "PaperControl";
-      this.Size = new System.Drawing.Size(705, 349);
+      this.Size = new System.Drawing.Size(898, 373);
       this.Load += new System.EventHandler(this.PaperControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.PaperControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

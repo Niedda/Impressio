@@ -11,7 +11,7 @@ namespace Impressio.Models
 
     public enum Columns
     {
-      Name,
+      Gender,
     }
 
     #endregion
@@ -29,14 +29,14 @@ namespace Impressio.Models
     public override void SetObject()
     {
       Identity = Database.Reader[IdentityColumn].GetInt();
-      Name = Database.Reader[Columns.Name.ToString()] as string;
+      Name = Database.Reader[Columns.Gender.ToString()] as string;
     }
     
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>
                {
-                 {Columns.Name, Name},
+                 {Columns.Gender, Name},
                };
     }
 

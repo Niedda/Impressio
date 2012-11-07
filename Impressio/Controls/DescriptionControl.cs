@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using DevExpress.XtraBars;
+using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
@@ -9,12 +12,90 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class DescriptionControl : ControlBase, IControl, IGridControl<Description>
+  public partial class DescriptionControl : ControlBase, IControl, IGridControl<Description>, IRibbon
   {
     public DescriptionControl()
     {
       InitializeComponent();
     }
+    
+    #region Ribbon
+
+    public string RibbonGroupName { get { return "Beschreibungen"; } }
+
+    public List<BarButtonItem> Buttons
+    {
+      get
+      {
+        return _buttons ?? (_buttons = LoadButtons());
+      }
+    }
+
+    public RibbonPageGroup GetRibbon()
+    {
+      var pageGroup = new RibbonPageGroup
+      {
+        Text = "Beschreibungen",
+        Name = "descriptionPageGroup"
+      };
+      pageGroup.ItemLinks.AddRange(Buttons.ToArray());
+
+      return pageGroup;
+    }
+
+    private List<BarButtonItem> _buttons;
+
+    private List<BarButtonItem> LoadButtons()
+    {
+      var deleteButton = new BarButtonItem
+      {
+        Caption = "Beschreibung Löschen",
+        Id = 1,
+        LargeGlyph = Properties.Resources.delete,
+        LargeWidth = 80,
+        Name = "descriptionDelete",
+      };
+      deleteButton.ItemClick += DeleteRow;
+
+      var deleteDetailButton = new BarButtonItem
+      {
+        Caption = "Detail Löschen",
+        Id = 2,
+        LargeGlyph = Properties.Resources.delete,
+        LargeWidth = 80,
+        Name = "detailDelete",
+      };
+      deleteDetailButton.ItemClick += DeleteDetailRow;
+      
+      var refreshButton = new BarButtonItem
+      {
+        Caption = "Aktualisieren",
+        Id = 3,
+        LargeGlyph = Properties.Resources.refresh,
+        LargeWidth = 80,
+        Name = "descriptionRefresh"
+      };
+      refreshButton.ItemClick += ReloadControl;
+
+      return new List<BarButtonItem> { deleteButton, deleteDetailButton, refreshButton};
+    }
+    
+    public void DeleteDetailRow(object sender, ItemClickEventArgs e)
+    {
+      DeleteDetailRow();
+    }
+
+    public void DeleteRow(object sender, ItemClickEventArgs e)
+    {
+      DeleteRow();
+    }
+
+    public void ReloadControl(object sender, ItemClickEventArgs e)
+    {
+      ReloadControl();
+    }
+
+    #endregion
 
     public void ReloadControl()
     {

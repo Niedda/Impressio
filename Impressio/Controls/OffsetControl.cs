@@ -1,17 +1,68 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using DevExpress.XtraBars;
+using DevExpress.XtraBars.Ribbon;
 using Impressio.Models;
 using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class OffsetControl : ControlBase, IControl
+  public partial class OffsetControl : ControlBase, IControl, IRibbon
   {
     public OffsetControl()
     {
       InitializeComponent();
     }
+
+    #region Ribbon
+
+    public string RibbonGroupName { get { return "Offsetdruck"; } }
+
+    public List<BarButtonItem> Buttons
+    {
+      get
+      {
+        return _buttons ?? (_buttons = LoadButtons());
+      }
+    }
+
+    public RibbonPageGroup GetRibbon()
+    {
+      var pageGroup = new RibbonPageGroup
+      {
+        Text = "Offsetdruck",
+        Name = "offsetPageGroup"
+      };
+      pageGroup.ItemLinks.AddRange(Buttons.ToArray());
+
+      return pageGroup;
+    }
+
+    private List<BarButtonItem> _buttons;
+
+    private List<BarButtonItem> LoadButtons()
+    {
+      var refreshButton = new BarButtonItem
+      {
+        Caption = "Aktualisieren",
+        Id = 2,
+        LargeGlyph = Properties.Resources.refresh,
+        LargeWidth = 80,
+        Name = "offsetRefresh"
+      };
+      refreshButton.ItemClick += ReloadControl;
+
+      return new List<BarButtonItem> { refreshButton };
+    }
+    
+    public void ReloadControl(object sender, ItemClickEventArgs e)
+    {
+      ReloadControl();
+    }
+
+    #endregion
 
     public void ReloadControl()
     {
@@ -70,6 +121,7 @@ namespace Impressio.Controls
         priceTotal.Value = Offset.PaperCostTotal + Offset.PrintTotal;
       }
     }
+
     private readonly Machine _machine = new Machine();
 
     private readonly Paper _paper = new Paper();

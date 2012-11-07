@@ -16,8 +16,7 @@ namespace Impressio
     {
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      MainView = new MainView();
-      Application.Run(MainView);
+      Application.Run(new MainViewRibbon());
     }
   }
 }

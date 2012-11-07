@@ -51,7 +51,7 @@
       this.gridMachine.Location = new System.Drawing.Point(0, 0);
       this.gridMachine.MainView = this.viewMachine;
       this.gridMachine.Name = "gridMachine";
-      this.gridMachine.Size = new System.Drawing.Size(914, 434);
+      this.gridMachine.Size = new System.Drawing.Size(821, 339);
       this.gridMachine.TabIndex = 0;
       this.gridMachine.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewMachine});
@@ -148,7 +148,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridMachine);
       this.Name = "MachineControl";
-      this.Size = new System.Drawing.Size(914, 434);
+      this.Size = new System.Drawing.Size(821, 339);
       this.Load += new System.EventHandler(this.MachineControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.MachineControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

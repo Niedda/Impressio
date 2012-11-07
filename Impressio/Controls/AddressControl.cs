@@ -14,7 +14,7 @@ namespace Impressio.Controls
     {
       InitializeComponent();
     }
-
+    
     public void ReloadControl()
     {
       _address.ClearObjectList();
