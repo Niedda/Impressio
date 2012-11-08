@@ -117,7 +117,7 @@ namespace Impressio.Models
     {
       get
       {
-        return (Company)new Company { Identity = FkOrderClient }.LoadSingleObject();
+        return (Company)new Company { Identity = FkOrderCompany }.LoadSingleObject();
       }
     }
 
@@ -196,7 +196,7 @@ namespace Impressio.Models
       FkOrderClient = Database.Reader[Columns.FkOrderClient.ToString()].GetInt();
       IsPredefined = (bool)Database.Reader[Columns.IsPredefined.ToString()];
     }
-    
+
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>
@@ -230,32 +230,51 @@ namespace Impressio.Models
 
     public void LoadOrderReport()
     {
+      _data = null;
+      _finish = null;
+      _offsets = null;
+      _print = null;
+
       if (Identity != 0)
       {
         var report = new OrderReport
                        {
                          orderBindingSource = { DataSource = this }
                        };
-        report.ShowPreview();
+
+        if (File.Exists(Settings.Default.logoImage))
+        {
+          report.logoBox.ImageUrl = Settings.Default.logoImage;
+        }
+
+        report.ShowRibbonPreview();
       }
     }
 
     public void LoadOrderOffer()
     {
+      _description = null;
+
       if (Identity != 0)
       {
         var report = new OfferReport
                        {
                          orderBindingSourcew = { DataSource = this }
                        };
-        report.ShowPreview();
+
+        if(File.Exists(Settings.Default.logoImage))
+        {
+          report.logoBox.ImageUrl = Settings.Default.logoImage;
+        }
+
+        report.ShowRibbonPreview();
       }
     }
 
     private string _dateCreated;
 
     private string _userCreated;
-    
+
     private List<Address> _address;
 
     private List<Client> _client;
@@ -304,7 +323,7 @@ namespace Impressio.Models
       Identity = Database.Reader[IdentityColumn].GetInt();
       StateName = Database.Reader[Columns.StateName.ToString()] as string;
     }
-    
+
     public override void ClearObjectList()
     {
       _states.Clear();

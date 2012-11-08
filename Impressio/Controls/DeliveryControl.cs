@@ -71,22 +71,18 @@ namespace Impressio.Controls
       {
         Caption = "Drucken",
         Id = 3,
-        LargeGlyph = Properties.Resources.printer2,
+        LargeGlyph = Properties.Resources.printglyph,
         LargeWidth = 80,
         Name = "printDelivery"
       };
-      refreshButton.ItemClick += PrintDelivery;
+      printDelivery.ItemClick += PrintDelivery;
 
       return new List<BarButtonItem> { refreshButton, deleteDelivery, printDelivery };
     }
 
     public void PrintDelivery(object sender, ItemClickEventArgs e)
     {
-      var report = new DeliveryReport
-      {
-        deliveryBindingSource = { DataSource = Delivery, },
-      };
-      report.ShowPreview();
+      Delivery.LoadDeliveryReport();
     }
 
     public void ReloadControl(object sender, ItemClickEventArgs e)
@@ -190,7 +186,7 @@ namespace Impressio.Controls
 
     private void DeliveryControlValidating(object sender, CancelEventArgs e)
     {
-      e.Cancel = ValidateControl();
+      e.Cancel = !ValidateControl();
     }
 
     private void ClientLookUpEditValueChanged(object sender, EventArgs e)

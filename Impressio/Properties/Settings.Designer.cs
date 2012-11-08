@@ -82,5 +82,17 @@ namespace Impressio.Properties {
                 this["lookAndFeel"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string logoImage {
+            get {
+                return ((string)(this["logoImage"]));
+            }
+            set {
+                this["logoImage"] = value;
+            }
+        }
     }
 }

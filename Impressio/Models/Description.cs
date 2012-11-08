@@ -45,7 +45,11 @@ namespace Impressio.Models
     {
       get
       {
-        return Identity != 0 ? _detail.LoadObjectList(Detail.Columns.FkDetailDescription, Identity) : new List<Detail>();
+        if(_details == null || _details.Count == 0 || _details[0].FkDetailDescription != Identity)
+        {
+          return _details = (new Detail().LoadObjectList(Detail.Columns.FkDetailDescription, Identity));
+        }
+        return _details;
       }
     }
 
@@ -93,7 +97,7 @@ namespace Impressio.Models
     
     private readonly List<Description> _descriptions = new List<Description>();
 
-    private readonly Detail _detail = new Detail();
+    private List<Detail> _details;
 
     private readonly List<Description> _predefinedDescriptions = new List<Description>();
   }

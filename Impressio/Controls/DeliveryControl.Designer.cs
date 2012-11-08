@@ -30,17 +30,18 @@ namespace Impressio.Controls
         /// </summary>
         private void InitializeComponent()
         {
+      this.components = new System.ComponentModel.Container();
       this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
       this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
       this.deliveryDate = new DevExpress.XtraEditors.DateEdit();
       this.addressLookUp = new DevExpress.XtraEditors.LookUpEdit();
-      this.addressBindingSource = new System.Windows.Forms.BindingSource();
+      this.addressBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.clientLookUp = new DevExpress.XtraEditors.LookUpEdit();
-      this.clientBindingSource = new System.Windows.Forms.BindingSource();
+      this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.gridDeliveryPosition = new DevExpress.XtraGrid.GridControl();
-      this.deliveryPositionBindingSource = new System.Windows.Forms.BindingSource();
+      this.deliveryPositionBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewDeliveryPosition = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -74,7 +75,7 @@ namespace Impressio.Controls
       this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
       this.groupControl1.Location = new System.Drawing.Point(0, 0);
       this.groupControl1.Name = "groupControl1";
-      this.groupControl1.Size = new System.Drawing.Size(914, 156);
+      this.groupControl1.Size = new System.Drawing.Size(861, 156);
       this.groupControl1.TabIndex = 0;
       this.groupControl1.Text = "Details Lieferschein";
       // 
@@ -125,15 +126,16 @@ namespace Impressio.Controls
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Identity", "Identity", 61, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Table", "Table", 36, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FkAddressCompany", "Fk Address Company", 111, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Street", "Street", 40, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StreetNumber", "Street Number", 80, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("City", "City", 29, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ZipCode", "Zip Code", 52, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Addition", "Addition", 49, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Street", "Strasse", 40, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StreetNumber", "Strassen Nr.", 80, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("City", "Stadt", 29, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ZipCode", "Plz", 52, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Addition", "Zusatz", 49, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FullAddress", "Full Address", 68, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near)});
       this.addressLookUp.Properties.DataSource = this.addressBindingSource;
       this.addressLookUp.Properties.DisplayMember = "FullAddress";
       this.addressLookUp.Properties.NullText = "";
+      this.addressLookUp.Properties.PopupWidth = 400;
       this.addressLookUp.Properties.ValueMember = "Identity";
       this.addressLookUp.Size = new System.Drawing.Size(217, 20);
       this.addressLookUp.TabIndex = 1;
@@ -154,8 +156,8 @@ namespace Impressio.Controls
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Table", "Table", 36, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FkClientCompany", "Fk Client Company", 99, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FkClientGender", "Fk Client Gender", 89, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FirstName", "First Name", 61, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("LastName", "Last Name", 60, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FirstName", "Vorname", 61, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("LastName", "Nachname", 60, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Phone", "Phone", 40, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Mobile", "Mobile", 40, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Mail", "Mail", 28, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near),
@@ -164,6 +166,7 @@ namespace Impressio.Controls
       this.clientLookUp.Properties.DataSource = this.clientBindingSource;
       this.clientLookUp.Properties.DisplayMember = "FullName";
       this.clientLookUp.Properties.NullText = "";
+      this.clientLookUp.Properties.PopupWidth = 400;
       this.clientLookUp.Properties.ValueMember = "Identity";
       this.clientLookUp.Size = new System.Drawing.Size(217, 20);
       this.clientLookUp.TabIndex = 0;
@@ -182,7 +185,7 @@ namespace Impressio.Controls
       this.gridDeliveryPosition.Name = "gridDeliveryPosition";
       this.gridDeliveryPosition.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.positionComboEdit});
-      this.gridDeliveryPosition.Size = new System.Drawing.Size(914, 150);
+      this.gridDeliveryPosition.Size = new System.Drawing.Size(861, 224);
       this.gridDeliveryPosition.TabIndex = 1;
       this.gridDeliveryPosition.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewDeliveryPosition});
@@ -254,6 +257,8 @@ namespace Impressio.Controls
       // colQuantity
       // 
       this.colQuantity.Caption = "Menge";
+      this.colQuantity.DisplayFormat.FormatString = "N00";
+      this.colQuantity.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.colQuantity.FieldName = "Quantity";
       this.colQuantity.Name = "colQuantity";
       this.colQuantity.Visible = true;
@@ -266,7 +271,7 @@ namespace Impressio.Controls
       this.Controls.Add(this.gridDeliveryPosition);
       this.Controls.Add(this.groupControl1);
       this.Name = "DeliveryControl";
-      this.Size = new System.Drawing.Size(914, 306);
+      this.Size = new System.Drawing.Size(861, 380);
       this.Load += new System.EventHandler(this.DeliveryControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.DeliveryControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

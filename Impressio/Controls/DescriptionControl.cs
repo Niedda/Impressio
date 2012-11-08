@@ -248,6 +248,7 @@ namespace Impressio.Controls
         (view.GetRow(index - 1) as Description).SaveObject();
 
         view.FocusedRowHandle = index - 1;
+        view.RefreshData();
       }
     }
 
@@ -268,6 +269,7 @@ namespace Impressio.Controls
         (view.GetRow(index + 1) as Description).SaveObject();
 
         view.FocusedRowHandle = index + 1;
+        view.RefreshData();
       }
     }
 
@@ -338,6 +340,7 @@ namespace Impressio.Controls
         (view.GetRow(index - 1) as Detail).SaveObject();
 
         view.FocusedRowHandle = index - 1;
+        view.RefreshData();
       }
     }
 
@@ -358,6 +361,7 @@ namespace Impressio.Controls
         (view.GetRow(index + 1) as Detail).SaveObject();
 
         view.FocusedRowHandle = index + 1;
+        view.RefreshData();
       }
     }
 

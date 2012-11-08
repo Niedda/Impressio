@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Impressio.Models.Tools;
+using Impressio.Properties;
+using Impressio.Reports;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Models
@@ -144,6 +147,20 @@ namespace Impressio.Models
     public override void ClearObjectList()
     {
       _deliveries.Clear();
+    }
+
+    public void LoadDeliveryReport()
+    {
+      _deliveryPosition = null;
+
+      var report = new DeliveryReport {deliveryBindingSource = {DataSource = this}};
+
+      if(File.Exists(Settings.Default.logoImage))
+      {
+        report.logoBox.ImageUrl = Settings.Default.logoImage;
+      }
+
+      report.ShowRibbonPreview();
     }
 
     private Company _company;

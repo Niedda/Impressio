@@ -26,6 +26,7 @@ namespace Impressio.Controls
       user.Text = Settings.Default.User;
       pathData.Text = Settings.Default.folderPath;
       lookAndFeel.Text = Settings.Default.lookAndFeel;
+      logoEdit.Text = Settings.Default.logoImage;
     }
 
     public bool ValidateControl()
@@ -110,6 +111,18 @@ namespace Impressio.Controls
       Settings.Default.lookAndFeel = lookAndFeel.Text;
       Settings.Default.Save();
       DevExpress.LookAndFeel.UserLookAndFeel.Default.SkinName = Settings.Default.lookAndFeel;
+    }
+
+    private void LogoEditEnter(object sender, EventArgs e)
+    {
+      var result = openFileDialog.ShowDialog();
+
+      if (result == DialogResult.OK)
+      {
+        Settings.Default.logoImage = openFileDialog.FileName;
+        logoEdit.Text = openFileDialog.FileName;
+        Settings.Default.Save();
+      }
     }
   }
 }

@@ -137,54 +137,54 @@ namespace Impressio.Controls
 
     public void OpenPosition()
     {
-      if (FocusedRow != null)
-      {
-        var view = new EmptyView();
+      //if (FocusedRow != null)
+      //{
+      //  var view = new EmptyView();
 
-        switch (FocusedRow.Type)
-        {
-          case Type.Datenaufbereitung:
-            view.mainPanel.Controls.Add(new DataControl
-                                          {
-                                            Data = new Data
-                                                     {
-                                                       Identity = FocusedRow.Identity,
-                                                     }
-                                          });
-            view.Show();
-            break;
-          case Type.Digitaldruck:
-            view.mainPanel.Controls.Add(new PrintControl
-                                          {
-                                            Print = new Print
-                                                      {
-                                                        Identity = FocusedRow.Identity,
-                                                      }
-                                          });
-            view.Show();
-            break;
-          case Type.Weiterverarbeitung:
-            view.mainPanel.Controls.Add(new FinishControl
-                                          {
-                                            Finish = new Finish
-                                                       {
-                                                         Identity = FocusedRow.Identity,
-                                                       }
-                                          });
-            view.Show();
-            break;
-          case Type.Offsetdruck:
-            view.mainPanel.Controls.Add(new OffsetControl
-                                          {
-                                            Offset = new Offset
-                                                       {
-                                                         Identity = FocusedRow.Identity,
-                                                       },
-                                          });
-            view.Show();
-            break;
-        }
-      }
+      //  switch (FocusedRow.Type)
+      //  {
+      //    case Type.Datenaufbereitung:
+      //      view.mainPanel.Controls.Add(new DataControl
+      //                                    {
+      //                                      Data = new Data
+      //                                               {
+      //                                                 Identity = FocusedRow.Identity,
+      //                                               }
+      //                                    });
+      //      view.Show();
+      //      break;
+      //    case Type.Digitaldruck:
+      //      view.mainPanel.Controls.Add(new PrintControl
+      //                                    {
+      //                                      Print = new Print
+      //                                                {
+      //                                                  Identity = FocusedRow.Identity,
+      //                                                }
+      //                                    });
+      //      view.Show();
+      //      break;
+      //    case Type.Weiterverarbeitung:
+      //      view.mainPanel.Controls.Add(new FinishControl
+      //                                    {
+      //                                      Finish = new Finish
+      //                                                 {
+      //                                                   Identity = FocusedRow.Identity,
+      //                                                 }
+      //                                    });
+      //      view.Show();
+      //      break;
+      //    case Type.Offsetdruck:
+      //      view.mainPanel.Controls.Add(new OffsetControl
+      //                                    {
+      //                                      Offset = new Offset
+      //                                                 {
+      //                                                   Identity = FocusedRow.Identity,
+      //                                                 },
+      //                                    });
+      //      view.Show();
+      //      break;
+      //  }
+      //}
     }
 
     public Position FocusedRow

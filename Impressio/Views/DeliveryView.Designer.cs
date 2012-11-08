@@ -91,21 +91,21 @@
       // 
       this.navOverview.Caption = "Übersicht";
       this.navOverview.Name = "navOverview";
-      this.navOverview.SmallImage = global::Impressio.Properties.Resources.book;
+      this.navOverview.SmallImage = global::Impressio.Properties.Resources.open;
       this.navOverview.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavOverviewLinkClicked);
       // 
       // navOpen
       // 
       this.navOpen.Caption = "Öffnen";
       this.navOpen.Name = "navOpen";
-      this.navOpen.SmallImage = global::Impressio.Properties.Resources.map;
+      this.navOpen.SmallImage = global::Impressio.Properties.Resources.open;
       this.navOpen.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavOpenLinkClicked);
       // 
       // navPrint
       // 
       this.navPrint.Caption = "Drucken";
       this.navPrint.Name = "navPrint";
-      this.navPrint.SmallImage = global::Impressio.Properties.Resources.printer;
+      this.navPrint.SmallImage = global::Impressio.Properties.Resources.printglyph;
       this.navPrint.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavPrintLinkClicked);
       // 
       // navDelete

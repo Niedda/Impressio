@@ -71,7 +71,7 @@
             this.ribbonPageOrder});
       this.ribbon.SelectedPage = this.ribbonPageOrder;
       this.ribbon.ShowToolbarCustomizeItem = false;
-      this.ribbon.Size = new System.Drawing.Size(642, 149);
+      this.ribbon.Size = new System.Drawing.Size(642, 145);
       this.ribbon.StatusBar = this.ribbonStatusBar;
       this.ribbon.Toolbar.ShowCustomizeItem = false;
       this.ribbon.SelectedPageChanged += new System.EventHandler(this.RibbonSelectedPageChanged);
@@ -118,12 +118,13 @@
       this.refresh.Id = 5;
       this.refresh.LargeGlyph = global::Impressio.Properties.Resources.refresh;
       this.refresh.Name = "refresh";
+      this.refresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RefreshItemClick);
       // 
       // printOrder
       // 
       this.printOrder.Caption = "Lauftasche";
       this.printOrder.Id = 6;
-      this.printOrder.LargeGlyph = global::Impressio.Properties.Resources.printer2;
+      this.printOrder.LargeGlyph = global::Impressio.Properties.Resources.printglyph;
       this.printOrder.LargeWidth = 80;
       this.printOrder.Name = "printOrder";
       this.printOrder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.PrintOrderItemClick);
@@ -132,7 +133,7 @@
       // 
       this.printOffer.Caption = "Offerte";
       this.printOffer.Id = 7;
-      this.printOffer.LargeGlyph = global::Impressio.Properties.Resources.printer2;
+      this.printOffer.LargeGlyph = global::Impressio.Properties.Resources.printglyph;
       this.printOffer.LargeWidth = 80;
       this.printOffer.Name = "printOffer";
       this.printOffer.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.PrintOfferItemClick);
@@ -170,17 +171,17 @@
       // 
       // ribbonStatusBar
       // 
-      this.ribbonStatusBar.Location = new System.Drawing.Point(0, 426);
+      this.ribbonStatusBar.Location = new System.Drawing.Point(0, 418);
       this.ribbonStatusBar.Name = "ribbonStatusBar";
       this.ribbonStatusBar.Ribbon = this.ribbon;
-      this.ribbonStatusBar.Size = new System.Drawing.Size(642, 23);
+      this.ribbonStatusBar.Size = new System.Drawing.Size(642, 31);
       // 
       // mainPanel
       // 
       this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.mainPanel.Location = new System.Drawing.Point(0, 149);
+      this.mainPanel.Location = new System.Drawing.Point(0, 145);
       this.mainPanel.Name = "mainPanel";
-      this.mainPanel.Size = new System.Drawing.Size(642, 277);
+      this.mainPanel.Size = new System.Drawing.Size(642, 273);
       this.mainPanel.TabIndex = 2;
       // 
       // OrderRibbonView

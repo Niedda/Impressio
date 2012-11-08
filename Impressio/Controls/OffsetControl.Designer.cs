@@ -30,6 +30,7 @@ namespace Impressio.Controls
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
       DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
       DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -47,7 +48,7 @@ namespace Impressio.Controls
       this.paperPricePer = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
       this.paperSearchLookUp = new DevExpress.XtraEditors.SearchLookUpEdit();
-      this.paperBindingSource = new System.Windows.Forms.BindingSource();
+      this.paperBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewPaper = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -81,7 +82,7 @@ namespace Impressio.Controls
       this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
       this.offsetMachineSearchLookUp = new DevExpress.XtraEditors.SearchLookUpEdit();
-      this.machineBindingSource = new System.Windows.Forms.BindingSource();
+      this.machineBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewMachine = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity1 = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -134,7 +135,7 @@ namespace Impressio.Controls
       this.groupControl1.Controls.Add(this.paperSearchLookUp);
       this.groupControl1.Location = new System.Drawing.Point(2, 3);
       this.groupControl1.Name = "groupControl1";
-      this.groupControl1.Size = new System.Drawing.Size(2327, 199);
+      this.groupControl1.Size = new System.Drawing.Size(2388, 199);
       this.groupControl1.TabIndex = 0;
       this.groupControl1.Text = "Papier";
       // 
@@ -156,6 +157,16 @@ namespace Impressio.Controls
       this.paperCostTotal.Enabled = false;
       this.paperCostTotal.Location = new System.Drawing.Point(625, 145);
       this.paperCostTotal.Name = "paperCostTotal";
+      this.paperCostTotal.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White;
+      this.paperCostTotal.Properties.AppearanceDisabled.BackColor2 = System.Drawing.Color.White;
+      this.paperCostTotal.Properties.AppearanceDisabled.BorderColor = System.Drawing.Color.White;
+      this.paperCostTotal.Properties.AppearanceDisabled.Options.UseBackColor = true;
+      this.paperCostTotal.Properties.AppearanceDisabled.Options.UseBorderColor = true;
+      this.paperCostTotal.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White;
+      this.paperCostTotal.Properties.AppearanceReadOnly.BackColor2 = System.Drawing.Color.White;
+      this.paperCostTotal.Properties.AppearanceReadOnly.BorderColor = System.Drawing.Color.White;
+      this.paperCostTotal.Properties.AppearanceReadOnly.Options.UseBackColor = true;
+      this.paperCostTotal.Properties.AppearanceReadOnly.Options.UseBorderColor = true;
       this.paperCostTotal.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
       this.paperCostTotal.Properties.DisplayFormat.FormatString = "c";
@@ -482,7 +493,7 @@ namespace Impressio.Controls
       this.groupControl2.Controls.Add(this.offsetPrintType);
       this.groupControl2.Location = new System.Drawing.Point(2, 208);
       this.groupControl2.Name = "groupControl2";
-      this.groupControl2.Size = new System.Drawing.Size(2327, 250);
+      this.groupControl2.Size = new System.Drawing.Size(2388, 250);
       this.groupControl2.TabIndex = 1;
       this.groupControl2.Text = "Druck";
       // 
@@ -496,6 +507,16 @@ namespace Impressio.Controls
       this.priceTotal.Enabled = false;
       this.priceTotal.Location = new System.Drawing.Point(625, 199);
       this.priceTotal.Name = "priceTotal";
+      this.priceTotal.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White;
+      this.priceTotal.Properties.AppearanceDisabled.BackColor2 = System.Drawing.Color.White;
+      this.priceTotal.Properties.AppearanceDisabled.BorderColor = System.Drawing.Color.White;
+      this.priceTotal.Properties.AppearanceDisabled.Options.UseBackColor = true;
+      this.priceTotal.Properties.AppearanceDisabled.Options.UseBorderColor = true;
+      this.priceTotal.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White;
+      this.priceTotal.Properties.AppearanceReadOnly.BackColor2 = System.Drawing.Color.White;
+      this.priceTotal.Properties.AppearanceReadOnly.BorderColor = System.Drawing.Color.White;
+      this.priceTotal.Properties.AppearanceReadOnly.Options.UseBackColor = true;
+      this.priceTotal.Properties.AppearanceReadOnly.Options.UseBorderColor = true;
       this.priceTotal.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
       this.priceTotal.Properties.DisplayFormat.FormatString = "c";
@@ -530,6 +551,16 @@ namespace Impressio.Controls
       this.offsetPrintTotal.Enabled = false;
       this.offsetPrintTotal.Location = new System.Drawing.Point(625, 138);
       this.offsetPrintTotal.Name = "offsetPrintTotal";
+      this.offsetPrintTotal.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White;
+      this.offsetPrintTotal.Properties.AppearanceDisabled.BackColor2 = System.Drawing.Color.White;
+      this.offsetPrintTotal.Properties.AppearanceDisabled.BorderColor = System.Drawing.Color.White;
+      this.offsetPrintTotal.Properties.AppearanceDisabled.Options.UseBackColor = true;
+      this.offsetPrintTotal.Properties.AppearanceDisabled.Options.UseBorderColor = true;
+      this.offsetPrintTotal.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White;
+      this.offsetPrintTotal.Properties.AppearanceReadOnly.BackColor2 = System.Drawing.Color.White;
+      this.offsetPrintTotal.Properties.AppearanceReadOnly.BorderColor = System.Drawing.Color.White;
+      this.offsetPrintTotal.Properties.AppearanceReadOnly.Options.UseBackColor = true;
+      this.offsetPrintTotal.Properties.AppearanceReadOnly.Options.UseBorderColor = true;
       this.offsetPrintTotal.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
       this.offsetPrintTotal.Properties.DisplayFormat.FormatString = "c";
@@ -767,7 +798,7 @@ namespace Impressio.Controls
       this.Controls.Add(this.groupControl1);
       this.MinimumSize = new System.Drawing.Size(800, 500);
       this.Name = "OffsetControl";
-      this.Size = new System.Drawing.Size(800, 500);
+      this.Size = new System.Drawing.Size(861, 500);
       this.Load += new System.EventHandler(this.OffsetControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.OffsetControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

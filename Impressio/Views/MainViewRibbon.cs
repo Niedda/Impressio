@@ -329,5 +329,15 @@ namespace Impressio.Views
           break;
       }
     }
+
+    private void PrintOrderItemClick(object sender, ItemClickEventArgs e)
+    {
+      _ordersControl.FocusedRow.LoadOrderReport();
+    }
+
+    private void PrintOfferItemClick(object sender, ItemClickEventArgs e)
+    {
+      _ordersControl.FocusedRow.LoadOrderOffer();
+    }
   }
 }

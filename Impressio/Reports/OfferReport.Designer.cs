@@ -44,7 +44,6 @@ namespace Impressio.Reports
       this.xrLabel11 = new DevExpress.XtraReports.UI.XRLabel();
       this.GroupFooter1 = new DevExpress.XtraReports.UI.GroupFooterBand();
       this.xrLabel10 = new DevExpress.XtraReports.UI.XRLabel();
-      this.orderBindingSourcew = new System.Windows.Forms.BindingSource(this.components);
       this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
       this.xrLabel8 = new DevExpress.XtraReports.UI.XRLabel();
       this.xrLabel7 = new DevExpress.XtraReports.UI.XRLabel();
@@ -56,6 +55,8 @@ namespace Impressio.Reports
       this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
       this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
       this.xrLabel13 = new DevExpress.XtraReports.UI.XRLabel();
+      this.logoBox = new DevExpress.XtraReports.UI.XRPictureBox();
+      this.orderBindingSourcew = new System.Windows.Forms.BindingSource(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.orderBindingSourcew)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
       // 
@@ -107,16 +108,18 @@ namespace Impressio.Reports
       // 
       this.Detail1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrLabel9});
-      this.Detail1.HeightF = 57.29168F;
+      this.Detail1.HeightF = 44.79167F;
       this.Detail1.KeepTogether = true;
       this.Detail1.Name = "Detail1";
+      this.Detail1.SortFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
+            new DevExpress.XtraReports.UI.GroupField("Arrange", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
       // 
       // xrLabel9
       // 
       this.xrLabel9.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "Descriptions.JobTitle")});
       this.xrLabel9.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(0F, 24.29167F);
+      this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(0F, 10.00001F);
       this.xrLabel9.Name = "xrLabel9";
       this.xrLabel9.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
       this.xrLabel9.SizeF = new System.Drawing.SizeF(278.5714F, 23F);
@@ -138,9 +141,11 @@ namespace Impressio.Reports
       this.Detail2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrLabel12,
             this.xrLabel11});
-      this.Detail2.HeightF = 41.66667F;
+      this.Detail2.HeightF = 33.00001F;
       this.Detail2.KeepTogether = true;
       this.Detail2.Name = "Detail2";
+      this.Detail2.SortFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
+            new DevExpress.XtraReports.UI.GroupField("Arrange", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
       // 
       // xrLabel12
       // 
@@ -171,14 +176,14 @@ namespace Impressio.Reports
       // 
       this.GroupFooter1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrLabel10});
-      this.GroupFooter1.HeightF = 84.73837F;
+      this.GroupFooter1.HeightF = 58.69672F;
       this.GroupFooter1.KeepTogether = true;
       this.GroupFooter1.Name = "GroupFooter1";
       // 
       // xrLabel10
       // 
       this.xrLabel10.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.xrLabel10.LocationFloat = new DevExpress.Utils.PointFloat(456.25F, 21.02133F);
+      this.xrLabel10.LocationFloat = new DevExpress.Utils.PointFloat(456.25F, 10.00001F);
       this.xrLabel10.Name = "xrLabel10";
       this.xrLabel10.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
       this.xrLabel10.SizeF = new System.Drawing.SizeF(193.75F, 23F);
@@ -187,13 +192,10 @@ namespace Impressio.Reports
       this.xrLabel10.Text = "[Descriptions.Price!c]";
       this.xrLabel10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
       // 
-      // orderBindingSourcew
-      // 
-      this.orderBindingSourcew.DataSource = typeof(Impressio.Models.Order);
-      // 
       // ReportHeader
       // 
       this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.logoBox,
             this.xrLabel8,
             this.xrLabel7,
             this.xrLabel6,
@@ -213,7 +215,7 @@ namespace Impressio.Reports
       this.xrLabel8.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
       this.xrLabel8.SizeF = new System.Drawing.SizeF(640F, 23F);
       this.xrLabel8.StylePriority.UseFont = false;
-      this.xrLabel8.Text = "Ihre Offerte für den Auftrag [OrderName]";
+      this.xrLabel8.Text = "Ihre Offerte für den Auftrag [OrderName] - Nr. [Identity]";
       // 
       // xrLabel7
       // 
@@ -316,6 +318,7 @@ namespace Impressio.Reports
       // 
       this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrLabel13});
+      this.ReportFooter.KeepTogether = true;
       this.ReportFooter.Name = "ReportFooter";
       // 
       // xrLabel13
@@ -328,6 +331,17 @@ namespace Impressio.Reports
       this.xrLabel13.SizeF = new System.Drawing.SizeF(233.3333F, 67.79166F);
       this.xrLabel13.StylePriority.UseFont = false;
       this.xrLabel13.Text = "Mit freundlichen Grüssen\r\n\r\n\r\n[UserModified]";
+      // 
+      // logoBox
+      // 
+      this.logoBox.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+      this.logoBox.Name = "logoBox";
+      this.logoBox.SizeF = new System.Drawing.SizeF(250F, 100F);
+      this.logoBox.Sizing = DevExpress.XtraPrinting.ImageSizeMode.Squeeze;
+      // 
+      // orderBindingSourcew
+      // 
+      this.orderBindingSourcew.DataSource = typeof(Impressio.Models.Order);
       // 
       // OfferReport
       // 
@@ -372,5 +386,6 @@ namespace Impressio.Reports
     private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
     private DevExpress.XtraReports.UI.XRLabel xrLabel13;
     private DevExpress.XtraReports.UI.GroupFooterBand GroupFooter1;
+    public DevExpress.XtraReports.UI.XRPictureBox logoBox;
   }
 }

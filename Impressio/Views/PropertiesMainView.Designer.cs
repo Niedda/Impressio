@@ -87,28 +87,28 @@
       // 
       this.navMachine.Caption = "Druckmaschinen";
       this.navMachine.Name = "navMachine";
-      this.navMachine.SmallImage = global::Impressio.Properties.Resources.printer;
+      this.navMachine.SmallImage = global::Impressio.Properties.Resources.printglyph;
       this.navMachine.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavMachineLinkClicked);
       // 
       // navDescription
       // 
       this.navDescription.Caption = "Beschreibungen";
       this.navDescription.Name = "navDescription";
-      this.navDescription.SmallImage = global::Impressio.Properties.Resources.pen;
+      this.navDescription.SmallImage = global::Impressio.Properties.Resources.description;
       this.navDescription.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavDescriptionLinkClicked);
       // 
       // navClickCost
       // 
       this.navClickCost.Caption = "Klickkosten";
       this.navClickCost.Name = "navClickCost";
-      this.navClickCost.SmallImage = global::Impressio.Properties.Resources.print;
+      this.navClickCost.SmallImage = global::Impressio.Properties.Resources.printglyph;
       this.navClickCost.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavClickCostLinkClicked);
       // 
       // navPaper
       // 
       this.navPaper.Caption = "Papiermanagement";
       this.navPaper.Name = "navPaper";
-      this.navPaper.SmallImage = global::Impressio.Properties.Resources.paper;
+      this.navPaper.SmallImage = global::Impressio.Properties.Resources.paperplane;
       this.navPaper.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavPaperLinkClicked);
       // 
       // navGender
@@ -122,7 +122,7 @@
       // 
       this.navPosition.Caption = "Positionen";
       this.navPosition.Name = "navPosition";
-      this.navPosition.SmallImage = global::Impressio.Properties.Resources.book;
+      this.navPosition.SmallImage = global::Impressio.Properties.Resources.position;
       this.navPosition.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavPositionLinkClicked);
       // 
       // navProperties

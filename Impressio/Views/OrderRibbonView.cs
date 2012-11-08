@@ -206,5 +206,10 @@ namespace Impressio.Views
         _deliveryOverviewControl.BringToFront();
       }
     }
+
+    private void RefreshItemClick(object sender, ItemClickEventArgs e)
+    {
+      _positionControl.ReloadControl();
+    }
   }
 }

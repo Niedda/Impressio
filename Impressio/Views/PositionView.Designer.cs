@@ -116,7 +116,7 @@
       this.navOpenPosition.Appearance.Options.UseFont = true;
       this.navOpenPosition.Caption = "Position öffnen";
       this.navOpenPosition.Name = "navOpenPosition";
-      this.navOpenPosition.SmallImage = global::Impressio.Properties.Resources.map;
+      this.navOpenPosition.SmallImage = global::Impressio.Properties.Resources.open;
       this.navOpenPosition.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavOpenPositionLinkClicked);
       // 
       // navOpenDescription
@@ -125,7 +125,7 @@
       this.navOpenDescription.Appearance.Options.UseFont = true;
       this.navOpenDescription.Caption = "Beschreibung öffnen";
       this.navOpenDescription.Name = "navOpenDescription";
-      this.navOpenDescription.SmallImage = global::Impressio.Properties.Resources.pen;
+      this.navOpenDescription.SmallImage = global::Impressio.Properties.Resources.open;
       this.navOpenDescription.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavOpenDescriptionLinkClicked);
       // 
       // navOpenDelivery
@@ -174,14 +174,14 @@
       // 
       this.navPrintOffer.Caption = "Offerte drucken";
       this.navPrintOffer.Name = "navPrintOffer";
-      this.navPrintOffer.SmallImage = global::Impressio.Properties.Resources.printer;
+      this.navPrintOffer.SmallImage = global::Impressio.Properties.Resources.printglyph;
       this.navPrintOffer.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavPrintOfferLinkClicked);
       // 
       // navPrintOrder
       // 
       this.navPrintOrder.Caption = "Lauftasche drucken";
       this.navPrintOrder.Name = "navPrintOrder";
-      this.navPrintOrder.SmallImage = global::Impressio.Properties.Resources.printer;
+      this.navPrintOrder.SmallImage = global::Impressio.Properties.Resources.printglyph;
       this.navPrintOrder.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavPrintOrderLinkClicked);
       // 
       // PositionView

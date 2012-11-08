@@ -93,7 +93,7 @@ namespace Impressio.Controls
       this.gridPosition.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.predefinedCombo,
             this.typeCombo});
-      this.gridPosition.Size = new System.Drawing.Size(898, 144);
+      this.gridPosition.Size = new System.Drawing.Size(861, 109);
       this.gridPosition.TabIndex = 0;
       this.gridPosition.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewPosition});
@@ -144,6 +144,7 @@ namespace Impressio.Controls
       // 
       // predefinedCombo
       // 
+      this.predefinedCombo.AutoComplete = false;
       this.predefinedCombo.AutoHeight = false;
       this.predefinedCombo.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -213,7 +214,7 @@ namespace Impressio.Controls
       this.groupBox1.Font = new System.Drawing.Font("Tahoma", 8.25F);
       this.groupBox1.Location = new System.Drawing.Point(0, 0);
       this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(898, 229);
+      this.groupBox1.Size = new System.Drawing.Size(861, 229);
       this.groupBox1.TabIndex = 1;
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Auftragsdetails";
@@ -478,7 +479,7 @@ namespace Impressio.Controls
       this.Controls.Add(this.gridPosition);
       this.Controls.Add(this.groupBox1);
       this.Name = "PositionControl";
-      this.Size = new System.Drawing.Size(898, 373);
+      this.Size = new System.Drawing.Size(861, 338);
       this.Load += new System.EventHandler(this.PositionControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.PositionControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

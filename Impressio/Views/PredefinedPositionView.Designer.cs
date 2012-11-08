@@ -88,7 +88,7 @@
       // 
       this.navOpen.Caption = "Position öffnen";
       this.navOpen.Name = "navOpen";
-      this.navOpen.SmallImage = global::Impressio.Properties.Resources.map;
+      this.navOpen.SmallImage = global::Impressio.Properties.Resources.open;
       this.navOpen.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavOpenLinkClicked);
       // 
       // navDelete

@@ -30,15 +30,16 @@ namespace Impressio.Controls
         /// </summary>
         private void InitializeComponent()
         {
+      this.components = new System.ComponentModel.Container();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.amountPrint = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
       this.lookUpClickCost = new DevExpress.XtraEditors.LookUpEdit();
-      this.clickCostBindingSource = new System.Windows.Forms.BindingSource();
+      this.clickCostBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
       this.lookUpPaper = new DevExpress.XtraEditors.SearchLookUpEdit();
-      this.paperBindingSource = new System.Windows.Forms.BindingSource();
+      this.paperBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.paperView = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -97,7 +98,7 @@ namespace Impressio.Controls
       // 
       // labelControl2
       // 
-      this.labelControl2.Location = new System.Drawing.Point(17, 33);
+      this.labelControl2.Location = new System.Drawing.Point(19, 55);
       this.labelControl2.Name = "labelControl2";
       this.labelControl2.Size = new System.Drawing.Size(43, 13);
       this.labelControl2.TabIndex = 2;
@@ -126,7 +127,7 @@ namespace Impressio.Controls
       // 
       // labelControl3
       // 
-      this.labelControl3.Location = new System.Drawing.Point(17, 80);
+      this.labelControl3.Location = new System.Drawing.Point(19, 102);
       this.labelControl3.Name = "labelControl3";
       this.labelControl3.Size = new System.Drawing.Size(37, 13);
       this.labelControl3.TabIndex = 4;
@@ -134,7 +135,7 @@ namespace Impressio.Controls
       // 
       // labelControl5
       // 
-      this.labelControl5.Location = new System.Drawing.Point(272, 80);
+      this.labelControl5.Location = new System.Drawing.Point(274, 102);
       this.labelControl5.Name = "labelControl5";
       this.labelControl5.Size = new System.Drawing.Size(41, 13);
       this.labelControl5.TabIndex = 6;
@@ -170,7 +171,7 @@ namespace Impressio.Controls
       // 
       // labelControl6
       // 
-      this.labelControl6.Location = new System.Drawing.Point(18, 50);
+      this.labelControl6.Location = new System.Drawing.Point(19, 50);
       this.labelControl6.Name = "labelControl6";
       this.labelControl6.Size = new System.Drawing.Size(30, 13);
       this.labelControl6.TabIndex = 10;
@@ -348,7 +349,7 @@ namespace Impressio.Controls
       // 
       // labelControl7
       // 
-      this.labelControl7.Location = new System.Drawing.Point(18, 138);
+      this.labelControl7.Location = new System.Drawing.Point(19, 138);
       this.labelControl7.Name = "labelControl7";
       this.labelControl7.Size = new System.Drawing.Size(84, 13);
       this.labelControl7.TabIndex = 12;
@@ -393,7 +394,7 @@ namespace Impressio.Controls
       this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
       this.groupControl1.Location = new System.Drawing.Point(0, 0);
       this.groupControl1.Name = "groupControl1";
-      this.groupControl1.Size = new System.Drawing.Size(0, 182);
+      this.groupControl1.Size = new System.Drawing.Size(861, 182);
       this.groupControl1.TabIndex = 14;
       this.groupControl1.Text = "Papier";
       // 
@@ -407,7 +408,17 @@ namespace Impressio.Controls
       this.paperCostTotal.Enabled = false;
       this.paperCostTotal.Location = new System.Drawing.Point(644, 135);
       this.paperCostTotal.Name = "paperCostTotal";
+      this.paperCostTotal.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White;
+      this.paperCostTotal.Properties.AppearanceDisabled.BackColor2 = System.Drawing.Color.White;
+      this.paperCostTotal.Properties.AppearanceDisabled.BorderColor = System.Drawing.Color.White;
+      this.paperCostTotal.Properties.AppearanceDisabled.Options.UseBackColor = true;
+      this.paperCostTotal.Properties.AppearanceDisabled.Options.UseBorderColor = true;
+      this.paperCostTotal.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White;
+      this.paperCostTotal.Properties.AppearanceReadOnly.BackColor2 = System.Drawing.Color.White;
+      this.paperCostTotal.Properties.AppearanceReadOnly.BorderColor = System.Drawing.Color.White;
       this.paperCostTotal.Properties.AppearanceReadOnly.ForeColor = System.Drawing.Color.Black;
+      this.paperCostTotal.Properties.AppearanceReadOnly.Options.UseBackColor = true;
+      this.paperCostTotal.Properties.AppearanceReadOnly.Options.UseBorderColor = true;
       this.paperCostTotal.Properties.AppearanceReadOnly.Options.UseForeColor = true;
       this.paperCostTotal.Properties.DisplayFormat.FormatString = "c";
       this.paperCostTotal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -438,7 +449,7 @@ namespace Impressio.Controls
       // 
       // paperTotal
       // 
-      this.paperTotal.Location = new System.Drawing.Point(558, 138);
+      this.paperTotal.Location = new System.Drawing.Point(559, 138);
       this.paperTotal.Name = "paperTotal";
       this.paperTotal.Size = new System.Drawing.Size(69, 13);
       this.paperTotal.TabIndex = 18;
@@ -446,7 +457,7 @@ namespace Impressio.Controls
       // 
       // labelControl11
       // 
-      this.labelControl11.Location = new System.Drawing.Point(273, 138);
+      this.labelControl11.Location = new System.Drawing.Point(274, 138);
       this.labelControl11.Name = "labelControl11";
       this.labelControl11.Size = new System.Drawing.Size(34, 13);
       this.labelControl11.TabIndex = 21;
@@ -454,7 +465,7 @@ namespace Impressio.Controls
       // 
       // labelControl1
       // 
-      this.labelControl1.Location = new System.Drawing.Point(18, 94);
+      this.labelControl1.Location = new System.Drawing.Point(19, 94);
       this.labelControl1.Name = "labelControl1";
       this.labelControl1.Size = new System.Drawing.Size(71, 13);
       this.labelControl1.TabIndex = 20;
@@ -483,7 +494,7 @@ namespace Impressio.Controls
       // 
       // paperPriceLabel
       // 
-      this.paperPriceLabel.Location = new System.Drawing.Point(558, 50);
+      this.paperPriceLabel.Location = new System.Drawing.Point(559, 50);
       this.paperPriceLabel.Name = "paperPriceLabel";
       this.paperPriceLabel.Size = new System.Drawing.Size(58, 13);
       this.paperPriceLabel.TabIndex = 18;
@@ -512,7 +523,7 @@ namespace Impressio.Controls
       // 
       // labelControl8
       // 
-      this.labelControl8.Location = new System.Drawing.Point(273, 94);
+      this.labelControl8.Location = new System.Drawing.Point(274, 94);
       this.labelControl8.Name = "labelControl8";
       this.labelControl8.Size = new System.Drawing.Size(67, 13);
       this.labelControl8.TabIndex = 14;
@@ -528,7 +539,17 @@ namespace Impressio.Controls
       this.positionTotal.Enabled = false;
       this.positionTotal.Location = new System.Drawing.Point(644, 172);
       this.positionTotal.Name = "positionTotal";
+      this.positionTotal.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White;
+      this.positionTotal.Properties.AppearanceDisabled.BackColor2 = System.Drawing.Color.White;
+      this.positionTotal.Properties.AppearanceDisabled.BorderColor = System.Drawing.Color.White;
+      this.positionTotal.Properties.AppearanceDisabled.Options.UseBackColor = true;
+      this.positionTotal.Properties.AppearanceDisabled.Options.UseBorderColor = true;
+      this.positionTotal.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White;
+      this.positionTotal.Properties.AppearanceReadOnly.BackColor2 = System.Drawing.Color.White;
+      this.positionTotal.Properties.AppearanceReadOnly.BorderColor = System.Drawing.Color.White;
       this.positionTotal.Properties.AppearanceReadOnly.ForeColor = System.Drawing.Color.Black;
+      this.positionTotal.Properties.AppearanceReadOnly.Options.UseBackColor = true;
+      this.positionTotal.Properties.AppearanceReadOnly.Options.UseBorderColor = true;
       this.positionTotal.Properties.AppearanceReadOnly.Options.UseForeColor = true;
       this.positionTotal.Properties.DisplayFormat.FormatString = "c";
       this.positionTotal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -538,7 +559,7 @@ namespace Impressio.Controls
       // 
       // labelControl9
       // 
-      this.labelControl9.Location = new System.Drawing.Point(557, 153);
+      this.labelControl9.Location = new System.Drawing.Point(559, 175);
       this.labelControl9.Name = "labelControl9";
       this.labelControl9.Size = new System.Drawing.Size(24, 13);
       this.labelControl9.TabIndex = 16;
@@ -559,7 +580,7 @@ namespace Impressio.Controls
       this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
       this.groupControl2.Location = new System.Drawing.Point(0, 182);
       this.groupControl2.Name = "groupControl2";
-      this.groupControl2.Size = new System.Drawing.Size(0, 0);
+      this.groupControl2.Size = new System.Drawing.Size(861, 236);
       this.groupControl2.TabIndex = 15;
       this.groupControl2.Text = "Druck";
       // 
@@ -590,7 +611,17 @@ namespace Impressio.Controls
       this.printCostTotal.Enabled = false;
       this.printCostTotal.Location = new System.Drawing.Point(644, 99);
       this.printCostTotal.Name = "printCostTotal";
+      this.printCostTotal.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White;
+      this.printCostTotal.Properties.AppearanceDisabled.BackColor2 = System.Drawing.Color.White;
+      this.printCostTotal.Properties.AppearanceDisabled.BorderColor = System.Drawing.Color.White;
+      this.printCostTotal.Properties.AppearanceDisabled.Options.UseBackColor = true;
+      this.printCostTotal.Properties.AppearanceDisabled.Options.UseBorderColor = true;
+      this.printCostTotal.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White;
+      this.printCostTotal.Properties.AppearanceReadOnly.BackColor2 = System.Drawing.Color.White;
+      this.printCostTotal.Properties.AppearanceReadOnly.BorderColor = System.Drawing.Color.White;
       this.printCostTotal.Properties.AppearanceReadOnly.ForeColor = System.Drawing.Color.Black;
+      this.printCostTotal.Properties.AppearanceReadOnly.Options.UseBackColor = true;
+      this.printCostTotal.Properties.AppearanceReadOnly.Options.UseBorderColor = true;
       this.printCostTotal.Properties.AppearanceReadOnly.Options.UseForeColor = true;
       this.printCostTotal.Properties.DisplayFormat.FormatString = "c";
       this.printCostTotal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -600,7 +631,7 @@ namespace Impressio.Controls
       // 
       // printTotal
       // 
-      this.printTotal.Location = new System.Drawing.Point(557, 80);
+      this.printTotal.Location = new System.Drawing.Point(559, 102);
       this.printTotal.Name = "printTotal";
       this.printTotal.Size = new System.Drawing.Size(63, 13);
       this.printTotal.TabIndex = 19;
@@ -613,7 +644,7 @@ namespace Impressio.Controls
       this.Controls.Add(this.groupControl2);
       this.Controls.Add(this.groupControl1);
       this.Name = "PrintControl";
-      this.Size = new System.Drawing.Size(0, 0);
+      this.Size = new System.Drawing.Size(861, 418);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.PrintControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.amountPrint.Properties)).EndInit();

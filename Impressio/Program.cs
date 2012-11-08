@@ -7,7 +7,7 @@ namespace Impressio
 {
   internal static class Program
   {
-    public static MainView MainView;
+    public static MainViewRibbon MainView;
 
     /// <summary>
     /// The main entry point for the application.

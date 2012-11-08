@@ -41,6 +41,8 @@ namespace Impressio.Controls
       this.database = new DevExpress.XtraEditors.ComboBoxEdit();
       this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
       this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+      this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
+      this.logoEdit = new DevExpress.XtraEditors.TextEdit();
       this.lookAndFeel = new DevExpress.XtraEditors.ComboBoxEdit();
       this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
       this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
@@ -49,6 +51,7 @@ namespace Impressio.Controls
       this.databaseCheckResult = new DevExpress.XtraEditors.LabelControl();
       this.createCompactDb = new DevExpress.XtraEditors.SimpleButton();
       this.checkDatabaseSetting = new DevExpress.XtraEditors.SimpleButton();
+      this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
       ((System.ComponentModel.ISupportInitialize)(this.dbConnectionString.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.user.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pathData.Properties)).BeginInit();
@@ -56,6 +59,7 @@ namespace Impressio.Controls
       ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
       this.xtraTabControl1.SuspendLayout();
       this.xtraTabPage2.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.logoEdit.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.lookAndFeel.Properties)).BeginInit();
       this.xtraTabPage1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.compactName.Properties)).BeginInit();
@@ -150,6 +154,8 @@ namespace Impressio.Controls
       // 
       // xtraTabPage2
       // 
+      this.xtraTabPage2.Controls.Add(this.labelControl7);
+      this.xtraTabPage2.Controls.Add(this.logoEdit);
       this.xtraTabPage2.Controls.Add(this.lookAndFeel);
       this.xtraTabPage2.Controls.Add(this.labelControl3);
       this.xtraTabPage2.Controls.Add(this.labelControl4);
@@ -159,6 +165,23 @@ namespace Impressio.Controls
       this.xtraTabPage2.Name = "xtraTabPage2";
       this.xtraTabPage2.Size = new System.Drawing.Size(853, 403);
       this.xtraTabPage2.Text = "Benutzer";
+      // 
+      // labelControl7
+      // 
+      this.labelControl7.Appearance.ForeColor = System.Drawing.Color.Navy;
+      this.labelControl7.Location = new System.Drawing.Point(18, 221);
+      this.labelControl7.Name = "labelControl7";
+      this.labelControl7.Size = new System.Drawing.Size(145, 13);
+      this.labelControl7.TabIndex = 13;
+      this.labelControl7.Text = "Pfad zum Logo 250px x 200px";
+      // 
+      // logoEdit
+      // 
+      this.logoEdit.Location = new System.Drawing.Point(18, 240);
+      this.logoEdit.Name = "logoEdit";
+      this.logoEdit.Size = new System.Drawing.Size(497, 20);
+      this.logoEdit.TabIndex = 14;
+      this.logoEdit.Enter += new System.EventHandler(this.LogoEditEnter);
       // 
       // lookAndFeel
       // 
@@ -273,6 +296,7 @@ namespace Impressio.Controls
       this.xtraTabControl1.ResumeLayout(false);
       this.xtraTabPage2.ResumeLayout(false);
       this.xtraTabPage2.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.logoEdit.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.lookAndFeel.Properties)).EndInit();
       this.xtraTabPage1.ResumeLayout(false);
       this.xtraTabPage1.PerformLayout();
@@ -302,5 +326,8 @@ namespace Impressio.Controls
     private DevExpress.XtraEditors.LabelControl labelControl2;
     private DevExpress.XtraEditors.ComboBoxEdit lookAndFeel;
     private DevExpress.XtraEditors.LabelControl labelControl3;
+    private DevExpress.XtraEditors.LabelControl labelControl7;
+    private DevExpress.XtraEditors.TextEdit logoEdit;
+    private OpenFileDialog openFileDialog;
   }
 }

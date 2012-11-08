@@ -86,7 +86,7 @@
       // 
       this.navOpenOrder.Caption = "Auftrag öffnen";
       this.navOpenOrder.Name = "navOpenOrder";
-      this.navOpenOrder.SmallImage = global::Impressio.Properties.Resources.map;
+      this.navOpenOrder.SmallImage = global::Impressio.Properties.Resources.open;
       this.navOpenOrder.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavOpenOrderLinkClicked);
       // 
       // navCopyOrder
@@ -107,14 +107,14 @@
       // 
       this.navPrintOverview.Caption = "Lauftasche drucken";
       this.navPrintOverview.Name = "navPrintOverview";
-      this.navPrintOverview.SmallImage = global::Impressio.Properties.Resources.printer;
+      this.navPrintOverview.SmallImage = global::Impressio.Properties.Resources.printglyph;
       this.navPrintOverview.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavPrintOverviewLinkClicked);
       // 
       // navPrintOffer
       // 
       this.navPrintOffer.Caption = "Offerte drucken";
       this.navPrintOffer.Name = "navPrintOffer";
-      this.navPrintOffer.SmallImage = global::Impressio.Properties.Resources.printer;
+      this.navPrintOffer.SmallImage = global::Impressio.Properties.Resources.printglyph;
       this.navPrintOffer.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavPrintOfferLinkClicked);
       // 
       // navRefresh

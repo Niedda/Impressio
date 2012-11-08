@@ -138,7 +138,7 @@ namespace Impressio.Models
       {
         return (PrintCostTotal + PaperCostTotal).GetInt();
       }
-      set { }
+      set {  }
     }
 
     public Type Type

@@ -147,7 +147,7 @@
       // 
       this.barButtonItem6.Caption = "barButtonItem6";
       this.barButtonItem6.Id = 7;
-      this.barButtonItem6.LargeGlyph = global::Impressio.Properties.Resources.folder;
+      this.barButtonItem6.LargeGlyph = global::Impressio.Properties.Resources.refresh;
       this.barButtonItem6.Name = "barButtonItem6";
       // 
       // printOrder
@@ -157,6 +157,7 @@
       this.printOrder.LargeGlyph = global::Impressio.Properties.Resources.printglyph;
       this.printOrder.LargeWidth = 80;
       this.printOrder.Name = "printOrder";
+      this.printOrder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.PrintOrderItemClick);
       // 
       // printOffer
       // 
@@ -165,6 +166,7 @@
       this.printOffer.LargeGlyph = global::Impressio.Properties.Resources.printglyph;
       this.printOffer.LargeWidth = 80;
       this.printOffer.Name = "printOffer";
+      this.printOffer.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.PrintOfferItemClick);
       // 
       // refreshOrder
       // 
