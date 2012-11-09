@@ -11,7 +11,7 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class DeliveryOverviewControl : ControlBase, IControl, IGridControl<Delivery>, IRibbon
+  public partial class DeliveryOverviewControl : BaseControlImpressio, IControl, IGridControl<Delivery>, IRibbon
   {
     public DeliveryOverviewControl()
     {

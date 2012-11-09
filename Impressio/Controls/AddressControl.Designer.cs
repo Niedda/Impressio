@@ -30,9 +30,8 @@ namespace Impressio.Controls
         /// </summary>
         private void InitializeComponent()
         {
-      this.components = new System.ComponentModel.Container();
       this.gridAddress = new DevExpress.XtraGrid.GridControl();
-      this.addressBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.addressBindingSource = new System.Windows.Forms.BindingSource();
       this.viewAddress = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colFkAddressCompany = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -54,7 +53,7 @@ namespace Impressio.Controls
       this.gridAddress.Location = new System.Drawing.Point(0, 0);
       this.gridAddress.MainView = this.viewAddress;
       this.gridAddress.Name = "gridAddress";
-      this.gridAddress.Size = new System.Drawing.Size(791, 345);
+      this.gridAddress.Size = new System.Drawing.Size(0, 0);
       this.gridAddress.TabIndex = 0;
       this.gridAddress.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewAddress});
@@ -148,7 +147,7 @@ namespace Impressio.Controls
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridAddress);
       this.Name = "AddressControl";
-      this.Size = new System.Drawing.Size(791, 345);
+      this.Size = new System.Drawing.Size(0, 0);
       this.Load += new System.EventHandler(this.AddressControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.AddressControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

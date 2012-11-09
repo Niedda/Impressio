@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors.Controls;
@@ -12,7 +13,7 @@ using Type = Impressio.Models.Type;
 
 namespace Impressio.Controls
 {
-  public partial class PredefinedPositionControl : ControlBase, IControl, IGridControl<Position>, IRibbon
+  public partial class PredefinedPositionControl : BaseControlImpressio, IControl, IGridControl<Position>, IRibbon
   {
     public PredefinedPositionControl()
     {
@@ -89,7 +90,7 @@ namespace Impressio.Controls
     {
       ReloadControl();
     }
-    
+
     public void OpenPosition(object sender, ItemClickEventArgs e)
     {
       OpenPosition();
@@ -111,7 +112,7 @@ namespace Impressio.Controls
     {
       return ValidateRow();
     }
-    
+
     public void DeleteRow()
     {
       FocusedRow.DeleteObject();
@@ -135,56 +136,43 @@ namespace Impressio.Controls
       }
     }
 
-    public void OpenPosition()
+    private void OpenPosition()
     {
-      //if (FocusedRow != null)
-      //{
-      //  var view = new EmptyView();
+      if (FocusedRow != null)
+      {
+        var id = FocusedRow.Identity;
+        switch (FocusedRow.Type)
+        {
+          case Type.Datenaufbereitung:
+            var dataControl = new DataControl { Data = new Data { Identity = id, }, };
+            dataControl.ReloadControl();
+            OpenPosition(dataControl);
+            break;
+          case Type.Digitaldruck:
+            var printControl = new PrintControl { Print = new Print { Identity = id } };
+            OpenPosition(printControl);
+            printControl.ReloadControl();
+            break;
+          case Type.Offsetdruck:
+            var offsetControl = new OffsetControl { Offset = new Offset { Identity = id } };
+            offsetControl.ReloadControl();
+            OpenPosition(offsetControl);
+            break;
+          case Type.Weiterverarbeitung:
+            var finishControl = new FinishControl { Finish = new Finish { Identity = id } };
+            finishControl.ReloadControl();
+            OpenPosition(finishControl);
+            break;
+        }
+      }
+    }
 
-      //  switch (FocusedRow.Type)
-      //  {
-      //    case Type.Datenaufbereitung:
-      //      view.mainPanel.Controls.Add(new DataControl
-      //                                    {
-      //                                      Data = new Data
-      //                                               {
-      //                                                 Identity = FocusedRow.Identity,
-      //                                               }
-      //                                    });
-      //      view.Show();
-      //      break;
-      //    case Type.Digitaldruck:
-      //      view.mainPanel.Controls.Add(new PrintControl
-      //                                    {
-      //                                      Print = new Print
-      //                                                {
-      //                                                  Identity = FocusedRow.Identity,
-      //                                                }
-      //                                    });
-      //      view.Show();
-      //      break;
-      //    case Type.Weiterverarbeitung:
-      //      view.mainPanel.Controls.Add(new FinishControl
-      //                                    {
-      //                                      Finish = new Finish
-      //                                                 {
-      //                                                   Identity = FocusedRow.Identity,
-      //                                                 }
-      //                                    });
-      //      view.Show();
-      //      break;
-      //    case Type.Offsetdruck:
-      //      view.mainPanel.Controls.Add(new OffsetControl
-      //                                    {
-      //                                      Offset = new Offset
-      //                                                 {
-      //                                                   Identity = FocusedRow.Identity,
-      //                                                 },
-      //                                    });
-      //      view.Show();
-      //      break;
-      //  }
-      //}
+    private void OpenPosition(Control control)
+    {
+      MainViewRibbon.Instance.mainPanel.Controls.Add(control);
+      control.BringToFront();
+      MainViewRibbon.Instance.SetCustomRibbon(control as IRibbon, true);
+      MainViewRibbon.Instance.FocusedDetailControl = control;
     }
 
     public Position FocusedRow
@@ -203,7 +191,7 @@ namespace Impressio.Controls
     {
       e.Valid = ValidateRow();
 
-      if(e.Valid)
+      if (e.Valid)
       {
         UpdateRow();
       }

@@ -2,10 +2,8 @@
 using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
-using DevExpress.XtraEditors;
 using Impressio.Controls;
 using Impressio.Models;
-using Type = Impressio.Models.Type;
 
 namespace Impressio.Views
 {
@@ -16,17 +14,35 @@ namespace Impressio.Views
       InitializeComponent();
     }
 
-    private readonly OrdersControl _ordersControl = new OrdersControl();
+    public static MainViewRibbon Instance { get { return _instance ?? (_instance = new MainViewRibbon()); } }
 
-    private CompanyControl _companyControl;
+    private static MainViewRibbon _instance;
 
-    private AddressControl _addressControl;
-
-    private ClientControl _clientControl;
+    public Control FocusedControl
+    {
+      get { return _focusedControl; }
+      set
+      {
+        _focusedControl = value;
+        _focusedControl.BringToFront();
+      }
+    }
 
     private Control _focusedControl;
 
-    private PropertieControl _propertieControl;
+    public Control FocusedDetailControl;
+
+    private RibbonPage _customPage;
+
+    private RibbonPage _customPageLevel2;
+
+    #region Main Controls
+
+    private readonly OrdersControl _ordersControl = new OrdersControl();
+
+    private readonly CompanyControl _companyControl = new CompanyControl();
+
+    private readonly PropertieControl _propertieControl = new PropertieControl();
 
     private PaperControl _paperControl;
 
@@ -40,19 +56,11 @@ namespace Impressio.Views
 
     private PredefinedPositionControl _predefinedPositionControl;
 
-    private DataControl _dataControl;
+    private DescriptionControl _descriptionControl;
 
-    private PrintControl _printControl;
+    #endregion
 
-    private OffsetControl _offsetControl;
-
-    private FinishControl _finishControl;
-
-    private RibbonPage _customPage;
-
-    private RibbonPage _positionPage;
-
-    private void SetControl<T>(ref T control) where T : Control, new()
+    public void SetControl<T>(ref T control) where T : Control, new()
     {
       if (control == null)
       {
@@ -60,9 +68,10 @@ namespace Impressio.Views
         mainPanel.Controls.Add(control);
       }
       control.BringToFront();
+      FocusedControl = control;
     }
 
-    private void SetCustomRibbon(IRibbon ribbons)
+    public void SetCustomRibbon(IRibbon ribbons)
     {
       DeleteCustomRibbon();
       _customPage = new RibbonPage
@@ -74,18 +83,54 @@ namespace Impressio.Views
       ribbon.SelectedPage = _customPage;
     }
 
-    private void DeleteCustomRibbon()
+    public void SetCustomRibbon(IRibbon ribbons, bool append)
+    {
+      if (!append)
+      {
+        SetCustomRibbon(ribbons);
+      }
+      else
+      {
+        _customPageLevel2 = new RibbonPage
+                              {
+                                Text = ribbons.RibbonGroupName,
+                              };
+        _customPageLevel2.Groups.Add(ribbons.GetRibbon());
+        ribbon.Pages.Add(_customPageLevel2);
+        ribbon.SelectedPage = _customPageLevel2;
+      }
+    }
+
+    public void DeleteCustomRibbon()
     {
       if (_customPage != null)
       {
         _customPage.Dispose();
+      }
+      DeleteCustomRibbonLevel2();
+    }
+
+    public void DeleteCustomRibbonLevel2()
+    {
+      if (_customPageLevel2 != null)
+      {
+        _customPageLevel2.Dispose();
+      }
+    }
+
+    public void DeleteCustomControlLevel2()
+    {
+      if (FocusedDetailControl != null)
+      {
+        FocusedDetailControl.Dispose();
       }
     }
 
     private void MainViewRibbonLoad(object sender, EventArgs e)
     {
       mainPanel.Controls.Add(_ordersControl);
-      _focusedControl = _companyControl;
+      mainPanel.Controls.Add(_propertieControl);
+      mainPanel.Controls.Add(_companyControl);
     }
 
     private void RibbonSelectedPageChanged(object sender, EventArgs e)
@@ -93,101 +138,67 @@ namespace Impressio.Views
       if (ribbon.SelectedPage == ribbonPageCustomer)
       {
         DeleteCustomRibbon();
-        if (_companyControl == null)
-        {
-          _companyControl = new CompanyControl();
-          mainPanel.Controls.Add(_companyControl);
-        }
-        if (_positionPage != null)
-        {
-          _positionPage.Dispose();
-        }
-        _companyControl.BringToFront();
+        FocusedControl = _companyControl;
       }
       else if (ribbon.SelectedPage == ribbonPageOrder)
       {
-        if (_positionPage != null)
-        {
-          _positionPage.Dispose();
-        }
         DeleteCustomRibbon();
-        _ordersControl.BringToFront();
+        FocusedControl = _ordersControl;
       }
       else if (ribbon.SelectedPage == ribbonPageProperties)
       {
-        if (_positionPage != null)
-        {
-          _positionPage.Dispose();
-        }
         DeleteCustomRibbon();
-        if (_propertieControl == null)
-        {
-          _propertieControl = new PropertieControl();
-          mainPanel.Controls.Add(_propertieControl);
-        }
-        _propertieControl.BringToFront();
+        FocusedControl = _propertieControl;
       }
-      else if (ribbon.SelectedPage == _positionPage)
+      else if (ribbon.SelectedPage == _customPage)
       {
-        DeleteCustomRibbon();
-        _predefinedPositionControl.BringToFront();
+        if (FocusedDetailControl != null)
+        {
+          FocusedDetailControl.Refresh();
+          FocusedDetailControl.Dispose();
+        }
+        DeleteCustomRibbonLevel2();
+        DeleteCustomControlLevel2();
       }
     }
 
     private void ShowAddressItemClick(object sender, ItemClickEventArgs e)
     {
-      if (_addressControl == null)
+      if (_companyControl.OpenAddress())
       {
-        _addressControl = new AddressControl();
-        mainPanel.Controls.Add(_addressControl);
+        FocusedControl = _companyControl.AddressControl;
       }
-      _addressControl.Company = _companyControl.FocusedRow;
-      _addressControl.ReloadControl();
-      _addressControl.BringToFront();
-      _focusedControl = _addressControl;
     }
 
     private void ShowPersonItemClick(object sender, ItemClickEventArgs e)
     {
-      if (_clientControl == null)
+      if (_companyControl.OpenClient())
       {
-        _clientControl = new ClientControl();
-        mainPanel.Controls.Add(_clientControl);
+        FocusedControl = _companyControl.ClientControl;
       }
-      _clientControl.Company = _companyControl.FocusedRow;
-      _clientControl.ReloadControl();
-      _clientControl.BringToFront();
-      _focusedControl = _clientControl;
     }
 
     private void ShowCompaniesItemClick(object sender, ItemClickEventArgs e)
     {
-      _focusedControl = _companyControl;
-      _companyControl.BringToFront();
+      if (_companyControl.ValidateAddressAndClient())
+      {
+        FocusedControl = _companyControl;
+      }
     }
 
     private void DeleteEntryItemClick(object sender, ItemClickEventArgs e)
     {
-      if (_focusedControl == _companyControl)
+      if (FocusedControl == _companyControl)
       {
-        if (!_companyControl.FocusedRow.HasOrders())
-        {
-          _companyControl.DeleteRow();
-        }
-        else
-        {
-          XtraMessageBox.Show(
-            "Der gewählte Kunde hat noch Aufträge. Bitte löschen Sie diese zuerst und versuchen Sie es erneut.",
-            "Fehler");
-        }
+        _companyControl.DeleteRow();
       }
-      else if (_focusedControl == _addressControl)
+      else if (FocusedControl == _companyControl.AddressControl)
       {
-        _addressControl.DeleteRow();
+        _companyControl.AddressControl.DeleteRow();
       }
-      else if (_focusedControl == _clientControl)
+      else if (FocusedControl == _companyControl.ClientControl)
       {
-        _clientControl.DeleteRow();
+        _companyControl.ClientControl.DeleteRow();
       }
     }
 
@@ -221,10 +232,18 @@ namespace Impressio.Views
       SetCustomRibbon(_stateControl);
     }
 
+    private void PredefinedDescriptionItemClick(object sender, ItemClickEventArgs e)
+    {
+      _descriptionControl = new DescriptionControl { IsPredefinedMode = true };
+      mainPanel.Controls.Add(_descriptionControl);
+      SetControl(ref _descriptionControl);
+      SetCustomRibbon(_descriptionControl);
+    }
+
     private void PredefinedPositionsItemClick(object sender, ItemClickEventArgs e)
     {
       SetControl(ref _predefinedPositionControl);
-      SetPositionRibbon();
+      SetCustomRibbon(_predefinedPositionControl);
     }
 
     private void OpenOrderItemClick(object sender, ItemClickEventArgs e)
@@ -235,99 +254,6 @@ namespace Impressio.Views
     private void DeleteOrderItemClick(object sender, ItemClickEventArgs e)
     {
       _ordersControl.DeleteRow();
-    }
-
-    public string RibbonGroupName { get { return "Vordefinierte Positionen"; } }
-
-    public void SetPositionRibbon()
-    {
-      var deleteButton = new BarButtonItem
-      {
-        Caption = "Löschen",
-        Id = 2,
-        LargeGlyph = Properties.Resources.delete,
-        LargeWidth = 80,
-        Name = "positionDelete",
-      };
-      deleteButton.ItemClick += DeleteRow;
-
-      var refreshButton = new BarButtonItem
-      {
-        Caption = "Aktualisieren",
-        Id = 3,
-        LargeGlyph = Properties.Resources.refresh,
-        LargeWidth = 80,
-        Name = "positionRefresh"
-      };
-      refreshButton.ItemClick += ReloadControl;
-
-      var openPosition = new BarButtonItem
-      {
-        Caption = "Position öffnen",
-        Id = 1,
-        LargeGlyph = Properties.Resources.open,
-        LargeWidth = 80,
-        Name = "positionOpen"
-      };
-      openPosition.ItemClick += OpenPosition;
-
-      var pageGroup = new RibbonPageGroup
-      {
-        Text = "Vordefinierte Positionen",
-        Name = "predefinedPositionPageGroup"
-      };
-      pageGroup.ItemLinks.Add(refreshButton);
-      pageGroup.ItemLinks.Add(deleteButton);
-      pageGroup.ItemLinks.Add(openPosition);
-
-      _positionPage = new RibbonPage
-                        {
-                          Text = "Positionen",
-                        };
-      _positionPage.Groups.Add(pageGroup);
-      ribbon.Pages.Add(_positionPage);
-      ribbon.SelectedPage = _positionPage;
-    }
-
-    public void DeleteRow(object sender, ItemClickEventArgs e)
-    {
-      _predefinedPositionControl.DeleteRow();
-    }
-
-    public void ReloadControl(object sender, ItemClickEventArgs e)
-    {
-      _predefinedPositionControl.ReloadControl();
-    }
-
-    public void OpenPosition(object sender, ItemClickEventArgs e)
-    {
-      switch (_predefinedPositionControl.FocusedRow.Type)
-      {
-        case Type.Datenaufbereitung:
-          SetControl(ref _dataControl);
-          _dataControl.Data = new Data { Identity = _predefinedPositionControl.FocusedRow.Identity };
-          _dataControl.ReloadControl();
-          SetCustomRibbon(_dataControl);
-          break;
-        case Type.Digitaldruck:
-          SetControl(ref _printControl);
-          _printControl.Print = new Print { Identity = _predefinedPositionControl.FocusedRow.Identity };
-          _printControl.ReloadControl();
-          SetCustomRibbon(_printControl);
-          break;
-        case Type.Offsetdruck:
-          SetControl(ref _offsetControl);
-          _offsetControl.Offset = new Offset { Identity = _predefinedPositionControl.FocusedRow.Identity };
-          _offsetControl.ReloadControl();
-          SetCustomRibbon(_offsetControl);
-          break;
-        case Type.Weiterverarbeitung:
-          SetControl(ref _finishControl);
-          _finishControl.Finish = new Finish { Identity = _predefinedPositionControl.FocusedRow.Identity };
-          _finishControl.ReloadControl();
-          SetCustomRibbon(_finishControl);
-          break;
-      }
     }
 
     private void PrintOrderItemClick(object sender, ItemClickEventArgs e)

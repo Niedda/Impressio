@@ -12,7 +12,7 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class DescriptionControl : ControlBase, IControl, IGridControl<Description>, IRibbon
+  public partial class DescriptionControl : BaseControlImpressio, IControl, IGridControl<Description>, IRibbon
   {
     public DescriptionControl()
     {

@@ -28,9 +28,8 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.components = new System.ComponentModel.Container();
       this.gridPosition = new DevExpress.XtraGrid.GridControl();
-      this.positionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.positionBindingSource = new System.Windows.Forms.BindingSource();
       this.viewPosition = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -40,7 +39,7 @@
       this.colType = new DevExpress.XtraGrid.Columns.GridColumn();
       this.typeCombo = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
       this.colIsPredefined = new DevExpress.XtraGrid.Columns.GridColumn();
-      this.typeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.typeBindingSource = new System.Windows.Forms.BindingSource();
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPosition)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.positionBindingSource)).BeginInit();
@@ -58,7 +57,7 @@
       this.gridPosition.Name = "gridPosition";
       this.gridPosition.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.typeCombo});
-      this.gridPosition.Size = new System.Drawing.Size(791, 345);
+      this.gridPosition.Size = new System.Drawing.Size(824, 309);
       this.gridPosition.TabIndex = 0;
       this.gridPosition.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewPosition});
@@ -167,7 +166,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridPosition);
       this.Name = "PredefinedPositionControl";
-      this.Size = new System.Drawing.Size(791, 345);
+      this.Size = new System.Drawing.Size(824, 309);
       this.Load += new System.EventHandler(this.PredefinedPositionControlLoad);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPosition)).EndInit();

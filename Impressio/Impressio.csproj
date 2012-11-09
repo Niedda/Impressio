@@ -88,6 +88,7 @@
     <Reference Include="DevExpress.XtraPivotGrid.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraReports.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraRichEdit.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraWizard.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Npgsql">
       <HintPath>..\Externals\npgsql\Npgsql.dll</HintPath>
     </Reference>
@@ -235,7 +236,7 @@
     <Compile Include="Models\Delivery.cs" />
     <Compile Include="Models\Description.cs" />
     <Compile Include="Models\Finish.cs" />
-    <Compile Include="Controls\ControlBase.cs">
+    <Compile Include="Controls\BaseControlImpressio.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Models\Gender.cs" />
@@ -287,6 +288,25 @@
     <Compile Include="Views\OrderRibbonView.Designer.cs">
       <DependentUpon>OrderRibbonView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\SplashAppContext.cs" />
+    <Compile Include="Views\StartScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\StartScreen.Designer.cs">
+      <DependentUpon>StartScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StartupWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\StartupWizard.Designer.cs">
+      <DependentUpon>StartupWizard.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\StartScreen.resx">
+      <DependentUpon>StartScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\StartupWizard.resx">
+      <DependentUpon>StartupWizard.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\DataSources\Impressio.Models.Address1.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.Client1.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.Position1.datasource" />
@@ -369,7 +389,9 @@
     <EmbeddedResource Include="Views\OrderRibbonView.resx">
       <DependentUpon>OrderRibbonView.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\DataSources\Impressio.Models.State.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.Address.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.ClickCost.datasource" />

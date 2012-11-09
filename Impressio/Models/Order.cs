@@ -130,7 +130,11 @@ namespace Impressio.Models
     {
       get
       {
-        return _client ?? (_client = new Client().LoadObjectList(Client.Columns.FkClientCompany, FkOrderCompany));
+        if(_client == null || _client.Count == 0)
+        {
+          return (_client = new Client().LoadObjectList(Client.Columns.FkClientCompany, FkOrderCompany));
+        }
+        return _client;
       }
     }
 
@@ -138,7 +142,11 @@ namespace Impressio.Models
     {
       get
       {
-        return _address ?? (_address = new Address().LoadObjectList(Address.Columns.FkAddressCompany, FkOrderCompany));
+        if(_address == null || _address.Count == 0)
+        {
+          return (_address = new Address().LoadObjectList(Address.Columns.FkAddressCompany, FkOrderCompany));
+        }
+        return _address;
       }
     }
 

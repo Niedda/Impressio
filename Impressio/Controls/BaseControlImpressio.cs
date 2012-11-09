@@ -7,11 +7,11 @@ using Impressio.Models.Tools;
 
 namespace Impressio.Controls
 {
-  public class ControlBase : XtraUserControl
+  public class BaseControlImpressio : XtraUserControl
   {
     public readonly DXErrorProvider ErrorProvider = new DXErrorProvider();
 
-    protected ControlBase()
+    protected BaseControlImpressio()
     {
       SetDockStyle();
     }

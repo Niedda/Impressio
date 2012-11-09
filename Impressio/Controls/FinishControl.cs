@@ -11,7 +11,7 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class FinishControl : ControlBase, IControl, IGridControl<FinishPosition>, IRibbon
+  public partial class FinishControl : BaseControlImpressio, IControl, IGridControl<FinishPosition>, IRibbon
   {
     public FinishControl()
     {
@@ -127,6 +127,19 @@ namespace Impressio.Controls
       }
     }
 
+    public override void Refresh()
+    {
+      GetFinish();
+      base.Refresh();
+    }
+
+    public void GetFinish()
+    {
+      Finish.Remark = remarkEdit.Text;
+      Finish.PositionTotal = _finishPosition.Objects.Sum(finish => finish.PriceTotal);
+      Finish.SaveObject();
+    }
+
     public FinishPosition FocusedRow
     {
       get { return viewFinish.GetFocusedRow() as FinishPosition; }
@@ -173,8 +186,7 @@ namespace Impressio.Controls
 
     private void RemarkEditEditValueChanged(object sender, EventArgs e)
     {
-      Finish.Remark = remarkEdit.Text;
-      Finish.SaveObject();
+      GetFinish();
     }
   }
 }

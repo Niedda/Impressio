@@ -20,7 +20,9 @@ namespace Impressio
       DevExpress.LookAndFeel.UserLookAndFeel.Default.SkinName = Settings.Default.lookAndFeel;
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      Application.Run(new MainViewRibbon());
+
+      var myContext = new SplashAppContext(MainViewRibbon.Instance, new StartScreen());
+      Application.Run(myContext);
     }
   }
 }

@@ -44,7 +44,7 @@
       this.deleteEntry = new DevExpress.XtraBars.BarButtonItem();
       this.properties = new DevExpress.XtraBars.BarButtonItem();
       this.predefinedPositions = new DevExpress.XtraBars.BarButtonItem();
-      this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+      this.predefinedDescription = new DevExpress.XtraBars.BarButtonItem();
       this.papers = new DevExpress.XtraBars.BarButtonItem();
       this.machines = new DevExpress.XtraBars.BarButtonItem();
       this.clickCosts = new DevExpress.XtraBars.BarButtonItem();
@@ -90,7 +90,7 @@
             this.deleteEntry,
             this.properties,
             this.predefinedPositions,
-            this.barButtonItem1,
+            this.predefinedDescription,
             this.papers,
             this.machines,
             this.clickCosts,
@@ -229,13 +229,14 @@
       this.predefinedPositions.Name = "predefinedPositions";
       this.predefinedPositions.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.PredefinedPositionsItemClick);
       // 
-      // barButtonItem1
+      // predefinedDescription
       // 
-      this.barButtonItem1.Caption = "Beschreibungen";
-      this.barButtonItem1.Id = 17;
-      this.barButtonItem1.LargeGlyph = global::Impressio.Properties.Resources.description;
-      this.barButtonItem1.LargeWidth = 90;
-      this.barButtonItem1.Name = "barButtonItem1";
+      this.predefinedDescription.Caption = "Beschreibungen";
+      this.predefinedDescription.Id = 17;
+      this.predefinedDescription.LargeGlyph = global::Impressio.Properties.Resources.description;
+      this.predefinedDescription.LargeWidth = 90;
+      this.predefinedDescription.Name = "predefinedDescription";
+      this.predefinedDescription.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.PredefinedDescriptionItemClick);
       // 
       // papers
       // 
@@ -351,7 +352,7 @@
       this.ribbonPageGroup5.AllowMinimize = false;
       this.ribbonPageGroup5.AllowTextClipping = false;
       this.ribbonPageGroup5.ItemLinks.Add(this.predefinedPositions);
-      this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItem1);
+      this.ribbonPageGroup5.ItemLinks.Add(this.predefinedDescription);
       this.ribbonPageGroup5.Name = "ribbonPageGroup5";
       this.ribbonPageGroup5.ShowCaptionButton = false;
       this.ribbonPageGroup5.Text = "Vordefiniert";
@@ -422,7 +423,6 @@
     private DevExpress.XtraBars.BarButtonItem printOffer;
     private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
     private DevExpress.XtraBars.BarButtonItem refreshOrder;
-    private DevExpress.XtraEditors.PanelControl mainPanel;
     private DevExpress.XtraBars.BarButtonItem showCompanies;
     private DevExpress.XtraBars.BarButtonItem showAddress;
     private DevExpress.XtraBars.BarButtonItem showPerson;
@@ -432,7 +432,7 @@
     private DevExpress.XtraBars.BarButtonItem properties;
     private DevExpress.XtraBars.BarButtonItem predefinedPositions;
     private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
-    private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+    private DevExpress.XtraBars.BarButtonItem predefinedDescription;
     private DevExpress.XtraBars.BarButtonItem papers;
     private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
     private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
@@ -440,5 +440,6 @@
     private DevExpress.XtraBars.BarButtonItem clickCosts;
     private DevExpress.XtraBars.BarButtonItem genders;
     private DevExpress.XtraBars.BarButtonItem state;
+    public DevExpress.XtraEditors.PanelControl mainPanel;
   }
 }

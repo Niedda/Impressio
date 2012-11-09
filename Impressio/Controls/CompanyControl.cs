@@ -4,16 +4,21 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using Impressio.Models;
+using Impressio.Views;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class CompanyControl : ControlBase, IControl, IGridControl<Company>
+  public partial class CompanyControl : BaseControlImpressio, IControl, IGridControl<Company>
   {
     public CompanyControl()
     {
       InitializeComponent();
     }
+
+    public ClientControl ClientControl;
+
+    public AddressControl AddressControl;
 
     public void ReloadControl()
     {
@@ -55,11 +60,42 @@ namespace Impressio.Controls
       }
     }
 
+    public bool OpenClient()
+    {
+      if (FocusedRow != null)
+      {
+        ClientControl = new ClientControl { Company = FocusedRow };
+        MainViewRibbon.Instance.mainPanel.Controls.Add(ClientControl);
+        MainViewRibbon.Instance.FocusedControl = AddressControl;
+        ClientControl.ReloadControl();
+        return true;
+      }
+      return false;
+    }
+
+    public bool OpenAddress()
+    {
+      if (FocusedRow != null)
+      {
+        AddressControl = new AddressControl { Company = FocusedRow };
+        MainViewRibbon.Instance.mainPanel.Controls.Add(AddressControl);
+        MainViewRibbon.Instance.FocusedControl = AddressControl;
+        AddressControl.ReloadControl();
+        return true;
+      }
+      return false;
+    }
+
+    public bool ValidateAddressAndClient()
+    {
+      return AddressControl.ValidateControl() && ClientControl.Validate();
+    }
+
     public Company FocusedRow
     {
       get { return viewCompany.GetFocusedRow() as Company; }
     }
-    
+
     private readonly Company _company = new Company();
 
     private void CompanyControlLoad(object sender, EventArgs e)

@@ -2,45 +2,44 @@
 
 namespace Impressio.Controls
 {
-    partial class PrintControl
+  partial class PrintControl
+  {
+    /// <summary> 
+    /// Required designer variable.
+    /// </summary>
+    private System.ComponentModel.IContainer components = null;
+
+    /// <summary> 
+    /// Clean up any resources being used.
+    /// </summary>
+    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    protected override void Dispose(bool disposing)
     {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+      if (disposing && (components != null))
+      {
+        components.Dispose();
+      }
+      base.Dispose(disposing);
+    }
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+    #region Component Designer generated code
 
-        #region Component Designer generated code
-
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-      this.components = new System.ComponentModel.Container();
+    /// <summary> 
+    /// Required method for Designer support - do not modify 
+    /// the contents of this method with the code editor.
+    /// </summary>
+    private void InitializeComponent()
+    {
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.amountPrint = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
       this.lookUpClickCost = new DevExpress.XtraEditors.LookUpEdit();
-      this.clickCostBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.clickCostBindingSource = new System.Windows.Forms.BindingSource();
       this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
-      this.lookUpPaper = new DevExpress.XtraEditors.SearchLookUpEdit();
-      this.paperBindingSource = new System.Windows.Forms.BindingSource(this.components);
-      this.paperView = new DevExpress.XtraGrid.Views.Grid.GridView();
+      this.paperSearchLookUp = new DevExpress.XtraEditors.SearchLookUpEdit();
+      this.paperBindingSource = new System.Windows.Forms.BindingSource();
+      this.viewPaper = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colItemNumber = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -72,6 +71,7 @@ namespace Impressio.Controls
       this.positionTotal = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
       this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+      this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
       this.typePrint = new DevExpress.XtraEditors.ComboBoxEdit();
       this.printCostTotal = new DevExpress.XtraEditors.SpinEdit();
       this.printTotal = new DevExpress.XtraEditors.LabelControl();
@@ -79,9 +79,9 @@ namespace Impressio.Controls
       ((System.ComponentModel.ISupportInitialize)(this.amountPrint.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.lookUpClickCost.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.clickCostBindingSource)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.lookUpPaper.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.paperSearchLookUp.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperBindingSource)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.paperView)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.viewPaper)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.amountPaper.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
       this.groupControl1.SuspendLayout();
@@ -145,12 +145,6 @@ namespace Impressio.Controls
       // 
       this.lookUpClickCost.Location = new System.Drawing.Point(128, 52);
       this.lookUpClickCost.Name = "lookUpClickCost";
-      this.lookUpClickCost.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lookUpClickCost.Properties.AppearanceDropDown.Options.UseFont = true;
-      this.lookUpClickCost.Properties.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lookUpClickCost.Properties.AppearanceDropDownHeader.Options.UseFont = true;
-      this.lookUpClickCost.Properties.AppearanceFocused.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lookUpClickCost.Properties.AppearanceFocused.Options.UseFont = true;
       this.lookUpClickCost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
       this.lookUpClickCost.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
@@ -177,36 +171,30 @@ namespace Impressio.Controls
       this.labelControl6.TabIndex = 10;
       this.labelControl6.Text = "Papier";
       // 
-      // lookUpPaper
+      // paperSearchLookUp
       // 
-      this.lookUpPaper.Location = new System.Drawing.Point(128, 47);
-      this.lookUpPaper.Name = "lookUpPaper";
-      this.lookUpPaper.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+      this.paperSearchLookUp.EditValue = "";
+      this.paperSearchLookUp.Location = new System.Drawing.Point(128, 47);
+      this.paperSearchLookUp.Name = "paperSearchLookUp";
+      this.paperSearchLookUp.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-      this.lookUpPaper.Properties.DataSource = this.paperBindingSource;
-      this.lookUpPaper.Properties.DisplayMember = "Name";
-      this.lookUpPaper.Properties.NullText = "";
-      this.lookUpPaper.Properties.ValueMember = "Identity";
-      this.lookUpPaper.Properties.View = this.paperView;
-      this.lookUpPaper.Size = new System.Drawing.Size(334, 20);
-      this.lookUpPaper.TabIndex = 11;
-      this.lookUpPaper.EditValueChanged += new System.EventHandler(this.LookUpPaperEditValueChanged);
+      this.paperSearchLookUp.Properties.DataSource = this.paperBindingSource;
+      this.paperSearchLookUp.Properties.DisplayMember = "Name";
+      this.paperSearchLookUp.Properties.NullText = "";
+      this.paperSearchLookUp.Properties.ValueMember = "Identity";
+      this.paperSearchLookUp.Properties.View = this.viewPaper;
+      this.paperSearchLookUp.Size = new System.Drawing.Size(334, 20);
+      this.paperSearchLookUp.TabIndex = 11;
+      this.paperSearchLookUp.EditValueChanged += new System.EventHandler(this.LookUpPaperEditValueChanged);
+      this.paperSearchLookUp.Validated += new System.EventHandler(this.FieldsEditValueChanged);
       // 
       // paperBindingSource
       // 
       this.paperBindingSource.DataSource = typeof(Impressio.Models.Paper);
       // 
-      // paperView
+      // viewPaper
       // 
-      this.paperView.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.paperView.Appearance.HeaderPanel.Options.UseFont = true;
-      this.paperView.Appearance.Row.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.paperView.Appearance.Row.Options.UseFont = true;
-      this.paperView.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.paperView.Appearance.SelectedRow.Options.UseFont = true;
-      this.paperView.Appearance.TopNewRow.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.paperView.Appearance.TopNewRow.Options.UseFont = true;
-      this.paperView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+      this.viewPaper.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colName,
             this.colItemNumber,
@@ -223,19 +211,16 @@ namespace Impressio.Controls
             this.colSizeL,
             this.colSizeB,
             this.colSize});
-      this.paperView.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-      this.paperView.Name = "paperView";
-      this.paperView.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-      this.paperView.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-      this.paperView.OptionsBehavior.ReadOnly = true;
-      this.paperView.OptionsSelection.EnableAppearanceFocusedCell = false;
-      this.paperView.OptionsView.ShowGroupPanel = false;
+      this.viewPaper.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+      this.viewPaper.Name = "viewPaper";
+      this.viewPaper.OptionsBehavior.ReadOnly = true;
+      this.viewPaper.OptionsSelection.EnableAppearanceFocusedCell = false;
+      this.viewPaper.OptionsView.ShowGroupPanel = false;
       // 
       // colIdentity
       // 
       this.colIdentity.FieldName = "Identity";
       this.colIdentity.Name = "colIdentity";
-      this.colIdentity.OptionsColumn.AllowEdit = false;
       this.colIdentity.OptionsColumn.ShowInCustomizationForm = false;
       // 
       // colName
@@ -390,11 +375,11 @@ namespace Impressio.Controls
       this.groupControl1.Controls.Add(this.amountPaper);
       this.groupControl1.Controls.Add(this.labelControl6);
       this.groupControl1.Controls.Add(this.labelControl7);
-      this.groupControl1.Controls.Add(this.lookUpPaper);
+      this.groupControl1.Controls.Add(this.paperSearchLookUp);
       this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
       this.groupControl1.Location = new System.Drawing.Point(0, 0);
       this.groupControl1.Name = "groupControl1";
-      this.groupControl1.Size = new System.Drawing.Size(861, 182);
+      this.groupControl1.Size = new System.Drawing.Size(824, 182);
       this.groupControl1.TabIndex = 14;
       this.groupControl1.Text = "Papier";
       // 
@@ -567,6 +552,7 @@ namespace Impressio.Controls
       // 
       // groupControl2
       // 
+      this.groupControl2.Controls.Add(this.simpleButton1);
       this.groupControl2.Controls.Add(this.typePrint);
       this.groupControl2.Controls.Add(this.printCostTotal);
       this.groupControl2.Controls.Add(this.labelControl9);
@@ -580,9 +566,17 @@ namespace Impressio.Controls
       this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
       this.groupControl2.Location = new System.Drawing.Point(0, 182);
       this.groupControl2.Name = "groupControl2";
-      this.groupControl2.Size = new System.Drawing.Size(861, 236);
+      this.groupControl2.Size = new System.Drawing.Size(824, 127);
       this.groupControl2.TabIndex = 15;
       this.groupControl2.Text = "Druck";
+      // 
+      // simpleButton1
+      // 
+      this.simpleButton1.Location = new System.Drawing.Point(531, 42);
+      this.simpleButton1.Name = "simpleButton1";
+      this.simpleButton1.Size = new System.Drawing.Size(75, 23);
+      this.simpleButton1.TabIndex = 22;
+      this.simpleButton1.Text = "simpleButton1";
       // 
       // typePrint
       // 
@@ -644,15 +638,15 @@ namespace Impressio.Controls
       this.Controls.Add(this.groupControl2);
       this.Controls.Add(this.groupControl1);
       this.Name = "PrintControl";
-      this.Size = new System.Drawing.Size(861, 418);
+      this.Size = new System.Drawing.Size(824, 309);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.PrintControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.amountPrint.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.lookUpClickCost.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.clickCostBindingSource)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.lookUpPaper.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.paperSearchLookUp.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperBindingSource)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.paperView)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.viewPaper)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.amountPaper.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
       this.groupControl1.ResumeLayout(false);
@@ -669,54 +663,55 @@ namespace Impressio.Controls
       ((System.ComponentModel.ISupportInitialize)(this.printCostTotal.Properties)).EndInit();
       this.ResumeLayout(false);
 
-        }
-
-        #endregion
-
-        private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.SpinEdit amountPrint;
-        private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.XtraEditors.LabelControl labelControl5;
-        private DevExpress.XtraEditors.LookUpEdit lookUpClickCost;
-        private DevExpress.XtraEditors.LabelControl labelControl6;
-        private DevExpress.XtraEditors.SearchLookUpEdit lookUpPaper;
-        private DevExpress.XtraGrid.Views.Grid.GridView paperView;
-        private DevExpress.XtraEditors.LabelControl labelControl7;
-        private DevExpress.XtraEditors.SpinEdit amountPaper;
-        private DevExpress.XtraEditors.GroupControl groupControl1;
-        private DevExpress.XtraEditors.SpinEdit positionTotal;
-        private DevExpress.XtraEditors.LabelControl labelControl9;
-        private DevExpress.XtraEditors.SpinEdit pricePerPaper;
-        private DevExpress.XtraEditors.LabelControl labelControl8;
-        private DevExpress.XtraEditors.GroupControl groupControl2;
-        private System.Windows.Forms.BindingSource clickCostBindingSource;
-        private System.Windows.Forms.BindingSource paperBindingSource;
-        private DevExpress.XtraGrid.Columns.GridColumn colIdentity;
-        private DevExpress.XtraGrid.Columns.GridColumn colName;
-        private DevExpress.XtraGrid.Columns.GridColumn colItemNumber;
-        private DevExpress.XtraGrid.Columns.GridColumn colVendor;
-        private DevExpress.XtraGrid.Columns.GridColumn colPrice1;
-        private DevExpress.XtraGrid.Columns.GridColumn colPrice2;
-        private DevExpress.XtraGrid.Columns.GridColumn colPrice3;
-        private DevExpress.XtraGrid.Columns.GridColumn colPrice4;
-        private DevExpress.XtraGrid.Columns.GridColumn colAmount1;
-        private DevExpress.XtraGrid.Columns.GridColumn colAmount2;
-        private DevExpress.XtraGrid.Columns.GridColumn colAmount3;
-        private DevExpress.XtraGrid.Columns.GridColumn colDirection;
-        private DevExpress.XtraGrid.Columns.GridColumn colDirectionString;
-        private DevExpress.XtraGrid.Columns.GridColumn colSizeL;
-        private DevExpress.XtraGrid.Columns.GridColumn colSizeB;
-        private DevExpress.XtraGrid.Columns.GridColumn colSize;
-        private DevExpress.XtraEditors.SpinEdit additionPaper;
-        private DevExpress.XtraEditors.LabelControl paperPriceLabel;
-        private DevExpress.XtraEditors.LabelControl printTotal;
-        private DevExpress.XtraEditors.LabelControl paperTotal;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.SpinEdit usePerPaper;
-        private DevExpress.XtraEditors.LabelControl labelControl11;
-        private DevExpress.XtraEditors.SpinEdit paperCostTotal;
-        private DevExpress.XtraEditors.SpinEdit printCostTotal;
-        private DevExpress.XtraEditors.ComboBoxEdit typePrint;
-
     }
+
+    #endregion
+
+    private DevExpress.XtraEditors.LabelControl labelControl2;
+    private DevExpress.XtraEditors.SpinEdit amountPrint;
+    private DevExpress.XtraEditors.LabelControl labelControl3;
+    private DevExpress.XtraEditors.LabelControl labelControl5;
+    private DevExpress.XtraEditors.LookUpEdit lookUpClickCost;
+    private DevExpress.XtraEditors.LabelControl labelControl6;
+    private DevExpress.XtraEditors.SearchLookUpEdit paperSearchLookUp;
+    private DevExpress.XtraGrid.Views.Grid.GridView viewPaper;
+    private DevExpress.XtraEditors.LabelControl labelControl7;
+    private DevExpress.XtraEditors.SpinEdit amountPaper;
+    private DevExpress.XtraEditors.GroupControl groupControl1;
+    private DevExpress.XtraEditors.SpinEdit positionTotal;
+    private DevExpress.XtraEditors.LabelControl labelControl9;
+    private DevExpress.XtraEditors.SpinEdit pricePerPaper;
+    private DevExpress.XtraEditors.LabelControl labelControl8;
+    private DevExpress.XtraEditors.GroupControl groupControl2;
+    private System.Windows.Forms.BindingSource clickCostBindingSource;
+    private System.Windows.Forms.BindingSource paperBindingSource;
+    private DevExpress.XtraGrid.Columns.GridColumn colIdentity;
+    private DevExpress.XtraGrid.Columns.GridColumn colName;
+    private DevExpress.XtraGrid.Columns.GridColumn colItemNumber;
+    private DevExpress.XtraGrid.Columns.GridColumn colVendor;
+    private DevExpress.XtraGrid.Columns.GridColumn colPrice1;
+    private DevExpress.XtraGrid.Columns.GridColumn colPrice2;
+    private DevExpress.XtraGrid.Columns.GridColumn colPrice3;
+    private DevExpress.XtraGrid.Columns.GridColumn colPrice4;
+    private DevExpress.XtraGrid.Columns.GridColumn colAmount1;
+    private DevExpress.XtraGrid.Columns.GridColumn colAmount2;
+    private DevExpress.XtraGrid.Columns.GridColumn colAmount3;
+    private DevExpress.XtraGrid.Columns.GridColumn colDirection;
+    private DevExpress.XtraGrid.Columns.GridColumn colDirectionString;
+    private DevExpress.XtraGrid.Columns.GridColumn colSizeL;
+    private DevExpress.XtraGrid.Columns.GridColumn colSizeB;
+    private DevExpress.XtraGrid.Columns.GridColumn colSize;
+    private DevExpress.XtraEditors.SpinEdit additionPaper;
+    private DevExpress.XtraEditors.LabelControl paperPriceLabel;
+    private DevExpress.XtraEditors.LabelControl printTotal;
+    private DevExpress.XtraEditors.LabelControl paperTotal;
+    private DevExpress.XtraEditors.LabelControl labelControl1;
+    private DevExpress.XtraEditors.SpinEdit usePerPaper;
+    private DevExpress.XtraEditors.LabelControl labelControl11;
+    private DevExpress.XtraEditors.SpinEdit paperCostTotal;
+    private DevExpress.XtraEditors.SpinEdit printCostTotal;
+    private DevExpress.XtraEditors.ComboBoxEdit typePrint;
+    private DevExpress.XtraEditors.SimpleButton simpleButton1;
+
+  }
 }

@@ -15,7 +15,7 @@ namespace Impressio.Views
       InitializeComponent();
     }
 
-    public Order Order = new Order();
+    public Order Order;
 
     private readonly PositionControl _positionControl = new PositionControl();
 
@@ -70,7 +70,6 @@ namespace Impressio.Views
     private void OrderRibbonViewLoad(object sender, EventArgs e)
     {
       _positionControl.Order = Order;
-      _positionControl.ReloadControl();
       mainPanel.Controls.Add(_positionControl);
     }
 

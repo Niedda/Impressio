@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using DevExpress.XtraEditors.Controls;
@@ -7,13 +6,12 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
 using Impressio.Models.Tools;
-using Impressio.Views;
 using Subvento.DatabaseObject;
 using Type = Impressio.Models.Type;
 
 namespace Impressio.Controls
 {
-  public partial class PositionControl : ControlBase, IControl, IGridControl<Position>
+  public partial class PositionControl : BaseControlImpressio, IControl, IGridControl<Position>
   {
     public PositionControl()
     {
@@ -95,7 +93,7 @@ namespace Impressio.Controls
       get { return viewPosition.GetFocusedRow() as Position; }
     }
 
-    public Order Order = new Order();
+    public Order Order;
 
     private readonly Position _position = new Position();
 

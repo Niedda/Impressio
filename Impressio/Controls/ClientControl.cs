@@ -8,11 +8,16 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class ClientControl : ControlBase, IControl, IGridControl<Client>
+  public partial class ClientControl : BaseControlImpressio, IControl, IGridControl<Client>
   {
     public ClientControl()
     {
       InitializeComponent();
+    }
+
+    public ClientControl(Company company)
+    {
+      Company = company;
     }
 
     public void ReloadControl()

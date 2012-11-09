@@ -11,7 +11,7 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class ClickCostControl : ControlBase, IControl, IGridControl<ClickCost>, IRibbon
+  public partial class ClickCostControl : BaseControlImpressio, IControl, IGridControl<ClickCost>, IRibbon
   {
     public ClickCostControl()
     {

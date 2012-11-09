@@ -9,7 +9,7 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class OrdersControl : ControlBase, IControl, IGridControl<Order>
+  public partial class OrdersControl : BaseControlImpressio, IControl, IGridControl<Order>
   {
     public OrdersControl()
     {
@@ -21,6 +21,7 @@ namespace Impressio.Controls
       Order.ClearObjectList();
       _company.ClearObjectList();
       _state.ClearObjectList();
+
       companiesBindingSource.DataSource = _company.LoadObjectList();
       orderBindingSource.DataSource = Order.LoadObjectList();
       stateBindingSource.DataSource = _state.LoadObjectList();

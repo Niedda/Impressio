@@ -8,18 +8,21 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class AddressControl : ControlBase, IControl, IGridControl<Address>
+  public partial class AddressControl : BaseControlImpressio, IControl, IGridControl<Address>
   {
     public AddressControl()
     {
       InitializeComponent();
     }
-    
+
     public void ReloadControl()
     {
-      _address.ClearObjectList();
-      addressBindingSource.DataSource = _address.LoadObjectList(Address.Columns.FkAddressCompany, Company.Identity);
-      viewAddress.RefreshData();
+      if (Company != null)
+      {
+        _address.ClearObjectList();
+        addressBindingSource.DataSource = _address.LoadObjectList(Address.Columns.FkAddressCompany, Company.Identity);
+        viewAddress.RefreshData();
+      }
     }
 
     public bool ValidateControl()

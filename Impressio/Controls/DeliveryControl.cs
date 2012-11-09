@@ -7,12 +7,11 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
-using Impressio.Reports;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class DeliveryControl : ControlBase, IControl, IGridControl<DeliveryPosition>, IRibbon
+  public partial class DeliveryControl : BaseControlImpressio, IControl, IGridControl<DeliveryPosition>, IRibbon
   {
     public DeliveryControl()
     {

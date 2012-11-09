@@ -10,7 +10,7 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class GenderControl : ControlBase, IControl, IGridControl<Gender>, IRibbon
+  public partial class GenderControl : BaseControlImpressio, IControl, IGridControl<Gender>, IRibbon
   {
     public GenderControl()
     {

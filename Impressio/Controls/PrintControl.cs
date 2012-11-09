@@ -9,10 +9,11 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class PrintControl : ControlBase, IControl, IRibbon
+  public partial class PrintControl : BaseControlImpressio, IControl, IRibbon
   {
     public PrintControl()
     {
+      Print.LoadSingleObject();
       InitializeComponent();
     }
 
@@ -68,17 +69,17 @@ namespace Impressio.Controls
 
     public void ReloadControl()
     {
-      _isLoaded = false;
-
-      _clickCost.ClearObjectList();
-      _paper.ClearObjectList();
-      clickCostBindingSource.DataSource = _clickCost.LoadObjectList();
-      paperBindingSource.DataSource = _paper.LoadObjectList();
-
       if (Print != null)
       {
-        Print.LoadSingleObject();
+        _isLoaded = false;
 
+        _clickCost.ClearObjectList();
+        _paper.ClearObjectList();
+        clickCostBindingSource.DataSource = _clickCost.LoadObjectList();
+        paperBindingSource.DataSource = _paper.LoadObjectList();
+        Print.LoadSingleObject();
+        
+        paperSearchLookUp.EditValue = Print.FkPrintPaper;
         usePerPaper.Value = Print.PaperUsePer;
         typePrint.SelectedIndex = Print.PrintType;
         amountPrint.Value = Print.PrintAmount;
@@ -86,10 +87,10 @@ namespace Impressio.Controls
         amountPaper.Value = Print.PaperAmount;
         pricePerPaper.Value = Print.PaperPricePer;
         additionPaper.Value = Print.PaperAddition;
-        lookUpPaper.EditValue = Print.FkPrintPaper;
         paperCostTotal.Value = Print.PaperCostTotal.GetInt();
         printCostTotal.Value = Print.PrintCostTotal.GetInt();
         positionTotal.Value = Print.PositionTotal;
+        paperSearchLookUp.DoValidate();
 
         _isLoaded = true;
       }
@@ -112,13 +113,19 @@ namespace Impressio.Controls
         Print.PaperPricePer = pricePerPaper.Value.GetInt();
         Print.PaperUsePer = usePerPaper.Value.GetInt();
         Print.FkPrintClickCost = lookUpClickCost.EditValue.GetInt();
-        Print.FkPrintPaper = lookUpPaper.EditValue.GetInt();
+        Print.FkPrintPaper = paperSearchLookUp.EditValue.GetInt();
         paperCostTotal.Value = Print.PaperCostTotal.GetInt();
         printCostTotal.Value = Print.PrintCostTotal.GetInt();
         positionTotal.Value = Print.PositionTotal.GetInt();
 
         Print.SaveObject();
       }
+    }
+
+    public override void Refresh()
+    {
+      GetPrint();
+      base.Refresh();
     }
 
     private bool _isLoaded;
@@ -134,19 +141,22 @@ namespace Impressio.Controls
 
     private void LookUpPaperEditValueChanged(object sender, EventArgs e)
     {
-      var paper = paperView.GetFocusedRow() as Paper;
+      if (_isLoaded)
+      {
+        var paper = viewPaper.GetFocusedRow() as Paper;
 
-      if (paper != null)
-      {
-        paperPriceLabel.Text =
-          string.Format("{8}{0}{1}{9}{0}{2}{9} ab {3} Bogen{0}{4}{9} ab {5} Bogen{0}{6}{9} ab {7} Bogen",
-                        Environment.NewLine, paper.Price1, paper.Price2, paper.Amount1,
-                        paper.Price3, paper.Amount2, paper.Price4, paper.Amount3, "Preisstufe:", ".00 Fr.");
-        GetPrint();
-      }
-      else
-      {
-        paperPriceLabel.Text = string.Empty;
+        if (paper != null)
+        {
+          paperPriceLabel.Text =
+            string.Format("{8}{0}{1}{9}{0}{2}{9} ab {3} Bogen{0}{4}{9} ab {5} Bogen{0}{6}{9} ab {7} Bogen",
+                          Environment.NewLine, paper.Price1, paper.Price2, paper.Amount1,
+                          paper.Price3, paper.Amount2, paper.Price4, paper.Amount3, "Preisstufe:", ".00 Fr.");
+          GetPrint();
+        }
+        else
+        {
+          paperPriceLabel.Text = string.Empty;
+        }
       }
     }
 
@@ -157,8 +167,11 @@ namespace Impressio.Controls
 
     private void UsePerPaperEditValueChanged(object sender, EventArgs e)
     {
-      amountPrint.Value = usePerPaper.Value * amountPaper.Value;
-      GetPrint();
+      if (_isLoaded)
+      {
+        amountPrint.Value = usePerPaper.Value * amountPaper.Value;
+        GetPrint();
+      }
     }
   }
 }

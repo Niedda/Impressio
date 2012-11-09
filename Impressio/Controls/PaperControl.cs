@@ -11,7 +11,7 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class PaperControl : ControlBase, IControl, IGridControl<Paper>, IRibbon
+  public partial class PaperControl : BaseControlImpressio, IControl, IGridControl<Paper>, IRibbon
   {
     public PaperControl()
     {

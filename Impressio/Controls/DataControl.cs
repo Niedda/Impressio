@@ -11,7 +11,7 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class DataControl : ControlBase, IControl, IGridControl<DataPosition>, IRibbon
+  public partial class DataControl : BaseControlImpressio, IControl, IGridControl<DataPosition>, IRibbon
   {
     public DataControl()
     {
@@ -149,6 +149,12 @@ namespace Impressio.Controls
         Data.PositionTotal = _dataPosition.Objects.Sum(data => data.PositionTotal);
         Data.SaveObject();
       }
+    }
+
+    public override void Refresh()
+    {
+      GetData();
+      base.Refresh();
     }
 
     private void DataControlLoad(object sender, EventArgs e)

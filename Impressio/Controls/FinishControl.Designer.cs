@@ -59,7 +59,7 @@ namespace Impressio.Controls
       this.gridFinish.Location = new System.Drawing.Point(0, 128);
       this.gridFinish.MainView = this.viewFinish;
       this.gridFinish.Name = "gridFinish";
-      this.gridFinish.Size = new System.Drawing.Size(841, 197);
+      this.gridFinish.Size = new System.Drawing.Size(905, 240);
       this.gridFinish.TabIndex = 0;
       this.gridFinish.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewFinish});
@@ -158,7 +158,7 @@ namespace Impressio.Controls
       this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
       this.groupBox1.Location = new System.Drawing.Point(0, 0);
       this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(841, 128);
+      this.groupBox1.Size = new System.Drawing.Size(905, 128);
       this.groupBox1.TabIndex = 1;
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Weiterverarbeitung";
@@ -186,7 +186,7 @@ namespace Impressio.Controls
       this.Controls.Add(this.gridFinish);
       this.Controls.Add(this.groupBox1);
       this.Name = "FinishControl";
-      this.Size = new System.Drawing.Size(841, 325);
+      this.Size = new System.Drawing.Size(905, 368);
       this.Load += new System.EventHandler(this.FinishControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.FinishControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

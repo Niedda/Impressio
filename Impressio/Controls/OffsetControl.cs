@@ -9,7 +9,7 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class OffsetControl : ControlBase, IControl, IRibbon
+  public partial class OffsetControl : BaseControlImpressio, IControl, IRibbon
   {
     public OffsetControl()
     {
@@ -70,17 +70,22 @@ namespace Impressio.Controls
       {
         _isLoaded = false;
 
+        _machine.ClearObjectList();
+        _paper.ClearObjectList();
+
         machineBindingSource.DataSource = _machine.LoadObjectList();
         paperBindingSource.DataSource = _paper.LoadObjectList();
         Offset.LoadSingleObject();
 
         paperSearchLookUp.EditValue = Offset.FkOffsetPaper;
+        paperSearchLookUp.Refresh();
         paperAddition.Value = Offset.PaperAddition;
         paperPricePer.Value = Offset.PaperPricePer;
         paperQuantity.Value = Offset.PaperQuantity;
         paperUsePer.Value = Offset.PaperUsePer;
 
         offsetMachineSearchLookUp.EditValue = Offset.FkOffsetMachine;
+        offsetMachineSearchLookUp.Refresh();
         offsetPrintType.SelectedIndex = Offset.PrintType;
         offsetColorAmount.Value = Offset.ColorAmount;
         offsetPaperQuantity.Value = Offset.OffsetQuantity;
@@ -125,7 +130,13 @@ namespace Impressio.Controls
         Offset.SaveObject();
       }
     }
-    
+
+    public override void Refresh()
+    {
+      GetOffset();
+      base.Refresh();
+    }
+
     private readonly Machine _machine = new Machine();
 
     private readonly Paper _paper = new Paper();
@@ -156,6 +167,10 @@ namespace Impressio.Controls
                                                 Offset.Paper.Price4, Offset.Paper.Amount3);
           paperPricePer.Value = Offset.Paper.Price1;
           GetOffset();
+        }
+        else
+        {
+          labelPricePaper.Text = string.Empty;
         }
       }
     }
