@@ -119,8 +119,11 @@ namespace Impressio.Controls
 
     public void DeleteRow()
     {
-      FocusedRow.DeleteObject();
-      viewPaper.DeleteSelectedRows();
+      if (FocusedRow != null)
+      {
+        FocusedRow.DeleteObject();
+        viewPaper.DeleteSelectedRows(); 
+      }
     }
 
     public bool ValidateRow()
@@ -171,6 +174,18 @@ namespace Impressio.Controls
     private void PaperControlValidating(object sender, CancelEventArgs e)
     {
       e.Cancel = !ValidateControl();
+    }
+
+    private void GridPaperKeyDown(object sender, KeyEventArgs e)
+    {
+      if (e.KeyCode == Keys.Escape)
+      {
+        if (viewPaper.IsNewItemRow(viewPaper.FocusedRowHandle))
+        {
+          viewPaper.CancelUpdateCurrentRow();
+          viewPaper.FocusedRowHandle = 0;
+        }
+      }
     }
   }
 }

@@ -79,10 +79,11 @@ namespace Impressio.Controls
       this.gridOrder.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.companySearchLookUpEdit,
             this.stateLookUpEdit});
-      this.gridOrder.Size = new System.Drawing.Size(0, 0);
+      this.gridOrder.Size = new System.Drawing.Size(777, 339);
       this.gridOrder.TabIndex = 0;
       this.gridOrder.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewOrder});
+      this.gridOrder.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridOrderKeyDown);
       // 
       // orderBindingSource
       // 
@@ -319,7 +320,7 @@ namespace Impressio.Controls
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridOrder);
       this.Name = "OrdersControl";
-      this.Size = new System.Drawing.Size(0, 0);
+      this.Size = new System.Drawing.Size(777, 339);
       this.Load += new System.EventHandler(this.OrderControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.OrdersControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

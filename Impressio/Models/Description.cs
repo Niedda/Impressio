@@ -71,11 +71,11 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader[IdentityColumn].GetInt();
-      JobTitle = Database.Reader[Columns.JobTitle.ToString()] as string;
-      Arrange = Database.Reader[Columns.Arrange.ToString()].GetInt();
-      FkDescriptionOrder = Database.Reader[Columns.FkDescriptionOrder.ToString()].GetInt();
-      Price = Database.Reader[Columns.Price.ToString()].GetInt();
+      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
+      JobTitle = Database.DatabaseCommand.Reader[Columns.JobTitle.ToString()] as string;
+      Arrange = Database.DatabaseCommand.Reader[Columns.Arrange.ToString()].GetInt();
+      FkDescriptionOrder = Database.DatabaseCommand.Reader[Columns.FkDescriptionOrder.ToString()].GetInt();
+      Price = Database.DatabaseCommand.Reader[Columns.Price.ToString()].GetInt();
     }
     
     public override Dictionary<Enum, object> GetObject()
@@ -134,11 +134,11 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      DetailContent = Database.Reader[Columns.DetailContent.ToString()] as string;
-      Identity = Database.Reader[IdentityColumn].GetInt();
-      Arrange = Database.Reader[Columns.Arrange.ToString()].GetInt();
-      DetailTitle = Database.Reader[Columns.DetailTitle.ToString()] as string;
-      FkDetailDescription = Database.Reader[Columns.FkDetailDescription.ToString()].GetInt();
+      DetailContent = Database.DatabaseCommand.Reader[Columns.DetailContent.ToString()] as string;
+      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
+      Arrange = Database.DatabaseCommand.Reader[Columns.Arrange.ToString()].GetInt();
+      DetailTitle = Database.DatabaseCommand.Reader[Columns.DetailTitle.ToString()] as string;
+      FkDetailDescription = Database.DatabaseCommand.Reader[Columns.FkDetailDescription.ToString()].GetInt();
     }
     
     public override Dictionary<Enum, object> GetObject()

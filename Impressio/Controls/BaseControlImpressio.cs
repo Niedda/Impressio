@@ -36,7 +36,7 @@ namespace Impressio.Controls
           }
           break;
         case "Double":
-          if ((double) value <= 0)
+          if (Convert.ToDouble(value) <= 0)
           {
             column.View.SetColumnError(column, "Bitte einen gültigen Wert angeben", ErrorType.Warning);
           }
@@ -44,9 +44,6 @@ namespace Impressio.Controls
         case "DateTime":
           break;
         case "Type":
-          break;
-        default:
-          MessageBox.Show(type.Name + " unhandled type", "Possible Error");
           break;
       }
     }

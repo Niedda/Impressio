@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors.Controls;
@@ -16,7 +17,7 @@ namespace Impressio.Controls
     {
       InitializeComponent();
     }
-    
+
     #region Ribbon
 
     public string RibbonGroupName { get { return "Druckmaschinen"; } }
@@ -91,11 +92,14 @@ namespace Impressio.Controls
     {
       return ValidateRow();
     }
-    
+
     public void DeleteRow()
     {
-      FocusedRow.DeleteObject();
-      viewMachine.DeleteSelectedRows();
+      if (FocusedRow != null)
+      {
+        FocusedRow.DeleteObject();
+        viewMachine.DeleteSelectedRows();
+      }
     }
 
     public bool ValidateRow()
@@ -136,17 +140,31 @@ namespace Impressio.Controls
 
     private void ViewMachineValidateRow(object sender, ValidateRowEventArgs e)
     {
-      e.Valid = ValidateRow();
-    }
-
-    private void ViewMachineRowUpdated(object sender, RowObjectEventArgs e)
-    {
-      UpdateRow();
+      if (ValidateRow())
+      {
+        UpdateRow();
+      }
+      else
+      {
+        e.Valid = false;
+      }
     }
 
     private void MachineControlValidating(object sender, CancelEventArgs e)
     {
       e.Cancel = !ValidateControl();
+    }
+
+    private void GridMachineKeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+    {
+      if (e.KeyCode == Keys.Escape)
+      {
+        if (viewMachine.IsNewItemRow(viewMachine.FocusedRowHandle))
+        {
+          viewMachine.CancelUpdateCurrentRow();
+          viewMachine.FocusedRowHandle = 0;
+        }
+      }
     }
   }
 }

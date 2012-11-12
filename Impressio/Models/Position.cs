@@ -217,9 +217,9 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader[IdentityColumn].GetInt();
-      Name = Database.Reader[Columns.PositionName.ToString()] as string;
-      PriceTotal = Database.Reader[Columns.PositionTotal.ToString()].GetInt();
+      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
+      Name = Database.DatabaseCommand.Reader[Columns.PositionName.ToString()] as string;
+      PriceTotal = Database.DatabaseCommand.Reader[Columns.PositionTotal.ToString()].GetInt();
     }
 
     public override Dictionary<Enum, object> GetObject()

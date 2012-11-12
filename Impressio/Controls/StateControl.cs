@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors.Controls;
@@ -94,8 +95,11 @@ namespace Impressio.Controls
 
     public void DeleteRow()
     {
-      FocusedRow.DeleteObject();
-      viewState.DeleteSelectedRows();
+      if (FocusedRow != null)
+      {
+        FocusedRow.DeleteObject();
+        viewState.DeleteSelectedRows();
+      }
     }
 
     public bool ValidateRow()
@@ -129,19 +133,33 @@ namespace Impressio.Controls
       e.ExceptionMode = ExceptionMode.NoAction;
     }
 
-    private void ViewStateRowUpdated(object sender, RowObjectEventArgs e)
-    {
-      UpdateRow();
-    }
-
     private void ViewStateValidateRow(object sender, ValidateRowEventArgs e)
     {
-      e.Valid = !ValidateRow();
+      if(ValidateRow())
+      {
+        UpdateRow();
+      }
+      else
+      {
+        e.Valid = false;
+      }
     }
 
     private void StateControlValidating(object sender, CancelEventArgs e)
     {
       e.Cancel = !ValidateControl();
+    }
+
+    private void GridStateKeyDown(object sender, KeyEventArgs e)
+    {
+      if (e.KeyCode == Keys.Escape)
+      {
+        if (viewState.IsNewItemRow(viewState.FocusedRowHandle))
+        {
+          viewState.CancelUpdateCurrentRow();
+          viewState.FocusedRowHandle = 0;
+        }
+      }
     }
   }
 }

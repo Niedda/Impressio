@@ -108,6 +108,7 @@
       this.ribbon.Size = new System.Drawing.Size(694, 145);
       this.ribbon.StatusBar = this.ribbonStatusBar;
       this.ribbon.Toolbar.ShowCustomizeItem = false;
+      this.ribbon.SelectedPageChanging += new DevExpress.XtraBars.Ribbon.RibbonPageChangingEventHandler(this.RibbonSelectedPageChanging);
       this.ribbon.SelectedPageChanged += new System.EventHandler(this.RibbonSelectedPageChanged);
       // 
       // openOrder
@@ -175,6 +176,7 @@
       this.refreshOrder.LargeGlyph = global::Impressio.Properties.Resources.refresh;
       this.refreshOrder.LargeWidth = 80;
       this.refreshOrder.Name = "refreshOrder";
+      this.refreshOrder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RefreshOrderItemClick);
       // 
       // showCompanies
       // 

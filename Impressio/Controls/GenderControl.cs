@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors.Controls;
@@ -91,11 +92,14 @@ namespace Impressio.Controls
     {
       return ValidateRow();
     }
-    
+
     public void DeleteRow()
     {
-      FocusedRow.DeleteObject();
-      viewGender.DeleteSelectedRows();
+      if (FocusedRow != null)
+      {
+        FocusedRow.DeleteObject();
+        viewGender.DeleteSelectedRows();
+      }
     }
 
     public bool ValidateRow()
@@ -132,17 +136,30 @@ namespace Impressio.Controls
 
     private void ViewGenderValidateRow(object sender, ValidateRowEventArgs e)
     {
-      e.Valid = ValidateRow();
-    }
-
-    private void ViewGenderRowUpdated(object sender, RowObjectEventArgs e)
-    {
-      UpdateRow();
+      if (ValidateRow())
+      {
+        UpdateRow();
+      }
+      else
+      {
+        e.Valid = false;
+      }
     }
 
     private void GenderControlValidating(object sender, CancelEventArgs e)
     {
       e.Cancel = !ValidateControl();
+    }
+
+    private void GridGenderKeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+    {
+      if (e.KeyCode == Keys.Escape)
+      {
+        if (viewGender.IsNewItemRow(viewGender.FocusedRowHandle))
+        {
+          viewGender.FocusedRowHandle = 0;
+        }
+      }
     }
   }
 }

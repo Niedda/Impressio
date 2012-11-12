@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.OleDb;
 using System.IO;
 using System.Linq;
+using DevExpress.XtraEditors;
 using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 
@@ -31,7 +32,7 @@ namespace Impressio.Models
     }
 
     #endregion
-    
+
     public override int Identity { get; set; }
 
     public override string IdentityColumn { get { return "PaperId"; } }
@@ -108,22 +109,22 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader[IdentityColumn].GetInt();
-      Price1 = Database.Reader[Columns.Price1.ToString()].GetInt();
-      Price2 = Database.Reader[Columns.Price2.ToString()].GetInt();
-      Price3 = Database.Reader[Columns.Price3.ToString()].GetInt();
-      Price4 = Database.Reader[Columns.Price4.ToString()].GetInt();
-      Amount1 = Database.Reader[Columns.Amount1.ToString()].GetInt();
-      Amount2 = Database.Reader[Columns.Amount2.ToString()].GetInt();
-      Amount3 = Database.Reader[Columns.Amount3.ToString()].GetInt();
-      Direction = Database.Reader[Columns.Direction.ToString()].GetInt();
-      ItemNumber = Database.Reader[Columns.ItemNumber.ToString()].GetInt();
-      SizeB = Database.Reader[Columns.SizeB.ToString()].GetInt();
-      SizeL = Database.Reader[Columns.SizeL.ToString()].GetInt();
-      Name = Database.Reader[Columns.PaperName.ToString()] as string;
-      Weight = Database.Reader[Columns.Weight.ToString()].GetInt();
+      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
+      Price1 = Database.DatabaseCommand.Reader[Columns.Price1.ToString()].GetInt();
+      Price2 = Database.DatabaseCommand.Reader[Columns.Price2.ToString()].GetInt();
+      Price3 = Database.DatabaseCommand.Reader[Columns.Price3.ToString()].GetInt();
+      Price4 = Database.DatabaseCommand.Reader[Columns.Price4.ToString()].GetInt();
+      Amount1 = Database.DatabaseCommand.Reader[Columns.Amount1.ToString()].GetInt();
+      Amount2 = Database.DatabaseCommand.Reader[Columns.Amount2.ToString()].GetInt();
+      Amount3 = Database.DatabaseCommand.Reader[Columns.Amount3.ToString()].GetInt();
+      Direction = Database.DatabaseCommand.Reader[Columns.Direction.ToString()].GetInt();
+      ItemNumber = Database.DatabaseCommand.Reader[Columns.ItemNumber.ToString()].GetInt();
+      SizeB = Database.DatabaseCommand.Reader[Columns.SizeB.ToString()].GetInt();
+      SizeL = Database.DatabaseCommand.Reader[Columns.SizeL.ToString()].GetInt();
+      Name = Database.DatabaseCommand.Reader[Columns.PaperName.ToString()] as string;
+      Weight = Database.DatabaseCommand.Reader[Columns.Weight.ToString()].GetInt();
     }
-    
+
     public override void ClearObjectList()
     {
       _papers.Clear();
@@ -215,11 +216,11 @@ namespace Impressio.Models
       }
       catch (Exception exception)
       {
-        ExceptionHandler.Instance.WriteToLog(exception.ToString());
+        XtraMessageBox.Show("Feher beim Einlesen der Papiere." + Environment.NewLine + exception, "Fehler");
         return false;
       }
     }
-    
+
     private readonly List<Paper> _papers = new List<Paper>();
   }
 }

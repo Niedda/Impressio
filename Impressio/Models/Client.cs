@@ -66,15 +66,15 @@ namespace Impressio.Models
     
     public override void SetObject()
     {
-      Identity = Database.Reader["ClientId"].GetInt();
-      FirstName = Database.Reader["FirstName"] as string;
-      LastName = Database.Reader["LastName"] as string;
-      Mobile = Database.Reader["Mobile"] as string;
-      Phone = Database.Reader["Phone"] as string;
-      Mail = Database.Reader["Mail"] as string;
-      Remark = Database.Reader["Remark"] as string;
-      FkClientCompany = Database.Reader["FkClientCompany"].GetInt();
-      FkClientGender = Database.Reader["FkClientGender"].GetInt();
+      Identity = Database.DatabaseCommand.Reader["ClientId"].GetInt();
+      FirstName = Database.DatabaseCommand.Reader["FirstName"] as string;
+      LastName = Database.DatabaseCommand.Reader["LastName"] as string;
+      Mobile = Database.DatabaseCommand.Reader["Mobile"] as string;
+      Phone = Database.DatabaseCommand.Reader["Phone"] as string;
+      Mail = Database.DatabaseCommand.Reader["Mail"] as string;
+      Remark = Database.DatabaseCommand.Reader["Remark"] as string;
+      FkClientCompany = Database.DatabaseCommand.Reader["FkClientCompany"].GetInt();
+      FkClientGender = Database.DatabaseCommand.Reader["FkClientGender"].GetInt();
     }
     
     public override void ClearObjectList()

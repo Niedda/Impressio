@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impressio", "Impressio\Impressio.csproj", "{97FA1D0D-FE7A-4C47-BD25-02603064C14D}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ImpressioSetup", "ImpressioSetup\ImpressioSetup.vdproj", "{B08BDC59-38B2-45D4-8A8F-5C5405C7DFAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,12 @@ Global
 		{97FA1D0D-FE7A-4C47-BD25-02603064C14D}.Release|Mixed Platforms.Build.0 = Release|x86
 		{97FA1D0D-FE7A-4C47-BD25-02603064C14D}.Release|x86.ActiveCfg = Release|x86
 		{97FA1D0D-FE7A-4C47-BD25-02603064C14D}.Release|x86.Build.0 = Release|x86
+		{B08BDC59-38B2-45D4-8A8F-5C5405C7DFAD}.Debug|Any CPU.ActiveCfg = Debug
+		{B08BDC59-38B2-45D4-8A8F-5C5405C7DFAD}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{B08BDC59-38B2-45D4-8A8F-5C5405C7DFAD}.Debug|x86.ActiveCfg = Debug
+		{B08BDC59-38B2-45D4-8A8F-5C5405C7DFAD}.Release|Any CPU.ActiveCfg = Release
+		{B08BDC59-38B2-45D4-8A8F-5C5405C7DFAD}.Release|Mixed Platforms.ActiveCfg = Release
+		{B08BDC59-38B2-45D4-8A8F-5C5405C7DFAD}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

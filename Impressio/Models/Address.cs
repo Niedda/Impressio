@@ -49,13 +49,13 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      FkAddressCompany = Database.Reader["FkAddressCompany"].GetInt();
-      Identity = Database.Reader["AddressId"].GetInt();
-      Street = Database.Reader["Street"] as string;
-      StreetNumber = Database.Reader["StreetNumber"] as string;
-      ZipCode = Database.Reader["ZipCode"] as string;
-      City = Database.Reader["City"] as string;
-      Addition = Database.Reader["Addition"] as string;
+      FkAddressCompany = Database.DatabaseCommand.Reader["FkAddressCompany"].GetInt();
+      Identity = Database.DatabaseCommand.Reader["AddressId"].GetInt();
+      Street = Database.DatabaseCommand.Reader["Street"] as string;
+      StreetNumber = Database.DatabaseCommand.Reader["StreetNumber"] as string;
+      ZipCode = Database.DatabaseCommand.Reader["ZipCode"] as string;
+      City = Database.DatabaseCommand.Reader["City"] as string;
+      Addition = Database.DatabaseCommand.Reader["Addition"] as string;
     }
 
     public override Dictionary<Enum, object> GetObject()

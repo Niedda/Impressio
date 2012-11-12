@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
@@ -77,17 +78,23 @@ namespace Impressio.Controls
       viewPosition.ClearColumnErrors();
       CheckColumn(colName);
       CheckColumn(colType);
-      return !viewPosition.HasColumnErrors;
+      if (!viewPosition.HasColumnErrors)
+      {
+        UpdateRow();
+        return true;
+      }
+      return false;
     }
 
     public void UpdateRow()
     {
       if (FocusedRow != null)
       {
-        FocusedRow.Identity = FocusedRow.SaveObject();
+        viewPosition.SetFocusedRowCellValue(colFkOrder, Order.Identity);
+        viewPosition.SetFocusedRowCellValue(colIdentity, FocusedRow.SaveObject());
       }
     }
-    
+
     public Position FocusedRow
     {
       get { return viewPosition.GetFocusedRow() as Position; }
@@ -216,9 +223,20 @@ namespace Impressio.Controls
 
     private void TypeComboEditValueChanging(object sender, ChangingEventArgs e)
     {
-      if(!viewPosition.IsNewItemRow(viewPosition.FocusedRowHandle))
+      if (!viewPosition.IsNewItemRow(viewPosition.FocusedRowHandle))
       {
         e.Cancel = true;
+      }
+    }
+
+    private void GridPositionKeyDown(object sender, KeyEventArgs e)
+    {
+      if (e.KeyCode == Keys.Escape)
+      {
+        if (viewPosition.IsNewItemRow(viewPosition.FocusedRowHandle))
+        {
+          viewPosition.CancelUpdateCurrentRow();
+        }
       }
     }
   }

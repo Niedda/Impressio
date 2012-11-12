@@ -4,8 +4,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using Impressio.Properties;
 using Subvento;
-using Subvento.Configuration;
-using Subvento.Database;
+using Subvento.Tools;
 
 namespace Impressio.Views
 {
@@ -42,9 +41,13 @@ namespace Impressio.Views
 
     private void WizardPageDatabasePageValidating(object sender, DevExpress.XtraWizard.WizardPageValidatingEventArgs e)
     {
-      ServiceLocator.ResetDatabase();
+      validateDatabase.Text = "";
+      validateDatabase.Update();
+      validateDatabase.ForeColor = Color.Gold;
+      validateDatabase.Text = "Validierung der Eingaben...";
+      validateDatabase.Update();
 
-      if (!ServiceLocator.Instance.Usable())
+      if (!ServiceLocator.Instance.Database.Usable())
       {
         validateDatabase.Text = "Fehler bei der Überprüfung der Datenbank";
         validateDatabase.ForeColor = Color.Red;
@@ -59,41 +62,50 @@ namespace Impressio.Views
 
     private void WizardPageDatabaseEnter(object sender, EventArgs e)
     {
-      connectionString.Text = ServiceLocator.ConfigFile.ConnectionString;
-      databaseEngine.Text = ServiceLocator.ConfigFile.DatabaseEngine;
+      databaseEngine.Properties.Items.Clear();
+      connectionString.Text = ServiceLocator.Instance.ConfigFile.ConnectionString;
+      databaseEngine.Properties.Items.AddRange(Enum.GetNames(typeof(ServiceLocator.DatabaseEngine)));
+      databaseEngine.Text = ServiceLocator.Instance.ConfigFile.DatabaseEngine.ToString();
     }
 
     private void ConnectionStringEditValueChanged(object sender, EventArgs e)
     {
-      ServiceLocator.ConfigFile.ConnectionString = connectionString.Text;
-      ServiceLocator.ConfigFile.SaveConfig();
+      ServiceLocator.Instance.ConfigFile.SetConnectionString(connectionString.Text);
     }
 
     private void DatabaseEngineSelectedIndexChanged(object sender, EventArgs e)
     {
-      ServiceLocator.ConfigFile.DatabaseEngine = databaseEngine.Text;
-      ServiceLocator.ConfigFile.SaveConfig();
+      ServiceLocator.Instance.ConfigFile.SetDatabaseEngine((ServiceLocator.DatabaseEngine)Enum.Parse(typeof(ServiceLocator.DatabaseEngine), databaseEngine.Text));
     }
 
     private void CreateCompactClick(object sender, EventArgs e)
     {
-      if(string.IsNullOrEmpty(compactName.Text))
+      if (string.IsNullOrEmpty(compactName.Text))
       {
         XtraMessageBox.Show("Bitte einen Namen vergen.", "Fehler");
         return;
       }
-      if(!SqlCompactDatabase.CreateNewCompactDatabase(compactName.Text))
+      if (!DatabaseCreationTools.CreateNewCompactDatabase(compactName.Text))
       {
         XtraMessageBox.Show("Fehler bei der Erstellung der Datenbank.", "Fehler");
       }
       else
       {
-        connectionString.Text = ServiceLocator.ConfigFile.ConnectionString;
-        databaseEngine.Text = ServiceLocator.ConfigFile.DatabaseEngine;
+        connectionString.Text = ServiceLocator.Instance.ConfigFile.ConnectionString;
+        databaseEngine.Text = ServiceLocator.Instance.ConfigFile.DatabaseEngine.ToString();
         connectionString.Update();
         databaseEngine.Update();
         validateDatabase.Text = "Compact Datenbank erfolgreich erstellt";
         validateDatabase.ForeColor = Color.Green;
+      }
+    }
+
+    private void WizardControlFinishClick(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+      if(!ServiceLocator.Instance.Database.Usable())
+      {
+        e.Cancel = true;
+        XtraMessageBox.Show("Bitte die Einstellungen überprüfen.", "Fehler");
       }
     }
   }

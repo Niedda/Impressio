@@ -134,7 +134,7 @@ namespace Impressio.Controls
       this.groupControl1.Controls.Add(this.paperSearchLookUp);
       this.groupControl1.Location = new System.Drawing.Point(2, 3);
       this.groupControl1.Name = "groupControl1";
-      this.groupControl1.Size = new System.Drawing.Size(2604, 199);
+      this.groupControl1.Size = new System.Drawing.Size(2656, 199);
       this.groupControl1.TabIndex = 0;
       this.groupControl1.Text = "Papier";
       // 
@@ -492,7 +492,7 @@ namespace Impressio.Controls
       this.groupControl2.Controls.Add(this.offsetPrintType);
       this.groupControl2.Location = new System.Drawing.Point(2, 208);
       this.groupControl2.Name = "groupControl2";
-      this.groupControl2.Size = new System.Drawing.Size(2604, 250);
+      this.groupControl2.Size = new System.Drawing.Size(2656, 250);
       this.groupControl2.TabIndex = 1;
       this.groupControl2.Text = "Druck";
       // 
@@ -797,7 +797,7 @@ namespace Impressio.Controls
       this.Controls.Add(this.groupControl1);
       this.MinimumSize = new System.Drawing.Size(800, 500);
       this.Name = "OffsetControl";
-      this.Size = new System.Drawing.Size(824, 500);
+      this.Size = new System.Drawing.Size(852, 500);
       this.Load += new System.EventHandler(this.OffsetControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.OffsetControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

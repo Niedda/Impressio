@@ -13,7 +13,6 @@ namespace Impressio.Controls
   {
     public PrintControl()
     {
-      Print.LoadSingleObject();
       InitializeComponent();
     }
 

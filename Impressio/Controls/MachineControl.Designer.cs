@@ -51,10 +51,11 @@
       this.gridMachine.Location = new System.Drawing.Point(0, 0);
       this.gridMachine.MainView = this.viewMachine;
       this.gridMachine.Name = "gridMachine";
-      this.gridMachine.Size = new System.Drawing.Size(821, 339);
+      this.gridMachine.Size = new System.Drawing.Size(777, 339);
       this.gridMachine.TabIndex = 0;
       this.gridMachine.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewMachine});
+      this.gridMachine.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridMachineKeyDown);
       // 
       // machineBindingSource
       // 
@@ -81,7 +82,6 @@
       this.viewMachine.RowHeight = 30;
       this.viewMachine.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewMachineInvalidRowException);
       this.viewMachine.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewMachineValidateRow);
-      this.viewMachine.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.ViewMachineRowUpdated);
       // 
       // colIdentity
       // 
@@ -148,7 +148,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridMachine);
       this.Name = "MachineControl";
-      this.Size = new System.Drawing.Size(821, 339);
+      this.Size = new System.Drawing.Size(777, 339);
       this.Load += new System.EventHandler(this.MachineControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.MachineControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

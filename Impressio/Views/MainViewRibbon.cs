@@ -60,7 +60,20 @@ namespace Impressio.Views
 
     #endregion
 
-    public void SetControl<T>(ref T control) where T : Control, new()
+    public bool ValidateFocusedControl()
+    {
+      if (FocusedControl is IControl)
+      {
+        if (!(FocusedControl as IControl).ValidateControl())
+        {
+          FocusedControl.BringToFront();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    public void SetControl<T>(ref T control) where T : Control, IControl, new()
     {
       if (control == null)
       {
@@ -258,12 +271,31 @@ namespace Impressio.Views
 
     private void PrintOrderItemClick(object sender, ItemClickEventArgs e)
     {
-      _ordersControl.FocusedRow.LoadOrderReport();
+      if (_ordersControl.FocusedRow != null)
+      {
+        _ordersControl.FocusedRow.LoadOrderReport();
+      }
     }
 
     private void PrintOfferItemClick(object sender, ItemClickEventArgs e)
     {
-      _ordersControl.FocusedRow.LoadOrderOffer();
+      if (_ordersControl.FocusedRow != null)
+      {
+        _ordersControl.FocusedRow.LoadOrderOffer();
+      }
+    }
+
+    private void RefreshOrderItemClick(object sender, ItemClickEventArgs e)
+    {
+      _ordersControl.ReloadControl();
+    }
+
+    private void RibbonSelectedPageChanging(object sender, RibbonPageChangingEventArgs e)
+    {
+      if(!ValidateFocusedControl())
+      {
+        e.Cancel = true;
+      }
     }
   }
 }

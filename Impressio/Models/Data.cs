@@ -70,12 +70,12 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader[IdentityColumn].GetInt();
-      FkOrder = Database.Reader[Columns.FkDataOrder.ToString()].GetInt();
-      Name = Database.Reader[Columns.PositionName.ToString()] as string;
-      PositionTotal = Database.Reader[Columns.PositionTotal.ToString()].GetInt();
-      Remark = Database.Reader[Columns.Remark.ToString()] as string;
-      IsPredefined = (bool) Database.Reader[Columns.IsPredefined.ToString()];
+      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
+      FkOrder = Database.DatabaseCommand.Reader[Columns.FkDataOrder.ToString()].GetInt();
+      Name = Database.DatabaseCommand.Reader[Columns.PositionName.ToString()] as string;
+      PositionTotal = Database.DatabaseCommand.Reader[Columns.PositionTotal.ToString()].GetInt();
+      Remark = Database.DatabaseCommand.Reader[Columns.Remark.ToString()] as string;
+      IsPredefined = (bool) Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
     }
     
     public override Dictionary<Enum, object> GetObject()
@@ -140,11 +140,11 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Description = Database.Reader[Columns.Description.ToString()] as string;
-      FkDataDataPosition = Database.Reader[Columns.FkDataDataPosition.ToString()].GetInt();
-      Quantity = Database.Reader[Columns.Quantity.ToString()].GetInt();
-      PricePerQuantity = Database.Reader[Columns.PricePerQuantity.ToString()].GetInt();
-      Identity = Database.Reader[IdentityColumn].GetInt();
+      Description = Database.DatabaseCommand.Reader[Columns.Description.ToString()] as string;
+      FkDataDataPosition = Database.DatabaseCommand.Reader[Columns.FkDataDataPosition.ToString()].GetInt();
+      Quantity = Database.DatabaseCommand.Reader[Columns.Quantity.ToString()].GetInt();
+      PricePerQuantity = Database.DatabaseCommand.Reader[Columns.PricePerQuantity.ToString()].GetInt();
+      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
     }
     
     public override Dictionary<Enum, object> GetObject()

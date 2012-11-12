@@ -75,6 +75,10 @@ namespace Impressio.Views
 
     private void OpenPositionItemClick(object sender, ItemClickEventArgs e)
     {
+      if(_positionControl.FocusedRow == null || _positionControl.FocusedRow.Identity == 0)
+      {
+        return;
+      }
       switch (_positionControl.FocusedRow.Type)
       {
         case Type.Datenaufbereitung:

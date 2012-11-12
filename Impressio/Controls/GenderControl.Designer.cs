@@ -47,10 +47,11 @@
       this.gridGender.Location = new System.Drawing.Point(0, 0);
       this.gridGender.MainView = this.viewGender;
       this.gridGender.Name = "gridGender";
-      this.gridGender.Size = new System.Drawing.Size(821, 339);
+      this.gridGender.Size = new System.Drawing.Size(777, 339);
       this.gridGender.TabIndex = 0;
       this.gridGender.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewGender});
+      this.gridGender.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridGenderKeyDown);
       // 
       // genderBindingSource
       // 
@@ -58,11 +59,13 @@
       // 
       // viewGender
       // 
+      this.viewGender.ColumnPanelRowHeight = 30;
       this.viewGender.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colTable,
             this.colName});
       this.viewGender.GridControl = this.gridGender;
+      this.viewGender.IndicatorWidth = 30;
       this.viewGender.Name = "viewGender";
       this.viewGender.OptionsDetail.AllowZoomDetail = false;
       this.viewGender.OptionsDetail.EnableMasterViewMode = false;
@@ -74,7 +77,6 @@
       this.viewGender.RowHeight = 30;
       this.viewGender.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewGenderInvalidRowException);
       this.viewGender.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewGenderValidateRow);
-      this.viewGender.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.ViewGenderRowUpdated);
       // 
       // colIdentity
       // 
@@ -101,7 +103,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridGender);
       this.Name = "GenderControl";
-      this.Size = new System.Drawing.Size(821, 339);
+      this.Size = new System.Drawing.Size(777, 339);
       this.Load += new System.EventHandler(this.GenderControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.GenderControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

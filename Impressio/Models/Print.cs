@@ -165,18 +165,18 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      IsPredefined = (bool)Database.Reader[Columns.IsPredefined.ToString()];
-      Identity = Database.Reader[IdentityColumn].GetInt();
-      FkPrintClickCost = Database.Reader[Columns.FkPrintClickCost.ToString()].GetInt();
-      FkOrder = Database.Reader[Columns.FkPrintOrder.ToString()].GetInt();
-      FkPrintPaper = Database.Reader[Columns.FkPrintPaper.ToString()].GetInt();
-      PrintAmount = Database.Reader[Columns.PrintAmount.ToString()].GetInt();
-      PaperUsePer = Database.Reader[Columns.PaperUsePer.ToString()].GetInt();
-      PaperAddition = Database.Reader[Columns.PaperAddition.ToString()].GetInt();
-      PaperAmount = Database.Reader[Columns.PaperAmount.ToString()].GetInt();
-      PositionTotal = Database.Reader[Columns.PositionTotal.ToString()].GetInt();
-      PaperPricePer = Database.Reader[Columns.PaperPrice.ToString()].GetInt();
-      Name = Database.Reader[Columns.PositionName.ToString()] as string;
+      IsPredefined = (bool)Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
+      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
+      FkPrintClickCost = Database.DatabaseCommand.Reader[Columns.FkPrintClickCost.ToString()].GetInt();
+      FkOrder = Database.DatabaseCommand.Reader[Columns.FkPrintOrder.ToString()].GetInt();
+      FkPrintPaper = Database.DatabaseCommand.Reader[Columns.FkPrintPaper.ToString()].GetInt();
+      PrintAmount = Database.DatabaseCommand.Reader[Columns.PrintAmount.ToString()].GetInt();
+      PaperUsePer = Database.DatabaseCommand.Reader[Columns.PaperUsePer.ToString()].GetInt();
+      PaperAddition = Database.DatabaseCommand.Reader[Columns.PaperAddition.ToString()].GetInt();
+      PaperAmount = Database.DatabaseCommand.Reader[Columns.PaperAmount.ToString()].GetInt();
+      PositionTotal = Database.DatabaseCommand.Reader[Columns.PositionTotal.ToString()].GetInt();
+      PaperPricePer = Database.DatabaseCommand.Reader[Columns.PaperPrice.ToString()].GetInt();
+      Name = Database.DatabaseCommand.Reader[Columns.PositionName.ToString()] as string;
     }
 
     public override Dictionary<Enum, object> GetObject()
@@ -252,9 +252,9 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader[IdentityColumn].GetInt();
-      Name = Database.Reader[Columns.ClickName.ToString()] as string;
-      Cost = Convert.ToDouble(Database.Reader[Columns.ClickCost.ToString()]);
+      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
+      Name = Database.DatabaseCommand.Reader[Columns.ClickName.ToString()] as string;
+      Cost = Convert.ToDouble(Database.DatabaseCommand.Reader[Columns.ClickCost.ToString()]);
     }
 
     public override Dictionary<Enum, object> GetObject()

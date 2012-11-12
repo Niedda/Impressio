@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using Impressio.Models;
 using Subvento;
-using Subvento.Database;
 
 namespace Impressio.Views
 {
@@ -19,8 +18,10 @@ namespace Impressio.Views
 
     public bool MainValidate()
     {
-      CheckConnection();
-      CheckDatabaseFields();
+      if (CheckConnection())
+      {
+        CheckDatabaseFields();
+      }
       return true;
     }
 
@@ -28,12 +29,15 @@ namespace Impressio.Views
     {
       Task = "Connecting to Database...";
 
-      _database.CheckConnection();
-
-      if (_database.DbConnection.State != ConnectionState.Open)
+      if (!ServiceLocator.Instance.Database.Usable())
       {
-        XtraMessageBox.Show("Fehler beim Versuch mit der Datenbank zu verbinden", "Fehler");
-        return false;
+        Hide();
+        var result = new StartupWizard().ShowDialog();
+
+        if(result == DialogResult.Cancel)
+        {
+          return false;
+        }
       }
       return true;
     }
@@ -55,7 +59,13 @@ namespace Impressio.Views
       listToCheck.AddRange(Enum.GetNames(typeof(Paper.Columns)));
       listToCheck.AddRange(Enum.GetNames(typeof(Print.Columns)));
 
-      return _database.CheckIfFieldsExist(listToCheck);
+      if (!ServiceLocator.Instance.Database.CheckIfFieldsExist(ref listToCheck))
+      {
+        var message = listToCheck.Aggregate("Failed to retrieve the following fields:", (current, field) => current + string.Format("{0}{1}", Environment.NewLine, field));
+        XtraMessageBox.Show(message, "Fehler");
+        return false;
+      }
+      return true;
     }
 
     private string Task
@@ -66,7 +76,5 @@ namespace Impressio.Views
         task.Update();
       }
     }
-
-    private readonly IDatabase _database = ServiceLocator.Instance.Database;
   }
 }

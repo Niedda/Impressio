@@ -6,8 +6,7 @@ using DevExpress.XtraEditors.DXErrorProvider;
 using Impressio.Models;
 using Impressio.Properties;
 using Subvento;
-using Subvento.Configuration;
-using Subvento.Database;
+using Subvento.Tools;
 
 namespace Impressio.Controls
 {
@@ -21,8 +20,9 @@ namespace Impressio.Controls
 
     public void ReloadControl()
     {
-      database.Text = ServiceLocator.ConfigFile.DatabaseEngine;
-      dbConnectionString.Text = ServiceLocator.ConfigFile.ConnectionString;
+      database.Properties.Items.AddRange(Enum.GetNames(typeof(ServiceLocator.DatabaseEngine)));
+      database.Text = ServiceLocator.Instance.ConfigFile.DatabaseEngine.ToString();
+      dbConnectionString.Text = ServiceLocator.Instance.ConfigFile.ConnectionString;
       user.Text = Settings.Default.User;
       pathData.Text = Settings.Default.folderPath;
       lookAndFeel.Text = Settings.Default.lookAndFeel;
@@ -60,21 +60,19 @@ namespace Impressio.Controls
 
     private void DbConnectionStringEditValueChanged(object sender, EventArgs e)
     {
-      ServiceLocator.ConfigFile.ConnectionString = dbConnectionString.Text;
-      ServiceLocator.ConfigFile.SaveConfig();
+      ServiceLocator.Instance.ConfigFile.SetConnectionString(dbConnectionString.Text);
     }
 
     private void DatabaseSelectedIndexChanged(object sender, EventArgs e)
     {
-      ServiceLocator.ConfigFile.DatabaseEngine = database.Text;
-      ServiceLocator.ConfigFile.SaveConfig();
+      ServiceLocator.Instance.ConfigFile.SetDatabaseEngine((ServiceLocator.DatabaseEngine)Enum.Parse(typeof(ServiceLocator.DatabaseEngine), database.Text));
     }
 
     private void CheckDatabaseSettingClick(object sender, EventArgs e)
     {
       ServiceLocator.ResetDatabase();
 
-      if (ServiceLocator.Instance.Usable())
+      if (ServiceLocator.Instance.Database.Usable())
       {
         databaseCheckResult.Text = "Datenbank erfolgreich überprüft.";
         databaseCheckResult.ForeColor = Color.Green;
@@ -90,7 +88,7 @@ namespace Impressio.Controls
     {
       if (!string.IsNullOrEmpty(compactName.Text))
       {
-        SqlCompactDatabase.CreateNewCompactDatabase(compactName.Text);
+        DatabaseCreationTools.CreateNewCompactDatabase(compactName.Text);
         ReloadControl();
         ServiceLocator.ResetDatabase();
         _errorProvider.SetError(compactName, "");

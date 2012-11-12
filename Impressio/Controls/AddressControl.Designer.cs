@@ -53,7 +53,7 @@ namespace Impressio.Controls
       this.gridAddress.Location = new System.Drawing.Point(0, 0);
       this.gridAddress.MainView = this.viewAddress;
       this.gridAddress.Name = "gridAddress";
-      this.gridAddress.Size = new System.Drawing.Size(0, 0);
+      this.gridAddress.Size = new System.Drawing.Size(852, 401);
       this.gridAddress.TabIndex = 0;
       this.gridAddress.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewAddress});
@@ -147,7 +147,7 @@ namespace Impressio.Controls
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridAddress);
       this.Name = "AddressControl";
-      this.Size = new System.Drawing.Size(0, 0);
+      this.Size = new System.Drawing.Size(852, 401);
       this.Load += new System.EventHandler(this.AddressControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.AddressControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

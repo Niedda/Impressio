@@ -28,8 +28,8 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader[IdentityColumn].GetInt();
-      Name = Database.Reader[Columns.Gender.ToString()] as string;
+      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
+      Name = Database.DatabaseCommand.Reader[Columns.Gender.ToString()] as string;
     }
     
     public override Dictionary<Enum, object> GetObject()

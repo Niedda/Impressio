@@ -73,12 +73,12 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader[IdentityColumn].GetInt();
-      Name = Database.Reader[Columns.PositionName.ToString()] as string;
-      FkOrder = Database.Reader[Columns.FkFinishOrder.ToString()].GetInt();
-      IsPredefined = (bool)Database.Reader[Columns.IsPredefined.ToString()];
-      Remark = Database.Reader[Columns.Remark.ToString()] as string;
-      PositionTotal = Database.Reader[Columns.PositionTotal.ToString()].GetInt();
+      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
+      Name = Database.DatabaseCommand.Reader[Columns.PositionName.ToString()] as string;
+      FkOrder = Database.DatabaseCommand.Reader[Columns.FkFinishOrder.ToString()].GetInt();
+      IsPredefined = (bool)Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
+      Remark = Database.DatabaseCommand.Reader[Columns.Remark.ToString()] as string;
+      PositionTotal = Database.DatabaseCommand.Reader[Columns.PositionTotal.ToString()].GetInt();
     }
     
     public override void ClearObjectList()
@@ -145,12 +145,12 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader[IdentityColumn].GetInt();
-      Description = Database.Reader[Columns.Description.ToString()] as string;
-      FkFinishFinishPosition = Database.Reader[Columns.FkFinishFinishPosition.ToString()].GetInt();
-      PricePerQuantity = Database.Reader[Columns.PricePerQuantity.ToString()].GetInt();
-      PriceTotal = Database.Reader[Columns.PriceTotal.ToString()].GetInt();
-      Quantity = Database.Reader[Columns.Quantity.ToString()].GetInt();
+      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
+      Description = Database.DatabaseCommand.Reader[Columns.Description.ToString()] as string;
+      FkFinishFinishPosition = Database.DatabaseCommand.Reader[Columns.FkFinishFinishPosition.ToString()].GetInt();
+      PricePerQuantity = Database.DatabaseCommand.Reader[Columns.PricePerQuantity.ToString()].GetInt();
+      PriceTotal = Database.DatabaseCommand.Reader[Columns.PriceTotal.ToString()].GetInt();
+      Quantity = Database.DatabaseCommand.Reader[Columns.Quantity.ToString()].GetInt();
     }
     
     public override Dictionary<Enum, object> GetObject()

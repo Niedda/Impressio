@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
@@ -35,17 +36,24 @@ namespace Impressio.Controls
 
     public void DeleteRow()
     {
-      FocusedRow.DeleteObject();
-      viewOrder.DeleteSelectedRows();
+      if (FocusedRow != null)
+      {
+        FocusedRow.DeleteObject();
+        viewOrder.DeleteSelectedRows();
+      }
     }
 
     public bool ValidateRow()
     {
-      viewOrder.ClearColumnErrors();
-      CheckColumn(colOrderName);
-      CheckColumn(colState);
-      CheckColumn(colCompany);
-      return !viewOrder.HasColumnErrors;
+      if (!viewOrder.IsFilterRow(viewOrder.FocusedRowHandle))
+      {
+        viewOrder.ClearColumnErrors();
+        CheckColumn(colOrderName);
+        CheckColumn(colState);
+        CheckColumn(colCompany);
+        return !viewOrder.HasColumnErrors;
+      }
+      return true;
     }
 
     public void UpdateRow()
@@ -132,6 +140,18 @@ namespace Impressio.Controls
     private void OrdersControlValidating(object sender, CancelEventArgs e)
     {
       e.Cancel = !ValidateControl();
+    }
+
+    private void GridOrderKeyDown(object sender, KeyEventArgs e)
+    {
+      if (e.KeyCode == Keys.Escape)
+      {
+        if (viewOrder.IsNewItemRow(viewOrder.FocusedRowHandle))
+        {
+          viewOrder.CancelUpdateCurrentRow();
+          viewOrder.FocusedRowHandle = 0;
+        }
+      }
     }
   }
 }

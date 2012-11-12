@@ -88,7 +88,19 @@ namespace Impressio.Controls
 
     public bool ValidateAddressAndClient()
     {
-      return AddressControl.ValidateControl() && ClientControl.Validate();
+      if(AddressControl != null && ClientControl != null)
+      {
+        return AddressControl.ValidateControl() || ClientControl.ValidateControl();
+      }
+      if(AddressControl == null && ClientControl != null)
+      {
+        return ClientControl.ValidateControl();
+      }
+      if (AddressControl != null && ClientControl == null)
+      {
+        return AddressControl.ValidateControl();
+      }
+      return true;
     }
 
     public Company FocusedRow

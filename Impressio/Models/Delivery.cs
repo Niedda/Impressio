@@ -124,12 +124,12 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader[IdentityColumn].GetInt();
-      FkDeliveryCompany = Database.Reader[Columns.FkDeliveryCompany.ToString()].GetInt();
-      FkDeliveryAddress = Database.Reader[Columns.FkDeliveryAddress.ToString()].GetInt();
-      FkDeliveryClient = Database.Reader[Columns.FkDeliveryClient.ToString()].GetInt();
-      FkDeliveryOrder = Database.Reader[Columns.FkDeliveryOrder.ToString()].GetInt();
-      DeliveryDate = Convert.ToDateTime(Database.Reader[Columns.DeliveryDate.ToString()]);
+      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
+      FkDeliveryCompany = Database.DatabaseCommand.Reader[Columns.FkDeliveryCompany.ToString()].GetInt();
+      FkDeliveryAddress = Database.DatabaseCommand.Reader[Columns.FkDeliveryAddress.ToString()].GetInt();
+      FkDeliveryClient = Database.DatabaseCommand.Reader[Columns.FkDeliveryClient.ToString()].GetInt();
+      FkDeliveryOrder = Database.DatabaseCommand.Reader[Columns.FkDeliveryOrder.ToString()].GetInt();
+      DeliveryDate = Convert.ToDateTime(Database.DatabaseCommand.Reader[Columns.DeliveryDate.ToString()]);
     }
     
     public override Dictionary<Enum, object> GetObject()
@@ -215,10 +215,10 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.Reader[IdentityColumn].GetInt();
-      Quantity = Database.Reader[Columns.Quantity.ToString()].GetInt();
-      Position = Database.Reader[Columns.DeliveryPosition.ToString()] as string;
-      FkDeliveryPositionDelivery = Database.Reader[Columns.FkDeliveryPositionDelivery.ToString()].GetInt();
+      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
+      Quantity = Database.DatabaseCommand.Reader[Columns.Quantity.ToString()].GetInt();
+      Position = Database.DatabaseCommand.Reader[Columns.DeliveryPosition.ToString()] as string;
+      FkDeliveryPositionDelivery = Database.DatabaseCommand.Reader[Columns.FkDeliveryPositionDelivery.ToString()].GetInt();
     }
     
     public override Dictionary<Enum, object> GetObject()

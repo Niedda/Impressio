@@ -73,6 +73,7 @@
             this.wizardPageDatabase,
             this.completionWizardPage});
       this.wizardControl.Size = new System.Drawing.Size(634, 334);
+      this.wizardControl.FinishClick += new System.ComponentModel.CancelEventHandler(this.WizardControlFinishClick);
       // 
       // validateDatabase
       // 
@@ -197,10 +198,6 @@
       this.databaseEngine.Name = "databaseEngine";
       this.databaseEngine.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-      this.databaseEngine.Properties.Items.AddRange(new object[] {
-            "mssql",
-            "posql",
-            "compact"});
       this.databaseEngine.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
       this.databaseEngine.Size = new System.Drawing.Size(387, 20);
       this.databaseEngine.TabIndex = 3;

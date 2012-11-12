@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors.Controls;
@@ -19,7 +19,7 @@ namespace Impressio.Controls
     }
 
     #region Ribbon
-    
+
     public string RibbonGroupName { get { return "Klickkosten"; } }
 
     public List<BarButtonItem> Buttons
@@ -68,7 +68,7 @@ namespace Impressio.Controls
 
       return new List<BarButtonItem> { deleteButton, refreshButton };
     }
-    
+
     #endregion
 
     public void ReloadControl()
@@ -85,8 +85,11 @@ namespace Impressio.Controls
 
     public void DeleteRow()
     {
-      FocusedRow.DeleteObject();
-      viewClickCost.DeleteSelectedRows();
+      if (FocusedRow != null)
+      {
+        FocusedRow.DeleteObject();
+        viewClickCost.DeleteSelectedRows(); 
+      }
     }
 
     public bool ValidateRow()
@@ -99,7 +102,10 @@ namespace Impressio.Controls
 
     public void UpdateRow()
     {
-      viewClickCost.SetFocusedRowCellValue(colIdentity, FocusedRow.SaveObject());
+      if (FocusedRow != null)
+      {
+        FocusedRow.Identity = FocusedRow.SaveObject();
+      }
     }
 
     public void DeleteRow(object sender, ItemClickEventArgs e)
@@ -131,17 +137,38 @@ namespace Impressio.Controls
 
     private void ViewClickCostValidateRow(object sender, ValidateRowEventArgs e)
     {
-      e.Valid = ValidateRow();
-    }
-
-    private void ViewClickCostRowUpdated(object sender, RowObjectEventArgs e)
-    {
-      UpdateRow();
+      if (ValidateRow())
+      {
+        UpdateRow();
+      }
+      else
+      {
+        e.Valid = false;
+      }
     }
 
     private void ClickCostControlValidating(object sender, CancelEventArgs e)
     {
       e.Cancel = !ValidateControl();
+    }
+
+    private void ClickCostControlLeave(object sender, EventArgs e)
+    {
+      if (!ValidateControl())
+      {
+        BringToFront();
+      }
+    }
+
+    private void GridClickCostKeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+    {
+      if (e.KeyCode == Keys.Escape)
+      {
+        if (viewClickCost.IsNewItemRow(viewClickCost.FocusedRowHandle))
+        {
+          viewClickCost.FocusedRowHandle = 0;
+        }
+      }
     }
   }
 }

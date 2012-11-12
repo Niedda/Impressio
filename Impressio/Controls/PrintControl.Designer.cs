@@ -30,15 +30,16 @@ namespace Impressio.Controls
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.amountPrint = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
       this.lookUpClickCost = new DevExpress.XtraEditors.LookUpEdit();
-      this.clickCostBindingSource = new System.Windows.Forms.BindingSource();
+      this.clickCostBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
       this.paperSearchLookUp = new DevExpress.XtraEditors.SearchLookUpEdit();
-      this.paperBindingSource = new System.Windows.Forms.BindingSource();
+      this.paperBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewPaper = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -98,7 +99,7 @@ namespace Impressio.Controls
       // 
       // labelControl2
       // 
-      this.labelControl2.Location = new System.Drawing.Point(19, 55);
+      this.labelControl2.Location = new System.Drawing.Point(17, 33);
       this.labelControl2.Name = "labelControl2";
       this.labelControl2.Size = new System.Drawing.Size(43, 13);
       this.labelControl2.TabIndex = 2;
@@ -127,7 +128,7 @@ namespace Impressio.Controls
       // 
       // labelControl3
       // 
-      this.labelControl3.Location = new System.Drawing.Point(19, 102);
+      this.labelControl3.Location = new System.Drawing.Point(17, 80);
       this.labelControl3.Name = "labelControl3";
       this.labelControl3.Size = new System.Drawing.Size(37, 13);
       this.labelControl3.TabIndex = 4;
@@ -135,7 +136,7 @@ namespace Impressio.Controls
       // 
       // labelControl5
       // 
-      this.labelControl5.Location = new System.Drawing.Point(274, 102);
+      this.labelControl5.Location = new System.Drawing.Point(272, 80);
       this.labelControl5.Name = "labelControl5";
       this.labelControl5.Size = new System.Drawing.Size(41, 13);
       this.labelControl5.TabIndex = 6;
@@ -165,7 +166,7 @@ namespace Impressio.Controls
       // 
       // labelControl6
       // 
-      this.labelControl6.Location = new System.Drawing.Point(19, 50);
+      this.labelControl6.Location = new System.Drawing.Point(18, 50);
       this.labelControl6.Name = "labelControl6";
       this.labelControl6.Size = new System.Drawing.Size(30, 13);
       this.labelControl6.TabIndex = 10;
@@ -334,7 +335,7 @@ namespace Impressio.Controls
       // 
       // labelControl7
       // 
-      this.labelControl7.Location = new System.Drawing.Point(19, 138);
+      this.labelControl7.Location = new System.Drawing.Point(18, 138);
       this.labelControl7.Name = "labelControl7";
       this.labelControl7.Size = new System.Drawing.Size(84, 13);
       this.labelControl7.TabIndex = 12;
@@ -379,7 +380,7 @@ namespace Impressio.Controls
       this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
       this.groupControl1.Location = new System.Drawing.Point(0, 0);
       this.groupControl1.Name = "groupControl1";
-      this.groupControl1.Size = new System.Drawing.Size(824, 182);
+      this.groupControl1.Size = new System.Drawing.Size(0, 182);
       this.groupControl1.TabIndex = 14;
       this.groupControl1.Text = "Papier";
       // 
@@ -434,7 +435,7 @@ namespace Impressio.Controls
       // 
       // paperTotal
       // 
-      this.paperTotal.Location = new System.Drawing.Point(559, 138);
+      this.paperTotal.Location = new System.Drawing.Point(558, 138);
       this.paperTotal.Name = "paperTotal";
       this.paperTotal.Size = new System.Drawing.Size(69, 13);
       this.paperTotal.TabIndex = 18;
@@ -442,7 +443,7 @@ namespace Impressio.Controls
       // 
       // labelControl11
       // 
-      this.labelControl11.Location = new System.Drawing.Point(274, 138);
+      this.labelControl11.Location = new System.Drawing.Point(273, 138);
       this.labelControl11.Name = "labelControl11";
       this.labelControl11.Size = new System.Drawing.Size(34, 13);
       this.labelControl11.TabIndex = 21;
@@ -450,7 +451,7 @@ namespace Impressio.Controls
       // 
       // labelControl1
       // 
-      this.labelControl1.Location = new System.Drawing.Point(19, 94);
+      this.labelControl1.Location = new System.Drawing.Point(18, 94);
       this.labelControl1.Name = "labelControl1";
       this.labelControl1.Size = new System.Drawing.Size(71, 13);
       this.labelControl1.TabIndex = 20;
@@ -479,7 +480,7 @@ namespace Impressio.Controls
       // 
       // paperPriceLabel
       // 
-      this.paperPriceLabel.Location = new System.Drawing.Point(559, 50);
+      this.paperPriceLabel.Location = new System.Drawing.Point(558, 50);
       this.paperPriceLabel.Name = "paperPriceLabel";
       this.paperPriceLabel.Size = new System.Drawing.Size(58, 13);
       this.paperPriceLabel.TabIndex = 18;
@@ -508,7 +509,7 @@ namespace Impressio.Controls
       // 
       // labelControl8
       // 
-      this.labelControl8.Location = new System.Drawing.Point(274, 94);
+      this.labelControl8.Location = new System.Drawing.Point(273, 94);
       this.labelControl8.Name = "labelControl8";
       this.labelControl8.Size = new System.Drawing.Size(67, 13);
       this.labelControl8.TabIndex = 14;
@@ -544,7 +545,7 @@ namespace Impressio.Controls
       // 
       // labelControl9
       // 
-      this.labelControl9.Location = new System.Drawing.Point(559, 175);
+      this.labelControl9.Location = new System.Drawing.Point(557, 153);
       this.labelControl9.Name = "labelControl9";
       this.labelControl9.Size = new System.Drawing.Size(24, 13);
       this.labelControl9.TabIndex = 16;
@@ -566,7 +567,7 @@ namespace Impressio.Controls
       this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
       this.groupControl2.Location = new System.Drawing.Point(0, 182);
       this.groupControl2.Name = "groupControl2";
-      this.groupControl2.Size = new System.Drawing.Size(824, 127);
+      this.groupControl2.Size = new System.Drawing.Size(0, 0);
       this.groupControl2.TabIndex = 15;
       this.groupControl2.Text = "Druck";
       // 
@@ -625,7 +626,7 @@ namespace Impressio.Controls
       // 
       // printTotal
       // 
-      this.printTotal.Location = new System.Drawing.Point(559, 102);
+      this.printTotal.Location = new System.Drawing.Point(557, 80);
       this.printTotal.Name = "printTotal";
       this.printTotal.Size = new System.Drawing.Size(63, 13);
       this.printTotal.TabIndex = 19;
@@ -638,7 +639,7 @@ namespace Impressio.Controls
       this.Controls.Add(this.groupControl2);
       this.Controls.Add(this.groupControl1);
       this.Name = "PrintControl";
-      this.Size = new System.Drawing.Size(824, 309);
+      this.Size = new System.Drawing.Size(0, 0);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.PrintControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.amountPrint.Properties)).EndInit();

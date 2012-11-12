@@ -47,10 +47,11 @@
       this.gridState.Location = new System.Drawing.Point(0, 0);
       this.gridState.MainView = this.viewState;
       this.gridState.Name = "gridState";
-      this.gridState.Size = new System.Drawing.Size(821, 339);
+      this.gridState.Size = new System.Drawing.Size(777, 339);
       this.gridState.TabIndex = 0;
       this.gridState.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewState});
+      this.gridState.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridStateKeyDown);
       // 
       // stateBindingSource
       // 
@@ -58,11 +59,13 @@
       // 
       // viewState
       // 
+      this.viewState.ColumnPanelRowHeight = 30;
       this.viewState.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colTable,
             this.colStateName});
       this.viewState.GridControl = this.gridState;
+      this.viewState.IndicatorWidth = 30;
       this.viewState.Name = "viewState";
       this.viewState.OptionsDetail.AllowZoomDetail = false;
       this.viewState.OptionsDetail.EnableMasterViewMode = false;
@@ -73,7 +76,6 @@
       this.viewState.RowHeight = 30;
       this.viewState.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewStateInvalidRowException);
       this.viewState.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewStateValidateRow);
-      this.viewState.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.ViewStateRowUpdated);
       // 
       // colIdentity
       // 
@@ -104,7 +106,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridState);
       this.Name = "StateControl";
-      this.Size = new System.Drawing.Size(821, 339);
+      this.Size = new System.Drawing.Size(777, 339);
       this.Load += new System.EventHandler(this.StateControlLoad);
       this.Validating += new System.ComponentModel.CancelEventHandler(this.StateControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();

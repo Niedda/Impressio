@@ -283,16 +283,19 @@ namespace Impressio.Controls
 
         if (predef != null)
         {
-          var newDescription = predef;
-          newDescription.Identity = 0;
-          newDescription.FkDescriptionOrder = _description.FkDescriptionOrder;
-          newDescription.Arrange = viewDescription.RowCount + 1;
+          var newDescription = new Description
+                                 {
+                                   Identity = 0,
+                                   JobTitle = predef.JobTitle + " [Kopie]",
+                                   FkDescriptionOrder = Order.Identity,
+                                   Arrange = viewDescription.RowCount + 1
+                                 };
           newDescription.Identity = newDescription.SaveObject();
 
           foreach (var detail in predef.Details)
           {
             detail.Identity = 0;
-            detail.FkDetailDescription = predef.Identity;
+            detail.FkDetailDescription = newDescription.Identity;
             detail.Arrange = viewDetail.RowCount + 1;
             detail.Identity = detail.SaveObject();
           }
