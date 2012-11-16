@@ -60,6 +60,7 @@ namespace Impressio.Controls
       this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
       this.detailMoveDownEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
       this.splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
+      this.repositoryContent = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
       this.groupControl1.SuspendLayout();
@@ -76,6 +77,7 @@ namespace Impressio.Controls
       ((System.ComponentModel.ISupportInitialize)(this.viewDetail)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.detailMoveUpEdit)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.detailMoveDownEdit)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.repositoryContent)).BeginInit();
       this.SuspendLayout();
       // 
       // groupControl1
@@ -249,7 +251,8 @@ namespace Impressio.Controls
       this.gridDetail.Name = "gridDetail";
       this.gridDetail.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.detailMoveUpEdit,
-            this.detailMoveDownEdit});
+            this.detailMoveDownEdit,
+            this.repositoryContent});
       this.gridDetail.Size = new System.Drawing.Size(892, 201);
       this.gridDetail.TabIndex = 0;
       this.gridDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -306,6 +309,7 @@ namespace Impressio.Controls
       // colDetailContent
       // 
       this.colDetailContent.Caption = "Beschreibung";
+      this.colDetailContent.ColumnEdit = this.repositoryContent;
       this.colDetailContent.FieldName = "DetailContent";
       this.colDetailContent.Name = "colDetailContent";
       this.colDetailContent.Visible = true;
@@ -371,6 +375,10 @@ namespace Impressio.Controls
       this.splitterControl1.TabIndex = 2;
       this.splitterControl1.TabStop = false;
       // 
+      // repositoryContent
+      // 
+      this.repositoryContent.Name = "repositoryContent";
+      // 
       // DescriptionControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -398,6 +406,7 @@ namespace Impressio.Controls
       ((System.ComponentModel.ISupportInitialize)(this.viewDetail)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.detailMoveUpEdit)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.detailMoveDownEdit)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.repositoryContent)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -433,5 +442,6 @@ namespace Impressio.Controls
     private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit detailMoveDownEdit;
     private DevExpress.XtraGrid.Columns.GridColumn colPrice;
     private DevExpress.XtraGrid.Columns.GridColumn colPredefinedDescription;
+    private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryContent;
   }
 }

@@ -35,32 +35,30 @@ namespace Impressio.Controls
       this.folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
       this.user = new DevExpress.XtraEditors.TextEdit();
       this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
-      this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
-      this.pathData = new DevExpress.XtraEditors.TextEdit();
       this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
       this.database = new DevExpress.XtraEditors.ComboBoxEdit();
       this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-      this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+      this.databaseTabPage = new DevExpress.XtraTab.XtraTabPage();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.compactName = new DevExpress.XtraEditors.TextEdit();
       this.databaseCheckResult = new DevExpress.XtraEditors.LabelControl();
       this.createCompactDb = new DevExpress.XtraEditors.SimpleButton();
       this.checkDatabaseSetting = new DevExpress.XtraEditors.SimpleButton();
-      this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+      this.userTabPage = new DevExpress.XtraTab.XtraTabPage();
       this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
       this.logoEdit = new DevExpress.XtraEditors.TextEdit();
       this.lookAndFeel = new DevExpress.XtraEditors.ComboBoxEdit();
       this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
       this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+      ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dbConnectionString.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.user.Properties)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.pathData.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.database.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
       this.xtraTabControl1.SuspendLayout();
-      this.xtraTabPage1.SuspendLayout();
+      this.databaseTabPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.compactName.Properties)).BeginInit();
-      this.xtraTabPage2.SuspendLayout();
+      this.userTabPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.logoEdit.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.lookAndFeel.Properties)).BeginInit();
       this.SuspendLayout();
@@ -99,23 +97,6 @@ namespace Impressio.Controls
       this.labelControl4.TabIndex = 7;
       this.labelControl4.Text = "User";
       // 
-      // labelControl5
-      // 
-      this.labelControl5.Appearance.ForeColor = System.Drawing.Color.Navy;
-      this.labelControl5.Location = new System.Drawing.Point(18, 91);
-      this.labelControl5.Name = "labelControl5";
-      this.labelControl5.Size = new System.Drawing.Size(89, 13);
-      this.labelControl5.TabIndex = 9;
-      this.labelControl5.Text = "Pfad zu den Daten";
-      // 
-      // pathData
-      // 
-      this.pathData.Location = new System.Drawing.Point(18, 110);
-      this.pathData.Name = "pathData";
-      this.pathData.Size = new System.Drawing.Size(497, 20);
-      this.pathData.TabIndex = 10;
-      this.pathData.Enter += new System.EventHandler(this.PathDataEnter);
-      // 
       // labelControl6
       // 
       this.labelControl6.Appearance.ForeColor = System.Drawing.Color.Navy;
@@ -141,27 +122,27 @@ namespace Impressio.Controls
       this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
       this.xtraTabControl1.Name = "xtraTabControl1";
-      this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
+      this.xtraTabControl1.SelectedTabPage = this.userTabPage;
       this.xtraTabControl1.Size = new System.Drawing.Size(859, 429);
       this.xtraTabControl1.TabIndex = 16;
       this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage1,
-            this.xtraTabPage2});
+            this.userTabPage,
+            this.databaseTabPage});
       // 
-      // xtraTabPage1
+      // databaseTabPage
       // 
-      this.xtraTabPage1.Controls.Add(this.labelControl2);
-      this.xtraTabPage1.Controls.Add(this.compactName);
-      this.xtraTabPage1.Controls.Add(this.databaseCheckResult);
-      this.xtraTabPage1.Controls.Add(this.createCompactDb);
-      this.xtraTabPage1.Controls.Add(this.checkDatabaseSetting);
-      this.xtraTabPage1.Controls.Add(this.dbConnectionString);
-      this.xtraTabPage1.Controls.Add(this.labelControl1);
-      this.xtraTabPage1.Controls.Add(this.labelControl6);
-      this.xtraTabPage1.Controls.Add(this.database);
-      this.xtraTabPage1.Name = "xtraTabPage1";
-      this.xtraTabPage1.Size = new System.Drawing.Size(853, 403);
-      this.xtraTabPage1.Text = "Datenbank";
+      this.databaseTabPage.Controls.Add(this.labelControl2);
+      this.databaseTabPage.Controls.Add(this.compactName);
+      this.databaseTabPage.Controls.Add(this.databaseCheckResult);
+      this.databaseTabPage.Controls.Add(this.createCompactDb);
+      this.databaseTabPage.Controls.Add(this.checkDatabaseSetting);
+      this.databaseTabPage.Controls.Add(this.dbConnectionString);
+      this.databaseTabPage.Controls.Add(this.labelControl1);
+      this.databaseTabPage.Controls.Add(this.labelControl6);
+      this.databaseTabPage.Controls.Add(this.database);
+      this.databaseTabPage.Name = "databaseTabPage";
+      this.databaseTabPage.Size = new System.Drawing.Size(853, 403);
+      this.databaseTabPage.Text = "Datenbank";
       // 
       // labelControl2
       // 
@@ -205,24 +186,22 @@ namespace Impressio.Controls
       this.checkDatabaseSetting.Text = "Einstellungen prüfen";
       this.checkDatabaseSetting.Click += new System.EventHandler(this.CheckDatabaseSettingClick);
       // 
-      // xtraTabPage2
+      // userTabPage
       // 
-      this.xtraTabPage2.Controls.Add(this.labelControl7);
-      this.xtraTabPage2.Controls.Add(this.logoEdit);
-      this.xtraTabPage2.Controls.Add(this.lookAndFeel);
-      this.xtraTabPage2.Controls.Add(this.labelControl3);
-      this.xtraTabPage2.Controls.Add(this.labelControl4);
-      this.xtraTabPage2.Controls.Add(this.user);
-      this.xtraTabPage2.Controls.Add(this.labelControl5);
-      this.xtraTabPage2.Controls.Add(this.pathData);
-      this.xtraTabPage2.Name = "xtraTabPage2";
-      this.xtraTabPage2.Size = new System.Drawing.Size(853, 403);
-      this.xtraTabPage2.Text = "Benutzer";
+      this.userTabPage.Controls.Add(this.labelControl7);
+      this.userTabPage.Controls.Add(this.logoEdit);
+      this.userTabPage.Controls.Add(this.lookAndFeel);
+      this.userTabPage.Controls.Add(this.labelControl3);
+      this.userTabPage.Controls.Add(this.labelControl4);
+      this.userTabPage.Controls.Add(this.user);
+      this.userTabPage.Name = "userTabPage";
+      this.userTabPage.Size = new System.Drawing.Size(853, 403);
+      this.userTabPage.Text = "Benutzer";
       // 
       // labelControl7
       // 
       this.labelControl7.Appearance.ForeColor = System.Drawing.Color.Navy;
-      this.labelControl7.Location = new System.Drawing.Point(18, 221);
+      this.labelControl7.Location = new System.Drawing.Point(18, 143);
       this.labelControl7.Name = "labelControl7";
       this.labelControl7.Size = new System.Drawing.Size(145, 13);
       this.labelControl7.TabIndex = 13;
@@ -230,7 +209,7 @@ namespace Impressio.Controls
       // 
       // logoEdit
       // 
-      this.logoEdit.Location = new System.Drawing.Point(18, 240);
+      this.logoEdit.Location = new System.Drawing.Point(18, 162);
       this.logoEdit.Name = "logoEdit";
       this.logoEdit.Size = new System.Drawing.Size(497, 20);
       this.logoEdit.TabIndex = 14;
@@ -238,7 +217,7 @@ namespace Impressio.Controls
       // 
       // lookAndFeel
       // 
-      this.lookAndFeel.Location = new System.Drawing.Point(18, 179);
+      this.lookAndFeel.Location = new System.Drawing.Point(18, 101);
       this.lookAndFeel.Name = "lookAndFeel";
       this.lookAndFeel.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -270,7 +249,7 @@ namespace Impressio.Controls
       // labelControl3
       // 
       this.labelControl3.Appearance.ForeColor = System.Drawing.Color.Navy;
-      this.labelControl3.Location = new System.Drawing.Point(18, 160);
+      this.labelControl3.Location = new System.Drawing.Point(18, 82);
       this.labelControl3.Name = "labelControl3";
       this.labelControl3.Size = new System.Drawing.Size(66, 13);
       this.labelControl3.TabIndex = 11;
@@ -284,18 +263,17 @@ namespace Impressio.Controls
       this.Name = "PropertieControl";
       this.Size = new System.Drawing.Size(859, 429);
       this.Load += new System.EventHandler(this.PropertieControlLoad);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.PropertieControlValidating);
+      ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.dbConnectionString.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.user.Properties)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.pathData.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.database.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
       this.xtraTabControl1.ResumeLayout(false);
-      this.xtraTabPage1.ResumeLayout(false);
-      this.xtraTabPage1.PerformLayout();
+      this.databaseTabPage.ResumeLayout(false);
+      this.databaseTabPage.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.compactName.Properties)).EndInit();
-      this.xtraTabPage2.ResumeLayout(false);
-      this.xtraTabPage2.PerformLayout();
+      this.userTabPage.ResumeLayout(false);
+      this.userTabPage.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.logoEdit.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.lookAndFeel.Properties)).EndInit();
       this.ResumeLayout(false);
@@ -309,13 +287,11 @@ namespace Impressio.Controls
     private System.Windows.Forms.FolderBrowserDialog folderBrowser;
     private DevExpress.XtraEditors.TextEdit user;
     private DevExpress.XtraEditors.LabelControl labelControl4;
-    private DevExpress.XtraEditors.LabelControl labelControl5;
-    private DevExpress.XtraEditors.TextEdit pathData;
     private DevExpress.XtraEditors.LabelControl labelControl6;
     private DevExpress.XtraEditors.ComboBoxEdit database;
     private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
-    private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
-    private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+    private DevExpress.XtraTab.XtraTabPage userTabPage;
+    private DevExpress.XtraTab.XtraTabPage databaseTabPage;
     private DevExpress.XtraEditors.SimpleButton createCompactDb;
     private DevExpress.XtraEditors.SimpleButton checkDatabaseSetting;
     private DevExpress.XtraEditors.LabelControl databaseCheckResult;

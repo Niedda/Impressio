@@ -250,7 +250,7 @@
     <Compile Include="Controls\StateControl.Designer.cs">
       <DependentUpon>StateControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\GridControlBase.cs">
+    <Compile Include="Controls\GridControlBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Models\IControl.cs" />
@@ -343,6 +343,9 @@
     <None Include="Properties\DataSources\Impressio.Models.Offset.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.Position1.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.Print.datasource" />
+    <None Include="Reports\deliveryReport.repx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Reports\offerReport.repx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

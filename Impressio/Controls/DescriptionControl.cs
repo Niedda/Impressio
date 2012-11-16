@@ -27,8 +27,6 @@ namespace Impressio.Controls
       {
         return _columns ?? (_columns = new List<GridColumn>
                                          {
-                                           colDetailTitle,
-                                           colDetailContent,
                                            colJobTitel,
                                          });
       }
@@ -36,10 +34,20 @@ namespace Impressio.Controls
 
     public override GridView GridView
     {
-      get
+      get { return viewDescription; }
+    }
+
+    public override bool ValidateControl()
+    {
+      if(FocusedRowDetail != null)
       {
-        return viewDescription;
+        return ValidateDetailRow() && ValidateRow(); 
       }
+      if(FocusedRow == null)
+      {
+        return true;
+      }
+      return ValidateRow();
     }
 
     public override void ReloadControl()
@@ -71,10 +79,14 @@ namespace Impressio.Controls
 
     public bool ValidateDetailRow()
     {
-      viewDetail.ClearColumnErrors();
-      CheckColumn(colDetailTitle);
-      CheckColumn(colDetailContent);
-      return !viewDetail.HasColumnErrors;
+      if (FocusedRowDetail != null)
+      {
+        viewDetail.ClearColumnErrors();
+        CheckColumn(colDetailTitle);
+        CheckColumn(colDetailContent);
+        return !viewDetail.HasColumnErrors;
+      }
+      return true;
     }
 
     public void UpdateDetailRow()
@@ -98,9 +110,7 @@ namespace Impressio.Controls
     public bool IsPredefinedMode;
 
     public Order Order;
-
-    private readonly Description _description = new Description();
-
+    
     private void ViewDescriptionFocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
     {
       detailsBindingSource.Clear();
@@ -116,7 +126,10 @@ namespace Impressio.Controls
 
     private void ViewDescriptionInitNewRow(object sender, InitNewRowEventArgs e)
     {
-      viewDescription.SetFocusedRowCellValue(colFkDescriptionOrder, Order.Identity);
+      if (IsPredefinedMode)
+      {
+        viewDescription.SetFocusedRowCellValue(colFkDescriptionOrder, Order.Identity);
+      }
     }
 
     private void DescriptionMoveUpEditClick(object sender, EventArgs e)
@@ -284,22 +297,21 @@ namespace Impressio.Controls
       {
         if (_ribbonPage == null)
         {
-          _ribbonPage = new RibbonPage("Statusverwaltung");
+          _ribbonPage = new RibbonPage("Beschreibungen");
         }
         if (_ribbonGroup == null)
         {
           _ribbonGroup = new RibbonPageGroup();
         }
+        DeleteButton.ItemClick += DeleteRow;
+        DeleteDetailButton.ItemClick += DeleteDetailRow;
+        RefreshButton.ItemClick += ReloadControl;
 
         _ribbonGroup.ItemLinks.Clear();
         _ribbonGroup.ItemLinks.Add(DeleteButton);
         _ribbonGroup.ItemLinks.Add(DeleteDetailButton);
         _ribbonGroup.ItemLinks.Add(RefreshButton);
-
-        DeleteButton.ItemClick += DeleteRow;
-        DeleteDetailButton.ItemClick += DeleteDetailRow;
-        RefreshButton.ItemClick += ReloadControl;
-
+        
         _ribbonPage.Groups.Add(_ribbonGroup);
 
         return _ribbonPage;
@@ -361,5 +373,7 @@ namespace Impressio.Controls
     #endregion
 
     private List<GridColumn> _columns;
+
+    private readonly Description _description = new Description();
   }
 }

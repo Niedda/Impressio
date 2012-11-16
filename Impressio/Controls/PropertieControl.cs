@@ -17,13 +17,16 @@ namespace Impressio.Controls
 
     public override void ReloadControl()
     {
+      _isLoaded = false;
+
       database.Properties.Items.AddRange(Enum.GetNames(typeof(ServiceLocator.DatabaseEngine)));
       database.Text = ServiceLocator.Instance.ConfigFile.DatabaseEngine.ToString();
       dbConnectionString.Text = ServiceLocator.Instance.ConfigFile.ConnectionString;
       user.Text = Settings.Default.User;
-      pathData.Text = Settings.Default.folderPath;
       lookAndFeel.Text = Settings.Default.lookAndFeel;
       logoEdit.Text = Settings.Default.logoImage;
+
+      _isLoaded = true;
     }
 
     private void PropertieControlLoad(object sender, EventArgs e)
@@ -31,31 +34,28 @@ namespace Impressio.Controls
       ReloadControl();
     }
 
-    private void PathDataEnter(object sender, EventArgs e)
-    {
-      var result = folderBrowser.ShowDialog();
-
-      if (result == DialogResult.OK)
-      {
-        Settings.Default.folderPath = folderBrowser.SelectedPath;
-        pathData.Text = folderBrowser.SelectedPath;
-        Settings.Default.Save();
-      }
-    }
-
     private void UserEditValueChanged(object sender, EventArgs e)
     {
-      ErrorProvider.SetError(user, string.IsNullOrEmpty(user.Text) ? "Bitte einen Namen vergeben." : "");
+      if (_isLoaded)
+      {
+        ErrorProvider.SetError(user, string.IsNullOrEmpty(user.Text) ? "Bitte einen Namen vergeben." : "");
+      }
     }
 
     private void DbConnectionStringEditValueChanged(object sender, EventArgs e)
     {
-      ServiceLocator.Instance.ConfigFile.SetConnectionString(dbConnectionString.Text);
+      if (_isLoaded)
+      {
+        ServiceLocator.Instance.ConfigFile.SetConnectionString(dbConnectionString.Text);
+      }
     }
 
     private void DatabaseSelectedIndexChanged(object sender, EventArgs e)
     {
-      ServiceLocator.Instance.ConfigFile.SetDatabaseEngine((ServiceLocator.DatabaseEngine)Enum.Parse(typeof(ServiceLocator.DatabaseEngine), database.Text));
+      if (_isLoaded)
+      {
+        ServiceLocator.Instance.ConfigFile.SetDatabaseEngine((ServiceLocator.DatabaseEngine)Enum.Parse(typeof(ServiceLocator.DatabaseEngine), database.Text));
+      }
     }
 
     private void CheckDatabaseSettingClick(object sender, EventArgs e)
@@ -89,16 +89,14 @@ namespace Impressio.Controls
       }
     }
 
-    private void PropertieControlValidating(object sender, System.ComponentModel.CancelEventArgs e)
-    {
-      e.Cancel = !ValidateControl();
-    }
-
     private void LookAndFeelSelectedIndexChanged(object sender, EventArgs e)
     {
-      Settings.Default.lookAndFeel = lookAndFeel.Text;
-      Settings.Default.Save();
-      DevExpress.LookAndFeel.UserLookAndFeel.Default.SkinName = Settings.Default.lookAndFeel;
+      if (_isLoaded)
+      {
+        Settings.Default.lookAndFeel = lookAndFeel.Text;
+        Settings.Default.Save();
+        DevExpress.LookAndFeel.UserLookAndFeel.Default.SkinName = Settings.Default.lookAndFeel;
+      }
     }
 
     private void LogoEditEnter(object sender, EventArgs e)
@@ -112,5 +110,7 @@ namespace Impressio.Controls
         Settings.Default.Save();
       }
     }
+
+    private bool _isLoaded;
   }
 }

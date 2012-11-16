@@ -30,7 +30,7 @@ namespace Impressio.Controls
 
     public bool BringDefaultToFront()
     {
-      if(DetailControl != null)
+      if (DetailControl != null)
       {
         _mainView.UnregisterRibbon(DetailControl.RibbonPage);
         _mainView.UnregisterControl(DetailControl);
@@ -49,17 +49,17 @@ namespace Impressio.Controls
 
     public void PageChanged(object sender, EventArgs e)
     {
-      if(_mainView.ribbon.SelectedPage == _mainView.ribbonPageProperties)
+      if (_mainView.ribbon.SelectedPage == _mainView.ribbonPageProperties)
       {
         BringDefaultToFront();
       }
-      else if(_mainView.ribbon.SelectedPage == ActiveControl.RibbonPage && DetailControl != null)
+      else if (_mainView.ribbon.SelectedPage == ActiveControl.RibbonPage && DetailControl != null)
       {
         _mainView.UnregisterRibbon(DetailControl.RibbonPage);
         _mainView.UnregisterControl(DetailControl);
       }
     }
-    
+
     public void GetProperty(object sender, EventArgs e)
     {
       if (Validate() && ActiveControl != _propertieControl)
@@ -168,6 +168,11 @@ namespace Impressio.Controls
       Order.LoadOrderDesigner();
     }
 
+    public void GetDeliveryEdit(object sender, EventArgs e)
+    {
+      Delivery.LoadDeliveryDesigner();
+    }
+
     public void GetPredefined(object sender, EventArgs e)
     {
       if (Validate())
@@ -179,9 +184,9 @@ namespace Impressio.Controls
         }
 
         ActiveControl = (_predefinedPositionControl = new PredefinedPositionControl());
-        _mainView.RegisterControl(ActiveControl);
+        _mainView.RegisterControl(_predefinedPositionControl);
         _predefinedPositionControl.OpenPositionButton.ItemClick += OpenPositionClick;
-        _mainView.RegisterRibbon(_predefinedPositionControl.RibbonPage);
+        _mainView.RegisterRibbon(_predefinedPositionControl.RibbonPage);        
       }
     }
 
@@ -212,7 +217,7 @@ namespace Impressio.Controls
     private PredefinedPositionControl _predefinedPositionControl;
 
     private readonly PropertieControl _propertieControl;
-    
+
     private readonly MainViewRibbon _mainView;
   }
 }

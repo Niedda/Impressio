@@ -43,8 +43,6 @@ namespace Impressio.Controls
       viewPosition.RefreshData();
     }
     
-    private readonly Position _position = new Position();
-    
     private void ViewPositionInitNewRow(object sender, InitNewRowEventArgs e)
     {
       viewPosition.SetFocusedRowCellValue(colIsPredefined, true);
@@ -143,6 +141,8 @@ namespace Impressio.Controls
     
     #endregion
 
-    private List<GridColumn> _columns;
+    private List<GridColumn> _columns; 
+    
+    private readonly Position _position = new Position();
   }
 }

@@ -88,7 +88,7 @@ namespace Impressio.Models
       var controler = form.DesignMdiController;
       controler.DesignPanelLoaded += OfferDesignerLoad;
       report.LoadLayout("Reports\\offerReport.repx");
-      controler.OpenReport(new OfferReport());
+      controler.OpenReport(report);
       form.ShowDialog();
       controler.ActiveDesignPanel.CloseReport();
     }
@@ -135,7 +135,7 @@ namespace Impressio.Models
       var controler = form.DesignMdiController;
       controler.DesignPanelLoaded += OrderDesignerLoad;
       report.LoadLayout("Reports\\orderReport.repx");
-      controler.OpenReport(new OrderReport());
+      controler.OpenReport(report);
       form.ShowDialog();
       controler.ActiveDesignPanel.CloseReport();
     }

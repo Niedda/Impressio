@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using DevExpress.XtraReports.UserDesigner;
 using Impressio.Models.Tools;
 using Impressio.Properties;
 using Impressio.Reports;
@@ -20,6 +21,73 @@ namespace Impressio.Models
       FkDeliveryClient,
       DeliveryDate,
       FkDeliveryCompany,
+    }
+
+    #endregion
+
+    #region Reports
+
+    //previews of the documents
+    public void LoadDeliveryReport()
+    {
+      _deliveryPosition = null;
+
+      var report = new DeliveryReport { deliveryBindingSource = { DataSource = this } };
+
+      if (File.Exists(Settings.Default.logoImage))
+      {
+        report.logoBox.ImageUrl = Settings.Default.logoImage;
+      }
+
+      report.ShowRibbonPreview();
+    }
+
+    //designer for the documents
+    public static void LoadDeliveryDesigner()
+    {
+      var form = new XRDesignForm();
+      var report = new DeliveryReport();
+
+      var controler = form.DesignMdiController;
+      controler.DesignPanelLoaded += DeliveryDesignerLoad;
+      report.LoadLayout("Reports\\deliveryReport.repx");
+      controler.OpenReport(report);
+      form.ShowDialog();
+      controler.ActiveDesignPanel.CloseReport();
+    }
+
+    public static void DeliveryDesignerLoad(object sender, DesignerLoadedEventArgs e)
+    {
+      var panel = (XRDesignPanel)sender;
+      panel.AddCommandHandler(new DeliverySaveCommand(panel));
+    }
+
+    public class DeliverySaveCommand : ICommandHandler
+    {
+      public DeliverySaveCommand(XRDesignPanel panel)
+      {
+        _panel = panel;
+      }
+
+      public virtual void HandleCommand(ReportCommand command, object[] args, ref bool handled)
+      {
+        if (!CanHandleCommand(command)) return;
+        Save();
+        handled = true;
+      }
+
+      public virtual bool CanHandleCommand(ReportCommand command)
+      {
+        return command == ReportCommand.SaveFile || command == ReportCommand.SaveFileAs || command == ReportCommand.Closing;
+      }
+
+      private void Save()
+      {
+        _panel.Report.SaveLayout("Reports\\deliveryReport.repx");
+        _panel.ReportState = ReportState.Saved;
+      }
+
+      private readonly XRDesignPanel _panel;
     }
 
     #endregion
@@ -148,21 +216,7 @@ namespace Impressio.Models
     {
       _deliveries.Clear();
     }
-
-    public void LoadDeliveryReport()
-    {
-      _deliveryPosition = null;
-
-      var report = new DeliveryReport {deliveryBindingSource = {DataSource = this}};
-
-      if(File.Exists(Settings.Default.logoImage))
-      {
-        report.logoBox.ImageUrl = Settings.Default.logoImage;
-      }
-
-      report.ShowRibbonPreview();
-    }
-
+    
     private Company _company;
 
     private Order _order;

@@ -69,7 +69,8 @@ namespace Impressio.Views
       machines.ItemClick += _propertyHandler.GetMachine;
       editOrder.ItemClick += _propertyHandler.GetOrderEdit;
       editOffer.ItemClick += _propertyHandler.GetOfferEdit;
-
+      editDelivery.ItemClick += _propertyHandler.GetDeliveryEdit;
+      
       RegisterControl(_ordersControl);
     }
 

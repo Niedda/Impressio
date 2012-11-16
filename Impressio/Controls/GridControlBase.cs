@@ -8,10 +8,11 @@ using DevExpress.XtraEditors.DXErrorProvider;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using Impressio.Models;
 using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 
-namespace Impressio.Models
+namespace Impressio.Controls
 {
   public class GridControlBase<T> : XtraUserControl, IControl, IGridControl where T : DatabaseObjectBase<T>, new()
   {
@@ -213,7 +214,7 @@ namespace Impressio.Models
       DeleteRow();
     }
 
-    public bool ValidateControl()
+    public virtual bool ValidateControl()
     {
       CheckEditors();
       return ValidateRow() && !ErrorProvider.HasErrors;
@@ -271,9 +272,6 @@ namespace Impressio.Models
   { }
 
   public class PositionControlBase : GridControlBase<Position>
-  { }
-
-  public class PredefinedPositionControl : GridControlBase<Position>
   { }
 
   public class StateControlBase : GridControlBase<State>
