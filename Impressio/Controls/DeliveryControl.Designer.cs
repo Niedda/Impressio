@@ -75,7 +75,7 @@ namespace Impressio.Controls
       this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
       this.groupControl1.Location = new System.Drawing.Point(0, 0);
       this.groupControl1.Name = "groupControl1";
-      this.groupControl1.Size = new System.Drawing.Size(861, 156);
+      this.groupControl1.Size = new System.Drawing.Size(790, 156);
       this.groupControl1.TabIndex = 0;
       this.groupControl1.Text = "Details Lieferschein";
       // 
@@ -115,6 +115,7 @@ namespace Impressio.Controls
             new DevExpress.XtraEditors.Controls.EditorButton()});
       this.deliveryDate.Size = new System.Drawing.Size(217, 20);
       this.deliveryDate.TabIndex = 2;
+      this.deliveryDate.EditValueChanged += new System.EventHandler(this.SaveDelivery);
       // 
       // addressLookUp
       // 
@@ -139,7 +140,7 @@ namespace Impressio.Controls
       this.addressLookUp.Properties.ValueMember = "Identity";
       this.addressLookUp.Size = new System.Drawing.Size(217, 20);
       this.addressLookUp.TabIndex = 1;
-      this.addressLookUp.EditValueChanged += new System.EventHandler(this.AddressLookUpEditValueChanged);
+      this.addressLookUp.EditValueChanged += new System.EventHandler(this.SaveDelivery);
       // 
       // addressBindingSource
       // 
@@ -170,7 +171,7 @@ namespace Impressio.Controls
       this.clientLookUp.Properties.ValueMember = "Identity";
       this.clientLookUp.Size = new System.Drawing.Size(217, 20);
       this.clientLookUp.TabIndex = 0;
-      this.clientLookUp.EditValueChanged += new System.EventHandler(this.ClientLookUpEditValueChanged);
+      this.clientLookUp.EditValueChanged += new System.EventHandler(this.SaveDelivery);
       // 
       // clientBindingSource
       // 
@@ -185,7 +186,7 @@ namespace Impressio.Controls
       this.gridDeliveryPosition.Name = "gridDeliveryPosition";
       this.gridDeliveryPosition.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.positionComboEdit});
-      this.gridDeliveryPosition.Size = new System.Drawing.Size(861, 224);
+      this.gridDeliveryPosition.Size = new System.Drawing.Size(790, 191);
       this.gridDeliveryPosition.TabIndex = 1;
       this.gridDeliveryPosition.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewDeliveryPosition});
@@ -211,9 +212,6 @@ namespace Impressio.Controls
       this.viewDeliveryPosition.OptionsView.ShowGroupPanel = false;
       this.viewDeliveryPosition.RowHeight = 30;
       this.viewDeliveryPosition.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewDeliveryPositionInitNewRow);
-      this.viewDeliveryPosition.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewDeliveryPositionInvalidRowException);
-      this.viewDeliveryPosition.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewDeliveryPositionValidateRow);
-      this.viewDeliveryPosition.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.ViewDeliveryPositionRowUpdated);
       // 
       // colIdentity
       // 
@@ -271,9 +269,7 @@ namespace Impressio.Controls
       this.Controls.Add(this.gridDeliveryPosition);
       this.Controls.Add(this.groupControl1);
       this.Name = "DeliveryControl";
-      this.Size = new System.Drawing.Size(861, 380);
-      this.Load += new System.EventHandler(this.DeliveryControlLoad);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.DeliveryControlValidating);
+      this.Size = new System.Drawing.Size(790, 347);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
       this.groupControl1.ResumeLayout(false);

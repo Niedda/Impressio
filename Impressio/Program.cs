@@ -19,7 +19,7 @@ namespace Impressio
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
 
-      var myContext = new SplashAppContext(MainViewRibbon.Instance, new StartScreen());
+      var myContext = new SplashAppContext(new MainViewRibbon(), new StartScreen());
       Application.Run(myContext);
     }
   }

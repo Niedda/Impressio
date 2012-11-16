@@ -3,7 +3,7 @@
   /// <summary>
   /// Provides some standard methods for controls
   /// </summary>
-  public interface IControl
+  public interface IControl : IRibbon
   {
     /// <summary>
     /// Reload the control from the database

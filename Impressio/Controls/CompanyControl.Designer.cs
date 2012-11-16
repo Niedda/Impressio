@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+      this.components = new System.ComponentModel.Container();
       this.gridCompany = new DevExpress.XtraGrid.GridControl();
-      this.companiesBindingSource = new System.Windows.Forms.BindingSource();
+      this.companiesBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewCompany = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colCompanyName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -53,7 +54,7 @@
       this.gridCompany.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
       this.gridCompany.Name = "gridCompany";
       this.gridCompany.ShowOnlyPredefinedDetails = true;
-      this.gridCompany.Size = new System.Drawing.Size(791, 381);
+      this.gridCompany.Size = new System.Drawing.Size(879, 398);
       this.gridCompany.TabIndex = 0;
       this.gridCompany.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewCompany,
@@ -84,9 +85,6 @@
       this.viewCompany.OptionsView.ShowDetailButtons = false;
       this.viewCompany.OptionsView.ShowGroupPanel = false;
       this.viewCompany.RowHeight = 30;
-      this.viewCompany.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewCompanyInvalidRowException);
-      this.viewCompany.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewCompanyValidateRow);
-      this.viewCompany.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.ViewCompanyRowUpdated);
       // 
       // colIdentity
       // 
@@ -131,9 +129,7 @@
       this.Controls.Add(this.gridCompany);
       this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
       this.Name = "CompanyControl";
-      this.Size = new System.Drawing.Size(791, 381);
-      this.Load += new System.EventHandler(this.CompanyControlLoad);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.CompanyControlValidating);
+      this.Size = new System.Drawing.Size(879, 398);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridCompany)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.companiesBindingSource)).EndInit();

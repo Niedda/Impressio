@@ -69,23 +69,27 @@ namespace Impressio.Models
       }
     }
 
-    public int PrintType { get; set; }
-
-    public string PrintTypeString
+    public int PrintType
     {
       get
       {
-        switch (PrintType)
+        switch (PrintTypeString)
         {
-          case 0:
-            return "Einseitig";
-          case 1:
-            return "Zweiseitig";
+          case "Einseitig":
+            return 0;
+          case "Zweiseitig":
+            return 1;
           default:
-            return "";
+            return 0;
         }
       }
+      set
+      {
+        PrintTypeString = value == 0 ? "Einseitig" : "Zweiseitig";
+      }
     }
+
+    public string PrintTypeString { get; set; }
 
     public int PrintAmount { get; set; }
 
@@ -138,7 +142,6 @@ namespace Impressio.Models
       {
         return (PrintCostTotal + PaperCostTotal).GetInt();
       }
-      set {  }
     }
 
     public Type Type
@@ -174,8 +177,8 @@ namespace Impressio.Models
       PaperUsePer = Database.DatabaseCommand.Reader[Columns.PaperUsePer.ToString()].GetInt();
       PaperAddition = Database.DatabaseCommand.Reader[Columns.PaperAddition.ToString()].GetInt();
       PaperAmount = Database.DatabaseCommand.Reader[Columns.PaperAmount.ToString()].GetInt();
-      PositionTotal = Database.DatabaseCommand.Reader[Columns.PositionTotal.ToString()].GetInt();
       PaperPricePer = Database.DatabaseCommand.Reader[Columns.PaperPrice.ToString()].GetInt();
+      PrintType = Database.DatabaseCommand.Reader[Columns.PrintType.ToString()].GetInt();
       Name = Database.DatabaseCommand.Reader[Columns.PositionName.ToString()] as string;
     }
 
@@ -190,11 +193,11 @@ namespace Impressio.Models
                  {Columns.PaperAddition, PaperAddition.SetIntDbNull()},
                  {Columns.PaperUsePer, PaperUsePer.SetIntDbNull()},
                  {Columns.PrintAmount, PrintAmount.SetIntDbNull()},
-                 {Columns.PositionTotal, PositionTotal.SetIntDbNull()},
+                 {Columns.PositionTotal, PositionTotal},
                  {Columns.IsPredefined, IsPredefined},
                  {Columns.PositionName, Name},
                  {Columns.PaperPrice, PaperPricePer.SetIntDbNull()},
-                 {Columns.PrintType, PrintType.SetIntDbNull()}
+                 {Columns.PrintType, PrintType}
                };
     }
 

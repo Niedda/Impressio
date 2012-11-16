@@ -5,6 +5,7 @@ using System.Linq;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
@@ -12,92 +13,36 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class DescriptionControl : BaseControlImpressio, IControl, IGridControl<Description>, IRibbon
+  public partial class DescriptionControl : DescriptionControlBase
   {
     public DescriptionControl()
     {
       InitializeComponent();
+      InitializeBase();
     }
-    
-    #region Ribbon
 
-    public string RibbonGroupName { get { return "Beschreibungen"; } }
-
-    public List<BarButtonItem> Buttons
+    public override List<GridColumn> ColumnsToCheck
     {
       get
       {
-        return _buttons ?? (_buttons = LoadButtons());
+        return _columns ?? (_columns = new List<GridColumn>
+                                         {
+                                           colDetailTitle,
+                                           colDetailContent,
+                                           colJobTitel,
+                                         });
       }
     }
 
-    public RibbonPageGroup GetRibbon()
+    public override GridView GridView
     {
-      var pageGroup = new RibbonPageGroup
+      get
       {
-        Text = "Beschreibungen",
-        Name = "descriptionPageGroup"
-      };
-      pageGroup.ItemLinks.AddRange(Buttons.ToArray());
-
-      return pageGroup;
+        return viewDescription;
+      }
     }
 
-    private List<BarButtonItem> _buttons;
-
-    private List<BarButtonItem> LoadButtons()
-    {
-      var deleteButton = new BarButtonItem
-      {
-        Caption = "Beschreibung Löschen",
-        Id = 1,
-        LargeGlyph = Properties.Resources.delete,
-        LargeWidth = 80,
-        Name = "descriptionDelete",
-      };
-      deleteButton.ItemClick += DeleteRow;
-
-      var deleteDetailButton = new BarButtonItem
-      {
-        Caption = "Detail Löschen",
-        Id = 2,
-        LargeGlyph = Properties.Resources.delete,
-        LargeWidth = 80,
-        Name = "detailDelete",
-      };
-      deleteDetailButton.ItemClick += DeleteDetailRow;
-      
-      var refreshButton = new BarButtonItem
-      {
-        Caption = "Aktualisieren",
-        Id = 3,
-        LargeGlyph = Properties.Resources.refresh,
-        LargeWidth = 80,
-        Name = "descriptionRefresh"
-      };
-      refreshButton.ItemClick += ReloadControl;
-
-      return new List<BarButtonItem> { deleteButton, deleteDetailButton, refreshButton};
-    }
-    
-    public void DeleteDetailRow(object sender, ItemClickEventArgs e)
-    {
-      DeleteDetailRow();
-    }
-
-    public void DeleteRow(object sender, ItemClickEventArgs e)
-    {
-      DeleteRow();
-    }
-
-    public void ReloadControl(object sender, ItemClickEventArgs e)
-    {
-      ReloadControl();
-    }
-
-    #endregion
-
-    public void ReloadControl()
+    public override void ReloadControl()
     {
       _description.ClearObjectList();
       _description.ClearPredefinedObjects();
@@ -116,38 +61,6 @@ namespace Impressio.Controls
         predefinedDescriptionCombo.Items.AddRange(_description.PredefinedObjects.Select(a => a.JobTitle).ToList());
       }
       viewDescription.RefreshData();
-    }
-
-    public bool ValidateControl()
-    {
-      return ValidateRow() && ValidateDetailRow();
-    }
-    
-    public void DeleteRow()
-    {
-      FocusedRow.DeleteObject();
-      viewDescription.DeleteSelectedRows();
-    }
-
-    public bool ValidateRow()
-    {
-      viewDescription.ClearColumnErrors();
-      CheckColumn(colJobTitel);
-      return !viewDescription.HasColumnErrors;
-    }
-
-    public void UpdateRow()
-    {
-      if (!viewDescription.HasColumnErrors && FocusedRow != null)
-      {
-        FocusedRow.IsPredefined = IsPredefinedMode;
-
-        if (viewDescription.IsNewItemRow(viewDescription.FocusedRowHandle))
-        {
-          FocusedRow.Arrange = viewDescription.RowCount;
-        }
-        FocusedRow.Identity = FocusedRow.SaveObject();
-      }
     }
 
     public void DeleteDetailRow()
@@ -176,12 +89,7 @@ namespace Impressio.Controls
         FocusedRowDetail.Identity = FocusedRowDetail.SaveObject();
       }
     }
-
-    public Description FocusedRow
-    {
-      get { return viewDescription.GetFocusedRow() as Description; }
-    }
-
+    
     public Detail FocusedRowDetail
     {
       get { return viewDetail.GetFocusedRow() as Detail; }
@@ -189,29 +97,9 @@ namespace Impressio.Controls
 
     public bool IsPredefinedMode;
 
-    public Order Order = new Order();
+    public Order Order;
 
     private readonly Description _description = new Description();
-
-    private void DescriptionControlLoad(object sender, EventArgs e)
-    {
-      ReloadControl();
-    }
-
-    private void ViewDescriptionValidateRow(object sender, ValidateRowEventArgs e)
-    {
-      e.Valid = ValidateRow();
-    }
-
-    private void ViewDescriptionRowUpdated(object sender, RowObjectEventArgs e)
-    {
-      UpdateRow();
-    }
-
-    private void ViewDescriptionInvalidRowException(object sender, InvalidRowExceptionEventArgs e)
-    {
-      e.ExceptionMode = ExceptionMode.NoAction;
-    }
 
     private void ViewDescriptionFocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
     {
@@ -372,5 +260,106 @@ namespace Impressio.Controls
     {
       ValidateControl();
     }
+
+    #region Ribbons
+    
+    public void DeleteDetailRow(object sender, ItemClickEventArgs e)
+    {
+      DeleteDetailRow();
+    }
+    
+    public void DeleteRow(object sender, ItemClickEventArgs e)
+    {
+      DeleteRow();
+    }
+
+    public void ReloadControl(object sender, ItemClickEventArgs e)
+    {
+      ReloadControl();
+    }
+    
+    public override RibbonPage RibbonPage
+    {
+      get
+      {
+        if (_ribbonPage == null)
+        {
+          _ribbonPage = new RibbonPage("Statusverwaltung");
+        }
+        if (_ribbonGroup == null)
+        {
+          _ribbonGroup = new RibbonPageGroup();
+        }
+
+        _ribbonGroup.ItemLinks.Clear();
+        _ribbonGroup.ItemLinks.Add(DeleteButton);
+        _ribbonGroup.ItemLinks.Add(DeleteDetailButton);
+        _ribbonGroup.ItemLinks.Add(RefreshButton);
+
+        DeleteButton.ItemClick += DeleteRow;
+        DeleteDetailButton.ItemClick += DeleteDetailRow;
+        RefreshButton.ItemClick += ReloadControl;
+
+        _ribbonPage.Groups.Add(_ribbonGroup);
+
+        return _ribbonPage;
+      }
+    }
+
+    public BarButtonItem RefreshButton
+    {
+      get
+      {
+        return _refreshButton ?? (_refreshButton = new BarButtonItem
+        {
+          Caption = "Aktualisieren",
+          Id = 3,
+          LargeGlyph = Properties.Resources.refresh,
+          LargeWidth = 80,
+        });
+      }
+    }
+
+    public BarButtonItem DeleteButton
+    {
+      get
+      {
+        return _deleteButton ?? (_deleteButton = new BarButtonItem
+        {
+          Caption = "Löschen",
+          Id = 2,
+          LargeGlyph = Properties.Resources.delete,
+          LargeWidth = 80,
+        });
+      }
+    }
+
+    public BarButtonItem DeleteDetailButton
+    {
+      get
+      {
+        return _deleteDetailButton ?? (_deleteDetailButton = new BarButtonItem
+                                                               {
+                                                                 Caption = "Detail löschen",
+                                                                 Id = 3,
+                                                                 LargeGlyph = Properties.Resources.delete,
+                                                                 LargeWidth = 80,
+                                                               });
+      }
+    }
+
+    private RibbonPageGroup _ribbonGroup;
+
+    private RibbonPage _ribbonPage;
+
+    private BarButtonItem _refreshButton;
+
+    private BarButtonItem _deleteButton;
+
+    private BarButtonItem _deleteDetailButton;
+
+    #endregion
+
+    private List<GridColumn> _columns;
   }
 }

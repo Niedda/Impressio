@@ -30,15 +30,16 @@ namespace Impressio.Controls
         /// </summary>
         private void InitializeComponent()
         {
+      this.components = new System.ComponentModel.Container();
       this.gridOrder = new DevExpress.XtraGrid.GridControl();
-      this.orderBindingSource = new System.Windows.Forms.BindingSource();
+      this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewOrder = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colFkOrderCompany = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colOrderName = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colState = new DevExpress.XtraGrid.Columns.GridColumn();
       this.stateLookUpEdit = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-      this.stateBindingSource = new System.Windows.Forms.BindingSource();
+      this.stateBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.colDateCreated = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colUserCreated = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colDateModified = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -48,14 +49,14 @@ namespace Impressio.Controls
       this.colFkOrderAddress = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colCompany = new DevExpress.XtraGrid.Columns.GridColumn();
       this.companySearchLookUpEdit = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
-      this.companiesBindingSource = new System.Windows.Forms.BindingSource();
+      this.companiesBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity1 = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colCompanyName = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colAddition = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
-      this.avaibleClientsBindingSource = new System.Windows.Forms.BindingSource();
-      this.avaibleAddressBindingSource = new System.Windows.Forms.BindingSource();
+      this.avaibleClientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.avaibleAddressBindingSource = new System.Windows.Forms.BindingSource(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridOrder)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
@@ -79,11 +80,10 @@ namespace Impressio.Controls
       this.gridOrder.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.companySearchLookUpEdit,
             this.stateLookUpEdit});
-      this.gridOrder.Size = new System.Drawing.Size(777, 339);
+      this.gridOrder.Size = new System.Drawing.Size(790, 347);
       this.gridOrder.TabIndex = 0;
       this.gridOrder.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewOrder});
-      this.gridOrder.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridOrderKeyDown);
       // 
       // orderBindingSource
       // 
@@ -123,10 +123,6 @@ namespace Impressio.Controls
       this.viewOrder.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.ShowAlways;
       this.viewOrder.OptionsView.ShowGroupPanel = false;
       this.viewOrder.RowHeight = 30;
-      this.viewOrder.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.ViewOrderRowClick);
-      this.viewOrder.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewOrderInvalidRowException);
-      this.viewOrder.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewOrderValidateRow);
-      this.viewOrder.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.ViewOrderRowUpdated);
       // 
       // colIdentity
       // 
@@ -320,9 +316,7 @@ namespace Impressio.Controls
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridOrder);
       this.Name = "OrdersControl";
-      this.Size = new System.Drawing.Size(777, 339);
-      this.Load += new System.EventHandler(this.OrderControlLoad);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.OrdersControlValidating);
+      this.Size = new System.Drawing.Size(790, 347);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridOrder)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).EndInit();

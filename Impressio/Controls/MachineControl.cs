@@ -1,170 +1,126 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows.Forms;
+﻿using System.Collections.Generic;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class MachineControl : BaseControlImpressio, IControl, IGridControl<Machine>, IRibbon
+  public partial class MachineControl : GridControlBase<Machine>
   {
     public MachineControl()
     {
       InitializeComponent();
+      InitializeBase();
     }
 
-    #region Ribbon
+    public override GridView GridView
+    {
+      get { return viewMachine; }
+    }
 
-    public string RibbonGroupName { get { return "Druckmaschinen"; } }
-
-    public List<BarButtonItem> Buttons
+    public override List<GridColumn> ColumnsToCheck
     {
       get
       {
-        return _buttons ?? (_buttons = LoadButtons());
+        return _columns ?? (_columns = new List<GridColumn>
+                 {
+                   colName,
+                   colPlateCost,
+                   colPricePerColor,
+                   colSpeed,
+                   colCostPerHour,
+                 });
       }
     }
 
-    public RibbonPageGroup GetRibbon()
+    public override void ReloadControl()
     {
-      var pageGroup = new RibbonPageGroup
-      {
-        Text = "Maschinen",
-        Name = "machinePageGroup"
-      };
-      pageGroup.ItemLinks.AddRange(Buttons.ToArray());
-
-      return pageGroup;
+      _machine.ClearObjectList();
+      machineBindingSource.DataSource = _machine.LoadObjectList();
+      viewMachine.RefreshData();
     }
-
-    private List<BarButtonItem> _buttons;
-
-    private List<BarButtonItem> LoadButtons()
-    {
-      var deleteButton = new BarButtonItem
-      {
-        Caption = "Löschen",
-        Id = 1,
-        LargeGlyph = Properties.Resources.delete,
-        LargeWidth = 80,
-        Name = "machineDelete",
-      };
-      deleteButton.ItemClick += DeleteRow;
-
-      var refreshButton = new BarButtonItem
-      {
-        Caption = "Aktualisieren",
-        Id = 2,
-        LargeGlyph = Properties.Resources.refresh,
-        LargeWidth = 80,
-        Name = "machineRefresh"
-      };
-      refreshButton.ItemClick += ReloadControl;
-
-      return new List<BarButtonItem> { deleteButton, refreshButton };
-    }
-
-    public void DeleteRow(object sender, ItemClickEventArgs e)
-    {
-      DeleteRow();
-    }
+    
+    #region Ribbons
 
     public void ReloadControl(object sender, ItemClickEventArgs e)
     {
       ReloadControl();
     }
 
+    public void DeleteRow(object sender, ItemClickEventArgs e)
+    {
+      DeleteRow();
+    }
+    
+    public override RibbonPage RibbonPage
+    {
+      get
+      {
+        if (_ribbonPage == null)
+        {
+          _ribbonPage = new RibbonPage("Druckmaschinen");
+        }
+        if (_ribbonGroup == null)
+        {
+          _ribbonGroup = new RibbonPageGroup();
+        }
+
+        _ribbonGroup.ItemLinks.Clear();
+        _ribbonGroup.ItemLinks.Add(DeleteButton);
+        _ribbonGroup.ItemLinks.Add(RefreshButton);
+
+        DeleteButton.ItemClick += DeleteRow;
+        RefreshButton.ItemClick += ReloadControl;
+
+        _ribbonPage.Groups.Add(_ribbonGroup);
+
+        return _ribbonPage;
+      }
+    }
+
+    public BarButtonItem RefreshButton
+    {
+      get
+      {
+        return _refreshButton ?? (_refreshButton = new BarButtonItem
+        {
+          Caption = "Aktualisieren",
+          Id = 3,
+          LargeGlyph = Properties.Resources.refresh,
+          LargeWidth = 80,
+        });
+      }
+    }
+
+    public BarButtonItem DeleteButton
+    {
+      get
+      {
+        return _deleteButton ?? (_deleteButton = new BarButtonItem
+        {
+          Caption = "Löschen",
+          Id = 2,
+          LargeGlyph = Properties.Resources.delete,
+          LargeWidth = 80,
+        });
+      }
+    }
+
+    private RibbonPageGroup _ribbonGroup;
+
+    private RibbonPage _ribbonPage;
+
+    private BarButtonItem _refreshButton;
+
+    private BarButtonItem _deleteButton;
+
     #endregion
 
-    public void ReloadControl()
-    {
-      _machine.ClearObjectList();
-      machineBindingSource.DataSource = _machine.LoadObjectList();
-      viewMachine.RefreshData();
-    }
-
-    public bool ValidateControl()
-    {
-      return ValidateRow();
-    }
-
-    public void DeleteRow()
-    {
-      if (FocusedRow != null)
-      {
-        FocusedRow.DeleteObject();
-        viewMachine.DeleteSelectedRows();
-      }
-    }
-
-    public bool ValidateRow()
-    {
-      viewMachine.ClearColumnErrors();
-      CheckColumn(colName);
-      CheckColumn(colCostPerHour);
-      CheckColumn(colPlateCost);
-      CheckColumn(colPricePerColor);
-      CheckColumn(colSpeed);
-      return !viewMachine.HasColumnErrors;
-    }
-
-    public void UpdateRow()
-    {
-      if (FocusedRow != null)
-      {
-        FocusedRow.Identity = FocusedRow.SaveObject();
-      }
-    }
-
-    public Machine FocusedRow
-    {
-      get { return viewMachine.GetFocusedRow() as Machine; }
-    }
+    private List<GridColumn> _columns;
 
     private readonly Machine _machine = new Machine();
-
-    private void MachineControlLoad(object sender, EventArgs e)
-    {
-      ReloadControl();
     }
-
-    private void ViewMachineInvalidRowException(object sender, InvalidRowExceptionEventArgs e)
-    {
-      e.ExceptionMode = ExceptionMode.NoAction;
-    }
-
-    private void ViewMachineValidateRow(object sender, ValidateRowEventArgs e)
-    {
-      if (ValidateRow())
-      {
-        UpdateRow();
-      }
-      else
-      {
-        e.Valid = false;
-      }
-    }
-
-    private void MachineControlValidating(object sender, CancelEventArgs e)
-    {
-      e.Cancel = !ValidateControl();
-    }
-
-    private void GridMachineKeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-    {
-      if (e.KeyCode == Keys.Escape)
-      {
-        if (viewMachine.IsNewItemRow(viewMachine.FocusedRowHandle))
-        {
-          viewMachine.CancelUpdateCurrentRow();
-          viewMachine.FocusedRowHandle = 0;
-        }
-      }
-    }
-  }
 }

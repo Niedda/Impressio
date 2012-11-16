@@ -28,8 +28,9 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.gridGender = new DevExpress.XtraGrid.GridControl();
-      this.genderBindingSource = new System.Windows.Forms.BindingSource();
+      this.genderBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewGender = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -47,11 +48,10 @@
       this.gridGender.Location = new System.Drawing.Point(0, 0);
       this.gridGender.MainView = this.viewGender;
       this.gridGender.Name = "gridGender";
-      this.gridGender.Size = new System.Drawing.Size(777, 339);
+      this.gridGender.Size = new System.Drawing.Size(879, 425);
       this.gridGender.TabIndex = 0;
       this.gridGender.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewGender});
-      this.gridGender.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridGenderKeyDown);
       // 
       // genderBindingSource
       // 
@@ -75,8 +75,6 @@
       this.viewGender.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewGender.OptionsView.ShowGroupPanel = false;
       this.viewGender.RowHeight = 30;
-      this.viewGender.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewGenderInvalidRowException);
-      this.viewGender.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewGenderValidateRow);
       // 
       // colIdentity
       // 
@@ -103,9 +101,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridGender);
       this.Name = "GenderControl";
-      this.Size = new System.Drawing.Size(777, 339);
-      this.Load += new System.EventHandler(this.GenderControlLoad);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.GenderControlValidating);
+      this.Size = new System.Drawing.Size(879, 425);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridGender)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.genderBindingSource)).EndInit();

@@ -100,9 +100,6 @@ namespace Impressio.Controls
       this.viewDelivery.OptionsView.ShowGroupPanel = false;
       this.viewDelivery.RowHeight = 30;
       this.viewDelivery.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewDeliveryInitNewRow);
-      this.viewDelivery.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewDeliveryInvalidRowException);
-      this.viewDelivery.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewDeliveryValidateRow);
-      this.viewDelivery.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.ViewDeliveryRowUpdated);
       // 
       // colIdentity
       // 
@@ -245,7 +242,6 @@ namespace Impressio.Controls
       this.Controls.Add(this.gridDelivery);
       this.Name = "DeliveryOverviewControl";
       this.Size = new System.Drawing.Size(847, 373);
-      this.Load += new System.EventHandler(this.DeliveryOverviewControlLoad);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridDelivery)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.deliveryBindingSource)).EndInit();

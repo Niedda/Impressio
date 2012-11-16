@@ -30,8 +30,9 @@ namespace Impressio.Controls
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.gridPaper = new DevExpress.XtraGrid.GridControl();
-      this.paperBindingSource = new System.Windows.Forms.BindingSource();
+      this.paperBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewPaper = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -70,11 +71,10 @@ namespace Impressio.Controls
       this.gridPaper.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.directionComobBox,
             this.directionLookUp});
-      this.gridPaper.Size = new System.Drawing.Size(777, 339);
+      this.gridPaper.Size = new System.Drawing.Size(879, 425);
       this.gridPaper.TabIndex = 0;
       this.gridPaper.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewPaper});
-      this.gridPaper.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridPaperKeyDown);
       // 
       // paperBindingSource
       // 
@@ -111,9 +111,6 @@ namespace Impressio.Controls
       this.viewPaper.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewPaper.OptionsView.ShowAutoFilterRow = true;
       this.viewPaper.RowHeight = 30;
-      this.viewPaper.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewPaperInvalidRowException);
-      this.viewPaper.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewPaperValidateRow);
-      this.viewPaper.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.ViewPaperRowUpdated);
       // 
       // colIdentity
       // 
@@ -293,9 +290,7 @@ namespace Impressio.Controls
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridPaper);
       this.Name = "PaperControl";
-      this.Size = new System.Drawing.Size(777, 339);
-      this.Load += new System.EventHandler(this.PaperControlLoad);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.PaperControlValidating);
+      this.Size = new System.Drawing.Size(879, 425);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPaper)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperBindingSource)).EndInit();

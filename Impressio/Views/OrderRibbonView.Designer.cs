@@ -37,7 +37,7 @@
       this.refresh = new DevExpress.XtraBars.BarButtonItem();
       this.printOrder = new DevExpress.XtraBars.BarButtonItem();
       this.printOffer = new DevExpress.XtraBars.BarButtonItem();
-      this.ribbonPageOrder = new DevExpress.XtraBars.Ribbon.RibbonPage();
+      this.orderPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
       this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
@@ -65,16 +65,15 @@
             this.printOrder,
             this.printOffer});
       this.ribbon.Location = new System.Drawing.Point(0, 0);
-      this.ribbon.MaxItemId = 8;
+      this.ribbon.MaxItemId = 16;
       this.ribbon.Name = "ribbon";
       this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
-            this.ribbonPageOrder});
-      this.ribbon.SelectedPage = this.ribbonPageOrder;
+            this.orderPage});
+      this.ribbon.SelectedPage = this.orderPage;
       this.ribbon.ShowToolbarCustomizeItem = false;
-      this.ribbon.Size = new System.Drawing.Size(642, 145);
+      this.ribbon.Size = new System.Drawing.Size(716, 145);
       this.ribbon.StatusBar = this.ribbonStatusBar;
       this.ribbon.Toolbar.ShowCustomizeItem = false;
-      this.ribbon.SelectedPageChanged += new System.EventHandler(this.RibbonSelectedPageChanged);
       // 
       // openPosition
       // 
@@ -83,7 +82,6 @@
       this.openPosition.LargeGlyph = global::Impressio.Properties.Resources.open;
       this.openPosition.LargeWidth = 80;
       this.openPosition.Name = "openPosition";
-      this.openPosition.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OpenPositionItemClick);
       // 
       // description
       // 
@@ -92,7 +90,6 @@
       this.description.LargeGlyph = global::Impressio.Properties.Resources.description;
       this.description.LargeWidth = 80;
       this.description.Name = "description";
-      this.description.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.DescriptionItemClick);
       // 
       // delivery
       // 
@@ -101,7 +98,6 @@
       this.delivery.LargeGlyph = global::Impressio.Properties.Resources.delivery;
       this.delivery.LargeWidth = 80;
       this.delivery.Name = "delivery";
-      this.delivery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.DeliveryItemClick);
       // 
       // deletePosition
       // 
@@ -110,7 +106,6 @@
       this.deletePosition.LargeGlyph = global::Impressio.Properties.Resources.delete;
       this.deletePosition.LargeWidth = 80;
       this.deletePosition.Name = "deletePosition";
-      this.deletePosition.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.DeletePositionItemClick);
       // 
       // refresh
       // 
@@ -118,7 +113,6 @@
       this.refresh.Id = 5;
       this.refresh.LargeGlyph = global::Impressio.Properties.Resources.refresh;
       this.refresh.Name = "refresh";
-      this.refresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RefreshItemClick);
       // 
       // printOrder
       // 
@@ -127,7 +121,6 @@
       this.printOrder.LargeGlyph = global::Impressio.Properties.Resources.printglyph;
       this.printOrder.LargeWidth = 80;
       this.printOrder.Name = "printOrder";
-      this.printOrder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.PrintOrderItemClick);
       // 
       // printOffer
       // 
@@ -136,15 +129,14 @@
       this.printOffer.LargeGlyph = global::Impressio.Properties.Resources.printglyph;
       this.printOffer.LargeWidth = 80;
       this.printOffer.Name = "printOffer";
-      this.printOffer.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.PrintOfferItemClick);
       // 
-      // ribbonPageOrder
+      // orderPage
       // 
-      this.ribbonPageOrder.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+      this.orderPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup1,
             this.ribbonPageGroup2});
-      this.ribbonPageOrder.Name = "ribbonPageOrder";
-      this.ribbonPageOrder.Text = "Auftrag";
+      this.orderPage.Name = "orderPage";
+      this.orderPage.Text = "Auftragsübersicht";
       // 
       // ribbonPageGroup1
       // 
@@ -157,7 +149,7 @@
       this.ribbonPageGroup1.ItemLinks.Add(this.deletePosition);
       this.ribbonPageGroup1.Name = "ribbonPageGroup1";
       this.ribbonPageGroup1.ShowCaptionButton = false;
-      this.ribbonPageGroup1.Text = "Position";
+      this.ribbonPageGroup1.Text = "Verwaltung";
       // 
       // ribbonPageGroup2
       // 
@@ -174,21 +166,21 @@
       this.ribbonStatusBar.Location = new System.Drawing.Point(0, 418);
       this.ribbonStatusBar.Name = "ribbonStatusBar";
       this.ribbonStatusBar.Ribbon = this.ribbon;
-      this.ribbonStatusBar.Size = new System.Drawing.Size(642, 31);
+      this.ribbonStatusBar.Size = new System.Drawing.Size(716, 31);
       // 
       // mainPanel
       // 
       this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
       this.mainPanel.Location = new System.Drawing.Point(0, 145);
       this.mainPanel.Name = "mainPanel";
-      this.mainPanel.Size = new System.Drawing.Size(642, 273);
+      this.mainPanel.Size = new System.Drawing.Size(716, 273);
       this.mainPanel.TabIndex = 2;
       // 
       // OrderRibbonView
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(642, 449);
+      this.ClientSize = new System.Drawing.Size(716, 449);
       this.Controls.Add(this.mainPanel);
       this.Controls.Add(this.ribbonStatusBar);
       this.Controls.Add(this.ribbon);
@@ -197,7 +189,6 @@
       this.Ribbon = this.ribbon;
       this.StatusBar = this.ribbonStatusBar;
       this.Text = "Impressio Auftragsdetails";
-      this.Load += new System.EventHandler(this.OrderRibbonViewLoad);
       ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).EndInit();
       this.ResumeLayout(false);
@@ -206,9 +197,6 @@
 
     #endregion
 
-    private DevExpress.XtraBars.Ribbon.RibbonControl ribbon;
-    private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageOrder;
-    private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
     private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
     private DevExpress.XtraBars.BarButtonItem openPosition;
     private DevExpress.XtraBars.BarButtonItem description;
@@ -217,7 +205,10 @@
     private DevExpress.XtraBars.BarButtonItem refresh;
     private DevExpress.XtraBars.BarButtonItem printOrder;
     private DevExpress.XtraBars.BarButtonItem printOffer;
-    private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
     private DevExpress.XtraEditors.PanelControl mainPanel;
+    public DevExpress.XtraBars.Ribbon.RibbonControl ribbon;
+    private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
+    private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
+    public DevExpress.XtraBars.Ribbon.RibbonPage orderPage;
   }
 }

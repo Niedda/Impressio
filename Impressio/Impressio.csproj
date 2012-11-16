@@ -11,7 +11,8 @@
     <RootNamespace>Impressio</RootNamespace>
     <AssemblyName>Impressio</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>C:\Users\bizzi\Desktop\Impressio output\</PublishUrl>
@@ -71,6 +72,10 @@
       <HintPath>..\..\..\..\..\Program Files (x86)\DevExpress 2010.2\Components\Sources\DevExpress.DLL\DevExpress.BonusSkins.v10.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Charts.v10.2.Core, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.CodeParser.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\DevExpress 2010.2\Components\Sources\DevExpress.DLL\DevExpress.CodeParser.v10.2.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Data.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.OfficeSkins.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -81,13 +86,25 @@
     <Reference Include="DevExpress.Utils.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraBars.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraCharts.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v10.2.Extensions, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\DevExpress 2010.2\Components\Sources\DevExpress.DLL\DevExpress.XtraCharts.v10.2.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.XtraEditors.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraNavBar.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPivotGrid.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraReports.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v10.2.Extensions, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\DevExpress 2010.2\Components\Sources\DevExpress.DLL\DevExpress.XtraReports.v10.2.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.XtraRichEdit.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraVerticalGrid.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\DevExpress 2010.2\Components\Sources\DevExpress.DLL\DevExpress.XtraVerticalGrid.v10.2.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.XtraWizard.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Npgsql">
       <HintPath>..\Externals\npgsql\Npgsql.dll</HintPath>
@@ -139,6 +156,7 @@
     <Compile Include="Controls\CompanyControl.Designer.cs">
       <DependentUpon>CompanyControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CustomerHandler.cs" />
     <Compile Include="Controls\DataControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -175,6 +193,7 @@
     <Compile Include="Controls\GenderControl.Designer.cs">
       <DependentUpon>GenderControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\IControlHandler.cs" />
     <Compile Include="Controls\MachineControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -187,6 +206,7 @@
     <Compile Include="Controls\OffsetControl.Designer.cs">
       <DependentUpon>OffsetControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\OrderHandler.cs" />
     <Compile Include="Controls\OrdersControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -223,11 +243,15 @@
     <Compile Include="Controls\PropertieControl.Designer.cs">
       <DependentUpon>PropertieControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PropertyHandler.cs" />
     <Compile Include="Controls\StateControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\StateControl.Designer.cs">
       <DependentUpon>StateControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GridControlBase.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Models\IControl.cs" />
     <Compile Include="Models\IGridControl.cs" />
@@ -239,7 +263,7 @@
     <Compile Include="Models\Delivery.cs" />
     <Compile Include="Models\Description.cs" />
     <Compile Include="Models\Finish.cs" />
-    <Compile Include="Controls\BaseControlImpressio.cs">
+    <Compile Include="Controls\ControlBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Models\Gender.cs" />
@@ -263,15 +287,19 @@
     </Compile>
     <Compile Include="Reports\DeliveryReport.cs">
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Reports\DeliveryReport.Designer.cs">
       <DependentUpon>DeliveryReport.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Reports\OfferReport.cs">
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Reports\OfferReport.Designer.cs">
       <DependentUpon>OfferReport.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Reports\OrderReport.cs">
       <SubType>Component</SubType>
@@ -312,7 +340,15 @@
     </EmbeddedResource>
     <None Include="Properties\DataSources\Impressio.Models.Address1.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.Client1.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Offset.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.Position1.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.Print.datasource" />
+    <None Include="Reports\offerReport.repx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Reports\orderReport.repx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\state.png" />
     <EmbeddedResource Include="Controls\AddressControl.resx">
       <DependentUpon>AddressControl.cs</DependentUpon>
@@ -379,9 +415,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\DeliveryReport.resx">
       <DependentUpon>DeliveryReport.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\OfferReport.resx">
       <DependentUpon>OfferReport.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\OrderReport.resx">
       <DependentUpon>OrderReport.cs</DependentUpon>

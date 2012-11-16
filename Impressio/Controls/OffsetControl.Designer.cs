@@ -30,6 +30,7 @@ namespace Impressio.Controls
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
       DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
       DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -47,7 +48,7 @@ namespace Impressio.Controls
       this.paperPricePer = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
       this.paperSearchLookUp = new DevExpress.XtraEditors.SearchLookUpEdit();
-      this.paperBindingSource = new System.Windows.Forms.BindingSource();
+      this.paperBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewPaper = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -81,7 +82,7 @@ namespace Impressio.Controls
       this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
       this.offsetMachineSearchLookUp = new DevExpress.XtraEditors.SearchLookUpEdit();
-      this.machineBindingSource = new System.Windows.Forms.BindingSource();
+      this.machineBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewMachine = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity1 = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -91,6 +92,7 @@ namespace Impressio.Controls
       this.colName1 = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colPlateCost = new DevExpress.XtraGrid.Columns.GridColumn();
       this.offsetPrintType = new DevExpress.XtraEditors.ComboBoxEdit();
+      this.offsetBindingSource = new System.Windows.Forms.BindingSource(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
       this.groupControl1.SuspendLayout();
@@ -113,6 +115,7 @@ namespace Impressio.Controls
       ((System.ComponentModel.ISupportInitialize)(this.machineBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewMachine)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.offsetPrintType.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.offsetBindingSource)).BeginInit();
       this.SuspendLayout();
       // 
       // groupControl1
@@ -148,6 +151,7 @@ namespace Impressio.Controls
       // 
       // paperCostTotal
       // 
+      this.paperCostTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "PaperCostTotal", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.paperCostTotal.EditValue = new decimal(new int[] {
             0,
             0,
@@ -173,9 +177,11 @@ namespace Impressio.Controls
       this.paperCostTotal.Properties.ReadOnly = true;
       this.paperCostTotal.Size = new System.Drawing.Size(100, 20);
       this.paperCostTotal.TabIndex = 11;
+      this.paperCostTotal.EditValueChanged += new System.EventHandler(this.SaveOffset);
       // 
       // paperUsePer
       // 
+      this.paperUsePer.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "PaperUsePer", true));
       this.paperUsePer.EditValue = new decimal(new int[] {
             0,
             0,
@@ -193,8 +199,7 @@ namespace Impressio.Controls
       this.paperUsePer.Properties.Mask.EditMask = "N00";
       this.paperUsePer.Size = new System.Drawing.Size(100, 20);
       this.paperUsePer.TabIndex = 10;
-      this.paperUsePer.EditValueChanged += new System.EventHandler(this.EditorsValidated);
-      this.paperUsePer.Validated += new System.EventHandler(this.EditorsValidated);
+      this.paperUsePer.EditValueChanged += new System.EventHandler(this.SaveOffset);
       // 
       // labelControl5
       // 
@@ -214,6 +219,7 @@ namespace Impressio.Controls
       // 
       // paperQuantity
       // 
+      this.paperQuantity.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "PaperQuantity", true));
       this.paperQuantity.EditValue = new decimal(new int[] {
             0,
             0,
@@ -232,7 +238,6 @@ namespace Impressio.Controls
       this.paperQuantity.Size = new System.Drawing.Size(100, 20);
       this.paperQuantity.TabIndex = 7;
       this.paperQuantity.EditValueChanged += new System.EventHandler(this.PaperQuantityEditValueChanged);
-      this.paperQuantity.Validated += new System.EventHandler(this.EditorsValidated);
       // 
       // labelPricePaper
       // 
@@ -260,6 +265,7 @@ namespace Impressio.Controls
       // 
       // paperAddition
       // 
+      this.paperAddition.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "PaperAddition", true));
       this.paperAddition.EditValue = new decimal(new int[] {
             0,
             0,
@@ -277,11 +283,11 @@ namespace Impressio.Controls
       this.paperAddition.Properties.Mask.EditMask = "N00";
       this.paperAddition.Size = new System.Drawing.Size(100, 20);
       this.paperAddition.TabIndex = 3;
-      this.paperAddition.EditValueChanged += new System.EventHandler(this.EditorsValidated);
-      this.paperAddition.Validated += new System.EventHandler(this.EditorsValidated);
+      this.paperAddition.EditValueChanged += new System.EventHandler(this.SaveOffset);
       // 
       // paperPricePer
       // 
+      this.paperPricePer.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "PaperPricePer", true));
       this.paperPricePer.EditValue = new decimal(new int[] {
             0,
             0,
@@ -299,8 +305,7 @@ namespace Impressio.Controls
       this.paperPricePer.Properties.Mask.EditMask = "N00";
       this.paperPricePer.Size = new System.Drawing.Size(100, 20);
       this.paperPricePer.TabIndex = 2;
-      this.paperPricePer.EditValueChanged += new System.EventHandler(this.EditorsValidated);
-      this.paperPricePer.Validated += new System.EventHandler(this.EditorsValidated);
+      this.paperPricePer.EditValueChanged += new System.EventHandler(this.SaveOffset);
       // 
       // labelControl1
       // 
@@ -312,6 +317,7 @@ namespace Impressio.Controls
       // 
       // paperSearchLookUp
       // 
+      this.paperSearchLookUp.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "FkOffsetPaper", true));
       this.paperSearchLookUp.EditValue = "";
       this.paperSearchLookUp.Location = new System.Drawing.Point(112, 51);
       this.paperSearchLookUp.Name = "paperSearchLookUp";
@@ -325,7 +331,6 @@ namespace Impressio.Controls
       this.paperSearchLookUp.Size = new System.Drawing.Size(350, 20);
       this.paperSearchLookUp.TabIndex = 0;
       this.paperSearchLookUp.EditValueChanged += new System.EventHandler(this.PaperSearchLookUpEditValueChanged);
-      this.paperSearchLookUp.Validated += new System.EventHandler(this.EditorsValidated);
       // 
       // paperBindingSource
       // 
@@ -498,6 +503,7 @@ namespace Impressio.Controls
       // 
       // priceTotal
       // 
+      this.priceTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "PositionTotal", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.priceTotal.EditValue = new decimal(new int[] {
             0,
             0,
@@ -523,6 +529,7 @@ namespace Impressio.Controls
       this.priceTotal.Properties.ReadOnly = true;
       this.priceTotal.Size = new System.Drawing.Size(100, 20);
       this.priceTotal.TabIndex = 22;
+      this.priceTotal.EditValueChanged += new System.EventHandler(this.SaveOffset);
       // 
       // labelControl13
       // 
@@ -542,6 +549,7 @@ namespace Impressio.Controls
       // 
       // offsetPrintTotal
       // 
+      this.offsetPrintTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "PrintTotal", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.offsetPrintTotal.EditValue = new decimal(new int[] {
             0,
             0,
@@ -567,9 +575,11 @@ namespace Impressio.Controls
       this.offsetPrintTotal.Properties.ReadOnly = true;
       this.offsetPrintTotal.Size = new System.Drawing.Size(100, 20);
       this.offsetPrintTotal.TabIndex = 19;
+      this.offsetPrintTotal.EditValueChanged += new System.EventHandler(this.SaveOffset);
       // 
       // offsetPrintQuantity
       // 
+      this.offsetPrintQuantity.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "PrintQuantity", true));
       this.offsetPrintQuantity.EditValue = new decimal(new int[] {
             0,
             0,
@@ -587,8 +597,7 @@ namespace Impressio.Controls
       this.offsetPrintQuantity.Properties.Mask.EditMask = "N00";
       this.offsetPrintQuantity.Size = new System.Drawing.Size(100, 20);
       this.offsetPrintQuantity.TabIndex = 18;
-      this.offsetPrintQuantity.EditValueChanged += new System.EventHandler(this.EditorsValidated);
-      this.offsetPrintQuantity.Validated += new System.EventHandler(this.EditorsValidated);
+      this.offsetPrintQuantity.EditValueChanged += new System.EventHandler(this.SaveOffset);
       // 
       // labelControl11
       // 
@@ -600,6 +609,7 @@ namespace Impressio.Controls
       // 
       // offsetPaperQuantity
       // 
+      this.offsetPaperQuantity.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "OffsetQuantity", true));
       this.offsetPaperQuantity.EditValue = new decimal(new int[] {
             0,
             0,
@@ -617,8 +627,7 @@ namespace Impressio.Controls
       this.offsetPaperQuantity.Properties.Mask.EditMask = "N00";
       this.offsetPaperQuantity.Size = new System.Drawing.Size(100, 20);
       this.offsetPaperQuantity.TabIndex = 16;
-      this.offsetPaperQuantity.EditValueChanged += new System.EventHandler(this.EditorsValidated);
-      this.offsetPaperQuantity.Validated += new System.EventHandler(this.EditorsValidated);
+      this.offsetPaperQuantity.EditValueChanged += new System.EventHandler(this.SaveOffset);
       // 
       // labelControl10
       // 
@@ -638,6 +647,7 @@ namespace Impressio.Controls
       // 
       // offsetColorAmount
       // 
+      this.offsetColorAmount.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "ColorAmount", true));
       this.offsetColorAmount.EditValue = new decimal(new int[] {
             0,
             0,
@@ -656,7 +666,6 @@ namespace Impressio.Controls
       this.offsetColorAmount.Size = new System.Drawing.Size(100, 20);
       this.offsetColorAmount.TabIndex = 13;
       this.offsetColorAmount.EditValueChanged += new System.EventHandler(this.OffsetColorAmountEditValueChanged);
-      this.offsetColorAmount.Validated += new System.EventHandler(this.EditorsValidated);
       // 
       // labelControl9
       // 
@@ -684,6 +693,7 @@ namespace Impressio.Controls
       // 
       // offsetMachineSearchLookUp
       // 
+      this.offsetMachineSearchLookUp.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "FkOffsetMachine", true));
       this.offsetMachineSearchLookUp.Location = new System.Drawing.Point(112, 49);
       this.offsetMachineSearchLookUp.Name = "offsetMachineSearchLookUp";
       this.offsetMachineSearchLookUp.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -695,8 +705,7 @@ namespace Impressio.Controls
       this.offsetMachineSearchLookUp.Properties.View = this.viewMachine;
       this.offsetMachineSearchLookUp.Size = new System.Drawing.Size(350, 20);
       this.offsetMachineSearchLookUp.TabIndex = 0;
-      this.offsetMachineSearchLookUp.EditValueChanged += new System.EventHandler(this.OffsetMachineSearchLookUpEditValueChanged);
-      this.offsetMachineSearchLookUp.Validated += new System.EventHandler(this.EditorsValidated);
+      this.offsetMachineSearchLookUp.EditValueChanged += new System.EventHandler(this.SaveOffset);
       // 
       // machineBindingSource
       // 
@@ -773,6 +782,7 @@ namespace Impressio.Controls
       // 
       // offsetPrintType
       // 
+      this.offsetPrintType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.offsetBindingSource, "PrintTypeString", true));
       this.offsetPrintType.EditValue = "Einseitig";
       this.offsetPrintType.Location = new System.Drawing.Point(112, 95);
       this.offsetPrintType.Name = "offsetPrintType";
@@ -787,7 +797,11 @@ namespace Impressio.Controls
       this.offsetPrintType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
       this.offsetPrintType.Size = new System.Drawing.Size(100, 20);
       this.offsetPrintType.TabIndex = 11;
-      this.offsetPrintType.Validated += new System.EventHandler(this.EditorsValidated);
+      this.offsetPrintType.EditValueChanged += new System.EventHandler(this.SaveOffset);
+      // 
+      // offsetBindingSource
+      // 
+      this.offsetBindingSource.DataSource = typeof(Impressio.Models.Offset);
       // 
       // OffsetControl
       // 
@@ -798,8 +812,6 @@ namespace Impressio.Controls
       this.MinimumSize = new System.Drawing.Size(800, 500);
       this.Name = "OffsetControl";
       this.Size = new System.Drawing.Size(852, 500);
-      this.Load += new System.EventHandler(this.OffsetControlLoad);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.OffsetControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
       this.groupControl1.ResumeLayout(false);
@@ -824,6 +836,7 @@ namespace Impressio.Controls
       ((System.ComponentModel.ISupportInitialize)(this.machineBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewMachine)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.offsetPrintType.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.offsetBindingSource)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -888,5 +901,6 @@ namespace Impressio.Controls
     private DevExpress.XtraGrid.Columns.GridColumn colCostPerHour;
     private DevExpress.XtraGrid.Columns.GridColumn colName1;
     private DevExpress.XtraGrid.Columns.GridColumn colPlateCost;
+    private System.Windows.Forms.BindingSource offsetBindingSource;
   }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Models.Tools
 {
@@ -27,6 +28,21 @@ namespace Impressio.Models.Tools
     public static object SetIntDbNull(this int value)
     {
       return value == 0 ? (object) DBNull.Value : value;
+    }
+  }
+
+  public static class ModelTools
+  {
+    public static bool Usable<T>(this DatabaseObjectBase<T> databaseObject)
+    {
+      if(databaseObject != null)
+      {
+        if(databaseObject.Identity > 0)
+        {
+          return true;
+        }
+      }
+      return false;
     }
   }
 }

@@ -1,24 +1,21 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.DXErrorProvider;
-using Impressio.Models;
 using Impressio.Properties;
 using Subvento;
 using Subvento.Tools;
 
 namespace Impressio.Controls
 {
-  public partial class PropertieControl : XtraUserControl, IControl
+  public partial class PropertieControl : ControlBase
   {
     public PropertieControl()
     {
       InitializeComponent();
-      Dock = DockStyle.Fill;
+      InitializeBase();
     }
 
-    public void ReloadControl()
+    public override void ReloadControl()
     {
       database.Properties.Items.AddRange(Enum.GetNames(typeof(ServiceLocator.DatabaseEngine)));
       database.Text = ServiceLocator.Instance.ConfigFile.DatabaseEngine.ToString();
@@ -28,13 +25,6 @@ namespace Impressio.Controls
       lookAndFeel.Text = Settings.Default.lookAndFeel;
       logoEdit.Text = Settings.Default.logoImage;
     }
-
-    public bool ValidateControl()
-    {
-      return !_errorProvider.HasErrors;
-    }
-
-    private readonly DXErrorProvider _errorProvider = new DXErrorProvider();
 
     private void PropertieControlLoad(object sender, EventArgs e)
     {
@@ -55,7 +45,7 @@ namespace Impressio.Controls
 
     private void UserEditValueChanged(object sender, EventArgs e)
     {
-      _errorProvider.SetError(user, string.IsNullOrEmpty(user.Text) ? "Bitte einen Namen vergeben." : "");
+      ErrorProvider.SetError(user, string.IsNullOrEmpty(user.Text) ? "Bitte einen Namen vergeben." : "");
     }
 
     private void DbConnectionStringEditValueChanged(object sender, EventArgs e)
@@ -91,11 +81,11 @@ namespace Impressio.Controls
         DatabaseCreationTools.CreateNewCompactDatabase(compactName.Text);
         ReloadControl();
         ServiceLocator.ResetDatabase();
-        _errorProvider.SetError(compactName, "");
+        ErrorProvider.SetError(compactName, "");
       }
       else
       {
-        _errorProvider.SetError(compactName, "Bitte einen Namen für die Datenbank wählen.");
+        ErrorProvider.SetError(compactName, "Bitte einen Namen für die Datenbank wählen.");
       }
     }
 

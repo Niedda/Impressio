@@ -30,8 +30,9 @@ namespace Impressio.Controls
         /// </summary>
         private void InitializeComponent()
         {
+      this.components = new System.ComponentModel.Container();
       this.gridAddress = new DevExpress.XtraGrid.GridControl();
-      this.addressBindingSource = new System.Windows.Forms.BindingSource();
+      this.addressBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewAddress = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colFkAddressCompany = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -53,7 +54,7 @@ namespace Impressio.Controls
       this.gridAddress.Location = new System.Drawing.Point(0, 0);
       this.gridAddress.MainView = this.viewAddress;
       this.gridAddress.Name = "gridAddress";
-      this.gridAddress.Size = new System.Drawing.Size(852, 401);
+      this.gridAddress.Size = new System.Drawing.Size(879, 398);
       this.gridAddress.TabIndex = 0;
       this.gridAddress.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewAddress});
@@ -87,9 +88,6 @@ namespace Impressio.Controls
       this.viewAddress.OptionsView.ShowGroupPanel = false;
       this.viewAddress.RowHeight = 30;
       this.viewAddress.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewAddressInitNewRow);
-      this.viewAddress.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewAddressInvalidRowException);
-      this.viewAddress.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewAddressValidateRow);
-      this.viewAddress.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.ViewAddressRowUpdated);
       // 
       // colIdentity
       // 
@@ -147,9 +145,8 @@ namespace Impressio.Controls
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridAddress);
       this.Name = "AddressControl";
-      this.Size = new System.Drawing.Size(852, 401);
+      this.Size = new System.Drawing.Size(879, 398);
       this.Load += new System.EventHandler(this.AddressControlLoad);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.AddressControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridAddress)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).EndInit();

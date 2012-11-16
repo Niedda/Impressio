@@ -28,8 +28,9 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.gridState = new DevExpress.XtraGrid.GridControl();
-      this.stateBindingSource = new System.Windows.Forms.BindingSource();
+      this.stateBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewState = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -47,11 +48,10 @@
       this.gridState.Location = new System.Drawing.Point(0, 0);
       this.gridState.MainView = this.viewState;
       this.gridState.Name = "gridState";
-      this.gridState.Size = new System.Drawing.Size(777, 339);
+      this.gridState.Size = new System.Drawing.Size(896, 416);
       this.gridState.TabIndex = 0;
       this.gridState.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewState});
-      this.gridState.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridStateKeyDown);
       // 
       // stateBindingSource
       // 
@@ -74,8 +74,6 @@
       this.viewState.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewState.OptionsView.ShowGroupPanel = false;
       this.viewState.RowHeight = 30;
-      this.viewState.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewStateInvalidRowException);
-      this.viewState.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewStateValidateRow);
       // 
       // colIdentity
       // 
@@ -106,9 +104,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridState);
       this.Name = "StateControl";
-      this.Size = new System.Drawing.Size(777, 339);
-      this.Load += new System.EventHandler(this.StateControlLoad);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.StateControlValidating);
+      this.Size = new System.Drawing.Size(896, 416);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridState)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.stateBindingSource)).EndInit();

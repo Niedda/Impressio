@@ -1,25 +1,53 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
-using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 using Type = Impressio.Models.Type;
 
 namespace Impressio.Controls
 {
-  public partial class PositionControl : BaseControlImpressio, IControl, IGridControl<Position>
+  public partial class PositionControl : PositionControlBase
   {
     public PositionControl()
     {
       InitializeComponent();
+      InitializeBase();
     }
 
-    public void ReloadControl()
+    public override GridView GridView
+    {
+      get { return viewPosition; }
+    }
+
+    public override List<GridColumn> ColumnsToCheck
+    {
+      get
+      {
+        return _columns ?? (_columns = new List<GridColumn>
+                                             {
+                                               colName,
+                                               colType,
+                                             });
+      }
+    }
+
+    public override List<object> EditorsToCheck
+    {
+      get
+      {
+        return _editors ?? (_editors = new List<object>
+                             {
+                               orderNameEdit,
+                               stateLookUp,
+                             });
+      }
+    }
+
+    public override void ReloadControl()
     {
       if (Order != null)
       {
@@ -51,96 +79,18 @@ namespace Impressio.Controls
       }
     }
 
-    public bool ValidateControl()
-    {
-      CheckEditor(orderNameEdit);
-      CheckEditor(stateLookUp);
-
-      if (!ErrorProvider.HasErrors && ValidateRow())
-      {
-        Order.OrderName = orderNameEdit.Text;
-        Order.FkOrderAddress = addressLookUp.EditValue.GetInt();
-        Order.FkOrderClient = clientLookUp.EditValue.GetInt();
-        Order.FkOrderState = stateLookUp.EditValue.GetInt();
-        Order.SaveObject();
-      }
-      return !ErrorProvider.HasErrors && ValidateRow();
-    }
-
-    public void DeleteRow()
-    {
-      FocusedRow.DeleteObject();
-      viewPosition.DeleteSelectedRows();
-    }
-
-    public bool ValidateRow()
-    {
-      viewPosition.ClearColumnErrors();
-      CheckColumn(colName);
-      CheckColumn(colType);
-      if (!viewPosition.HasColumnErrors)
-      {
-        UpdateRow();
-        return true;
-      }
-      return false;
-    }
-
-    public void UpdateRow()
-    {
-      if (FocusedRow != null)
-      {
-        viewPosition.SetFocusedRowCellValue(colFkOrder, Order.Identity);
-        viewPosition.SetFocusedRowCellValue(colIdentity, FocusedRow.SaveObject());
-      }
-    }
-
-    public Position FocusedRow
-    {
-      get { return viewPosition.GetFocusedRow() as Position; }
-    }
-
     public Order Order;
-
-    private readonly Position _position = new Position();
-
-    private readonly State _state = new State();
-
-    private void PositionControlLoad(object sender, EventArgs e)
-    {
-      ReloadControl();
-    }
-
-    private void ViewPositionValidateRow(object sender, ValidateRowEventArgs e)
-    {
-      e.Valid = ValidateRow();
-    }
-
-    private void ViewPositionInvalidRowException(object sender, InvalidRowExceptionEventArgs e)
-    {
-      e.ExceptionMode = ExceptionMode.NoAction;
-    }
 
     private void ViewPositionInitNewRow(object sender, InitNewRowEventArgs e)
     {
       viewPosition.SetRowCellValue(e.RowHandle, colFkOrder, Order.Identity);
     }
 
-    private void PositionControlValidating(object sender, CancelEventArgs e)
-    {
-      e.Cancel = !ValidateControl();
-    }
-
-    private void ViewPositionRowUpdated(object sender, RowObjectEventArgs e)
-    {
-      UpdateRow();
-    }
-
     private void ViewPositionFocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
     {
       if (viewPosition.IsNewItemRow(e.FocusedRowHandle))
       {
-        foreach (Position predefinedPosition in _position.PredefinedObjects)
+        foreach (var predefinedPosition in _position.PredefinedObjects)
         {
           predefinedCombo.Items.Add(predefinedPosition.Name);
         }
@@ -228,16 +178,18 @@ namespace Impressio.Controls
         e.Cancel = true;
       }
     }
-
-    private void GridPositionKeyDown(object sender, KeyEventArgs e)
+    
+    private void SaveOrder(object sender, System.EventArgs e)
     {
-      if (e.KeyCode == Keys.Escape)
-      {
-        if (viewPosition.IsNewItemRow(viewPosition.FocusedRowHandle))
-        {
-          viewPosition.CancelUpdateCurrentRow();
-        }
-      }
+      Order.SaveObject();
     }
+
+    private readonly Position _position = new Position();
+
+    private readonly State _state = new State();
+
+    private List<GridColumn> _columns;
+
+    private List<object> _editors;
   }
 }

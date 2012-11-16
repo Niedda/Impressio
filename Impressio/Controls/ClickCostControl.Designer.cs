@@ -28,8 +28,9 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.gridClickCost = new DevExpress.XtraGrid.GridControl();
-      this.clickCostBindingSource = new System.Windows.Forms.BindingSource();
+      this.clickCostBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewClickCost = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -52,11 +53,10 @@
       this.gridClickCost.Name = "gridClickCost";
       this.gridClickCost.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemSpinEdit1});
-      this.gridClickCost.Size = new System.Drawing.Size(777, 339);
+      this.gridClickCost.Size = new System.Drawing.Size(879, 398);
       this.gridClickCost.TabIndex = 0;
       this.gridClickCost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewClickCost});
-      this.gridClickCost.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridClickCostKeyDown);
       // 
       // clickCostBindingSource
       // 
@@ -80,8 +80,6 @@
       this.viewClickCost.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewClickCost.OptionsView.ShowGroupPanel = false;
       this.viewClickCost.RowHeight = 30;
-      this.viewClickCost.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewClickCostInvalidRowException);
-      this.viewClickCost.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewClickCostValidateRow);
       // 
       // colIdentity
       // 
@@ -144,10 +142,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridClickCost);
       this.Name = "ClickCostControl";
-      this.Size = new System.Drawing.Size(777, 339);
-      this.Load += new System.EventHandler(this.ClickCostControlLoad);
-      this.Leave += new System.EventHandler(this.ClickCostControlLeave);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.ClickCostControlValidating);
+      this.Size = new System.Drawing.Size(879, 398);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridClickCost)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.clickCostBindingSource)).EndInit();

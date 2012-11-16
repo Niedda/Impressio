@@ -33,6 +33,7 @@ namespace Impressio.Controls
       this.components = new System.ComponentModel.Container();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.amountPrint = new DevExpress.XtraEditors.SpinEdit();
+      this.printBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
       this.lookUpClickCost = new DevExpress.XtraEditors.LookUpEdit();
@@ -72,12 +73,12 @@ namespace Impressio.Controls
       this.positionTotal = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
       this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-      this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
       this.typePrint = new DevExpress.XtraEditors.ComboBoxEdit();
       this.printCostTotal = new DevExpress.XtraEditors.SpinEdit();
       this.printTotal = new DevExpress.XtraEditors.LabelControl();
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.amountPrint.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.printBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.lookUpClickCost.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.clickCostBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperSearchLookUp.Properties)).BeginInit();
@@ -99,7 +100,7 @@ namespace Impressio.Controls
       // 
       // labelControl2
       // 
-      this.labelControl2.Location = new System.Drawing.Point(17, 33);
+      this.labelControl2.Location = new System.Drawing.Point(19, 55);
       this.labelControl2.Name = "labelControl2";
       this.labelControl2.Size = new System.Drawing.Size(43, 13);
       this.labelControl2.TabIndex = 2;
@@ -107,6 +108,7 @@ namespace Impressio.Controls
       // 
       // amountPrint
       // 
+      this.amountPrint.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.printBindingSource, "PrintAmount", true));
       this.amountPrint.EditValue = new decimal(new int[] {
             0,
             0,
@@ -124,11 +126,15 @@ namespace Impressio.Controls
       this.amountPrint.Properties.Mask.EditMask = "N00";
       this.amountPrint.Size = new System.Drawing.Size(93, 20);
       this.amountPrint.TabIndex = 3;
-      this.amountPrint.EditValueChanged += new System.EventHandler(this.FieldsEditValueChanged);
+      this.amountPrint.EditValueChanged += new System.EventHandler(this.SavePrint);
+      // 
+      // printBindingSource
+      // 
+      this.printBindingSource.DataSource = typeof(Impressio.Models.Print);
       // 
       // labelControl3
       // 
-      this.labelControl3.Location = new System.Drawing.Point(17, 80);
+      this.labelControl3.Location = new System.Drawing.Point(19, 102);
       this.labelControl3.Name = "labelControl3";
       this.labelControl3.Size = new System.Drawing.Size(37, 13);
       this.labelControl3.TabIndex = 4;
@@ -136,7 +142,7 @@ namespace Impressio.Controls
       // 
       // labelControl5
       // 
-      this.labelControl5.Location = new System.Drawing.Point(272, 80);
+      this.labelControl5.Location = new System.Drawing.Point(274, 102);
       this.labelControl5.Name = "labelControl5";
       this.labelControl5.Size = new System.Drawing.Size(41, 13);
       this.labelControl5.TabIndex = 6;
@@ -144,6 +150,7 @@ namespace Impressio.Controls
       // 
       // lookUpClickCost
       // 
+      this.lookUpClickCost.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.printBindingSource, "FkPrintClickCost", true));
       this.lookUpClickCost.Location = new System.Drawing.Point(128, 52);
       this.lookUpClickCost.Name = "lookUpClickCost";
       this.lookUpClickCost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -158,7 +165,7 @@ namespace Impressio.Controls
       this.lookUpClickCost.Properties.ValueMember = "Identity";
       this.lookUpClickCost.Size = new System.Drawing.Size(334, 20);
       this.lookUpClickCost.TabIndex = 8;
-      this.lookUpClickCost.EditValueChanged += new System.EventHandler(this.FieldsEditValueChanged);
+      this.lookUpClickCost.EditValueChanged += new System.EventHandler(this.SavePrint);
       // 
       // clickCostBindingSource
       // 
@@ -166,7 +173,7 @@ namespace Impressio.Controls
       // 
       // labelControl6
       // 
-      this.labelControl6.Location = new System.Drawing.Point(18, 50);
+      this.labelControl6.Location = new System.Drawing.Point(19, 50);
       this.labelControl6.Name = "labelControl6";
       this.labelControl6.Size = new System.Drawing.Size(30, 13);
       this.labelControl6.TabIndex = 10;
@@ -174,6 +181,7 @@ namespace Impressio.Controls
       // 
       // paperSearchLookUp
       // 
+      this.paperSearchLookUp.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.printBindingSource, "FkPrintPaper", true));
       this.paperSearchLookUp.EditValue = "";
       this.paperSearchLookUp.Location = new System.Drawing.Point(128, 47);
       this.paperSearchLookUp.Name = "paperSearchLookUp";
@@ -187,7 +195,6 @@ namespace Impressio.Controls
       this.paperSearchLookUp.Size = new System.Drawing.Size(334, 20);
       this.paperSearchLookUp.TabIndex = 11;
       this.paperSearchLookUp.EditValueChanged += new System.EventHandler(this.LookUpPaperEditValueChanged);
-      this.paperSearchLookUp.Validated += new System.EventHandler(this.FieldsEditValueChanged);
       // 
       // paperBindingSource
       // 
@@ -335,7 +342,7 @@ namespace Impressio.Controls
       // 
       // labelControl7
       // 
-      this.labelControl7.Location = new System.Drawing.Point(18, 138);
+      this.labelControl7.Location = new System.Drawing.Point(19, 138);
       this.labelControl7.Name = "labelControl7";
       this.labelControl7.Size = new System.Drawing.Size(84, 13);
       this.labelControl7.TabIndex = 12;
@@ -343,6 +350,7 @@ namespace Impressio.Controls
       // 
       // amountPaper
       // 
+      this.amountPaper.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.printBindingSource, "PaperAmount", true));
       this.amountPaper.EditValue = new decimal(new int[] {
             0,
             0,
@@ -380,12 +388,13 @@ namespace Impressio.Controls
       this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
       this.groupControl1.Location = new System.Drawing.Point(0, 0);
       this.groupControl1.Name = "groupControl1";
-      this.groupControl1.Size = new System.Drawing.Size(0, 182);
+      this.groupControl1.Size = new System.Drawing.Size(845, 182);
       this.groupControl1.TabIndex = 14;
       this.groupControl1.Text = "Papier";
       // 
       // paperCostTotal
       // 
+      this.paperCostTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.printBindingSource, "PaperCostTotal", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.paperCostTotal.EditValue = new decimal(new int[] {
             0,
             0,
@@ -414,6 +423,7 @@ namespace Impressio.Controls
       // 
       // usePerPaper
       // 
+      this.usePerPaper.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.printBindingSource, "PaperUsePer", true));
       this.usePerPaper.EditValue = new decimal(new int[] {
             0,
             0,
@@ -435,7 +445,7 @@ namespace Impressio.Controls
       // 
       // paperTotal
       // 
-      this.paperTotal.Location = new System.Drawing.Point(558, 138);
+      this.paperTotal.Location = new System.Drawing.Point(559, 138);
       this.paperTotal.Name = "paperTotal";
       this.paperTotal.Size = new System.Drawing.Size(69, 13);
       this.paperTotal.TabIndex = 18;
@@ -443,7 +453,7 @@ namespace Impressio.Controls
       // 
       // labelControl11
       // 
-      this.labelControl11.Location = new System.Drawing.Point(273, 138);
+      this.labelControl11.Location = new System.Drawing.Point(274, 138);
       this.labelControl11.Name = "labelControl11";
       this.labelControl11.Size = new System.Drawing.Size(34, 13);
       this.labelControl11.TabIndex = 21;
@@ -451,7 +461,7 @@ namespace Impressio.Controls
       // 
       // labelControl1
       // 
-      this.labelControl1.Location = new System.Drawing.Point(18, 94);
+      this.labelControl1.Location = new System.Drawing.Point(19, 94);
       this.labelControl1.Name = "labelControl1";
       this.labelControl1.Size = new System.Drawing.Size(71, 13);
       this.labelControl1.TabIndex = 20;
@@ -459,6 +469,7 @@ namespace Impressio.Controls
       // 
       // additionPaper
       // 
+      this.additionPaper.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.printBindingSource, "PaperAddition", true));
       this.additionPaper.EditValue = new decimal(new int[] {
             0,
             0,
@@ -476,11 +487,11 @@ namespace Impressio.Controls
       this.additionPaper.Properties.Mask.EditMask = "N00";
       this.additionPaper.Size = new System.Drawing.Size(93, 20);
       this.additionPaper.TabIndex = 19;
-      this.additionPaper.EditValueChanged += new System.EventHandler(this.FieldsEditValueChanged);
+      this.additionPaper.EditValueChanged += new System.EventHandler(this.SavePrint);
       // 
       // paperPriceLabel
       // 
-      this.paperPriceLabel.Location = new System.Drawing.Point(558, 50);
+      this.paperPriceLabel.Location = new System.Drawing.Point(559, 50);
       this.paperPriceLabel.Name = "paperPriceLabel";
       this.paperPriceLabel.Size = new System.Drawing.Size(58, 13);
       this.paperPriceLabel.TabIndex = 18;
@@ -488,6 +499,7 @@ namespace Impressio.Controls
       // 
       // pricePerPaper
       // 
+      this.pricePerPaper.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.printBindingSource, "PaperPricePer", true));
       this.pricePerPaper.EditValue = new decimal(new int[] {
             0,
             0,
@@ -505,11 +517,11 @@ namespace Impressio.Controls
       this.pricePerPaper.Properties.Mask.EditMask = "N00";
       this.pricePerPaper.Size = new System.Drawing.Size(93, 20);
       this.pricePerPaper.TabIndex = 15;
-      this.pricePerPaper.EditValueChanged += new System.EventHandler(this.FieldsEditValueChanged);
+      this.pricePerPaper.EditValueChanged += new System.EventHandler(this.SavePrint);
       // 
       // labelControl8
       // 
-      this.labelControl8.Location = new System.Drawing.Point(273, 94);
+      this.labelControl8.Location = new System.Drawing.Point(274, 94);
       this.labelControl8.Name = "labelControl8";
       this.labelControl8.Size = new System.Drawing.Size(67, 13);
       this.labelControl8.TabIndex = 14;
@@ -517,6 +529,7 @@ namespace Impressio.Controls
       // 
       // positionTotal
       // 
+      this.positionTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.printBindingSource, "PositionTotal", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.positionTotal.EditValue = new decimal(new int[] {
             0,
             0,
@@ -545,7 +558,7 @@ namespace Impressio.Controls
       // 
       // labelControl9
       // 
-      this.labelControl9.Location = new System.Drawing.Point(557, 153);
+      this.labelControl9.Location = new System.Drawing.Point(559, 175);
       this.labelControl9.Name = "labelControl9";
       this.labelControl9.Size = new System.Drawing.Size(24, 13);
       this.labelControl9.TabIndex = 16;
@@ -553,7 +566,6 @@ namespace Impressio.Controls
       // 
       // groupControl2
       // 
-      this.groupControl2.Controls.Add(this.simpleButton1);
       this.groupControl2.Controls.Add(this.typePrint);
       this.groupControl2.Controls.Add(this.printCostTotal);
       this.groupControl2.Controls.Add(this.labelControl9);
@@ -567,20 +579,13 @@ namespace Impressio.Controls
       this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
       this.groupControl2.Location = new System.Drawing.Point(0, 182);
       this.groupControl2.Name = "groupControl2";
-      this.groupControl2.Size = new System.Drawing.Size(0, 0);
+      this.groupControl2.Size = new System.Drawing.Size(845, 216);
       this.groupControl2.TabIndex = 15;
       this.groupControl2.Text = "Druck";
       // 
-      // simpleButton1
-      // 
-      this.simpleButton1.Location = new System.Drawing.Point(531, 42);
-      this.simpleButton1.Name = "simpleButton1";
-      this.simpleButton1.Size = new System.Drawing.Size(75, 23);
-      this.simpleButton1.TabIndex = 22;
-      this.simpleButton1.Text = "simpleButton1";
-      // 
       // typePrint
       // 
+      this.typePrint.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.printBindingSource, "PrintTypeString", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.typePrint.EditValue = "Einseitig";
       this.typePrint.Location = new System.Drawing.Point(351, 99);
       this.typePrint.Name = "typePrint";
@@ -593,11 +598,11 @@ namespace Impressio.Controls
       this.typePrint.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
       this.typePrint.Size = new System.Drawing.Size(111, 20);
       this.typePrint.TabIndex = 21;
-      this.typePrint.SelectedIndexChanged += new System.EventHandler(this.FieldsEditValueChanged);
-      this.typePrint.EditValueChanged += new System.EventHandler(this.FieldsEditValueChanged);
+      this.typePrint.EditValueChanged += new System.EventHandler(this.SavePrint);
       // 
       // printCostTotal
       // 
+      this.printCostTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.printBindingSource, "PrintCostTotal", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.printCostTotal.EditValue = new decimal(new int[] {
             0,
             0,
@@ -626,7 +631,7 @@ namespace Impressio.Controls
       // 
       // printTotal
       // 
-      this.printTotal.Location = new System.Drawing.Point(557, 80);
+      this.printTotal.Location = new System.Drawing.Point(559, 102);
       this.printTotal.Name = "printTotal";
       this.printTotal.Size = new System.Drawing.Size(63, 13);
       this.printTotal.TabIndex = 19;
@@ -639,10 +644,10 @@ namespace Impressio.Controls
       this.Controls.Add(this.groupControl2);
       this.Controls.Add(this.groupControl1);
       this.Name = "PrintControl";
-      this.Size = new System.Drawing.Size(0, 0);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.PrintControlValidating);
+      this.Size = new System.Drawing.Size(845, 398);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.amountPrint.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.printBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.lookUpClickCost.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.clickCostBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperSearchLookUp.Properties)).EndInit();
@@ -712,7 +717,7 @@ namespace Impressio.Controls
     private DevExpress.XtraEditors.SpinEdit paperCostTotal;
     private DevExpress.XtraEditors.SpinEdit printCostTotal;
     private DevExpress.XtraEditors.ComboBoxEdit typePrint;
-    private DevExpress.XtraEditors.SimpleButton simpleButton1;
+    private System.Windows.Forms.BindingSource printBindingSource;
 
   }
 }
