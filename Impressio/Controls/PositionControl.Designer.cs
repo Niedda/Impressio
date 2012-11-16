@@ -30,8 +30,9 @@ namespace Impressio.Controls
         /// </summary>
         private void InitializeComponent()
         {
+      this.components = new System.ComponentModel.Container();
       this.gridPosition = new DevExpress.XtraGrid.GridControl();
-      this.positionBindingSource = new System.Windows.Forms.BindingSource();
+      this.positionBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewPosition = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -53,14 +54,14 @@ namespace Impressio.Controls
       this.orderNameEdit = new DevExpress.XtraEditors.TextEdit();
       this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
       this.stateLookUp = new DevExpress.XtraEditors.LookUpEdit();
-      this.stateBindingSource = new System.Windows.Forms.BindingSource();
+      this.stateBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
       this.addressLookUp = new DevExpress.XtraEditors.LookUpEdit();
-      this.addressBindingSource = new System.Windows.Forms.BindingSource();
+      this.addressBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.clientLookUp = new DevExpress.XtraEditors.LookUpEdit();
-      this.clientBindingSource = new System.Windows.Forms.BindingSource();
+      this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPosition)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.positionBindingSource)).BeginInit();
@@ -92,11 +93,10 @@ namespace Impressio.Controls
       this.gridPosition.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.predefinedCombo,
             this.typeCombo});
-      this.gridPosition.Size = new System.Drawing.Size(777, 110);
+      this.gridPosition.Size = new System.Drawing.Size(790, 118);
       this.gridPosition.TabIndex = 0;
       this.gridPosition.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewPosition});
-      this.gridPosition.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridPositionKeyDown);
       // 
       // positionBindingSource
       // 
@@ -125,9 +125,6 @@ namespace Impressio.Controls
       this.viewPosition.RowHeight = 30;
       this.viewPosition.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewPositionInitNewRow);
       this.viewPosition.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.ViewPositionFocusedRowChanged);
-      this.viewPosition.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewPositionInvalidRowException);
-      this.viewPosition.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewPositionValidateRow);
-      this.viewPosition.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.ViewPositionRowUpdated);
       // 
       // colIdentity
       // 
@@ -214,7 +211,7 @@ namespace Impressio.Controls
       this.groupBox1.Font = new System.Drawing.Font("Tahoma", 8.25F);
       this.groupBox1.Location = new System.Drawing.Point(0, 0);
       this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(777, 229);
+      this.groupBox1.Size = new System.Drawing.Size(790, 229);
       this.groupBox1.TabIndex = 1;
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Auftragsdetails";
@@ -351,6 +348,7 @@ namespace Impressio.Controls
       this.orderNameEdit.Properties.Appearance.Options.UseFont = true;
       this.orderNameEdit.Size = new System.Drawing.Size(295, 20);
       this.orderNameEdit.TabIndex = 7;
+      this.orderNameEdit.EditValueChanged += new System.EventHandler(this.SaveOrder);
       // 
       // labelControl4
       // 
@@ -381,6 +379,7 @@ namespace Impressio.Controls
       this.stateLookUp.Properties.ValueMember = "Identity";
       this.stateLookUp.Size = new System.Drawing.Size(295, 20);
       this.stateLookUp.TabIndex = 12;
+      this.stateLookUp.EditValueChanged += new System.EventHandler(this.SaveOrder);
       // 
       // stateBindingSource
       // 
@@ -437,6 +436,7 @@ namespace Impressio.Controls
       this.addressLookUp.Properties.ValueMember = "Identity";
       this.addressLookUp.Size = new System.Drawing.Size(295, 20);
       this.addressLookUp.TabIndex = 11;
+      this.addressLookUp.EditValueChanged += new System.EventHandler(this.SaveOrder);
       // 
       // addressBindingSource
       // 
@@ -467,6 +467,7 @@ namespace Impressio.Controls
       this.clientLookUp.Properties.ValueMember = "Identity";
       this.clientLookUp.Size = new System.Drawing.Size(295, 20);
       this.clientLookUp.TabIndex = 9;
+      this.clientLookUp.EditValueChanged += new System.EventHandler(this.SaveOrder);
       // 
       // clientBindingSource
       // 
@@ -479,9 +480,7 @@ namespace Impressio.Controls
       this.Controls.Add(this.gridPosition);
       this.Controls.Add(this.groupBox1);
       this.Name = "PositionControl";
-      this.Size = new System.Drawing.Size(777, 339);
-      this.Load += new System.EventHandler(this.PositionControlLoad);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.PositionControlValidating);
+      this.Size = new System.Drawing.Size(790, 347);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPosition)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.positionBindingSource)).EndInit();

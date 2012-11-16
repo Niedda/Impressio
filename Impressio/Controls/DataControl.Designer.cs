@@ -30,11 +30,12 @@ namespace Impressio.Controls
         /// </summary>
         private void InitializeComponent()
         {
+      this.components = new System.ComponentModel.Container();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.remarkEdit = new DevExpress.XtraEditors.MemoEdit();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.gridData = new DevExpress.XtraGrid.GridControl();
-      this.dataPositionBindingSource = new System.Windows.Forms.BindingSource();
+      this.dataPositionBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewData = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -58,7 +59,7 @@ namespace Impressio.Controls
       this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
       this.groupBox1.Location = new System.Drawing.Point(0, 0);
       this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(0, 111);
+      this.groupBox1.Size = new System.Drawing.Size(879, 111);
       this.groupBox1.TabIndex = 0;
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Datenaufbereitung";
@@ -86,7 +87,7 @@ namespace Impressio.Controls
       this.gridData.Location = new System.Drawing.Point(0, 111);
       this.gridData.MainView = this.viewData;
       this.gridData.Name = "gridData";
-      this.gridData.Size = new System.Drawing.Size(0, 0);
+      this.gridData.Size = new System.Drawing.Size(879, 297);
       this.gridData.TabIndex = 1;
       this.gridData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewData});
@@ -107,15 +108,15 @@ namespace Impressio.Controls
             this.colPricePerQuantity,
             this.colPriceTotal});
       this.viewData.GridControl = this.gridData;
+      this.viewData.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "PositionTotal", this.colPriceTotal, "{0:c}")});
       this.viewData.IndicatorWidth = 50;
       this.viewData.Name = "viewData";
       this.viewData.OptionsDetail.EnableMasterViewMode = false;
       this.viewData.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
+      this.viewData.OptionsView.ShowFooter = true;
       this.viewData.OptionsView.ShowGroupPanel = false;
       this.viewData.RowHeight = 30;
-      this.viewData.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.ViewDataCellValueChanged);
-      this.viewData.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewDataInvalidRowException);
-      this.viewData.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewDataValidateRow);
       // 
       // colIdentity
       // 
@@ -174,6 +175,8 @@ namespace Impressio.Controls
       this.colPriceTotal.Name = "colPriceTotal";
       this.colPriceTotal.OptionsColumn.AllowEdit = false;
       this.colPriceTotal.OptionsColumn.ShowInCustomizationForm = false;
+      this.colPriceTotal.SummaryItem.DisplayFormat = "{0:c}";
+      this.colPriceTotal.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
       this.colPriceTotal.Visible = true;
       this.colPriceTotal.VisibleIndex = 3;
       // 
@@ -184,9 +187,7 @@ namespace Impressio.Controls
       this.Controls.Add(this.gridData);
       this.Controls.Add(this.groupBox1);
       this.Name = "DataControl";
-      this.Size = new System.Drawing.Size(0, 0);
-      this.Load += new System.EventHandler(this.DataControlLoad);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.DataControlValidating);
+      this.Size = new System.Drawing.Size(879, 408);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();

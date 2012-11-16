@@ -1,72 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using Impressio.Models;
-using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class PrintControl : BaseControlImpressio, IControl, IRibbon
+  public partial class PrintControl : ControlBase
   {
     public PrintControl()
     {
       InitializeComponent();
+      InitializeBase();
     }
-
-    #region Ribbon
-
-    public string RibbonGroupName { get { return "Digitaldruck"; } }
-
-    public List<BarButtonItem> Buttons
-    {
-      get
-      {
-        return _buttons ?? (_buttons = LoadButtons());
-      }
-    }
-
-    public RibbonPageGroup GetRibbon()
-    {
-      var pageGroup = new RibbonPageGroup
-      {
-        Text = "Offsetdruck",
-        Name = "printPageGroup"
-      };
-      pageGroup.ItemLinks.AddRange(Buttons.ToArray());
-
-      return pageGroup;
-    }
-
-    private List<BarButtonItem> _buttons;
-
-    private List<BarButtonItem> LoadButtons()
-    {
-      var refreshButton = new BarButtonItem
-      {
-        Caption = "Aktualisieren",
-        Id = 2,
-        LargeGlyph = Properties.Resources.refresh,
-        LargeWidth = 80,
-        Name = "printRefresh"
-      };
-      refreshButton.ItemClick += ReloadControl;
-
-      return new List<BarButtonItem> { refreshButton };
-    }
-
-    public void ReloadControl(object sender, ItemClickEventArgs e)
-    {
-      ReloadControl();
-    }
-
-    #endregion
 
     public Print Print;
 
-    public void ReloadControl()
+    public override void ReloadControl()
     {
       if (Print != null)
       {
@@ -77,65 +27,15 @@ namespace Impressio.Controls
         clickCostBindingSource.DataSource = _clickCost.LoadObjectList();
         paperBindingSource.DataSource = _paper.LoadObjectList();
         Print.LoadSingleObject();
-        
-        paperSearchLookUp.EditValue = Print.FkPrintPaper;
-        usePerPaper.Value = Print.PaperUsePer;
-        typePrint.SelectedIndex = Print.PrintType;
-        amountPrint.Value = Print.PrintAmount;
-        lookUpClickCost.EditValue = Print.FkPrintClickCost;
-        amountPaper.Value = Print.PaperAmount;
-        pricePerPaper.Value = Print.PaperPricePer;
-        additionPaper.Value = Print.PaperAddition;
-        paperCostTotal.Value = Print.PaperCostTotal.GetInt();
-        printCostTotal.Value = Print.PrintCostTotal.GetInt();
-        positionTotal.Value = Print.PositionTotal;
-        paperSearchLookUp.DoValidate();
-
+        printBindingSource.DataSource = Print;
+ 
         _isLoaded = true;
       }
     }
 
-    public bool ValidateControl()
+    private void SavePrint(object sender, EventArgs e)
     {
-      GetPrint();
-      return true;
-    }
-
-    public void GetPrint()
-    {
-      if (_isLoaded)
-      {
-        Print.PrintType = typePrint.SelectedIndex;
-        Print.PrintAmount = amountPrint.Value.GetInt();
-        Print.PaperAddition = additionPaper.Value.GetInt();
-        Print.PaperAmount = amountPaper.Value.GetInt();
-        Print.PaperPricePer = pricePerPaper.Value.GetInt();
-        Print.PaperUsePer = usePerPaper.Value.GetInt();
-        Print.FkPrintClickCost = lookUpClickCost.EditValue.GetInt();
-        Print.FkPrintPaper = paperSearchLookUp.EditValue.GetInt();
-        paperCostTotal.Value = Print.PaperCostTotal.GetInt();
-        printCostTotal.Value = Print.PrintCostTotal.GetInt();
-        positionTotal.Value = Print.PositionTotal.GetInt();
-
-        Print.SaveObject();
-      }
-    }
-
-    public override void Refresh()
-    {
-      GetPrint();
-      base.Refresh();
-    }
-
-    private bool _isLoaded;
-
-    private readonly ClickCost _clickCost = new ClickCost();
-
-    private readonly Paper _paper = new Paper();
-
-    private void PrintControlValidating(object sender, CancelEventArgs e)
-    {
-      ValidateControl();
+      Print.SaveObject();
     }
 
     private void LookUpPaperEditValueChanged(object sender, EventArgs e)
@@ -150,7 +50,7 @@ namespace Impressio.Controls
             string.Format("{8}{0}{1}{9}{0}{2}{9} ab {3} Bogen{0}{4}{9} ab {5} Bogen{0}{6}{9} ab {7} Bogen",
                           Environment.NewLine, paper.Price1, paper.Price2, paper.Amount1,
                           paper.Price3, paper.Amount2, paper.Price4, paper.Amount3, "Preisstufe:", ".00 Fr.");
-          GetPrint();
+          Print.SaveObject();
         }
         else
         {
@@ -159,18 +59,70 @@ namespace Impressio.Controls
       }
     }
 
-    private void FieldsEditValueChanged(object sender, EventArgs e)
-    {
-      GetPrint();
-    }
-
     private void UsePerPaperEditValueChanged(object sender, EventArgs e)
     {
-      if (_isLoaded)
+      if (_isLoaded && usePerPaper != null && amountPaper != null)
       {
-        amountPrint.Value = usePerPaper.Value * amountPaper.Value;
-        GetPrint();
+        Print.PrintAmount = (int)usePerPaper.Value * (int)amountPaper.Value;
+        Print.SaveObject();
       }
     }
+
+    #region Ribbon
+
+    public void ReloadControl(object sender, ItemClickEventArgs e)
+    {
+      ReloadControl();
+    }
+
+    public override RibbonPage RibbonPage
+    {
+      get
+      {
+        if (_ribbonPage == null)
+        {
+          _ribbonPage = new RibbonPage("Datenaufbereitung");
+        }
+        if (_ribbonGroup == null)
+        {
+          _ribbonGroup = new RibbonPageGroup();
+        }
+
+        _ribbonGroup.ItemLinks.Clear();
+        _ribbonGroup.ItemLinks.Add(RefreshButton);
+        _refreshButton.ItemClick += ReloadControl;
+        _ribbonPage.Groups.Add(_ribbonGroup);
+
+        return _ribbonPage;
+      }
+    }
+
+    public BarButtonItem RefreshButton
+    {
+      get
+      {
+        return _refreshButton ?? (_refreshButton = new BarButtonItem
+        {
+          Caption = "Aktualisieren",
+          Id = 3,
+          LargeGlyph = Properties.Resources.refresh,
+          LargeWidth = 80,
+        });
+      }
+    }
+
+    private RibbonPageGroup _ribbonGroup;
+
+    private RibbonPage _ribbonPage;
+
+    private BarButtonItem _refreshButton;
+
+    #endregion
+
+    private bool _isLoaded;
+
+    private readonly ClickCost _clickCost = new ClickCost();
+
+    private readonly Paper _paper = new Paper();
   }
 }

@@ -1,191 +1,150 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class PaperControl : BaseControlImpressio, IControl, IGridControl<Paper>, IRibbon
+  public partial class PaperControl : PaperControlBase
   {
     public PaperControl()
     {
       InitializeComponent();
+      InitializeBase();
     }
 
-    #region Ribbon
+    public override GridView GridView
+    {
+      get { return viewPaper; }
+    }
 
-    public string RibbonGroupName { get { return "Papierverwaltung"; } }
-
-    public List<BarButtonItem> Buttons
+    public override List<GridColumn> ColumnsToCheck
     {
       get
       {
-        return _buttons ?? (_buttons = LoadButtons());
+        return _columns ?? (_columns = new List<GridColumn>
+                                         {
+                                           colName,
+                                           colPrice1,
+                                           colSizeB,
+                                           colSizeL,
+                                         });
       }
     }
 
-    public RibbonPageGroup GetRibbon()
-    {
-      var pageGroup = new RibbonPageGroup
-      {
-        Text = "Papierverwaltung",
-        Name = "paperPageGroup"
-      };
-      pageGroup.ItemLinks.AddRange(Buttons.ToArray());
-
-      return pageGroup;
-    }
-
-    private List<BarButtonItem> _buttons;
-
-    private List<BarButtonItem> LoadButtons()
-    {
-      var deleteButton = new BarButtonItem
-      {
-        Caption = "Löschen",
-        Id = 1,
-        LargeGlyph = Properties.Resources.delete,
-        LargeWidth = 80,
-        Name = "paperDelete",
-      };
-      deleteButton.ItemClick += DeleteRow;
-
-      var refreshButton = new BarButtonItem
-      {
-        Caption = "Aktualisieren",
-        Id = 2,
-        LargeGlyph = Properties.Resources.refresh,
-        LargeWidth = 80,
-        Name = "paperRefresh"
-      };
-      refreshButton.ItemClick += ReloadControl;
-
-      var importButton = new BarButtonItem
-      {
-        Caption = "Importieren",
-        Id = 3,
-        LargeGlyph = Properties.Resources.excel,
-        LargeWidth = 80,
-        Name = "paperImport"
-      };
-      importButton.ItemClick += ImportPaper;
-
-      return new List<BarButtonItem> { deleteButton, refreshButton, importButton };
-    }
-
-    public void DeleteRow(object sender, ItemClickEventArgs e)
-    {
-      DeleteRow();
-    }
-    
-    public void ReloadControl(object sender, ItemClickEventArgs e)
-    {
-      ReloadControl();
-    }
-
-    public void ImportPaper(object sender, ItemClickEventArgs e)
-    {
-      var fileDialog = new OpenFileDialog
-                         {
-                           Filter = "Excel (*.xls; *.xlsx) | *.xls; *.xlsx",
-                         };
-      var dialogResult = fileDialog.ShowDialog();
-
-      if(dialogResult == DialogResult.OK)
-      {
-        Paper.LoadFromExcel(fileDialog.FileName);
-      }
-    }
-
-    #endregion
-
-    public void ReloadControl()
+    public override void ReloadControl()
     {
       _paper.ClearObjectList();
       paperBindingSource.DataSource = _paper.LoadObjectList();
       viewPaper.RefreshData();
     }
+    
+    #region Ribbons
 
-    public bool ValidateControl()
-    {
-      return ValidateRow();
-    }
-
-    public void DeleteRow()
-    {
-      if (FocusedRow != null)
-      {
-        FocusedRow.DeleteObject();
-        viewPaper.DeleteSelectedRows(); 
-      }
-    }
-
-    public bool ValidateRow()
-    {
-      viewPaper.ClearColumnErrors();
-      CheckColumn(colName);
-      CheckColumn(colPrice1);
-      CheckColumn(colSizeB);
-      CheckColumn(colSizeL);
-      return !viewPaper.HasColumnErrors;
-    }
-
-    public void UpdateRow()
-    {
-      if (FocusedRow != null)
-      {
-        FocusedRow.Identity = FocusedRow.SaveObject();
-      }
-    }
-
-    public Paper FocusedRow
-    {
-      get { return viewPaper.GetFocusedRow() as Paper; }
-    }
-
-    private readonly Paper _paper = new Paper();
-
-    private void PaperControlLoad(object sender, EventArgs e)
+    public void ReloadControl(object sender, ItemClickEventArgs e)
     {
       ReloadControl();
     }
 
-    private void ViewPaperInvalidRowException(object sender, InvalidRowExceptionEventArgs e)
+    public void LoadFromExcel(object sender, ItemClickEventArgs e)
     {
-      e.ExceptionMode = ExceptionMode.NoAction;
-    }
+      var fileDialog = new OpenFileDialog { Filter = "Excel Worksheets|*.xls | *.xlsx" };
+      var result = fileDialog.ShowDialog();
 
-    private void ViewPaperValidateRow(object sender, ValidateRowEventArgs e)
-    {
-      e.Valid = ValidateRow();
-    }
-
-    private void ViewPaperRowUpdated(object sender, RowObjectEventArgs e)
-    {
-      UpdateRow();
-    }
-
-    private void PaperControlValidating(object sender, CancelEventArgs e)
-    {
-      e.Cancel = !ValidateControl();
-    }
-
-    private void GridPaperKeyDown(object sender, KeyEventArgs e)
-    {
-      if (e.KeyCode == Keys.Escape)
+      if (result == DialogResult.OK)
       {
-        if (viewPaper.IsNewItemRow(viewPaper.FocusedRowHandle))
-        {
-          viewPaper.CancelUpdateCurrentRow();
-          viewPaper.FocusedRowHandle = 0;
-        }
+        Paper.LoadFromExcel(fileDialog.FileName);
       }
     }
+    
+    public override RibbonPage RibbonPage
+    {
+      get
+      {
+        if (_ribbonPage == null)
+        {
+          _ribbonPage = new RibbonPage("Klickkosten");
+        }
+        if (_ribbonGroup == null)
+        {
+          _ribbonGroup = new RibbonPageGroup();
+        }
+
+        _ribbonGroup.ItemLinks.Clear();
+        _ribbonGroup.ItemLinks.Add(DeleteButton);
+        _ribbonGroup.ItemLinks.Add(RefreshButton);
+        _ribbonGroup.ItemLinks.Add(ImportButton);
+
+        DeleteButton.ItemClick += DeleteRow;
+        RefreshButton.ItemClick += ReloadControl;
+        ImportButton.ItemClick += LoadFromExcel;
+
+        _ribbonPage.Groups.Add(_ribbonGroup);
+
+        return _ribbonPage;
+      }
+    }
+
+    public BarButtonItem RefreshButton
+    {
+      get
+      {
+        return _refreshButton ?? (_refreshButton = new BarButtonItem
+        {
+          Caption = "Aktualisieren",
+          Id = 3,
+          LargeGlyph = Properties.Resources.refresh,
+          LargeWidth = 80,
+        });
+      }
+    }
+
+    public BarButtonItem DeleteButton
+    {
+      get
+      {
+        return _deleteButton ?? (_deleteButton = new BarButtonItem
+        {
+          Caption = "Löschen",
+          Id = 2,
+          LargeGlyph = Properties.Resources.delete,
+          LargeWidth = 80,
+        });
+      }
+    }
+
+    public BarButtonItem ImportButton
+    {
+      get
+      {
+        return _importButton ?? (_importButton = new BarButtonItem
+        {
+          Caption = "Excel importieren",
+          Id = 2,
+          LargeGlyph = Properties.Resources.excel,
+          LargeWidth = 80,
+        });
+      }
+    }
+
+    private RibbonPageGroup _ribbonGroup;
+
+    private RibbonPage _ribbonPage;
+
+    private BarButtonItem _refreshButton;
+
+    private BarButtonItem _deleteButton;
+
+    private BarButtonItem _importButton;
+
+    #endregion
+
+    private readonly Paper _paper = new Paper();
+
+    private List<GridColumn> _columns;
   }
 }

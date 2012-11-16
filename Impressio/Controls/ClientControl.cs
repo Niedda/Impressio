@@ -1,100 +1,60 @@
-﻿using System;
-using System.ComponentModel;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraGrid.Views.Base;
+﻿using System.Collections.Generic;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
+using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class ClientControl : BaseControlImpressio, IControl, IGridControl<Client>
+  public partial class ClientControl : ClientControlBase
   {
     public ClientControl()
     {
       InitializeComponent();
+      InitializeBase();
     }
 
-    public ClientControl(Company company)
+    public override GridView GridView
     {
-      Company = company;
+      get { return viewClients; }
     }
 
-    public void ReloadControl()
+    public override List<GridColumn> ColumnsToCheck
     {
-      _client.ClearObjectList();
-      _gender.ClearObjectList();
-      genderLookUp.DataSource = _gender.LoadObjectList();
-      clientsBindingSource.DataSource = _client.LoadObjectList(Client.Columns.FkClientCompany, Company.Identity);
-      viewClients.RefreshData();
-    }
-
-    public bool ValidateControl()
-    {
-      return ValidateRow();
-    }
-
-    public void DeleteRow()
-    {
-      FocusedRow.DeleteObject();
-      viewClients.DeleteSelectedRows();
-    }
-
-    public bool ValidateRow()
-    {
-      viewClients.ClearColumnErrors();
-      CheckColumn(colLastName);
-      CheckColumn(colGender);
-      return !viewClients.HasColumnErrors;
-    }
-
-    public void UpdateRow()
-    {
-      if (FocusedRow != null)
+      get
       {
-        FocusedRow.Identity = FocusedRow.SaveObject();
+        return _columns ?? (_columns = new List<GridColumn>
+                                         {
+                                           colGender,
+                                           colLastName,
+                                         });
       }
     }
 
-    public Client FocusedRow
+    public override void ReloadControl()
     {
-      get { return viewClients.GetFocusedRow() as Client; }
+      if (Company.Usable())
+      {
+        _client.ClearObjectList();
+        _gender.ClearObjectList();
+        genderLookUp.DataSource = _gender.LoadObjectList();
+        clientsBindingSource.DataSource = _client.LoadObjectList(Client.Columns.FkClientCompany, Company.Identity);
+        viewClients.RefreshData(); 
+      }
     }
 
-    public Company Company = new Company();
-
-    private readonly Client _client = new Client();
-
-    private readonly Gender _gender = new Gender();
-
-    private void ClientControlLoad(object sender, EventArgs e)
-    {
-      ReloadControl();
-    }
-
-    private void ViewClientsValidateRow(object sender, ValidateRowEventArgs e)
-    {
-      e.Valid = ValidateRow();
-    }
-
-    private void ViewClientsInvalidRowException(object sender, InvalidRowExceptionEventArgs e)
-    {
-      e.ExceptionMode = ExceptionMode.NoAction;
-    }
-
-    private void ViewClientsRowUpdated(object sender, RowObjectEventArgs e)
-    {
-      UpdateRow();
-    }
-
+    public Company Company;
+    
     private void ViewClientsInitNewRow(object sender, InitNewRowEventArgs e)
     {
       viewClients.SetRowCellValue(e.RowHandle, colFkClientCompany, Company.Identity);
     }
 
-    private void ClientControlValidating(object sender, CancelEventArgs e)
-    {
-      e.Cancel = !ValidateControl();
-    }
+    private List<GridColumn> _columns;
+
+    private readonly Client _client = new Client();
+
+    private readonly Gender _gender = new Gender();
   }
 }

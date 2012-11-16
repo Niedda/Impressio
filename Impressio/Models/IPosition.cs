@@ -8,7 +8,7 @@
 
     int FkOrder { get; set; }
 
-    int PositionTotal { get; set; }
+    int PositionTotal { get; }
 
     Type Type { get; set; }
   }

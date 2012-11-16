@@ -28,8 +28,9 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.gridMachine = new DevExpress.XtraGrid.GridControl();
-      this.machineBindingSource = new System.Windows.Forms.BindingSource();
+      this.machineBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewMachine = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -51,11 +52,10 @@
       this.gridMachine.Location = new System.Drawing.Point(0, 0);
       this.gridMachine.MainView = this.viewMachine;
       this.gridMachine.Name = "gridMachine";
-      this.gridMachine.Size = new System.Drawing.Size(777, 339);
+      this.gridMachine.Size = new System.Drawing.Size(747, 355);
       this.gridMachine.TabIndex = 0;
       this.gridMachine.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewMachine});
-      this.gridMachine.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridMachineKeyDown);
       // 
       // machineBindingSource
       // 
@@ -80,8 +80,6 @@
       this.viewMachine.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewMachine.OptionsView.ShowGroupPanel = false;
       this.viewMachine.RowHeight = 30;
-      this.viewMachine.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewMachineInvalidRowException);
-      this.viewMachine.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewMachineValidateRow);
       // 
       // colIdentity
       // 
@@ -148,9 +146,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridMachine);
       this.Name = "MachineControl";
-      this.Size = new System.Drawing.Size(777, 339);
-      this.Load += new System.EventHandler(this.MachineControlLoad);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.MachineControlValidating);
+      this.Size = new System.Drawing.Size(747, 355);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridMachine)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.machineBindingSource)).EndInit();

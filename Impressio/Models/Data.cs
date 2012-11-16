@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 
@@ -30,7 +31,10 @@ namespace Impressio.Models
 
     public string Name { get; set; }
 
-    public int PositionTotal { get; set; }
+    public int PositionTotal
+    {
+      get { return DataPositions.Sum(data => data.PositionTotal); }
+    }
 
     public bool IsPredefined { get; set; }
 
@@ -45,7 +49,7 @@ namespace Impressio.Models
         return _dataPosition ?? (_dataPosition = new DataPosition().LoadObjectList(DataPosition.Columns.FkDataDataPosition, Identity));
       }
     }
-    
+
     public Type Type
     {
       get { return Type.Datenaufbereitung; }
@@ -73,11 +77,10 @@ namespace Impressio.Models
       Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
       FkOrder = Database.DatabaseCommand.Reader[Columns.FkDataOrder.ToString()].GetInt();
       Name = Database.DatabaseCommand.Reader[Columns.PositionName.ToString()] as string;
-      PositionTotal = Database.DatabaseCommand.Reader[Columns.PositionTotal.ToString()].GetInt();
       Remark = Database.DatabaseCommand.Reader[Columns.Remark.ToString()] as string;
-      IsPredefined = (bool) Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
+      IsPredefined = (bool)Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
     }
-    
+
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>
@@ -131,9 +134,9 @@ namespace Impressio.Models
 
     public int PricePerQuantity { get; set; }
 
-    public int PositionTotal 
+    public int PositionTotal
     {
-      get { return PricePerQuantity*Quantity; }
+      get { return PricePerQuantity * Quantity; }
     }
 
     public override List<DataPosition> Objects { get { return _dataPositions; } }
@@ -146,7 +149,7 @@ namespace Impressio.Models
       PricePerQuantity = Database.DatabaseCommand.Reader[Columns.PricePerQuantity.ToString()].GetInt();
       Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
     }
-    
+
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>

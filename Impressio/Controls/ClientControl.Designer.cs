@@ -30,8 +30,9 @@ namespace Impressio.Controls
         /// </summary>
         private void InitializeComponent()
         {
+      this.components = new System.ComponentModel.Container();
       this.gridClients = new DevExpress.XtraGrid.GridControl();
-      this.clientsBindingSource = new System.Windows.Forms.BindingSource();
+      this.clientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewClients = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colFirstName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -42,7 +43,7 @@ namespace Impressio.Controls
       this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colGender = new DevExpress.XtraGrid.Columns.GridColumn();
       this.genderLookUp = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-      this.genderBindingSource = new System.Windows.Forms.BindingSource();
+      this.genderBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.colFkClientCompany = new DevExpress.XtraGrid.Columns.GridColumn();
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridClients)).BeginInit();
@@ -61,7 +62,7 @@ namespace Impressio.Controls
       this.gridClients.Name = "gridClients";
       this.gridClients.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.genderLookUp});
-      this.gridClients.Size = new System.Drawing.Size(914, 306);
+      this.gridClients.Size = new System.Drawing.Size(879, 398);
       this.gridClients.TabIndex = 0;
       this.gridClients.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewClients});
@@ -91,9 +92,6 @@ namespace Impressio.Controls
       this.viewClients.OptionsView.ShowGroupPanel = false;
       this.viewClients.RowHeight = 30;
       this.viewClients.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewClientsInitNewRow);
-      this.viewClients.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewClientsInvalidRowException);
-      this.viewClients.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewClientsValidateRow);
-      this.viewClients.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.ViewClientsRowUpdated);
       // 
       // colIdentity
       // 
@@ -192,9 +190,7 @@ namespace Impressio.Controls
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.gridClients);
       this.Name = "ClientControl";
-      this.Size = new System.Drawing.Size(914, 306);
-      this.Load += new System.EventHandler(this.ClientControlLoad);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.ClientControlValidating);
+      this.Size = new System.Drawing.Size(879, 398);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridClients)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).EndInit();

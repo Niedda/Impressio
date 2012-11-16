@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using DevExpress.XtraReports.UI;
+using DevExpress.XtraReports.UserDesigner;
 using Impressio.Models.Tools;
 using Impressio.Properties;
 using Impressio.Reports;
@@ -25,6 +27,151 @@ namespace Impressio.Models
       IsPredefined,
       FkOrderClient,
       FkOrderAddress,
+    }
+
+    #endregion
+    
+    #region Reports
+
+    //previews of the documents
+    public void LoadOrderReport()
+    {
+      _data = null;
+      _finish = null;
+      _offsets = null;
+      _print = null;
+
+      if (Identity != 0)
+      {
+        var report = new OrderReport
+        {
+          orderBindingSource = { DataSource = this }
+        };
+
+        if (File.Exists(Settings.Default.logoImage))
+        {
+          report.logoBox.ImageUrl = Settings.Default.logoImage;
+        }
+
+        report.LoadLayout("Reports\\orderReport.repx");
+        report.ShowRibbonPreview();
+      }
+    }
+
+    public void LoadOfferReport()
+    {
+      _description = null;
+
+      if (Identity != 0)
+      {
+        var report = new OfferReport
+        {
+          orderBindingSourcew = { DataSource = this }
+        };
+
+        if (File.Exists(Settings.Default.logoImage))
+        {
+          report.logoBox.ImageUrl = Settings.Default.logoImage;
+        }
+
+        report.LoadLayout("Reports\\offerReport.repx");
+        report.ShowRibbonPreview();
+      }
+    }
+
+    //designer for the documents
+    public static void LoadOfferDesigner()
+    {
+      var form = new XRDesignForm();
+      var report = new OfferReport();
+
+      var controler = form.DesignMdiController;
+      controler.DesignPanelLoaded += OfferDesignerLoad;
+      report.LoadLayout("Reports\\offerReport.repx");
+      controler.OpenReport(new OfferReport());
+      form.ShowDialog();
+      controler.ActiveDesignPanel.CloseReport();
+    }
+
+    public static void OfferDesignerLoad(object sender, DesignerLoadedEventArgs e)
+    {
+      var panel = (XRDesignPanel)sender;
+      panel.AddCommandHandler(new OfferSaveCommand(panel));
+    }
+
+    public class OfferSaveCommand : ICommandHandler
+    {
+      public OfferSaveCommand(XRDesignPanel panel)
+      {
+        _panel = panel;
+      }
+
+      public virtual void HandleCommand(ReportCommand command, object[] args, ref bool handled)
+      {
+        if (!CanHandleCommand(command)) return;
+        Save();
+        handled = true;
+      }
+
+      public virtual bool CanHandleCommand(ReportCommand command)
+      {
+        return command == ReportCommand.SaveFile || command == ReportCommand.SaveFileAs || command == ReportCommand.Closing;
+      }
+
+      private void Save()
+      {
+        _panel.Report.SaveLayout("Reports\\offerReport.repx");
+        _panel.ReportState = ReportState.Saved;
+      }
+
+      private readonly XRDesignPanel _panel;
+    }
+
+    public static void LoadOrderDesigner()
+    {
+      var form = new XRDesignForm();
+      var report = new OrderReport();
+
+      var controler = form.DesignMdiController;
+      controler.DesignPanelLoaded += OrderDesignerLoad;
+      report.LoadLayout("Reports\\orderReport.repx");
+      controler.OpenReport(new OrderReport());
+      form.ShowDialog();
+      controler.ActiveDesignPanel.CloseReport();
+    }
+
+    public static void OrderDesignerLoad(object sender, DesignerLoadedEventArgs e)
+    {
+      var panel = (XRDesignPanel)sender;
+      panel.AddCommandHandler(new OrderSaveCommand(panel));
+    }
+
+    public class OrderSaveCommand : ICommandHandler
+    {
+      public OrderSaveCommand(XRDesignPanel panel)
+      {
+        _panel = panel;
+      }
+
+      public virtual void HandleCommand(ReportCommand command, object[] args, ref bool handled)
+      {
+        if (!CanHandleCommand(command)) return;
+        Save();
+        handled = true;
+      }
+
+      public virtual bool CanHandleCommand(ReportCommand command)
+      {
+        return command == ReportCommand.SaveFile || command == ReportCommand.SaveFileAs || command == ReportCommand.Closing;
+      }
+
+      private void Save()
+      {
+        _panel.Report.SaveLayout("Reports\\orderReport.repx");
+        _panel.ReportState = ReportState.Saved;
+      }
+
+      private readonly XRDesignPanel _panel;
     }
 
     #endregion
@@ -130,7 +277,7 @@ namespace Impressio.Models
     {
       get
       {
-        if(_client == null || _client.Count == 0)
+        if (_client == null || _client.Count == 0)
         {
           return (_client = new Client().LoadObjectList(Client.Columns.FkClientCompany, FkOrderCompany));
         }
@@ -142,7 +289,7 @@ namespace Impressio.Models
     {
       get
       {
-        if(_address == null || _address.Count == 0)
+        if (_address == null || _address.Count == 0)
         {
           return (_address = new Address().LoadObjectList(Address.Columns.FkAddressCompany, FkOrderCompany));
         }
@@ -234,49 +381,6 @@ namespace Impressio.Models
         Directory.CreateDirectory(FolderPath);
       }
       Process.Start("explorer.exe", FolderPath);
-    }
-
-    public void LoadOrderReport()
-    {
-      _data = null;
-      _finish = null;
-      _offsets = null;
-      _print = null;
-
-      if (Identity != 0)
-      {
-        var report = new OrderReport
-                       {
-                         orderBindingSource = { DataSource = this }
-                       };
-
-        if (File.Exists(Settings.Default.logoImage))
-        {
-          report.logoBox.ImageUrl = Settings.Default.logoImage;
-        }
-
-        report.ShowRibbonPreview();
-      }
-    }
-
-    public void LoadOrderOffer()
-    {
-      _description = null;
-
-      if (Identity != 0)
-      {
-        var report = new OfferReport
-                       {
-                         orderBindingSourcew = { DataSource = this }
-                       };
-
-        if(File.Exists(Settings.Default.logoImage))
-        {
-          report.logoBox.ImageUrl = Settings.Default.logoImage;
-        }
-
-        report.ShowRibbonPreview();
-      }
     }
 
     private string _dateCreated;

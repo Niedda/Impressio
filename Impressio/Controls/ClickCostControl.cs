@@ -1,112 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows.Forms;
+﻿using System.Collections.Generic;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Columns;
 using Impressio.Models;
+using DevExpress.XtraGrid.Views.Grid;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class ClickCostControl : BaseControlImpressio, IControl, IGridControl<ClickCost>, IRibbon
+  public partial class ClickCostControl : ClickCostControlBase
   {
     public ClickCostControl()
     {
       InitializeComponent();
+      InitializeBase();
     }
 
-    #region Ribbon
-
-    public string RibbonGroupName { get { return "Klickkosten"; } }
-
-    public List<BarButtonItem> Buttons
-    {
-      get
-      {
-        return _buttons ?? (_buttons = LoadButtons());
-      }
-    }
-
-    public RibbonPageGroup GetRibbon()
-    {
-      var pageGroup = new RibbonPageGroup
-      {
-        Text = "Klickkosten",
-        Name = "clickCostPageGroup"
-      };
-      pageGroup.ItemLinks.AddRange(Buttons.ToArray());
-
-      return pageGroup;
-    }
-
-    private List<BarButtonItem> _buttons;
-
-    private List<BarButtonItem> LoadButtons()
-    {
-      var deleteButton = new BarButtonItem
-      {
-        Caption = "Löschen",
-        Id = 1,
-        LargeGlyph = Properties.Resources.delete,
-        LargeWidth = 80,
-        Name = "clickCostDelete",
-      };
-      deleteButton.ItemClick += DeleteRow;
-
-      var refreshButton = new BarButtonItem
-      {
-        Caption = "Aktualisieren",
-        Id = 2,
-        LargeGlyph = Properties.Resources.refresh,
-        LargeWidth = 80,
-        Name = "clickCostRefresh"
-      };
-      refreshButton.ItemClick += ReloadControl;
-
-      return new List<BarButtonItem> { deleteButton, refreshButton };
-    }
-
-    #endregion
-
-    public void ReloadControl()
+    public override void ReloadControl()
     {
       _clickCost.ClearObjectList();
       clickCostBindingSource.DataSource = _clickCost.LoadObjectList();
       viewClickCost.RefreshData();
     }
 
-    public bool ValidateControl()
+    public override GridView GridView
     {
-      return ValidateRow();
+      get { return viewClickCost; }
     }
 
-    public void DeleteRow()
+    public override List<GridColumn> ColumnsToCheck
     {
-      if (FocusedRow != null)
+      get
       {
-        FocusedRow.DeleteObject();
-        viewClickCost.DeleteSelectedRows(); 
+        return _columns ?? (_columns = new List<GridColumn>
+                                         {
+                                           colName,
+                                           colCost,
+                                         });
       }
     }
-
-    public bool ValidateRow()
-    {
-      viewClickCost.ClearColumnErrors();
-      CheckColumn(colName);
-      CheckColumn(colCost);
-      return !viewClickCost.HasColumnErrors;
-    }
-
-    public void UpdateRow()
-    {
-      if (FocusedRow != null)
-      {
-        FocusedRow.Identity = FocusedRow.SaveObject();
-      }
-    }
+    
+    #region Ribbons
 
     public void DeleteRow(object sender, ItemClickEventArgs e)
     {
@@ -118,57 +52,72 @@ namespace Impressio.Controls
       ReloadControl();
     }
 
-    public ClickCost FocusedRow
+    public override RibbonPage RibbonPage
     {
-      get { return viewClickCost.GetFocusedRow() as ClickCost; }
+      get
+      {
+        if (_ribbonPage == null)
+        {
+          _ribbonPage = new RibbonPage("Klickkosten");
+        }
+        if (_ribbonGroup == null)
+        {
+          _ribbonGroup = new RibbonPageGroup();
+        }
+
+        _ribbonGroup.ItemLinks.Clear();
+        _ribbonGroup.ItemLinks.Add(DeleteButton);
+        _ribbonGroup.ItemLinks.Add(RefreshButton);
+
+        DeleteButton.ItemClick += DeleteRow;
+        RefreshButton.ItemClick += ReloadControl;
+
+        _ribbonPage.Groups.Add(_ribbonGroup);
+
+        return _ribbonPage;
+      }
     }
+
+    public BarButtonItem RefreshButton
+    {
+      get
+      {
+        return _refreshButton ?? (_refreshButton = new BarButtonItem
+        {
+          Caption = "Aktualisieren",
+          Id = 3,
+          LargeGlyph = Properties.Resources.refresh,
+          LargeWidth = 80,
+        });
+      }
+    }
+
+    public BarButtonItem DeleteButton
+    {
+      get
+      {
+        return _deleteButton ?? (_deleteButton = new BarButtonItem
+        {
+          Caption = "Löschen",
+          Id = 2,
+          LargeGlyph = Properties.Resources.delete,
+          LargeWidth = 80,
+        });
+      }
+    }
+
+    private RibbonPageGroup _ribbonGroup;
+
+    private RibbonPage _ribbonPage;
+
+    private BarButtonItem _refreshButton;
+
+    private BarButtonItem _deleteButton;
+
+    #endregion
+
+    private List<GridColumn> _columns;
 
     private readonly ClickCost _clickCost = new ClickCost();
-
-    private void ClickCostControlLoad(object sender, EventArgs e)
-    {
-      ReloadControl();
-    }
-
-    private void ViewClickCostInvalidRowException(object sender, InvalidRowExceptionEventArgs e)
-    {
-      e.ExceptionMode = ExceptionMode.NoAction;
-    }
-
-    private void ViewClickCostValidateRow(object sender, ValidateRowEventArgs e)
-    {
-      if (ValidateRow())
-      {
-        UpdateRow();
-      }
-      else
-      {
-        e.Valid = false;
-      }
-    }
-
-    private void ClickCostControlValidating(object sender, CancelEventArgs e)
-    {
-      e.Cancel = !ValidateControl();
-    }
-
-    private void ClickCostControlLeave(object sender, EventArgs e)
-    {
-      if (!ValidateControl())
-      {
-        BringToFront();
-      }
-    }
-
-    private void GridClickCostKeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-    {
-      if (e.KeyCode == Keys.Escape)
-      {
-        if (viewClickCost.IsNewItemRow(viewClickCost.FocusedRowHandle))
-        {
-          viewClickCost.FocusedRowHandle = 0;
-        }
-      }
-    }
   }
 }

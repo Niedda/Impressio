@@ -102,7 +102,7 @@ namespace Impressio.Models
           Identity = predefinedObject.Identity,
           Type = Type.Datenaufbereitung,
           Name = predefinedObject.Name,
-          PriceTotal = predefinedObject.PositionTotal
+          PriceTotal = predefinedObject.PositionTotal,
         };
         _positions.Add(position);
       }

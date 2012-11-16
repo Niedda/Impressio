@@ -87,10 +87,7 @@
       this.viewPosition.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewPosition.OptionsView.ShowGroupPanel = false;
       this.viewPosition.RowHeight = 30;
-      this.viewPosition.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.ViewPositionRowClick);
       this.viewPosition.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewPositionInitNewRow);
-      this.viewPosition.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewPositionInvalidRowException);
-      this.viewPosition.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewPositionValidateRow);
       // 
       // colIdentity
       // 
@@ -167,7 +164,6 @@
       this.Controls.Add(this.gridPosition);
       this.Name = "PredefinedPositionControl";
       this.Size = new System.Drawing.Size(824, 309);
-      this.Load += new System.EventHandler(this.PredefinedPositionControlLoad);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPosition)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.positionBindingSource)).EndInit();

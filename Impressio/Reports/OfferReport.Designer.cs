@@ -44,7 +44,9 @@ namespace Impressio.Reports
       this.xrLabel11 = new DevExpress.XtraReports.UI.XRLabel();
       this.GroupFooter1 = new DevExpress.XtraReports.UI.GroupFooterBand();
       this.xrLabel10 = new DevExpress.XtraReports.UI.XRLabel();
+      this.orderBindingSourcew = new System.Windows.Forms.BindingSource(this.components);
       this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+      this.logoBox = new DevExpress.XtraReports.UI.XRPictureBox();
       this.xrLabel8 = new DevExpress.XtraReports.UI.XRLabel();
       this.xrLabel7 = new DevExpress.XtraReports.UI.XRLabel();
       this.xrLabel6 = new DevExpress.XtraReports.UI.XRLabel();
@@ -55,8 +57,6 @@ namespace Impressio.Reports
       this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
       this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
       this.xrLabel13 = new DevExpress.XtraReports.UI.XRLabel();
-      this.logoBox = new DevExpress.XtraReports.UI.XRPictureBox();
-      this.orderBindingSourcew = new System.Windows.Forms.BindingSource(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.orderBindingSourcew)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
       // 
@@ -85,7 +85,7 @@ namespace Impressio.Reports
       // 
       this.xrPageInfo1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.xrPageInfo1.Format = "{0:d MMMM, yyyy}";
-      this.xrPageInfo1.LocationFloat = new DevExpress.Utils.PointFloat(456.25F, 0F);
+      this.xrPageInfo1.LocationFloat = new DevExpress.Utils.PointFloat(433.2501F, 0F);
       this.xrPageInfo1.Name = "xrPageInfo1";
       this.xrPageInfo1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
       this.xrPageInfo1.PageInfo = DevExpress.XtraPrinting.PageInfo.DateTime;
@@ -141,7 +141,7 @@ namespace Impressio.Reports
       this.Detail2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrLabel12,
             this.xrLabel11});
-      this.Detail2.HeightF = 33.00001F;
+      this.Detail2.HeightF = 33.00003F;
       this.Detail2.KeepTogether = true;
       this.Detail2.Name = "Detail2";
       this.Detail2.SortFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
@@ -152,11 +152,11 @@ namespace Impressio.Reports
       this.xrLabel12.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "Descriptions.Details.DetailContent")});
       this.xrLabel12.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.xrLabel12.LocationFloat = new DevExpress.Utils.PointFloat(199.6366F, 10.00001F);
+      this.xrLabel12.LocationFloat = new DevExpress.Utils.PointFloat(199.6366F, 10.00004F);
       this.xrLabel12.Multiline = true;
       this.xrLabel12.Name = "xrLabel12";
       this.xrLabel12.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-      this.xrLabel12.SizeF = new System.Drawing.SizeF(450.3633F, 23F);
+      this.xrLabel12.SizeF = new System.Drawing.SizeF(427.3633F, 23F);
       this.xrLabel12.StylePriority.UseFont = false;
       this.xrLabel12.Text = "xrLabel12";
       // 
@@ -183,14 +183,18 @@ namespace Impressio.Reports
       // xrLabel10
       // 
       this.xrLabel10.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.xrLabel10.LocationFloat = new DevExpress.Utils.PointFloat(456.25F, 10.00001F);
+      this.xrLabel10.LocationFloat = new DevExpress.Utils.PointFloat(456.25F, 10.00004F);
       this.xrLabel10.Name = "xrLabel10";
       this.xrLabel10.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-      this.xrLabel10.SizeF = new System.Drawing.SizeF(193.75F, 23F);
+      this.xrLabel10.SizeF = new System.Drawing.SizeF(170.75F, 23F);
       this.xrLabel10.StylePriority.UseFont = false;
       this.xrLabel10.StylePriority.UseTextAlignment = false;
       this.xrLabel10.Text = "[Descriptions.Price!c]";
       this.xrLabel10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
+      // 
+      // orderBindingSourcew
+      // 
+      this.orderBindingSourcew.DataSource = typeof(Impressio.Models.Order);
       // 
       // ReportHeader
       // 
@@ -207,13 +211,20 @@ namespace Impressio.Reports
       this.ReportHeader.HeightF = 385.4167F;
       this.ReportHeader.Name = "ReportHeader";
       // 
+      // logoBox
+      // 
+      this.logoBox.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+      this.logoBox.Name = "logoBox";
+      this.logoBox.SizeF = new System.Drawing.SizeF(250F, 100F);
+      this.logoBox.Sizing = DevExpress.XtraPrinting.ImageSizeMode.Squeeze;
+      // 
       // xrLabel8
       // 
       this.xrLabel8.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.xrLabel8.LocationFloat = new DevExpress.Utils.PointFloat(0F, 335.75F);
       this.xrLabel8.Name = "xrLabel8";
       this.xrLabel8.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-      this.xrLabel8.SizeF = new System.Drawing.SizeF(640F, 23F);
+      this.xrLabel8.SizeF = new System.Drawing.SizeF(617F, 23F);
       this.xrLabel8.StylePriority.UseFont = false;
       this.xrLabel8.Text = "Ihre Offerte für den Auftrag [OrderName] - Nr. [Identity]";
       // 
@@ -226,7 +237,7 @@ namespace Impressio.Reports
       this.xrLabel7.Name = "xrLabel7";
       this.xrLabel7.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
       this.xrLabel7.ProcessNullValues = DevExpress.XtraReports.UI.ValueSuppressType.SuppressAndShrink;
-      this.xrLabel7.SizeF = new System.Drawing.SizeF(250F, 20F);
+      this.xrLabel7.SizeF = new System.Drawing.SizeF(227F, 20F);
       this.xrLabel7.StylePriority.UseFont = false;
       this.xrLabel7.StylePriority.UseTextAlignment = false;
       this.xrLabel7.Text = "xrLabel7";
@@ -238,7 +249,7 @@ namespace Impressio.Reports
       this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(399.9999F, 182.875F);
       this.xrLabel6.Name = "xrLabel6";
       this.xrLabel6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-      this.xrLabel6.SizeF = new System.Drawing.SizeF(250F, 20F);
+      this.xrLabel6.SizeF = new System.Drawing.SizeF(227F, 20F);
       this.xrLabel6.StylePriority.UseFont = false;
       this.xrLabel6.StylePriority.UseTextAlignment = false;
       this.xrLabel6.Text = "[Address.ZipCode] [Address.City]";
@@ -250,7 +261,7 @@ namespace Impressio.Reports
       this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(399.9999F, 162.875F);
       this.xrLabel5.Name = "xrLabel5";
       this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-      this.xrLabel5.SizeF = new System.Drawing.SizeF(250F, 20F);
+      this.xrLabel5.SizeF = new System.Drawing.SizeF(227F, 20F);
       this.xrLabel5.StylePriority.UseFont = false;
       this.xrLabel5.StylePriority.UseTextAlignment = false;
       this.xrLabel5.Text = "[Address.Street] [Address.StreetNumber]";
@@ -265,7 +276,7 @@ namespace Impressio.Reports
       this.xrLabel4.Name = "xrLabel4";
       this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
       this.xrLabel4.ProcessNullValues = DevExpress.XtraReports.UI.ValueSuppressType.SuppressAndShrink;
-      this.xrLabel4.SizeF = new System.Drawing.SizeF(250F, 20F);
+      this.xrLabel4.SizeF = new System.Drawing.SizeF(227F, 20.00002F);
       this.xrLabel4.StylePriority.UseFont = false;
       this.xrLabel4.StylePriority.UseTextAlignment = false;
       this.xrLabel4.Text = "xrLabel4";
@@ -280,7 +291,7 @@ namespace Impressio.Reports
       this.xrLabel3.Name = "xrLabel3";
       this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
       this.xrLabel3.ProcessNullValues = DevExpress.XtraReports.UI.ValueSuppressType.SuppressAndShrink;
-      this.xrLabel3.SizeF = new System.Drawing.SizeF(250F, 20F);
+      this.xrLabel3.SizeF = new System.Drawing.SizeF(227F, 20F);
       this.xrLabel3.StylePriority.UseFont = false;
       this.xrLabel3.StylePriority.UseTextAlignment = false;
       this.xrLabel3.Text = "xrLabel3";
@@ -294,7 +305,7 @@ namespace Impressio.Reports
       this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(400F, 142.875F);
       this.xrLabel2.Name = "xrLabel2";
       this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-      this.xrLabel2.SizeF = new System.Drawing.SizeF(250F, 20F);
+      this.xrLabel2.SizeF = new System.Drawing.SizeF(227F, 20F);
       this.xrLabel2.StylePriority.UseFont = false;
       this.xrLabel2.StylePriority.UseTextAlignment = false;
       this.xrLabel2.Text = "xrLabel2";
@@ -308,7 +319,7 @@ namespace Impressio.Reports
       this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(400F, 122.875F);
       this.xrLabel1.Name = "xrLabel1";
       this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-      this.xrLabel1.SizeF = new System.Drawing.SizeF(250F, 20F);
+      this.xrLabel1.SizeF = new System.Drawing.SizeF(227F, 20.00001F);
       this.xrLabel1.StylePriority.UseFont = false;
       this.xrLabel1.StylePriority.UseTextAlignment = false;
       this.xrLabel1.Text = "xrLabel1";
@@ -332,17 +343,6 @@ namespace Impressio.Reports
       this.xrLabel13.StylePriority.UseFont = false;
       this.xrLabel13.Text = "Mit freundlichen Grüssen\r\n\r\n\r\n[UserModified]";
       // 
-      // logoBox
-      // 
-      this.logoBox.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
-      this.logoBox.Name = "logoBox";
-      this.logoBox.SizeF = new System.Drawing.SizeF(250F, 100F);
-      this.logoBox.Sizing = DevExpress.XtraPrinting.ImageSizeMode.Squeeze;
-      // 
-      // orderBindingSourcew
-      // 
-      this.orderBindingSourcew.DataSource = typeof(Impressio.Models.Order);
-      // 
       // OfferReport
       // 
       this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -353,6 +353,9 @@ namespace Impressio.Reports
             this.ReportHeader,
             this.ReportFooter});
       this.DataSource = this.orderBindingSourcew;
+      this.PageHeight = 1169;
+      this.PageWidth = 827;
+      this.PaperKind = System.Drawing.Printing.PaperKind.A4;
       this.Version = "10.2";
       ((System.ComponentModel.ISupportInitialize)(this.orderBindingSourcew)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this)).EndInit();

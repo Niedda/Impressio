@@ -1,102 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class DeliveryControl : BaseControlImpressio, IControl, IGridControl<DeliveryPosition>, IRibbon
+  public partial class DeliveryControl : DeliveryControlBase
   {
     public DeliveryControl()
     {
       InitializeComponent();
+      InitializeBase();
     }
 
-    #region Ribbon
+    public override GridView GridView
+    {
+      get { return viewDeliveryPosition; }
+    }
 
-    public string RibbonGroupName { get { return "Lieferschein"; } }
-
-    public List<BarButtonItem> Buttons
+    public override List<GridColumn> ColumnsToCheck
     {
       get
       {
-        return _buttons ?? (_buttons = LoadButtons());
+        return _columns ?? (_columns = new List<GridColumn>
+                                         {
+                                           colPosition,
+                                           colQuantity,
+                                         });
       }
     }
 
-    public RibbonPageGroup GetRibbon()
+    public override List<object> EditorsToCheck
     {
-      var pageGroup = new RibbonPageGroup
+      get
       {
-        Text = "Lieferschein",
-        Name = "deliveryPageGroup"
-      };
-      pageGroup.ItemLinks.AddRange(Buttons.ToArray());
-
-      return pageGroup;
+        return _editors ?? (_editors = new List<object>
+                                         {
+                                           deliveryDate,
+                                         });
+      }
     }
 
-    private List<BarButtonItem> _buttons;
-
-    private List<BarButtonItem> LoadButtons()
-    {
-      var deleteDelivery = new BarButtonItem
-      {
-        Caption = "Löschen",
-        Id = 1,
-        LargeGlyph = Properties.Resources.delete,
-        LargeWidth = 80,
-        Name = "deliveryOpen"
-      };
-      deleteDelivery.ItemClick += DeleteRow;
-
-      var refreshButton = new BarButtonItem
-      {
-        Caption = "Aktualisieren",
-        Id = 2,
-        LargeGlyph = Properties.Resources.refresh,
-        LargeWidth = 80,
-        Name = "deliveryRefresh"
-      };
-      refreshButton.ItemClick += ReloadControl;
-
-      var printDelivery = new BarButtonItem
-      {
-        Caption = "Drucken",
-        Id = 3,
-        LargeGlyph = Properties.Resources.printglyph,
-        LargeWidth = 80,
-        Name = "printDelivery"
-      };
-      printDelivery.ItemClick += PrintDelivery;
-
-      return new List<BarButtonItem> { refreshButton, deleteDelivery, printDelivery };
-    }
-
-    public void PrintDelivery(object sender, ItemClickEventArgs e)
-    {
-      Delivery.LoadDeliveryReport();
-    }
-
-    public void ReloadControl(object sender, ItemClickEventArgs e)
-    {
-      ReloadControl();
-    }
-
-    public void DeleteRow(object sender, ItemClickEventArgs e)
-    {
-      DeleteRow();
-    }
-
-    #endregion
-
-    public void ReloadControl()
+    public override void ReloadControl()
     {
       if (Delivery != null)
       {
@@ -113,91 +62,75 @@ namespace Impressio.Controls
         addressLookUp.EditValue = Delivery.FkDeliveryAddress;
       }
     }
-
-    public bool ValidateControl()
-    {
-      CheckEditor(deliveryDate);
-
-      if (!ErrorProvider.HasErrors)
-      {
-        Delivery.DeliveryDate = Convert.ToDateTime(deliveryDate.Text);
-        Delivery.SaveObject();
-        return true;
-      }
-      return false;
-    }
-
-    public void DeleteRow()
-    {
-      FocusedRow.DeleteObject();
-      viewDeliveryPosition.DeleteSelectedRows();
-    }
-
-    public bool ValidateRow()
-    {
-      viewDeliveryPosition.ClearColumnErrors();
-      CheckColumn(colQuantity);
-      CheckColumn(colPosition);
-      return !viewDeliveryPosition.HasColumnErrors;
-    }
-
-    public void UpdateRow()
-    {
-      if (FocusedRow != null)
-      {
-        FocusedRow.Identity = FocusedRow.SaveObject();
-      }
-    }
-
-    public DeliveryPosition FocusedRow
-    {
-      get { return viewDeliveryPosition.GetFocusedRow() as DeliveryPosition; }
-    }
-
+    
     public Delivery Delivery;
-
-    private readonly DeliveryPosition _deliveryPosition = new DeliveryPosition();
-
-    private void DeliveryControlLoad(object sender, EventArgs e)
-    {
-      ReloadControl();
-    }
 
     private void ViewDeliveryPositionInitNewRow(object sender, InitNewRowEventArgs e)
     {
       viewDeliveryPosition.SetFocusedRowCellValue(colFkDeliveryPositionDelivery, Delivery.Identity);
     }
 
-    private void ViewDeliveryPositionValidateRow(object sender, ValidateRowEventArgs e)
+    private void SaveDelivery(object sender, EventArgs e)
     {
-      e.Valid = ValidateRow();
-    }
-
-    private void ViewDeliveryPositionRowUpdated(object sender, RowObjectEventArgs e)
-    {
-      UpdateRow();
-    }
-
-    private void ViewDeliveryPositionInvalidRowException(object sender, InvalidRowExceptionEventArgs e)
-    {
-      e.ExceptionMode = ExceptionMode.NoAction;
-    }
-
-    private void DeliveryControlValidating(object sender, CancelEventArgs e)
-    {
-      e.Cancel = !ValidateControl();
-    }
-
-    private void ClientLookUpEditValueChanged(object sender, EventArgs e)
-    {
-      Delivery.FkDeliveryClient = (int) clientLookUp.EditValue;
       Delivery.SaveObject();
     }
+    
+    #region Ribbon
 
-    private void AddressLookUpEditValueChanged(object sender, EventArgs e)
+    public void PrintDelivery(object sender, ItemClickEventArgs e)
     {
-      Delivery.FkDeliveryAddress = (int) addressLookUp.EditValue;
-      Delivery.SaveObject();
+      Delivery.LoadDeliveryReport();
     }
+
+    public override RibbonPage RibbonPage
+    {
+      get
+      {
+        if (_ribbonPage == null)
+        {
+          _ribbonPage = new RibbonPage("Lieferschein");
+        }
+        if (_ribbonGroup == null)
+        {
+          _ribbonGroup = new RibbonPageGroup();
+        }
+
+        _ribbonGroup.ItemLinks.Clear();
+        RefreshButton.ItemClick += PrintDelivery;
+        _ribbonGroup.ItemLinks.Add(RefreshButton);
+        
+        _ribbonPage.Groups.Add(_ribbonGroup);
+
+        return _ribbonPage;
+      }
+    }
+
+    public BarButtonItem RefreshButton
+    {
+      get
+      {
+        return _refreshButton ?? (_refreshButton = new BarButtonItem
+        {
+          Caption = "Lieferschein drucken",
+          Id = 3,
+          LargeGlyph = Properties.Resources.printglyph,
+          LargeWidth = 80,
+        });
+      }
+    }
+    
+    private RibbonPageGroup _ribbonGroup;
+
+    private RibbonPage _ribbonPage;
+    
+    private BarButtonItem _refreshButton;
+
+    #endregion
+
+    private readonly DeliveryPosition _deliveryPosition = new DeliveryPosition();
+
+    private List<object> _editors; 
+
+    private List<GridColumn> _columns;
   }
 }

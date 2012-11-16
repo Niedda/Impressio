@@ -1,70 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using Impressio.Models;
-using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class OffsetControl : BaseControlImpressio, IControl, IRibbon
+  public partial class OffsetControl : ControlBase
   {
     public OffsetControl()
     {
       InitializeComponent();
+      InitializeBase();
     }
 
-    #region Ribbon
-
-    public string RibbonGroupName { get { return "Offsetdruck"; } }
-
-    public List<BarButtonItem> Buttons
-    {
-      get
-      {
-        return _buttons ?? (_buttons = LoadButtons());
-      }
-    }
-
-    public RibbonPageGroup GetRibbon()
-    {
-      var pageGroup = new RibbonPageGroup
-      {
-        Text = "Offsetdruck",
-        Name = "offsetPageGroup"
-      };
-      pageGroup.ItemLinks.AddRange(Buttons.ToArray());
-
-      return pageGroup;
-    }
-
-    private List<BarButtonItem> _buttons;
-
-    private List<BarButtonItem> LoadButtons()
-    {
-      var refreshButton = new BarButtonItem
-      {
-        Caption = "Aktualisieren",
-        Id = 2,
-        LargeGlyph = Properties.Resources.refresh,
-        LargeWidth = 80,
-        Name = "offsetRefresh"
-      };
-      refreshButton.ItemClick += ReloadControl;
-
-      return new List<BarButtonItem> { refreshButton };
-    }
-    
-    public void ReloadControl(object sender, ItemClickEventArgs e)
-    {
-      ReloadControl();
-    }
-
-    #endregion
-
-    public void ReloadControl()
+    public override void ReloadControl()
     {
       if (Offset != null)
       {
@@ -77,83 +27,11 @@ namespace Impressio.Controls
         paperBindingSource.DataSource = _paper.LoadObjectList();
         Offset.LoadSingleObject();
 
-        paperSearchLookUp.EditValue = Offset.FkOffsetPaper;
-        paperSearchLookUp.Refresh();
-        paperAddition.Value = Offset.PaperAddition;
-        paperPricePer.Value = Offset.PaperPricePer;
-        paperQuantity.Value = Offset.PaperQuantity;
-        paperUsePer.Value = Offset.PaperUsePer;
-
-        offsetMachineSearchLookUp.EditValue = Offset.FkOffsetMachine;
-        offsetMachineSearchLookUp.Refresh();
-        offsetPrintType.SelectedIndex = Offset.PrintType;
-        offsetColorAmount.Value = Offset.ColorAmount;
-        offsetPaperQuantity.Value = Offset.OffsetQuantity;
-        offsetPrintQuantity.Value = Offset.PrintQuantity;
-        offsetPrintTotal.Value = Offset.PrintTotal;
-        paperCostTotal.Value = Offset.PaperCostTotal;
-
-        priceTotal.Value = Offset.PositionTotal;
-
         _isLoaded = true;
       }
     }
 
-    public bool ValidateControl()
-    {
-      GetOffset();
-      Offset.SaveObject();
-      return true;
-    }
-
-    public void GetOffset()
-    {
-      if (_isLoaded)
-      {
-        Offset.FkOffsetPaper = paperSearchLookUp.EditValue.GetInt();
-        Offset.FkOffsetMachine = offsetMachineSearchLookUp.EditValue.GetInt();
-
-        Offset.PaperAddition = paperAddition.Value.GetInt();
-        Offset.PaperPricePer = paperPricePer.Value.GetInt();
-        Offset.PaperQuantity = paperQuantity.Value.GetInt();
-        Offset.PaperUsePer = paperUsePer.Value.GetInt();
-
-        Offset.PrintType = offsetPrintType.SelectedIndex;
-        Offset.ColorAmount = offsetColorAmount.Value.GetInt();
-        Offset.PrintQuantity = offsetPrintQuantity.Value.GetInt();
-        Offset.OffsetQuantity = offsetPaperQuantity.Value.GetInt();
-
-        paperCostTotal.Value = Offset.PaperCostTotal;
-        offsetPrintTotal.Value = Offset.PrintTotal;
-        priceTotal.Value = Offset.PaperCostTotal + Offset.PrintTotal;
-
-        Offset.SaveObject();
-      }
-    }
-
-    public override void Refresh()
-    {
-      GetOffset();
-      base.Refresh();
-    }
-
-    private readonly Machine _machine = new Machine();
-
-    private readonly Paper _paper = new Paper();
-
-    public Offset Offset = new Offset();
-
-    private bool _isLoaded;
-
-    private void OffsetControlLoad(object sender, EventArgs e)
-    {
-      ReloadControl();
-    }
-
-    private void OffsetControlValidating(object sender, CancelEventArgs e)
-    {
-      e.Cancel = !ValidateControl();
-    }
+    public Offset Offset;
 
     private void PaperSearchLookUpEditValueChanged(object sender, EventArgs e)
     {
@@ -165,8 +43,7 @@ namespace Impressio.Controls
                                                 Environment.NewLine, Offset.Paper.Price1, Offset.Paper.Price2,
                                                 Offset.Paper.Amount1, Offset.Paper.Price3, Offset.Paper.Amount2,
                                                 Offset.Paper.Price4, Offset.Paper.Amount3);
-          paperPricePer.Value = Offset.Paper.Price1;
-          GetOffset();
+          Offset.SaveObject();
         }
         else
         {
@@ -179,29 +56,80 @@ namespace Impressio.Controls
     {
       if (paperQuantity.Value != 0 && paperUsePer.Value != 0 && _isLoaded)
       {
-        offsetPaperQuantity.Value = paperQuantity.Value * paperUsePer.Value;
-        paperCostTotal.Value = Offset.PaperCostTotal;
-        GetOffset();
+        Offset.PaperQuantity = (int)paperQuantity.Value * (int)paperUsePer.Value;
+        Offset.SaveObject();
       }
-    }
-
-    private void OffsetMachineSearchLookUpEditValueChanged(object sender, EventArgs e)
-    {
-      GetOffset();
     }
 
     private void OffsetColorAmountEditValueChanged(object sender, EventArgs e)
     {
       if (_isLoaded)
       {
-        offsetPrintQuantity.Value = offsetColorAmount.Value * offsetPaperQuantity.Value;
-        GetOffset();
+        Offset.PrintQuantity = (int)offsetColorAmount.Value * (int)offsetPaperQuantity.Value;
+        Offset.SaveObject();
       }
     }
 
-    private void EditorsValidated(object sender, EventArgs e)
+    private void SaveOffset(object sender, EventArgs e)
     {
-      GetOffset();
+      Offset.SaveObject();
     }
+
+    #region Ribbon
+
+    public void ReloadControl(object sender, ItemClickEventArgs e)
+    {
+      ReloadControl();
+    }
+
+    public override RibbonPage RibbonPage
+    {
+      get
+      {
+        if (_ribbonPage == null)
+        {
+          _ribbonPage = new RibbonPage("Datenaufbereitung");
+        }
+        if (_ribbonGroup == null)
+        {
+          _ribbonGroup = new RibbonPageGroup();
+        }
+
+        _ribbonGroup.ItemLinks.Clear();
+        _ribbonGroup.ItemLinks.Add(RefreshButton);
+        _refreshButton.ItemClick += ReloadControl;
+        _ribbonPage.Groups.Add(_ribbonGroup);
+
+        return _ribbonPage;
+      }
+    }
+
+    public BarButtonItem RefreshButton
+    {
+      get
+      {
+        return _refreshButton ?? (_refreshButton = new BarButtonItem
+        {
+          Caption = "Aktualisieren",
+          Id = 3,
+          LargeGlyph = Properties.Resources.refresh,
+          LargeWidth = 80,
+        });
+      }
+    }
+
+    private RibbonPageGroup _ribbonGroup;
+
+    private RibbonPage _ribbonPage;
+
+    private BarButtonItem _refreshButton;
+
+    #endregion
+
+    private bool _isLoaded;
+
+    private readonly Machine _machine = new Machine();
+
+    private readonly Paper _paper = new Paper();
   }
 }

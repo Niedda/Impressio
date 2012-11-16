@@ -1,8 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows.Forms;
+﻿using System.Collections.Generic;
 using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
 using Impressio.Views;
@@ -10,14 +8,33 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class OrdersControl : BaseControlImpressio, IControl, IGridControl<Order>
+  public partial class OrdersControl : OrderControlBase
   {
     public OrdersControl()
     {
       InitializeComponent();
+      InitializeBase();
     }
 
-    public void ReloadControl()
+    public override GridView GridView
+    {
+      get { return viewOrder; }
+    }
+
+    public override List<GridColumn> ColumnsToCheck
+    {
+      get
+      {
+        return _columns ?? (_columns = new List<GridColumn>
+                                         {
+                                           colOrderName,
+                                           colState,
+                                           colCompany,
+                                         });
+      }
+    }
+
+    public override void ReloadControl()
     {
       Order.ClearObjectList();
       _company.ClearObjectList();
@@ -29,49 +46,11 @@ namespace Impressio.Controls
       viewOrder.RefreshData();
     }
 
-    public bool ValidateControl()
-    {
-      return ValidateRow();
-    }
-
-    public void DeleteRow()
-    {
-      if (FocusedRow != null)
-      {
-        FocusedRow.DeleteObject();
-        viewOrder.DeleteSelectedRows();
-      }
-    }
-
-    public bool ValidateRow()
-    {
-      if (!viewOrder.IsFilterRow(viewOrder.FocusedRowHandle))
-      {
-        viewOrder.ClearColumnErrors();
-        CheckColumn(colOrderName);
-        CheckColumn(colState);
-        CheckColumn(colCompany);
-        return !viewOrder.HasColumnErrors;
-      }
-      return true;
-    }
-
-    public void UpdateRow()
-    {
-      if (FocusedRow != null)
-      {
-        FocusedRow.Identity = FocusedRow.SaveObject();
-      }
-    }
-
     public void OpenOrder()
     {
       if (FocusedRow != null)
       {
-        new OrderRibbonView
-          {
-            Order = FocusedRow,
-          }.Show();
+        new OrderRibbonView(FocusedRow).Show();
       }
     }
 
@@ -87,71 +66,23 @@ namespace Impressio.Controls
     {
       if (FocusedRow != null)
       {
-        FocusedRow.LoadOrderOffer();
+        FocusedRow.LoadOfferReport();
       }
-    }
-    
-    public Order FocusedRow
-    {
-      get { return viewOrder.GetFocusedRow() as Order; }
     }
 
     public Order Order = new Order();
 
-    private readonly Company _company = new Company();
-    
-    private readonly State _state = new State();
-
-    private void OrderControlLoad(object sender, EventArgs e)
-    {
-      ReloadControl();
-    }
-
-    private void ViewOrderValidateRow(object sender, ValidateRowEventArgs e)
-    {
-      e.Valid = ValidateRow();
-    }
-
     private void CompanySearchLookUpEditEditValueChanging(object sender, ChangingEventArgs e)
     {
-      Order.FkOrderCompany = (int) e.NewValue;
+      Order.FkOrderCompany = (int)e.NewValue;
       Order.FkOrderClient = 0;
       Order.FkOrderAddress = 0;
     }
+    
+    private List<GridColumn> _columns;
 
-    private void ViewOrderInvalidRowException(object sender, InvalidRowExceptionEventArgs e)
-    {
-      e.ExceptionMode = ExceptionMode.NoAction;
-    }
+    private readonly Company _company = new Company();
 
-    private void ViewOrderRowUpdated(object sender, RowObjectEventArgs e)
-    {
-      UpdateRow();
-    }
-
-    private void ViewOrderRowClick(object sender, RowClickEventArgs e)
-    {
-      if (e.Clicks == 2)
-      {
-        OpenOrder();
-      }
-    }
-
-    private void OrdersControlValidating(object sender, CancelEventArgs e)
-    {
-      e.Cancel = !ValidateControl();
-    }
-
-    private void GridOrderKeyDown(object sender, KeyEventArgs e)
-    {
-      if (e.KeyCode == Keys.Escape)
-      {
-        if (viewOrder.IsNewItemRow(viewOrder.FocusedRowHandle))
-        {
-          viewOrder.CancelUpdateCurrentRow();
-          viewOrder.FocusedRowHandle = 0;
-        }
-      }
-    }
+    private readonly State _state = new State();
   }
 }

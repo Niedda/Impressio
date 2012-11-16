@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using DevExpress.XtraBars;
@@ -11,7 +10,7 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class FinishControl : BaseControlImpressio, IControl, IGridControl<FinishPosition>, IRibbon
+  public partial class FinishControl : ControlBase, IGridControl
   {
     public FinishControl()
     {
@@ -20,55 +19,69 @@ namespace Impressio.Controls
 
     #region Ribbon
 
-    public string RibbonGroupName { get { return "Weiterverarbeitung"; } }
-
-    public List<BarButtonItem> Buttons
+    public override RibbonPage RibbonPage
     {
       get
       {
-        return _buttons ?? (_buttons = LoadButtons());
+        if (_ribbonPage == null)
+        {
+          _ribbonPage = new RibbonPage("Datenaufbereitung");
+        }
+        if (_ribbonGroup == null)
+        {
+          _ribbonGroup = new RibbonPageGroup();
+        }
+
+        _ribbonGroup.ItemLinks.Clear();
+        _refreshButton.ItemClick += ReloadControl;
+        _deleteButton.ItemClick += DeleteRow;
+        _ribbonGroup.ItemLinks.Add(RefreshButton);
+        _ribbonGroup.ItemLinks.Add(DeleteButton);
+
+        _ribbonPage.Groups.Add(_ribbonGroup);
+
+        return _ribbonPage;
       }
     }
 
-    public RibbonPageGroup GetRibbon()
+    public BarButtonItem RefreshButton
     {
-      var pageGroup = new RibbonPageGroup
+      get
       {
-        Text = "Weiterverarbeitung",
-        Name = "dataPageGroup"
-      };
-      pageGroup.ItemLinks.AddRange(Buttons.ToArray());
-
-      return pageGroup;
+        return _refreshButton ?? (_refreshButton = new BarButtonItem
+        {
+          Caption = "Aktualisieren",
+          Id = 3,
+          LargeGlyph = Properties.Resources.refresh,
+          LargeWidth = 80,
+          Name = "positionRefresh"
+        });
+      }
     }
 
-    private List<BarButtonItem> _buttons;
-
-    private List<BarButtonItem> LoadButtons()
+    public BarButtonItem DeleteButton
     {
-      var deleteButton = new BarButtonItem
+      get
       {
-        Caption = "Löschen",
-        Id = 1,
-        LargeGlyph = Properties.Resources.delete,
-        LargeWidth = 80,
-        Name = "finishDelete",
-      };
-      deleteButton.ItemClick += DeleteRow;
-
-      var refreshButton = new BarButtonItem
-      {
-        Caption = "Aktualisieren",
-        Id = 2,
-        LargeGlyph = Properties.Resources.refresh,
-        LargeWidth = 80,
-        Name = "finishRefresh"
-      };
-      refreshButton.ItemClick += ReloadControl;
-
-      return new List<BarButtonItem> { deleteButton, refreshButton };
+        return _deleteButton ?? (_deleteButton = new BarButtonItem
+        {
+          Caption = "Löschen",
+          Id = 2,
+          LargeGlyph = Properties.Resources.delete,
+          LargeWidth = 80,
+          Name = "positionDelete",
+        });
+      }
     }
 
+    private RibbonPageGroup _ribbonGroup;
+
+    private RibbonPage _ribbonPage;
+
+    private BarButtonItem _refreshButton;
+
+    private BarButtonItem _deleteButton;
+    
     public void ReloadControl(object sender, ItemClickEventArgs e)
     {
       ReloadControl();
@@ -81,7 +94,7 @@ namespace Impressio.Controls
 
     #endregion
 
-    public void ReloadControl()
+    public override void ReloadControl()
     {
       if (Finish != null)
       {
@@ -93,7 +106,7 @@ namespace Impressio.Controls
       }
     }
 
-    public bool ValidateControl()
+    public new bool ValidateControl()
     {
       if (ValidateRow() && !ErrorProvider.HasErrors)
       {
@@ -112,7 +125,7 @@ namespace Impressio.Controls
     public bool ValidateRow()
     {
       viewFinish.ClearColumnErrors();
-      CheckColumn(colDescription);
+      //CheckColumn(colDescription);
       return !viewFinish.HasColumnErrors;
     }
 

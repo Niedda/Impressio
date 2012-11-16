@@ -1,165 +1,117 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows.Forms;
+﻿using System.Collections.Generic;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class StateControl : BaseControlImpressio, IControl, IGridControl<State>, IRibbon
+  public partial class StateControl : StateControlBase
   {
     public StateControl()
     {
       InitializeComponent();
+      InitializeBase();
     }
 
-    #region Ribbon
+    public override GridView GridView
+    {
+      get { return viewState; }
+    }
 
-    public string RibbonGroupName { get { return "Auftragsstatus"; } }
-
-    public List<BarButtonItem> Buttons
+    public override List<GridColumn> ColumnsToCheck
     {
       get
       {
-        return _buttons ?? (_buttons = LoadButtons());
+        return _columns ?? (_columns = new List<GridColumn>
+                                         {
+                                           colStateName,
+                                         });
       }
     }
 
-    public RibbonPageGroup GetRibbon()
-    {
-      var pageGroup = new RibbonPageGroup
-      {
-        Text = "Auftragsstatus",
-        Name = "statePageGroup"
-      };
-      pageGroup.ItemLinks.AddRange(Buttons.ToArray());
-
-      return pageGroup;
-    }
-
-    private List<BarButtonItem> _buttons;
-
-    private List<BarButtonItem> LoadButtons()
-    {
-      var deleteButton = new BarButtonItem
-      {
-        Caption = "Löschen",
-        Id = 1,
-        LargeGlyph = Properties.Resources.delete,
-        LargeWidth = 80,
-        Name = "sateDelete",
-      };
-      deleteButton.ItemClick += DeleteRow;
-
-      var refreshButton = new BarButtonItem
-      {
-        Caption = "Aktualisieren",
-        Id = 2,
-        LargeGlyph = Properties.Resources.refresh,
-        LargeWidth = 80,
-        Name = "stateRefresh"
-      };
-      refreshButton.ItemClick += ReloadControl;
-
-      return new List<BarButtonItem> { deleteButton, refreshButton };
-    }
-
-    public void DeleteRow(object sender, ItemClickEventArgs e)
-    {
-      DeleteRow();
-    }
-
-    public void ReloadControl(object sender, ItemClickEventArgs e)
-    {
-      ReloadControl();
-    }
-
-    #endregion
-
-    public void ReloadControl()
+    public override void ReloadControl()
     {
       _state.ClearObjectList();
       stateBindingSource.DataSource = _state.LoadObjectList();
       viewState.RefreshData();
     }
-
-    public bool ValidateControl()
-    {
-      return ValidateRow();
-    }
-
-    public void DeleteRow()
-    {
-      if (FocusedRow != null)
-      {
-        FocusedRow.DeleteObject();
-        viewState.DeleteSelectedRows();
-      }
-    }
-
-    public bool ValidateRow()
-    {
-      CheckColumn(colStateName);
-      return !viewState.HasColumnErrors;
-    }
-
-    public void UpdateRow()
-    {
-      if (FocusedRow != null)
-      {
-        FocusedRow.Identity = FocusedRow.SaveObject();
-      }
-    }
-
-    public State FocusedRow
-    {
-      get { return viewState.GetFocusedRow() as State; }
-    }
-
-    private readonly State _state = new State();
-
-    private void StateControlLoad(object sender, EventArgs e)
+    
+    #region Ribbons
+    
+    public void ReloadControl(object sender, ItemClickEventArgs e)
     {
       ReloadControl();
     }
-
-    private void ViewStateInvalidRowException(object sender, InvalidRowExceptionEventArgs e)
+    
+    public override RibbonPage RibbonPage
     {
-      e.ExceptionMode = ExceptionMode.NoAction;
-    }
-
-    private void ViewStateValidateRow(object sender, ValidateRowEventArgs e)
-    {
-      if(ValidateRow())
+      get
       {
-        UpdateRow();
-      }
-      else
-      {
-        e.Valid = false;
-      }
-    }
-
-    private void StateControlValidating(object sender, CancelEventArgs e)
-    {
-      e.Cancel = !ValidateControl();
-    }
-
-    private void GridStateKeyDown(object sender, KeyEventArgs e)
-    {
-      if (e.KeyCode == Keys.Escape)
-      {
-        if (viewState.IsNewItemRow(viewState.FocusedRowHandle))
+        if (_ribbonPage == null)
         {
-          viewState.CancelUpdateCurrentRow();
-          viewState.FocusedRowHandle = 0;
+          _ribbonPage = new RibbonPage("Statusverwaltung");
         }
+        if (_ribbonGroup == null)
+        {
+          _ribbonGroup = new RibbonPageGroup();
+        }
+
+        _ribbonGroup.ItemLinks.Clear();
+        _ribbonGroup.ItemLinks.Add(DeleteButton);
+        _ribbonGroup.ItemLinks.Add(RefreshButton);
+
+        DeleteButton.ItemClick += DeleteRow;
+        RefreshButton.ItemClick += ReloadControl;
+
+        _ribbonPage.Groups.Add(_ribbonGroup);
+
+        return _ribbonPage;
       }
     }
+
+    public BarButtonItem RefreshButton
+    {
+      get
+      {
+        return _refreshButton ?? (_refreshButton = new BarButtonItem
+        {
+          Caption = "Aktualisieren",
+          Id = 3,
+          LargeGlyph = Properties.Resources.refresh,
+          LargeWidth = 80,
+        });
+      }
+    }
+
+    public BarButtonItem DeleteButton
+    {
+      get
+      {
+        return _deleteButton ?? (_deleteButton = new BarButtonItem
+        {
+          Caption = "Löschen",
+          Id = 2,
+          LargeGlyph = Properties.Resources.delete,
+          LargeWidth = 80,
+        });
+      }
+    }
+
+    private RibbonPageGroup _ribbonGroup;
+
+    private RibbonPage _ribbonPage;
+
+    private BarButtonItem _refreshButton;
+
+    private BarButtonItem _deleteButton;
+    
+    #endregion
+
+    private readonly State _state = new State();
+
+    private List<GridColumn> _columns;
   }
 }

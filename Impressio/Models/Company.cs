@@ -84,7 +84,7 @@ namespace Impressio.Models
         Database.DatabaseCommand.CloseReader();
       }
     }
-
+    
     private List<Address> _address;
 
     private List<Client> _client;

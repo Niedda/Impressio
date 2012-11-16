@@ -1,16 +1,13 @@
-﻿namespace Impressio.Models
+﻿using DevExpress.XtraGrid.Views.Grid;
+using Subvento.DatabaseObject;
+
+namespace Impressio.Models
 {
   /// <summary>
   /// Offers some standard methods for controls with grids
   /// </summary>
-  /// <typeparam name="T">Object bound to the Grid</typeparam>
-  public interface IGridControl<T>
+  public interface IGridControl
   {
-    /// <summary>
-    /// The focused grid row
-    /// </summary>
-    T FocusedRow { get; }
-
     /// <summary>
     /// Delete the selected Row
     /// </summary>
