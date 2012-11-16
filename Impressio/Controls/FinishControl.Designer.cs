@@ -88,9 +88,7 @@ namespace Impressio.Controls
       this.viewFinish.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewFinish.OptionsView.ShowGroupPanel = false;
       this.viewFinish.RowHeight = 30;
-      this.viewFinish.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.ViewFinishCellValueChanged);
-      this.viewFinish.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewFinishInvalidRowException);
-      this.viewFinish.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewFinishValidateRow);
+      this.viewFinish.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewFinishInitNewRow);
       // 
       // colIdentity
       // 
@@ -188,8 +186,6 @@ namespace Impressio.Controls
       this.Controls.Add(this.groupBox1);
       this.Name = "FinishControl";
       this.Size = new System.Drawing.Size(845, 398);
-      this.Load += new System.EventHandler(this.FinishControlLoad);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.FinishControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridFinish)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.finishPositionBindingSource)).EndInit();

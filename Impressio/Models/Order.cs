@@ -30,16 +30,16 @@ namespace Impressio.Models
     }
 
     #endregion
-    
+
     #region Reports
 
     //previews of the documents
     public void LoadOrderReport()
     {
-      _data = null;
-      _finish = null;
+      _datas = null;
+      _finishs = null;
       _offsets = null;
-      _print = null;
+      _prints = null;
 
       if (Identity != 0)
       {
@@ -82,7 +82,7 @@ namespace Impressio.Models
     //designer for the documents
     public static void LoadOfferDesigner()
     {
-      var form = new XRDesignForm();
+      var form = new XRDesignRibbonForm();
       var report = new OfferReport();
 
       var controler = form.DesignMdiController;
@@ -129,7 +129,7 @@ namespace Impressio.Models
 
     public static void LoadOrderDesigner()
     {
-      var form = new XRDesignForm();
+      var form = new XRDesignRibbonForm();
       var report = new OrderReport();
 
       var controler = form.DesignMdiController;
@@ -301,7 +301,7 @@ namespace Impressio.Models
     {
       get
       {
-        return _data ?? (_data = new Data().LoadObjectList(Data.Columns.FkDataOrder, Identity));
+        return _datas ?? (_datas = new Data().LoadObjectList(Data.Columns.FkDataOrder, Identity));
       }
     }
 
@@ -309,7 +309,7 @@ namespace Impressio.Models
     {
       get
       {
-        return _finish ?? (_finish = new Finish().LoadObjectList(Finish.Columns.FkFinishOrder, Identity));
+        return _finishs ?? (_finishs = new Finish().LoadObjectList(Finish.Columns.FkFinishOrder, Identity));
       }
     }
 
@@ -317,7 +317,7 @@ namespace Impressio.Models
     {
       get
       {
-        return _print ?? (_print = new Print().LoadObjectList(Print.Columns.FkPrintOrder, Identity));
+        return _prints ?? (_prints = new Print().LoadObjectList(Print.Columns.FkPrintOrder, Identity));
       }
     }
 
@@ -335,6 +335,11 @@ namespace Impressio.Models
       {
         return _description ?? (_description = new Description().LoadObjectList(Description.Columns.FkDescriptionOrder, Identity));
       }
+    }
+
+    public List<Delivery> Deliveries
+    {
+      get { return _deliveries ?? (_deliveries = new Delivery().LoadObjectList(Delivery.Columns.FkDeliveryOrder, Identity)); }
     }
 
     public override void SetObject()
@@ -383,6 +388,96 @@ namespace Impressio.Models
       Process.Start("explorer.exe", FolderPath);
     }
 
+    public void CopyOrder()
+    {
+      var descriptions = Descriptions;
+      var prints = Prints;
+      var offsets = Offsets;
+      var datas = Datas;
+      var finishes = Finishes;
+      var deliveries = Deliveries;
+
+      Identity = 0;
+      _dateCreated = "";
+      _userCreated = "";
+      OrderName += " [Kopie]";
+
+      Identity = this.SaveObject();
+
+      foreach (var description in descriptions)
+      {
+        var descriptionPositions = description.Details;
+        description.Identity = 0;
+        description.FkDescriptionOrder = Identity;
+        var descriptionId = description.SaveObject();
+
+        foreach (var detail in descriptionPositions)
+        {
+          detail.Identity = 0;
+          detail.FkDetailDescription = descriptionId;
+          detail.SaveObject();
+        }
+      }
+
+      foreach (var data in datas)
+      {
+        var dataPositions = data.DataPositions;
+        data.Identity = 0;
+        data.FkOrder = Identity;
+        var dataId = data.SaveObject();
+
+        foreach (var dataPosition in dataPositions)
+        {
+          dataPosition.FkDataDataPosition = dataId;
+          dataPosition.SaveObject();
+        }
+      }
+
+      foreach (var print in prints)
+      {
+        print.Identity = 0;
+        print.FkOrder = Identity;
+        print.SaveObject();
+      }
+
+      foreach(var offset in offsets)
+      {
+        offset.Identity = 0;
+        offset.FkOrder = Identity;
+        offset.SaveObject();
+      }
+
+      foreach (var finish in finishes)
+      {
+        var finishPositions = finish.FinishPositions;
+        finish.Identity = 0;
+        finish.FkOrder = Identity;
+        var finishId = finish.SaveObject();
+
+        foreach (var finishPosition in finishPositions)
+        {
+          finishPosition.Identity = 0;
+          finishPosition.FkFinishFinishPosition = finishId;
+          finishPosition.SaveObject();
+        }
+      }
+      
+      foreach (var delivery in deliveries)
+      {
+        var deliveryPositions = delivery.DeliveryPositions;
+        delivery.Identity = 0;
+        delivery.FkDeliveryOrder = Identity;
+        var deliveryId = delivery.SaveObject();
+
+        foreach (var deliveryPosition in deliveryPositions)
+        {
+          deliveryPosition.Identity = 0;
+          deliveryPosition.FkDeliveryPositionDelivery = deliveryId;
+          deliveryPosition.SaveObject();
+        }
+      }
+    }
+
     private string _dateCreated;
 
     private string _userCreated;
@@ -391,15 +486,17 @@ namespace Impressio.Models
 
     private List<Client> _client;
 
-    private List<Data> _data;
+    private List<Data> _datas;
 
     private List<Description> _description;
 
-    private List<Finish> _finish;
+    private List<Finish> _finishs;
 
     private List<Offset> _offsets;
 
-    private List<Print> _print;
+    private List<Print> _prints;
+
+    private List<Delivery> _deliveries; 
 
     private readonly State _state = new State();
 

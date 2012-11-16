@@ -56,7 +56,9 @@ namespace Impressio.Controls
         _position.Identity = Order.Identity;
         _position.LoadPositions();
         _position.LoadPredefined();
+        _state.ClearObjectList();
 
+        orderBindingSource.DataSource = Order;
         typeCombo.Items.Clear();
         typeCombo.Items.AddEnum(typeof(Type));
         var predefObjects = _position.PredefinedObjects.Select(b => b.Name).Distinct();
@@ -65,15 +67,6 @@ namespace Impressio.Controls
         stateBindingSource.DataSource = _state.LoadObjectList();
         clientBindingSource.DataSource = Order.AvaibleClients;
         addressBindingSource.DataSource = Order.AvaibleAddress;
-
-        orderNameEdit.Text = Order.OrderName;
-        clientLookUp.EditValue = Order.FkOrderClient;
-        addressLookUp.EditValue = Order.FkOrderAddress;
-        stateLookUp.EditValue = Order.FkOrderState;
-        userCreated.Text = Order.UserCreated;
-        userEdited.Text = Order.UserModified;
-        dateEdited.Text = Order.DateModified;
-        dateCreated.Text = Order.DateCreated;
 
         viewPosition.RefreshData();
       }
@@ -179,7 +172,7 @@ namespace Impressio.Controls
       }
     }
     
-    private void SaveOrder(object sender, System.EventArgs e)
+    private void PositionControlValidated(object sender, System.EventArgs e)
     {
       Order.SaveObject();
     }

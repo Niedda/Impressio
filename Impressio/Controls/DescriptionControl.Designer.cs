@@ -53,6 +53,7 @@ namespace Impressio.Controls
       this.colIdentityDetail = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colFkDetailDescription = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colDetailContent = new DevExpress.XtraGrid.Columns.GridColumn();
+      this.repositoryContent = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
       this.colArrangeDetail = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colDetailTitle = new DevExpress.XtraGrid.Columns.GridColumn();
       this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -60,7 +61,6 @@ namespace Impressio.Controls
       this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
       this.detailMoveDownEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
       this.splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
-      this.repositoryContent = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
       this.groupControl1.SuspendLayout();
@@ -75,9 +75,9 @@ namespace Impressio.Controls
       ((System.ComponentModel.ISupportInitialize)(this.gridDetail)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.detailsBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewDetail)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.repositoryContent)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.detailMoveUpEdit)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.detailMoveDownEdit)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.repositoryContent)).BeginInit();
       this.SuspendLayout();
       // 
       // groupControl1
@@ -288,9 +288,9 @@ namespace Impressio.Controls
       this.viewDetail.RowHeight = 30;
       this.viewDetail.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colArrangeDetail, DevExpress.Data.ColumnSortOrder.Ascending)});
+      this.viewDetail.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewDetailInitNewRow);
       this.viewDetail.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewDetailInvalidRowException);
       this.viewDetail.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewDetailValidateRow);
-      this.viewDetail.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.ViewDetailRowUpdated);
       // 
       // colIdentityDetail
       // 
@@ -315,6 +315,10 @@ namespace Impressio.Controls
       this.colDetailContent.Visible = true;
       this.colDetailContent.VisibleIndex = 1;
       this.colDetailContent.Width = 294;
+      // 
+      // repositoryContent
+      // 
+      this.repositoryContent.Name = "repositoryContent";
       // 
       // colArrangeDetail
       // 
@@ -375,10 +379,6 @@ namespace Impressio.Controls
       this.splitterControl1.TabIndex = 2;
       this.splitterControl1.TabStop = false;
       // 
-      // repositoryContent
-      // 
-      this.repositoryContent.Name = "repositoryContent";
-      // 
       // DescriptionControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -389,7 +389,6 @@ namespace Impressio.Controls
       this.MinimumSize = new System.Drawing.Size(450, 300);
       this.Name = "DescriptionControl";
       this.Size = new System.Drawing.Size(896, 416);
-      this.Validating += new System.ComponentModel.CancelEventHandler(this.DescriptionControlValidating);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
       this.groupControl1.ResumeLayout(false);
@@ -404,9 +403,9 @@ namespace Impressio.Controls
       ((System.ComponentModel.ISupportInitialize)(this.gridDetail)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.detailsBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewDetail)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.repositoryContent)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.detailMoveUpEdit)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.detailMoveDownEdit)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.repositoryContent)).EndInit();
       this.ResumeLayout(false);
 
     }

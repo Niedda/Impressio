@@ -117,6 +117,7 @@ namespace Impressio.Controls
       this.viewData.OptionsView.ShowFooter = true;
       this.viewData.OptionsView.ShowGroupPanel = false;
       this.viewData.RowHeight = 30;
+      this.viewData.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewDataInitNewRow);
       // 
       // colIdentity
       // 

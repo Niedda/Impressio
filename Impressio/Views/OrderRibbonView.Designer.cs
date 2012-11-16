@@ -79,6 +79,7 @@
       // 
       this.openPosition.Caption = "Öffnen";
       this.openPosition.Id = 1;
+      this.openPosition.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Postponed;
       this.openPosition.LargeGlyph = global::Impressio.Properties.Resources.open;
       this.openPosition.LargeWidth = 80;
       this.openPosition.Name = "openPosition";
@@ -87,6 +88,7 @@
       // 
       this.description.Caption = "Beschreibung";
       this.description.Id = 2;
+      this.description.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Postponed;
       this.description.LargeGlyph = global::Impressio.Properties.Resources.description;
       this.description.LargeWidth = 80;
       this.description.Name = "description";
@@ -95,6 +97,7 @@
       // 
       this.delivery.Caption = "Lieferscheine";
       this.delivery.Id = 3;
+      this.delivery.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Postponed;
       this.delivery.LargeGlyph = global::Impressio.Properties.Resources.delivery;
       this.delivery.LargeWidth = 80;
       this.delivery.Name = "delivery";
@@ -103,6 +106,7 @@
       // 
       this.deletePosition.Caption = "Löschen";
       this.deletePosition.Id = 4;
+      this.deletePosition.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Postponed;
       this.deletePosition.LargeGlyph = global::Impressio.Properties.Resources.delete;
       this.deletePosition.LargeWidth = 80;
       this.deletePosition.Name = "deletePosition";
@@ -111,6 +115,7 @@
       // 
       this.refresh.Caption = "Aktualisieren";
       this.refresh.Id = 5;
+      this.refresh.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Postponed;
       this.refresh.LargeGlyph = global::Impressio.Properties.Resources.refresh;
       this.refresh.Name = "refresh";
       // 
@@ -118,6 +123,7 @@
       // 
       this.printOrder.Caption = "Lauftasche";
       this.printOrder.Id = 6;
+      this.printOrder.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Postponed;
       this.printOrder.LargeGlyph = global::Impressio.Properties.Resources.printglyph;
       this.printOrder.LargeWidth = 80;
       this.printOrder.Name = "printOrder";
@@ -126,6 +132,7 @@
       // 
       this.printOffer.Caption = "Offerte";
       this.printOffer.Id = 7;
+      this.printOffer.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Postponed;
       this.printOffer.LargeGlyph = global::Impressio.Properties.Resources.printglyph;
       this.printOffer.LargeWidth = 80;
       this.printOffer.Name = "printOffer";

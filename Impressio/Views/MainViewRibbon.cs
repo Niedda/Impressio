@@ -70,7 +70,7 @@ namespace Impressio.Views
       editOrder.ItemClick += _propertyHandler.GetOrderEdit;
       editOffer.ItemClick += _propertyHandler.GetOfferEdit;
       editDelivery.ItemClick += _propertyHandler.GetDeliveryEdit;
-      
+
       RegisterControl(_ordersControl);
     }
 
@@ -85,7 +85,7 @@ namespace Impressio.Views
       {
         _ordersControl.BringToFront();
       }
-      else 
+      else
       {
         _customerHandler.PageChanged(sender, e);
         _propertyHandler.PageChanged(sender, e);
@@ -122,7 +122,16 @@ namespace Impressio.Views
     {
       _ordersControl.ReloadControl();
     }
-    
+
+    private void CopyOrderItemClick(object sender, ItemClickEventArgs e)
+    {
+      if (_ordersControl.FocusedRow != null)
+      {
+        _ordersControl.FocusedRow.CopyOrder();
+        _ordersControl.ReloadControl();
+      }
+    }
+
     private CustomerHandler _customerHandler;
 
     private PropertyHandler _propertyHandler;

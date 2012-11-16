@@ -45,7 +45,7 @@ namespace Impressio.Models
     //designer for the documents
     public static void LoadDeliveryDesigner()
     {
-      var form = new XRDesignForm();
+      var form = new XRDesignRibbonForm();
       var report = new DeliveryReport();
 
       var controler = form.DesignMdiController;
@@ -186,7 +186,7 @@ namespace Impressio.Models
     {
       get
       {
-        return Identity != 0 ? (_deliveryPosition ?? (_deliveryPosition = new DeliveryPosition().LoadObjectList(DeliveryPosition.Columns.FkDeliveryPositionDelivery, Identity))) : null;
+        return Identity != 0 ? (_deliveryPosition ?? (_deliveryPosition = new DeliveryPosition().LoadObjectList(DeliveryPosition.Columns.FkDeliveryPositionDelivery, Identity))) : new List<DeliveryPosition>();
       }
     }
 

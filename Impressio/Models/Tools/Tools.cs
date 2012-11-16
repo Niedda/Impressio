@@ -9,7 +9,13 @@ namespace Impressio.Models.Tools
     {
       try
       {
-        return Convert.ToInt32(obj);
+        int result;
+
+        if(Int32.TryParse(obj.ToString(), out result))
+        {
+          return result;
+        }
+        return 0;
       }
       catch (Exception)
       {

@@ -135,6 +135,7 @@
       this.copyOrder.LargeGlyph = global::Impressio.Properties.Resources.copy;
       this.copyOrder.LargeWidth = 80;
       this.copyOrder.Name = "copyOrder";
+      this.copyOrder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CopyOrderItemClick);
       // 
       // deleteOrder
       // 

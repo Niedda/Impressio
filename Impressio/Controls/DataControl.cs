@@ -39,29 +39,25 @@ namespace Impressio.Controls
     {
       if (Data != null)
       {
-        _isLoaded = false;
-
         _dataPosition.ClearObjectList();
         Data.LoadSingleObject();
         remarkEdit.Text = Data.Remark;
         dataPositionBindingSource.DataSource = _dataPosition.LoadObjectList(DataPosition.Columns.FkDataDataPosition, Data.Identity);
         viewData.RefreshData();
-
-        _isLoaded = true;
       }
     }
 
     public Data Data;
 
-    private bool _isLoaded;
-
     private void RemarkEditEditValueChanged(object sender, EventArgs e)
     {
-      if (_isLoaded)
-      {
-        Data.Remark = remarkEdit.Text;
-        Data.SaveObject();
-      }
+      Data.Remark = remarkEdit.Text;
+      Data.SaveObject();
+    }
+
+    private void ViewDataInitNewRow(object sender, InitNewRowEventArgs e)
+    {
+      viewData.SetFocusedRowCellValue(colFkDataDataPosition, Data.Identity);
     }
 
     #region Ribbon

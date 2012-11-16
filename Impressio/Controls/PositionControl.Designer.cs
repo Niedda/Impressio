@@ -52,6 +52,7 @@ namespace Impressio.Controls
       this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
       this.orderNameEdit = new DevExpress.XtraEditors.TextEdit();
+      this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
       this.stateLookUp = new DevExpress.XtraEditors.LookUpEdit();
       this.stateBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -74,6 +75,7 @@ namespace Impressio.Controls
       ((System.ComponentModel.ISupportInitialize)(this.dateEdited.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dateCreated.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.orderNameEdit.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.stateLookUp.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.stateBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.addressLookUp.Properties)).BeginInit();
@@ -218,6 +220,7 @@ namespace Impressio.Controls
       // 
       // userEdited
       // 
+      this.userEdited.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.orderBindingSource, "UserModified", true));
       this.userEdited.Enabled = false;
       this.userEdited.Location = new System.Drawing.Point(584, 133);
       this.userEdited.Name = "userEdited";
@@ -241,6 +244,7 @@ namespace Impressio.Controls
       // 
       // userCreated
       // 
+      this.userCreated.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.orderBindingSource, "UserCreated", true));
       this.userCreated.Enabled = false;
       this.userCreated.Location = new System.Drawing.Point(584, 34);
       this.userCreated.Name = "userCreated";
@@ -264,6 +268,7 @@ namespace Impressio.Controls
       // 
       // dateEdited
       // 
+      this.dateEdited.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.orderBindingSource, "DateModified", true));
       this.dateEdited.Enabled = false;
       this.dateEdited.Location = new System.Drawing.Point(584, 186);
       this.dateEdited.Name = "dateEdited";
@@ -287,6 +292,7 @@ namespace Impressio.Controls
       // 
       // dateCreated
       // 
+      this.dateCreated.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.orderBindingSource, "DateCreated", true));
       this.dateCreated.Enabled = false;
       this.dateCreated.Location = new System.Drawing.Point(584, 80);
       this.dateCreated.Name = "dateCreated";
@@ -342,13 +348,17 @@ namespace Impressio.Controls
       // 
       // orderNameEdit
       // 
+      this.orderNameEdit.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.orderBindingSource, "OrderName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.orderNameEdit.Location = new System.Drawing.Point(129, 34);
       this.orderNameEdit.Name = "orderNameEdit";
       this.orderNameEdit.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.orderNameEdit.Properties.Appearance.Options.UseFont = true;
       this.orderNameEdit.Size = new System.Drawing.Size(295, 20);
       this.orderNameEdit.TabIndex = 7;
-      this.orderNameEdit.EditValueChanged += new System.EventHandler(this.SaveOrder);
+      // 
+      // orderBindingSource
+      // 
+      this.orderBindingSource.DataSource = typeof(Impressio.Models.Order);
       // 
       // labelControl4
       // 
@@ -361,6 +371,7 @@ namespace Impressio.Controls
       // 
       // stateLookUp
       // 
+      this.stateLookUp.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.orderBindingSource, "FkOrderState", true));
       this.stateLookUp.Location = new System.Drawing.Point(129, 186);
       this.stateLookUp.Name = "stateLookUp";
       this.stateLookUp.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -368,7 +379,7 @@ namespace Impressio.Controls
       this.stateLookUp.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
       this.stateLookUp.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Identity", "Identity", 61, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.False),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Identity", "Identity", 61, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StateName", "Status", 66, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
       this.stateLookUp.Properties.DataSource = this.stateBindingSource;
       this.stateLookUp.Properties.DisplayMember = "StateName";
@@ -379,7 +390,6 @@ namespace Impressio.Controls
       this.stateLookUp.Properties.ValueMember = "Identity";
       this.stateLookUp.Size = new System.Drawing.Size(295, 20);
       this.stateLookUp.TabIndex = 12;
-      this.stateLookUp.EditValueChanged += new System.EventHandler(this.SaveOrder);
       // 
       // stateBindingSource
       // 
@@ -414,6 +424,7 @@ namespace Impressio.Controls
       // 
       // addressLookUp
       // 
+      this.addressLookUp.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.orderBindingSource, "FkOrderAddress", true));
       this.addressLookUp.Location = new System.Drawing.Point(129, 133);
       this.addressLookUp.Name = "addressLookUp";
       this.addressLookUp.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -436,7 +447,6 @@ namespace Impressio.Controls
       this.addressLookUp.Properties.ValueMember = "Identity";
       this.addressLookUp.Size = new System.Drawing.Size(295, 20);
       this.addressLookUp.TabIndex = 11;
-      this.addressLookUp.EditValueChanged += new System.EventHandler(this.SaveOrder);
       // 
       // addressBindingSource
       // 
@@ -444,6 +454,7 @@ namespace Impressio.Controls
       // 
       // clientLookUp
       // 
+      this.clientLookUp.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.orderBindingSource, "FkOrderClient", true));
       this.clientLookUp.Location = new System.Drawing.Point(129, 80);
       this.clientLookUp.Name = "clientLookUp";
       this.clientLookUp.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -467,7 +478,6 @@ namespace Impressio.Controls
       this.clientLookUp.Properties.ValueMember = "Identity";
       this.clientLookUp.Size = new System.Drawing.Size(295, 20);
       this.clientLookUp.TabIndex = 9;
-      this.clientLookUp.EditValueChanged += new System.EventHandler(this.SaveOrder);
       // 
       // clientBindingSource
       // 
@@ -481,6 +491,7 @@ namespace Impressio.Controls
       this.Controls.Add(this.groupBox1);
       this.Name = "PositionControl";
       this.Size = new System.Drawing.Size(790, 347);
+      this.Validated += new System.EventHandler(this.PositionControlValidated);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPosition)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.positionBindingSource)).EndInit();
@@ -494,6 +505,7 @@ namespace Impressio.Controls
       ((System.ComponentModel.ISupportInitialize)(this.dateEdited.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.dateCreated.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.orderNameEdit.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.stateLookUp.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.stateBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.addressLookUp.Properties)).EndInit();
@@ -537,5 +549,6 @@ namespace Impressio.Controls
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox predefinedCombo;
         private DevExpress.XtraGrid.Columns.GridColumn colIsPredefined;
         private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox typeCombo;
+        private System.Windows.Forms.BindingSource orderBindingSource;
     }
 }

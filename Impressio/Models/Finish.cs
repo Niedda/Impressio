@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 
@@ -28,7 +29,7 @@ namespace Impressio.Models
 
     public int FkOrder { get; set; }
 
-    public int PositionTotal { get; set; }
+    public int PositionTotal { get { return FinishPositions.Sum(data => data.PriceTotal); } }
 
     public string Name { get; set; }
 
@@ -78,9 +79,8 @@ namespace Impressio.Models
       FkOrder = Database.DatabaseCommand.Reader[Columns.FkFinishOrder.ToString()].GetInt();
       IsPredefined = (bool)Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
       Remark = Database.DatabaseCommand.Reader[Columns.Remark.ToString()] as string;
-      PositionTotal = Database.DatabaseCommand.Reader[Columns.PositionTotal.ToString()].GetInt();
     }
-    
+
     public override void ClearObjectList()
     {
       _finishes.Clear();
@@ -134,7 +134,7 @@ namespace Impressio.Models
 
     public int PricePerQuantity { get; set; }
 
-    public int PriceTotal { get; set; }
+    public int PriceTotal { get { return Quantity * PricePerQuantity; } }
 
     public bool IsPredefined { get; set; }
 
@@ -149,10 +149,9 @@ namespace Impressio.Models
       Description = Database.DatabaseCommand.Reader[Columns.Description.ToString()] as string;
       FkFinishFinishPosition = Database.DatabaseCommand.Reader[Columns.FkFinishFinishPosition.ToString()].GetInt();
       PricePerQuantity = Database.DatabaseCommand.Reader[Columns.PricePerQuantity.ToString()].GetInt();
-      PriceTotal = Database.DatabaseCommand.Reader[Columns.PriceTotal.ToString()].GetInt();
       Quantity = Database.DatabaseCommand.Reader[Columns.Quantity.ToString()].GetInt();
     }
-    
+
     public override Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>
