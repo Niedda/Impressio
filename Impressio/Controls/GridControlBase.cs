@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
@@ -19,7 +20,7 @@ namespace Impressio.Controls
     protected void InitializeBase()
     {
       Dock = DockStyle.Fill;
-      
+
       if (GridView != null)
       {
         GridView.ValidateRow += ValidateRow;
@@ -114,7 +115,7 @@ namespace Impressio.Controls
 
     public void CheckEditors()
     {
-      if(EditorsToCheck == null)
+      if (EditorsToCheck == null)
       {
         return;
       }
@@ -171,7 +172,7 @@ namespace Impressio.Controls
       }
     }
 
-    public bool ValidateRow()
+    public virtual bool ValidateRow()
     {
       foreach (var gridColumn in ColumnsToCheck)
       {
@@ -180,7 +181,7 @@ namespace Impressio.Controls
       return !GridView.HasColumnErrors;
     }
 
-    public void ValidateRow(object sender, ValidateRowEventArgs e)
+    public virtual void ValidateRow(object sender, ValidateRowEventArgs e)
     {
       if (ValidateRow())
       {
@@ -192,7 +193,7 @@ namespace Impressio.Controls
       }
     }
 
-    public void UpdateRow()
+    public virtual void UpdateRow()
     {
       if (FocusedRow != null)
       {
@@ -200,7 +201,7 @@ namespace Impressio.Controls
       }
     }
 
-    public void DeleteRow()
+    public virtual void DeleteRow()
     {
       if (FocusedRow != null)
       {
@@ -209,13 +210,14 @@ namespace Impressio.Controls
       }
     }
 
-    public void DeleteRow(object sender, EventArgs e)
+    public virtual void DeleteRow(object sender, ItemClickEventArgs e)
     {
       DeleteRow();
     }
 
     public virtual bool ValidateControl()
     {
+      ValidateChildren();
       CheckEditors();
       return ValidateRow() && !ErrorProvider.HasErrors;
     }
@@ -229,13 +231,12 @@ namespace Impressio.Controls
     {
       ReloadControl();
     }
-    
+
     public virtual RibbonPage RibbonPage { get; set; }
 
     public readonly DXErrorProvider ErrorProvider = new DXErrorProvider();
   }
 
-  //TODO Workaround to show files in the designer - find a proper solution...
   #region Designer Files
 
   public class ClientControlBase : GridControlBase<Client>
@@ -261,7 +262,7 @@ namespace Impressio.Controls
 
   public class FinishControlBase : GridControlBase<FinishPosition>
   { }
-  
+
   public class GenderControlBase : GridControlBase<Gender>
   { }
 
@@ -269,9 +270,6 @@ namespace Impressio.Controls
   { }
 
   public class PaperControlBase : GridControlBase<Paper>
-  { }
-
-  public class PositionControlBase : GridControlBase<Position>
   { }
 
   public class StateControlBase : GridControlBase<State>
@@ -282,6 +280,6 @@ namespace Impressio.Controls
 
   public class DeliveryOverviewBase : GridControlBase<Delivery>
   { }
-  
+
   #endregion
 }

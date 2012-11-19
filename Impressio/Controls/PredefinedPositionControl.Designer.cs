@@ -40,7 +40,6 @@
       this.typeCombo = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
       this.colIsPredefined = new DevExpress.XtraGrid.Columns.GridColumn();
       this.typeBindingSource = new System.Windows.Forms.BindingSource();
-      ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPosition)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.positionBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewPosition)).BeginInit();
@@ -88,6 +87,7 @@
       this.viewPosition.OptionsView.ShowGroupPanel = false;
       this.viewPosition.RowHeight = 30;
       this.viewPosition.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewPositionInitNewRow);
+      this.viewPosition.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewPositionValidateRow);
       // 
       // colIdentity
       // 
@@ -121,7 +121,7 @@
       this.colPriceTotal.Caption = "Preis Total";
       this.colPriceTotal.DisplayFormat.FormatString = "c";
       this.colPriceTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-      this.colPriceTotal.FieldName = "PriceTotal";
+      this.colPriceTotal.FieldName = "PositionTotal";
       this.colPriceTotal.Name = "colPriceTotal";
       this.colPriceTotal.OptionsColumn.AllowEdit = false;
       this.colPriceTotal.OptionsColumn.AllowFocus = false;
@@ -164,7 +164,6 @@
       this.Controls.Add(this.gridPosition);
       this.Name = "PredefinedPositionControl";
       this.Size = new System.Drawing.Size(824, 309);
-      ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPosition)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.positionBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewPosition)).EndInit();

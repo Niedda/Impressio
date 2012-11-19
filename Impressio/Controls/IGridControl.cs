@@ -1,7 +1,4 @@
-﻿using DevExpress.XtraGrid.Views.Grid;
-using Subvento.DatabaseObject;
-
-namespace Impressio.Models
+﻿namespace Impressio.Controls
 {
   /// <summary>
   /// Offers some standard methods for controls with grids

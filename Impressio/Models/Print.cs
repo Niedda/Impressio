@@ -121,18 +121,18 @@ namespace Impressio.Models
     {
       get
       {
-        double total = 0;
+        decimal total = 0;
 
         if (ClickCost != null)
         {
-          total = ClickCost.Cost * PrintAmount;
+          total = (decimal)ClickCost.Cost * PrintAmount;
 
           if (PrintType == 1)
           {
-            return (total * 2).GetInt();
+            return Math.Round(total * 2, 1);
           }
         }
-        return total.GetInt();
+        return Math.Round(total,1);
       }
     }
 
@@ -140,7 +140,7 @@ namespace Impressio.Models
     {
       get
       {
-        return (PrintCostTotal + PaperCostTotal).GetInt();
+        return (int)Math.Round(PrintCostTotal + PaperCostTotal, 0);
       }
     }
 
@@ -213,69 +213,5 @@ namespace Impressio.Models
     private readonly List<Print> _predefinedPrints = new List<Print>();
 
     private readonly List<Print> _prints = new List<Print>();
-  }
-
-  public class ClickCost : DatabaseObjectBase<ClickCost>
-  {
-    #region Columns enum
-
-    public enum Columns
-    {
-      ClickCost,
-      ClickName,
-    }
-
-    #endregion
-
-    public override int Identity { get; set; }
-
-    public override string IdentityColumn { get { return "ClickCostId"; } }
-
-    public override string Table { get { return "ClickCost"; } }
-
-    public string Name { get; set; }
-
-    public double Cost
-    {
-      get { return _cost; }
-      set
-      {
-        if (value <= 0.0001 || value >= 5)
-        {
-          _cost = 0.01;
-        }
-        else
-        {
-          _cost = value;
-        }
-      }
-    }
-
-    public override List<ClickCost> Objects { get { return _clickCosts; } }
-
-    public override void SetObject()
-    {
-      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
-      Name = Database.DatabaseCommand.Reader[Columns.ClickName.ToString()] as string;
-      Cost = Convert.ToDouble(Database.DatabaseCommand.Reader[Columns.ClickCost.ToString()]);
-    }
-
-    public override Dictionary<Enum, object> GetObject()
-    {
-      return new Dictionary<Enum, object>
-               {
-                 {Columns.ClickCost, Cost},
-                 {Columns.ClickName, Name},
-               };
-    }
-
-    public override void ClearObjectList()
-    {
-      _clickCosts.Clear();
-    }
-
-    private readonly List<ClickCost> _clickCosts = new List<ClickCost>();
-
-    private double _cost;
   }
 }

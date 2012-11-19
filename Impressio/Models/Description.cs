@@ -76,6 +76,7 @@ namespace Impressio.Models
       Arrange = Database.DatabaseCommand.Reader[Columns.Arrange.ToString()].GetInt();
       FkDescriptionOrder = Database.DatabaseCommand.Reader[Columns.FkDescriptionOrder.ToString()].GetInt();
       Price = Database.DatabaseCommand.Reader[Columns.Price.ToString()].GetInt();
+      IsPredefined = (bool)Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
     }
     
     public override Dictionary<Enum, object> GetObject()

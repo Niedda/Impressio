@@ -102,6 +102,7 @@ namespace Impressio.Controls
             this.colSizeB,
             this.colSize});
       this.viewPaper.GridControl = this.gridPaper;
+      this.viewPaper.GroupPanelText = "Eine Überschrift auf diese Fläche ziehen um nach dieser zur gruppieren";
       this.viewPaper.IndicatorWidth = 30;
       this.viewPaper.Name = "viewPaper";
       this.viewPaper.OptionsDetail.AllowZoomDetail = false;

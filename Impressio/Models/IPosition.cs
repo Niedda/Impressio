@@ -10,6 +10,8 @@
 
     int PositionTotal { get; }
 
-    Type Type { get; set; }
+    bool IsPredefined { get; set; }
+
+    Type Type { get; }
   }
 }

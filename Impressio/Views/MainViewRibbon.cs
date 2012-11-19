@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using Impressio.Controls;
-using Impressio.Models;
 
 namespace Impressio.Views
 {
@@ -83,7 +82,14 @@ namespace Impressio.Views
     {
       if (ribbon.SelectedPage == ribbonPageOrder)
       {
+        _propertyHandler.PageChanged(sender, e);
+        _customerHandler.PageChanged(sender, e);
         _ordersControl.BringToFront();
+      }
+      else if (ribbon.SelectedPage == ribbonPageCustomer)
+      {
+        _propertyHandler.PageChanged(sender, e);
+        _customerHandler.PageChanged(sender, e);
       }
       else
       {

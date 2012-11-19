@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Impressio.Models.Tools;
 using Impressio.Properties;
 using Subvento;
 using Subvento.Tools;
@@ -19,6 +20,7 @@ namespace Impressio.Controls
     {
       _isLoaded = false;
 
+      database.Properties.Items.Clear();
       database.Properties.Items.AddRange(Enum.GetNames(typeof(ServiceLocator.DatabaseEngine)));
       database.Text = ServiceLocator.Instance.ConfigFile.DatabaseEngine.ToString();
       dbConnectionString.Text = ServiceLocator.Instance.ConfigFile.ConnectionString;
@@ -82,6 +84,7 @@ namespace Impressio.Controls
         ReloadControl();
         ServiceLocator.ResetDatabase();
         ErrorProvider.SetError(compactName, "");
+        ApplicationTools.RestartApplication();
       }
       else
       {

@@ -128,9 +128,12 @@ namespace Impressio.Controls
 
     public void OpenDelivery(object sender, EventArgs e)
     {
-      DetailControl = new DeliveryControl { Delivery = _deliveryOverviewControl.FocusedRow };
-      _orderView.RegisterControl(DetailControl);
-      _orderView.RegisterRibbon(DetailControl.RibbonPage);
+      if (_deliveryOverviewControl.FocusedRow != null && _deliveryOverviewControl.ValidateControl())
+      {
+        DetailControl = new DeliveryControl {Delivery = _deliveryOverviewControl.FocusedRow};
+        _orderView.RegisterControl(DetailControl);
+        _orderView.RegisterRibbon(DetailControl.RibbonPage);
+      }
     }
 
     private DeliveryOverviewControl _deliveryOverviewControl;

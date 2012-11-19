@@ -30,18 +30,18 @@ namespace Impressio.Controls
         /// </summary>
         private void InitializeComponent()
         {
-      this.components = new System.ComponentModel.Container();
       this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
       this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
       this.deliveryDate = new DevExpress.XtraEditors.DateEdit();
+      this.deliveryBindingSource = new System.Windows.Forms.BindingSource();
       this.addressLookUp = new DevExpress.XtraEditors.LookUpEdit();
-      this.addressBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.addressBindingSource = new System.Windows.Forms.BindingSource();
       this.clientLookUp = new DevExpress.XtraEditors.LookUpEdit();
-      this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.clientBindingSource = new System.Windows.Forms.BindingSource();
       this.gridDeliveryPosition = new DevExpress.XtraGrid.GridControl();
-      this.deliveryPositionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.deliveryPositionBindingSource = new System.Windows.Forms.BindingSource();
       this.viewDeliveryPosition = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -54,6 +54,7 @@ namespace Impressio.Controls
       this.groupControl1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.deliveryDate.Properties.VistaTimeProperties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.deliveryDate.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.deliveryBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.addressLookUp.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.clientLookUp.Properties)).BeginInit();
@@ -105,6 +106,7 @@ namespace Impressio.Controls
       // 
       // deliveryDate
       // 
+      this.deliveryDate.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.deliveryBindingSource, "DeliveryDate", true));
       this.deliveryDate.EditValue = null;
       this.deliveryDate.Location = new System.Drawing.Point(108, 115);
       this.deliveryDate.Name = "deliveryDate";
@@ -115,10 +117,14 @@ namespace Impressio.Controls
             new DevExpress.XtraEditors.Controls.EditorButton()});
       this.deliveryDate.Size = new System.Drawing.Size(217, 20);
       this.deliveryDate.TabIndex = 2;
-      this.deliveryDate.EditValueChanged += new System.EventHandler(this.SaveDelivery);
+      // 
+      // deliveryBindingSource
+      // 
+      this.deliveryBindingSource.DataSource = typeof(Impressio.Models.Delivery);
       // 
       // addressLookUp
       // 
+      this.addressLookUp.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.deliveryBindingSource, "FkDeliveryAddress", true));
       this.addressLookUp.Location = new System.Drawing.Point(108, 79);
       this.addressLookUp.Name = "addressLookUp";
       this.addressLookUp.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -140,7 +146,6 @@ namespace Impressio.Controls
       this.addressLookUp.Properties.ValueMember = "Identity";
       this.addressLookUp.Size = new System.Drawing.Size(217, 20);
       this.addressLookUp.TabIndex = 1;
-      this.addressLookUp.EditValueChanged += new System.EventHandler(this.SaveDelivery);
       // 
       // addressBindingSource
       // 
@@ -148,6 +153,7 @@ namespace Impressio.Controls
       // 
       // clientLookUp
       // 
+      this.clientLookUp.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.deliveryBindingSource, "FkDeliveryClient", true));
       this.clientLookUp.Location = new System.Drawing.Point(108, 43);
       this.clientLookUp.Name = "clientLookUp";
       this.clientLookUp.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -171,7 +177,6 @@ namespace Impressio.Controls
       this.clientLookUp.Properties.ValueMember = "Identity";
       this.clientLookUp.Size = new System.Drawing.Size(217, 20);
       this.clientLookUp.TabIndex = 0;
-      this.clientLookUp.EditValueChanged += new System.EventHandler(this.SaveDelivery);
       // 
       // clientBindingSource
       // 
@@ -276,6 +281,7 @@ namespace Impressio.Controls
       this.groupControl1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.deliveryDate.Properties.VistaTimeProperties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.deliveryDate.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.deliveryBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.addressLookUp.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.clientLookUp.Properties)).EndInit();
@@ -308,6 +314,7 @@ namespace Impressio.Controls
         private DevExpress.XtraGrid.Columns.GridColumn colPosition;
         private DevExpress.XtraGrid.Columns.GridColumn colQuantity;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox positionComboEdit;
+        private System.Windows.Forms.BindingSource deliveryBindingSource;
 
     }
 }

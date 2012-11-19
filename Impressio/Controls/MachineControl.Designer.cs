@@ -63,6 +63,7 @@
       // 
       // viewMachine
       // 
+      this.viewMachine.ColumnPanelRowHeight = 30;
       this.viewMachine.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colTable,
@@ -72,6 +73,7 @@
             this.colSpeed,
             this.colCostPerHour});
       this.viewMachine.GridControl = this.gridMachine;
+      this.viewMachine.IndicatorWidth = 30;
       this.viewMachine.Name = "viewMachine";
       this.viewMachine.OptionsDetail.AllowZoomDetail = false;
       this.viewMachine.OptionsDetail.EnableMasterViewMode = false;

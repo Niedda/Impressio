@@ -1,6 +1,6 @@
 ﻿using DevExpress.XtraBars.Ribbon;
 
-namespace Impressio.Models
+namespace Impressio.Controls
 {
   public interface IRibbon
   {

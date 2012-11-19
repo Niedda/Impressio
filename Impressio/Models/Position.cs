@@ -5,258 +5,136 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
-  public class Position : DatabaseObjectBase<Position>, IPredefined<Position>
+  public class Position : IPosition
   {
-    #region Columns enum
+    public int OrderId { get; set; }
 
-    public enum Columns
-    {
-      PositionName,
-      PositionTotal,
-      IsPredefined,
-    }
-
-    #endregion
-
-    public override int Identity { get; set; }
-
-    public override string IdentityColumn
-    {
-      get
-      {
-        switch (Type)
-        {
-          case Type.Datenaufbereitung:
-            return "DataId";
-          case Type.Offsetdruck:
-            return "OffsetId";
-          case Type.Digitaldruck:
-            return "PrintId";
-          case Type.Weiterverarbeitung:
-            return "FinishId";
-          default:
-            return String.Empty;
-        }
-      }
-    }
-
-    public Enum FkOrderColumn
-    {
-      get
-      {
-        switch (Type)
-        {
-          case Type.Datenaufbereitung:
-            return Data.Columns.FkDataOrder;
-          case Type.Offsetdruck:
-            return Offset.Columns.FkOffsetOrder;
-          case Type.Digitaldruck:
-            return Print.Columns.FkPrintOrder;
-          case Type.Weiterverarbeitung:
-            return Finish.Columns.FkFinishOrder;
-          default:
-            throw new Exception("Fehlerhafter Typ");
-        }
-      }
-    }
-
-    public override string Table
-    {
-      get
-      {
-        switch (Type)
-        {
-          case Type.Datenaufbereitung:
-            return "Data";
-          case Type.Offsetdruck:
-            return "Offset";
-          case Type.Digitaldruck:
-            return "Print";
-          case Type.Weiterverarbeitung:
-            return "Finish";
-          default:
-            return String.Empty;
-        }
-      }
-    }
+    public int Identity { get; set; }
 
     public string Name { get; set; }
 
     public int FkOrder { get; set; }
 
-    public int PriceTotal { get; set; }
-
     public bool IsPredefined { get; set; }
+
+    public int PositionTotal { get; set; }
 
     public Type Type { get; set; }
 
+    public List<Position> Objects
+    {
+      get { return _objects; }
+    }
+
+    public List<Position> PredefinedObjects
+    {
+      get { return _predefinedObjects; }
+    }
+
+    public List<Offset> Offsets
+    {
+      get { return _offsets ?? (_offsets = (new Offset().LoadObjectList(Offset.Columns.FkOffsetOrder, OrderId))); }
+    }
+
+    public List<Print> Prints
+    {
+      get { return _prints ?? (_prints = (new Print().LoadObjectList(Print.Columns.FkPrintOrder, OrderId))); }
+    }
+
+    public List<Data> Datas
+    {
+      get
+      {
+        return _datas ?? (_datas = (new Data().LoadObjectList(Data.Columns.FkDataOrder, OrderId)));
+      }
+    }
+
+    public List<Finish> Finishes
+    {
+      get { return _finishes ?? (_finishes = (new Finish().LoadObjectList(Finish.Columns.FkFinishOrder, OrderId))); }
+    }
+
+    public List<Offset> PredefinedOffsets
+    {
+      get { return _predefinedOffsets ?? (_predefinedOffsets = (new Offset().LoadObjectList(Offset.Columns.IsPredefined, true))); }
+    }
+
+    public List<Print> PredefinedPrints
+    {
+      get { return _predefinedPrints ?? (_predefinedPrints = (new Print().LoadObjectList(Print.Columns.IsPredefined, true))); }
+    }
+
+    public List<Data> PredefinedDatas
+    {
+      get
+      {
+        return _predefinedDatas ?? (_predefinedDatas = (new Data().LoadObjectList(Data.Columns.IsPredefined, true)));
+      }
+    }
+
+    public List<Finish> PredefinedFinishes
+    {
+      get { return _predefinedFinishes ?? (_predefinedFinishes = (new Finish().LoadObjectList(Finish.Columns.IsPredefined, true))); }
+    }
+
     public void LoadPositions()
     {
-      //TODO find a better solution
-      Position position;
-
-      foreach (var predefinedObject in new Data().LoadObjectList(Data.Columns.FkDataOrder, Identity))
+      if (OrderId <= 0)
       {
-        position = new Position
-        {
-          Identity = predefinedObject.Identity,
-          Type = Type.Datenaufbereitung,
-          Name = predefinedObject.Name,
-          PriceTotal = predefinedObject.PositionTotal,
-        };
-        _positions.Add(position);
+        throw new InvalidOperationException("Order Id out of range");
       }
 
-      foreach (var objects in new Offset().LoadObjectList(Offset.Columns.FkOffsetOrder, Identity))
-      {
-        position = new Position
-        {
-          Identity = objects.Identity,
-          Type = Type.Offsetdruck,
-          Name = objects.Name,
-          PriceTotal = objects.PositionTotal
-        };
-        _positions.Add(position);
-      }
-
-      foreach (var objects in new Print().LoadObjectList(Print.Columns.FkPrintOrder, Identity))
-      {
-        position = new Position
-        {
-          Identity = objects.Identity,
-          Type = Type.Digitaldruck,
-          Name = objects.Name,
-          PriceTotal = objects.PositionTotal
-        };
-        _positions.Add(position);
-      }
-
-      foreach (var predefinedObject in new Finish().LoadObjectList(Finish.Columns.FkFinishOrder, Identity))
-      {
-        position = new Position
-        {
-          Identity = predefinedObject.Identity,
-          Type = Type.Weiterverarbeitung,
-          Name = predefinedObject.Name,
-          PriceTotal = predefinedObject.PositionTotal
-        };
-        _positions.Add(position);
-      }
+      _objects.AddRange(Datas.ToPosition());
+      _objects.AddRange(Prints.ToPosition());
+      _objects.AddRange(Offsets.ToPosition());
+      _objects.AddRange(Finishes.ToPosition());
     }
 
-    public override List<Position> Objects { get { return _positions; } }
-
-    public void LoadPredefined()
+    public void ClearPositions()
     {
-      //TODO find a better solution
-      Position position;
-
-      var data = new Data();
-      data.LoadPredefined();
-      foreach (var predefinedObject in data.PredefinedObjects)
-      {
-        position = new Position
-        {
-          Identity = predefinedObject.Identity,
-          Type = Type.Datenaufbereitung,
-          Name = predefinedObject.Name,
-          PriceTotal = predefinedObject.PositionTotal
-        };
-        _predefinedPositions.Add(position);
-      }
-
-      var offset = new Offset();
-      offset.LoadPredefined();
-      foreach (var predefinedObject in offset.PredefinedObjects)
-      {
-        position = new Position
-                    {
-                      Identity = predefinedObject.Identity,
-                      Type = Type.Offsetdruck,
-                      Name = predefinedObject.Name,
-                      PriceTotal = predefinedObject.PositionTotal
-                    };
-        _predefinedPositions.Add(position);
-      }
-
-      var print = new Print();
-      print.LoadPredefined();
-      foreach (var predefinedObject in print.PredefinedObjects)
-      {
-        position = new Position
-        {
-          Identity = predefinedObject.Identity,
-          Type = Type.Digitaldruck,
-          Name = predefinedObject.Name,
-          PriceTotal = predefinedObject.PositionTotal
-        };
-        _predefinedPositions.Add(position);
-      }
-
-      var finish = new Finish();
-      finish.LoadPredefined();
-      foreach (var predefinedObject in finish.PredefinedObjects)
-      {
-        position = new Position
-        {
-          Identity = predefinedObject.Identity,
-          Type = Type.Weiterverarbeitung,
-          Name = predefinedObject.Name,
-          PriceTotal = predefinedObject.PositionTotal
-        };
-        _predefinedPositions.Add(position);
-      }
+      _datas = null;
+      _prints = null;
+      _offsets = null;
+      _finishes = null;
+      _objects.Clear();
     }
 
-    public List<Position> PredefinedObjects { get { return _predefinedPositions; } }
+    public void LoadPredefinedObjects()
+    {
+      _predefinedObjects.AddRange(PredefinedDatas.ToPosition());
+      _predefinedObjects.AddRange(PredefinedPrints.ToPosition());
+      _predefinedObjects.AddRange(PredefinedOffsets.ToPosition());
+      _predefinedObjects.AddRange(PredefinedFinishes.ToPosition());
+    }
 
     public void ClearPredefinedObjects()
     {
-      _predefinedPositions.Clear();
+      _predefinedDatas = null;
+      _predefinedFinishes = null;
+      _predefinedOffsets = null;
+      _predefinedPrints = null;
+      _predefinedObjects.Clear();
     }
+    
+    private readonly List<Position> _objects = new List<Position>();
 
-    public override void SetObject()
-    {
-      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
-      Name = Database.DatabaseCommand.Reader[Columns.PositionName.ToString()] as string;
-      PriceTotal = Database.DatabaseCommand.Reader[Columns.PositionTotal.ToString()].GetInt();
-    }
+    private readonly List<Position> _predefinedObjects = new List<Position>();
 
-    public override Dictionary<Enum, object> GetObject()
-    {
-      var dic = new Dictionary<Enum, object>
-                  {
-                    {Columns.PositionName, Name},
-                    {Columns.PositionTotal, PriceTotal},
-                    {Columns.IsPredefined, IsPredefined},
-                  };
-      switch (Type)
-      {
-        case Type.Datenaufbereitung:
-          dic.Add(Data.Columns.FkDataOrder, FkOrder.SetIntDbNull());
-          break;
-        case Type.Offsetdruck:
-          dic.Add(Offset.Columns.FkOffsetOrder, FkOrder.SetIntDbNull());
-          break;
-        case Type.Digitaldruck:
-          dic.Add(Print.Columns.FkPrintOrder, FkOrder.SetIntDbNull());
-          break;
-        case Type.Weiterverarbeitung:
-          dic.Add(Finish.Columns.FkFinishOrder, FkOrder.SetIntDbNull());
-          break;
-      }
+    private List<Finish> _finishes;
 
-      return dic;
-    }
+    private List<Data> _datas;
 
-    public override void ClearObjectList()
-    {
-      _positions.Clear();
-    }
+    private List<Print> _prints;
 
-    private readonly List<Position> _positions = new List<Position>();
+    private List<Offset> _offsets;
 
-    private readonly List<Position> _predefinedPositions = new List<Position>();
+    private List<Finish> _predefinedFinishes;
+
+    private List<Data> _predefinedDatas;
+
+    private List<Print> _predefinedPrints;
+
+    private List<Offset> _predefinedOffsets;
   }
 
   public enum Type

@@ -28,20 +28,19 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.components = new System.ComponentModel.Container();
       this.gridClickCost = new DevExpress.XtraGrid.GridControl();
-      this.clickCostBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.clickCostBindingSource = new System.Windows.Forms.BindingSource();
       this.viewClickCost = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colCost = new DevExpress.XtraGrid.Columns.GridColumn();
-      this.repositoryItemSpinEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
+      this.repositoryClickCost = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridClickCost)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.clickCostBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewClickCost)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit1)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.repositoryClickCost)).BeginInit();
       this.SuspendLayout();
       // 
       // gridClickCost
@@ -52,7 +51,7 @@
       this.gridClickCost.MainView = this.viewClickCost;
       this.gridClickCost.Name = "gridClickCost";
       this.gridClickCost.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemSpinEdit1});
+            this.repositoryClickCost});
       this.gridClickCost.Size = new System.Drawing.Size(879, 398);
       this.gridClickCost.TabIndex = 0;
       this.gridClickCost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -103,6 +102,7 @@
       // colCost
       // 
       this.colCost.Caption = "Klickkosten";
+      this.colCost.ColumnEdit = this.repositoryClickCost;
       this.colCost.DisplayFormat.FormatString = "c";
       this.colCost.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.colCost.FieldName = "Cost";
@@ -110,31 +110,29 @@
       this.colCost.Visible = true;
       this.colCost.VisibleIndex = 1;
       // 
-      // repositoryItemSpinEdit1
+      // repositoryClickCost
       // 
-      this.repositoryItemSpinEdit1.AutoHeight = false;
-      this.repositoryItemSpinEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-      this.repositoryItemSpinEdit1.DisplayFormat.FormatString = "n0";
-      this.repositoryItemSpinEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-      this.repositoryItemSpinEdit1.EditFormat.FormatString = "n0";
-      this.repositoryItemSpinEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-      this.repositoryItemSpinEdit1.Increment = new decimal(new int[] {
+      this.repositoryClickCost.AutoHeight = false;
+      this.repositoryClickCost.DisplayFormat.FormatString = "n0";
+      this.repositoryClickCost.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.repositoryClickCost.EditFormat.FormatString = "n0";
+      this.repositoryClickCost.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.repositoryClickCost.Increment = new decimal(new int[] {
             1,
             0,
             0,
             131072});
-      this.repositoryItemSpinEdit1.MaxValue = new decimal(new int[] {
-            5,
+      this.repositoryClickCost.MaxValue = new decimal(new int[] {
+            100,
             0,
             0,
             0});
-      this.repositoryItemSpinEdit1.MinValue = new decimal(new int[] {
+      this.repositoryClickCost.MinValue = new decimal(new int[] {
             1,
             0,
             0,
             196608});
-      this.repositoryItemSpinEdit1.Name = "repositoryItemSpinEdit1";
+      this.repositoryClickCost.Name = "repositoryClickCost";
       // 
       // ClickCostControl
       // 
@@ -147,7 +145,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.gridClickCost)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.clickCostBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewClickCost)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit1)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.repositoryClickCost)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -161,6 +159,6 @@
     private DevExpress.XtraGrid.Columns.GridColumn colTable;
     private DevExpress.XtraGrid.Columns.GridColumn colName;
     private DevExpress.XtraGrid.Columns.GridColumn colCost;
-    private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit repositoryItemSpinEdit1;
+    private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit repositoryClickCost;
   }
 }

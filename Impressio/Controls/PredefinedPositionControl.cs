@@ -1,53 +1,104 @@
-﻿using System.Collections.Generic;
+﻿using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
-using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
+using Impressio.Models.Tools;
+using Subvento.DatabaseObject;
 using Type = Impressio.Models.Type;
 
 namespace Impressio.Controls
 {
-  public partial class PredefinedPositionControl : PositionControlBase
+  public partial class PredefinedPositionControl : XtraUserControl, IControl
   {
     public PredefinedPositionControl()
     {
       InitializeComponent();
-      InitializeBase();
+      Dock = DockStyle.Fill;
     }
 
-    public override GridView GridView
+    public Position FocusedRow
     {
-      get { return viewPosition; }
+      get { return viewPosition.GetFocusedRow() as Position; }
     }
 
-    public override List<GridColumn> ColumnsToCheck
-    {
-      get
-      {
-        return _columns ?? (_columns = new List<GridColumn>
-                                         {
-                                           colName,
-                                           colType,
-                                         });
-      }
-    }
-    
-    public override void ReloadControl()
+    public void ReloadControl()
     {
       _position.ClearPredefinedObjects();
       typeCombo.Items.Clear();
       typeCombo.Items.AddEnum(typeof(Type));
-      _position.LoadPredefined();
+      _position.LoadPredefinedObjects();
       positionBindingSource.DataSource = _position.PredefinedObjects;
       viewPosition.RefreshData();
     }
-    
+
+    public void DeleteRow()
+    {
+      if (FocusedRow != null)
+      {
+        switch (FocusedRow.Type)
+        {
+          case Type.Datenaufbereitung:
+            FocusedRow.ToType<Data>().DeleteObject();
+            break;
+          case Type.Digitaldruck:
+            FocusedRow.ToType<Print>().DeleteObject();
+            break;
+          case Type.Offsetdruck:
+            FocusedRow.ToType<Offset>().DeleteObject();
+            break;
+          case Type.Weiterverarbeitung:
+            FocusedRow.ToType<Finish>().DeleteObject();
+            break;
+        }
+      }
+    }
+
+    public bool ValidateRow()
+    {
+      if (FocusedRow != null && !string.IsNullOrEmpty(FocusedRow.Name))
+      {
+        UpdateRow();
+        return true;
+      }
+      return FocusedRow == null;
+    }
+
+    public void UpdateRow()
+    {
+      switch (FocusedRow.Type)
+      {
+        case Type.Datenaufbereitung:
+          FocusedRow.ToType<Data>().SaveObject();
+          break;
+        case Type.Digitaldruck:
+          FocusedRow.ToType<Print>().SaveObject();
+          break;
+        case Type.Offsetdruck:
+          FocusedRow.ToType<Offset>().SaveObject();
+          break;
+        case Type.Weiterverarbeitung:
+          FocusedRow.ToType<Finish>().SaveObject();
+          break;
+      }
+    }
+
+    public bool ValidateControl()
+    {
+      return ValidateRow();
+    }
+
+    private void ViewPositionValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+    {
+      ValidateRow();
+    }
+
     private void ViewPositionInitNewRow(object sender, InitNewRowEventArgs e)
     {
       viewPosition.SetFocusedRowCellValue(colIsPredefined, true);
     }
-   
+
     #region Ribbon
 
     public void DeleteRow(object sender, ItemClickEventArgs e)
@@ -60,7 +111,7 @@ namespace Impressio.Controls
       ReloadControl();
     }
 
-    public override RibbonPage RibbonPage
+    public RibbonPage RibbonPage
     {
       get
       {
@@ -72,11 +123,12 @@ namespace Impressio.Controls
         {
           _ribbonGroup = new RibbonPageGroup();
         }
-
         _ribbonGroup.ItemLinks.Clear();
         _ribbonGroup.ItemLinks.Add(DeleteButton);
         _ribbonGroup.ItemLinks.Add(RefreshButton);
         _ribbonGroup.ItemLinks.Add(OpenPositionButton);
+        _refreshButton.ItemClick += ReloadControl;
+        _deleteButton.ItemClick += DeleteRow;
 
         _ribbonPage.Groups.Add(_ribbonGroup);
 
@@ -128,7 +180,7 @@ namespace Impressio.Controls
         });
       }
     }
-    
+
     private RibbonPageGroup _ribbonGroup;
 
     private RibbonPage _ribbonPage;
@@ -138,11 +190,9 @@ namespace Impressio.Controls
     private BarButtonItem _refreshButton;
 
     private BarButtonItem _deleteButton;
-    
+
     #endregion
 
-    private List<GridColumn> _columns; 
-    
     private readonly Position _position = new Position();
   }
 }

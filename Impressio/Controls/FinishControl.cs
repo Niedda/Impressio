@@ -78,7 +78,7 @@ namespace Impressio.Controls
       {
         if (_ribbonPage == null)
         {
-          _ribbonPage = new RibbonPage("Datenaufbereitung");
+          _ribbonPage = new RibbonPage("Weiterverarbeitung");
         }
         if (_ribbonGroup == null)
         {

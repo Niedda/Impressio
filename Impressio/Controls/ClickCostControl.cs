@@ -42,11 +42,6 @@ namespace Impressio.Controls
     
     #region Ribbons
 
-    public void DeleteRow(object sender, ItemClickEventArgs e)
-    {
-      DeleteRow();
-    }
-
     public void ReloadControl(object sender, ItemClickEventArgs e)
     {
       ReloadControl();
@@ -63,17 +58,15 @@ namespace Impressio.Controls
         if (_ribbonGroup == null)
         {
           _ribbonGroup = new RibbonPageGroup();
+          _ribbonGroup.ItemLinks.Clear();
+          _ribbonGroup.ItemLinks.Add(DeleteButton);
+          _ribbonGroup.ItemLinks.Add(RefreshButton);
+
+          DeleteButton.ItemClick += DeleteRow;
+          RefreshButton.ItemClick += ReloadControl;
+
+          _ribbonPage.Groups.Add(_ribbonGroup);
         }
-
-        _ribbonGroup.ItemLinks.Clear();
-        _ribbonGroup.ItemLinks.Add(DeleteButton);
-        _ribbonGroup.ItemLinks.Add(RefreshButton);
-
-        DeleteButton.ItemClick += DeleteRow;
-        RefreshButton.ItemClick += ReloadControl;
-
-        _ribbonPage.Groups.Add(_ribbonGroup);
-
         return _ribbonPage;
       }
     }

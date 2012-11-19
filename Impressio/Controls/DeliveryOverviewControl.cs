@@ -58,12 +58,7 @@ namespace Impressio.Controls
     {
       ReloadControl();
     }
-
-    public void DeleteRow(object sender, ItemClickEventArgs e)
-    {
-      DeleteRow();
-    }
-
+    
     public override RibbonPage RibbonPage
     {
       get
@@ -78,15 +73,14 @@ namespace Impressio.Controls
         if (_ribbonGroup == null)
         {
           _ribbonGroup = new RibbonPageGroup();
+          _ribbonGroup.ItemLinks.Clear();
+          DeleteButton.ItemClick += DeleteRow;
+          RefreshButton.ItemClick += ReloadControl;
+          _ribbonGroup.ItemLinks.Add(DeleteButton);
+          _ribbonGroup.ItemLinks.Add(RefreshButton);
+          _ribbonGroup.ItemLinks.Add(OpenDelivery);
+          _ribbonPage.Groups.Add(_ribbonGroup);
         }
-
-        _ribbonGroup.ItemLinks.Clear();
-        _ribbonGroup.ItemLinks.Add(DeleteButton);
-        _ribbonGroup.ItemLinks.Add(RefreshButton);
-        _ribbonGroup.ItemLinks.Add(OpenDelivery);
-
-        _ribbonPage.Groups.Add(_ribbonGroup);
-
         return _ribbonPage;
       }
     }

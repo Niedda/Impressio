@@ -58,6 +58,13 @@ namespace Impressio.Controls
         _mainView.UnregisterRibbon(DetailControl.RibbonPage);
         _mainView.UnregisterControl(DetailControl);
       }
+      else if (DetailControl != null && _mainView.ribbon.SelectedPage == DetailControl.RibbonPage)
+      {
+      }
+      else if (ActiveControl != null && _mainView.ribbon.SelectedPage != ActiveControl.RibbonPage)
+      {
+        BringDefaultToFront();
+      }
     }
 
     public void GetProperty(object sender, EventArgs e)

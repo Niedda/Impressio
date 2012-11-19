@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.DXErrorProvider;
-using Impressio.Models;
 using Impressio.Models.Tools;
 
 namespace Impressio.Controls
@@ -90,7 +89,7 @@ namespace Impressio.Controls
       ReloadControl();
     }
 
-    public bool ValidateControl()
+    public virtual bool ValidateControl()
     {
       return !ErrorProvider.HasErrors;
     }

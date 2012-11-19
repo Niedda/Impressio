@@ -8,7 +8,7 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
 {
-  public partial class MachineControl : GridControlBase<Machine>
+  public partial class MachineControl : MachineControlBase
   {
     public MachineControl()
     {
@@ -49,11 +49,6 @@ namespace Impressio.Controls
     {
       ReloadControl();
     }
-
-    public void DeleteRow(object sender, ItemClickEventArgs e)
-    {
-      DeleteRow();
-    }
     
     public override RibbonPage RibbonPage
     {
@@ -66,17 +61,15 @@ namespace Impressio.Controls
         if (_ribbonGroup == null)
         {
           _ribbonGroup = new RibbonPageGroup();
+          _ribbonGroup.ItemLinks.Clear();
+          _ribbonGroup.ItemLinks.Add(DeleteButton);
+          _ribbonGroup.ItemLinks.Add(RefreshButton);
+
+          DeleteButton.ItemClick += DeleteRow;
+          RefreshButton.ItemClick += ReloadControl;
+
+          _ribbonPage.Groups.Add(_ribbonGroup);
         }
-
-        _ribbonGroup.ItemLinks.Clear();
-        _ribbonGroup.ItemLinks.Add(DeleteButton);
-        _ribbonGroup.ItemLinks.Add(RefreshButton);
-
-        DeleteButton.ItemClick += DeleteRow;
-        RefreshButton.ItemClick += ReloadControl;
-
-        _ribbonPage.Groups.Add(_ribbonGroup);
-
         return _ribbonPage;
       }
     }

@@ -28,14 +28,29 @@ namespace Impressio.Controls
         paperBindingSource.DataSource = _paper.LoadObjectList();
         Print.LoadSingleObject();
         printBindingSource.DataSource = Print;
- 
+
         _isLoaded = true;
       }
     }
 
+    public override bool ValidateControl()
+    {
+      ValidateChildren();
+
+      if(!ErrorProvider.HasErrors)
+      {
+        Print.SaveObject();
+        return true;
+      }
+      return false;
+    }
+
     private void SavePrint(object sender, EventArgs e)
     {
-      Print.SaveObject();
+      if (_isLoaded)
+      {
+        Print.SaveObject();
+      }
     }
 
     private void LookUpPaperEditValueChanged(object sender, EventArgs e)
@@ -81,7 +96,7 @@ namespace Impressio.Controls
       {
         if (_ribbonPage == null)
         {
-          _ribbonPage = new RibbonPage("Datenaufbereitung");
+          _ribbonPage = new RibbonPage("Digitaldruck");
         }
         if (_ribbonGroup == null)
         {

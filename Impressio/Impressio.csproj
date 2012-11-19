@@ -253,8 +253,9 @@
     <Compile Include="Controls\GridControlBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Models\IControl.cs" />
-    <Compile Include="Models\IGridControl.cs" />
+    <Compile Include="Controls\IControl.cs" />
+    <Compile Include="Controls\IGridControl.cs" />
+    <Compile Include="Models\ClickCost.cs" />
     <Compile Include="Models\IPosition.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Client.cs" />
@@ -268,15 +269,17 @@
     </Compile>
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\IPredefined.cs" />
-    <Compile Include="Models\IRibbon.cs" />
+    <Compile Include="Controls\IRibbon.cs" />
     <Compile Include="Models\Log\DatabaseLogger.cs" />
     <Compile Include="Models\Log\FileLogger.cs" />
     <Compile Include="Models\Log\ILogger.cs" />
+    <Compile Include="Models\Machine.cs" />
     <Compile Include="Models\Offset.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Paper.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Print.cs" />
+    <Compile Include="Models\State.cs" />
     <Compile Include="Models\Tools\Tools.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

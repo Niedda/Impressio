@@ -15,12 +15,6 @@ namespace Impressio.Views
       InitializeComponent();
     }
 
-    private void WizardPagePersonalInformationEnter(object sender, EventArgs e)
-    {
-      userEdit.Text = Settings.Default.User;
-      logoEdit.Text = Settings.Default.logoImage;
-    }
-
     private void LogoEditEnter(object sender, EventArgs e)
     {
       var fileDialog = new OpenFileDialog();
@@ -58,14 +52,6 @@ namespace Impressio.Views
         validateDatabase.Text = "Datenbank erfolgreich verbunden";
         validateDatabase.ForeColor = Color.Green;
       }
-    }
-
-    private void WizardPageDatabaseEnter(object sender, EventArgs e)
-    {
-      databaseEngine.Properties.Items.Clear();
-      connectionString.Text = ServiceLocator.Instance.ConfigFile.ConnectionString;
-      databaseEngine.Properties.Items.AddRange(Enum.GetNames(typeof(ServiceLocator.DatabaseEngine)));
-      databaseEngine.Text = ServiceLocator.Instance.ConfigFile.DatabaseEngine.ToString();
     }
 
     private void ConnectionStringEditValueChanged(object sender, EventArgs e)
@@ -107,6 +93,16 @@ namespace Impressio.Views
         e.Cancel = true;
         XtraMessageBox.Show("Bitte die Einstellungen überprüfen.", "Fehler");
       }
+    }
+
+    private void WelcomeWizardPageEnter(object sender, EventArgs e)
+    {
+      userEdit.Text = Settings.Default.User;
+      logoEdit.Text = Settings.Default.logoImage;
+      databaseEngine.Properties.Items.Clear();
+      connectionString.Text = ServiceLocator.Instance.ConfigFile.ConnectionString;
+      databaseEngine.Properties.Items.AddRange(Enum.GetNames(typeof(ServiceLocator.DatabaseEngine)));
+      databaseEngine.Text = ServiceLocator.Instance.ConfigFile.DatabaseEngine.ToString();
     }
   }
 }

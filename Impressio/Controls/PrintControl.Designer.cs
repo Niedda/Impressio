@@ -394,7 +394,7 @@ namespace Impressio.Controls
       // 
       // paperCostTotal
       // 
-      this.paperCostTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.printBindingSource, "PaperCostTotal", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.paperCostTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.printBindingSource, "PaperCostTotal", true));
       this.paperCostTotal.EditValue = new decimal(new int[] {
             0,
             0,
@@ -529,7 +529,7 @@ namespace Impressio.Controls
       // 
       // positionTotal
       // 
-      this.positionTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.printBindingSource, "PositionTotal", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.positionTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.printBindingSource, "PositionTotal", true));
       this.positionTotal.EditValue = new decimal(new int[] {
             0,
             0,
@@ -585,7 +585,7 @@ namespace Impressio.Controls
       // 
       // typePrint
       // 
-      this.typePrint.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.printBindingSource, "PrintTypeString", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.typePrint.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.printBindingSource, "PrintTypeString", true));
       this.typePrint.EditValue = "Einseitig";
       this.typePrint.Location = new System.Drawing.Point(351, 99);
       this.typePrint.Name = "typePrint";
@@ -602,7 +602,7 @@ namespace Impressio.Controls
       // 
       // printCostTotal
       // 
-      this.printCostTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.printBindingSource, "PrintCostTotal", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.printCostTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.printBindingSource, "PrintCostTotal", true));
       this.printCostTotal.EditValue = new decimal(new int[] {
             0,
             0,

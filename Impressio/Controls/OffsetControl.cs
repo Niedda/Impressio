@@ -16,19 +16,18 @@ namespace Impressio.Controls
 
     public override void ReloadControl()
     {
-      if (Offset != null)
-      {
-        _isLoaded = false;
+      if (Offset == null) { throw new InvalidOperationException("Offset cannot be null"); }
 
-        _machine.ClearObjectList();
-        _paper.ClearObjectList();
+      _isLoaded = false;
 
-        machineBindingSource.DataSource = _machine.LoadObjectList();
-        paperBindingSource.DataSource = _paper.LoadObjectList();
-        Offset.LoadSingleObject();
+      _machine.ClearObjectList();
+      _paper.ClearObjectList();
 
-        _isLoaded = true;
-      }
+      machineBindingSource.DataSource = _machine.LoadObjectList();
+      paperBindingSource.DataSource = _paper.LoadObjectList();
+      offsetBindingSource.DataSource = Offset.LoadSingleObject();
+
+      _isLoaded = true;
     }
 
     public Offset Offset;
@@ -88,7 +87,7 @@ namespace Impressio.Controls
       {
         if (_ribbonPage == null)
         {
-          _ribbonPage = new RibbonPage("Datenaufbereitung");
+          _ribbonPage = new RibbonPage("Offsetdruck");
         }
         if (_ribbonGroup == null)
         {

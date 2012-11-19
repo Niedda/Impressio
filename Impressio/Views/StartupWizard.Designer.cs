@@ -89,9 +89,11 @@
       this.welcomeWizardPage.ProceedText = "";
       this.welcomeWizardPage.Size = new System.Drawing.Size(417, 201);
       this.welcomeWizardPage.Text = "Impressio";
+      this.welcomeWizardPage.Enter += new System.EventHandler(this.WelcomeWizardPageEnter);
       // 
       // wizardPagePersonalInformation
       // 
+      this.wizardPagePersonalInformation.AllowBack = false;
       this.wizardPagePersonalInformation.Controls.Add(this.logoEdit);
       this.wizardPagePersonalInformation.Controls.Add(this.labelControl2);
       this.wizardPagePersonalInformation.Controls.Add(this.userEdit);
@@ -100,7 +102,6 @@
       this.wizardPagePersonalInformation.Name = "wizardPagePersonalInformation";
       this.wizardPagePersonalInformation.Size = new System.Drawing.Size(602, 189);
       this.wizardPagePersonalInformation.Text = "Ihre persönlichen Daten";
-      this.wizardPagePersonalInformation.Enter += new System.EventHandler(this.WizardPagePersonalInformationEnter);
       // 
       // logoEdit
       // 
@@ -157,7 +158,6 @@
       this.wizardPageDatabase.Size = new System.Drawing.Size(602, 189);
       this.wizardPageDatabase.Text = "Datenbank konfigurieren";
       this.wizardPageDatabase.PageValidating += new DevExpress.XtraWizard.WizardPageValidatingEventHandler(this.WizardPageDatabasePageValidating);
-      this.wizardPageDatabase.Enter += new System.EventHandler(this.WizardPageDatabaseEnter);
       // 
       // labelControl6
       // 

@@ -42,11 +42,7 @@ namespace Impressio.Controls
       {
         return ValidateDetailRow() && ValidateRow();
       }
-      if (FocusedRow == null)
-      {
-        return true;
-      }
-      return ValidateRow();
+      return FocusedRow == null || ValidateRow();
     }
 
     public override void ReloadControl()
@@ -57,13 +53,11 @@ namespace Impressio.Controls
 
       if (IsPredefinedMode)
       {
-        IsPredefinedMode = true;
         descriptionBindingSource.DataSource = _description.PredefinedObjects;
       }
       else
       {
-        descriptionBindingSource.DataSource = _description.LoadObjectList(Description.Columns.FkDescriptionOrder,
-                                                                          Order.Identity);
+        descriptionBindingSource.DataSource = _description.LoadObjectList(Description.Columns.FkDescriptionOrder, Order.Identity);
         predefinedDescriptionCombo.Items.Clear();
         predefinedDescriptionCombo.Items.AddRange(_description.PredefinedObjects.Select(a => a.JobTitle).ToList());
       }
@@ -74,6 +68,15 @@ namespace Impressio.Controls
     {
       FocusedRowDetail.DeleteObject();
       viewDetail.DeleteSelectedRows();
+    }
+
+    public override void UpdateRow()
+    {
+      if (IsPredefinedMode)
+      {
+        FocusedRow.IsPredefined = true;
+      }
+      FocusedRow.Identity = FocusedRow.SaveObject();
     }
 
     public bool ValidateDetailRow()
@@ -96,10 +99,9 @@ namespace Impressio.Controls
     {
       if (FocusedRowDetail != null)
       {
-        if (FocusedRowDetail.Identity == 0)
+        if (IsPredefinedMode)
         {
-          FocusedRowDetail.FkDetailDescription = FocusedRow.Identity;
-          FocusedRowDetail.Arrange = viewDetail.DataRowCount;
+          FocusedRow.IsPredefined = true;
         }
         FocusedRowDetail.Identity = FocusedRowDetail.SaveObject();
       }
@@ -129,51 +131,52 @@ namespace Impressio.Controls
 
     private void ViewDescriptionInitNewRow(object sender, InitNewRowEventArgs e)
     {
+      viewDescription.SetFocusedRowCellValue(colArrange, viewDescription.DataRowCount);
+
       if (!IsPredefinedMode)
       {
         viewDescription.SetFocusedRowCellValue(colFkDescriptionOrder, Order.Identity);
+      }
+      else
+      {
+        viewDescription.SetFocusedRowCellValue(colPredefinedDescription, true);
       }
     }
 
     private void DescriptionMoveUpEditClick(object sender, EventArgs e)
     {
-      var view = viewDescription;
-      var index = view.FocusedRowHandle;
+      var index = viewDescription.FocusedRowHandle;
 
-      if (index > 0 && !view.IsNewItemRow(index))
+      if (index > 0 && !viewDescription.IsNewItemRow(index))
       {
-        var rowArrange1 = viewDescription.GetRowCellValue(index, colArrange);
-        var rowArrange2 = viewDescription.GetRowCellValue(index - 1, colArrange);
+        var row1 = viewDescription.GetRow(index) as Description;
+        var row2 = viewDescription.GetRow(index - 1) as Description;
+        row1.Arrange = (int)viewDescription.GetRowCellValue(index - 1, colArrange);
+        row2.Arrange = index;
+        row1.SaveObject();
+        row2.SaveObject();
 
-        viewDescription.SetRowCellValue(index, colArrange, rowArrange2);
-        viewDescription.SetRowCellValue(index - 1, colArrange, rowArrange1);
-
-        (view.GetRow(index) as Description).SaveObject();
-        (view.GetRow(index - 1) as Description).SaveObject();
-
-        view.FocusedRowHandle = index - 1;
-        view.RefreshData();
+        viewDescription.RefreshData();
+        viewDescription.FocusedRowHandle = index - 1;
       }
     }
 
     private void DescriptionMoveDownEditClick(object sender, EventArgs e)
     {
-      var view = viewDescription;
-      var index = view.FocusedRowHandle;
+      var index = viewDescription.FocusedRowHandle;
 
-      if (index < view.DataRowCount - 1 && !view.IsNewItemRow(index))
+      if (index < viewDescription.DataRowCount - 1 && !viewDescription.IsNewItemRow(index))
       {
-        var val1 = viewDescription.GetRowCellValue(index, colArrange);
-        var val2 = viewDescription.GetRowCellValue(index + 1, colArrange);
+        var row1 = viewDescription.GetRow(index) as Description;
+        var row2 = viewDescription.GetRow(index + 1) as Description;
 
-        viewDescription.SetRowCellValue(index, colArrange, val2);
-        viewDescription.SetRowCellValue(index + 1, colArrange, val1);
+        row1.Arrange = (int)viewDescription.GetRowCellValue(index + 1, colArrange);
+        row2.Arrange = index;
+        row1.SaveObject();
+        row2.SaveObject();
 
-        (view.GetRow(index) as Description).SaveObject();
-        (view.GetRow(index + 1) as Description).SaveObject();
-
-        view.FocusedRowHandle = index + 1;
-        view.RefreshData();
+        viewDescription.RefreshData();
+        viewDescription.FocusedRowHandle = index + 1;
       }
     }
 
@@ -214,7 +217,6 @@ namespace Impressio.Controls
       }
     }
 
-
     private void ViewDetailValidateRow(object sender, ValidateRowEventArgs e)
     {
       e.Valid = ValidateDetailRow();
@@ -228,6 +230,7 @@ namespace Impressio.Controls
     private void ViewDetailInitNewRow(object sender, InitNewRowEventArgs e)
     {
       viewDetail.SetFocusedRowCellValue(colFkDetailDescription, FocusedRow.Identity);
+      viewDetail.SetFocusedRowCellValue(colArrange, viewDetail.DataRowCount);
     }
 
     private void DetailMoveUpEditClick(object sender, EventArgs e)
@@ -237,17 +240,15 @@ namespace Impressio.Controls
 
       if (index > 0 && !view.IsNewItemRow(index))
       {
-        var val1 = view.GetRowCellValue(index, colArrangeDetail);
-        var val2 = view.GetRowCellValue(index - 1, colArrangeDetail);
+        var row1 = view.GetFocusedRow() as Detail;
+        var row2 = view.GetRow(index - 1) as Detail;
+        row1.Arrange = (int)viewDescription.GetRowCellValue(index - 1, colArrangeDetail);
+        row2.Arrange = index;
+        row1.SaveObject();
+        row2.SaveObject();
 
-        view.SetRowCellValue(index, colArrangeDetail, val2);
-        view.SetRowCellValue(index - 1, colArrangeDetail, val1);
-
-        (view.GetRow(index) as Detail).SaveObject();
-        (view.GetRow(index - 1) as Detail).SaveObject();
-
-        view.FocusedRowHandle = index - 1;
         view.RefreshData();
+        view.FocusedRowHandle = index - 1;
       }
     }
 
@@ -258,17 +259,15 @@ namespace Impressio.Controls
 
       if (index < view.DataRowCount - 1 && !view.IsNewItemRow(index))
       {
-        var val1 = view.GetRowCellValue(index, colArrangeDetail);
-        var val2 = view.GetRowCellValue(index + 1, colArrangeDetail);
+        var row1 = view.GetFocusedRow() as Detail;
+        var row2 = view.GetRow(index + 1) as Detail;
+        row1.Arrange = (int)viewDescription.GetRowCellValue(index + 1, colArrangeDetail);
+        row2.Arrange = index;
+        row1.SaveObject();
+        row2.SaveObject();
 
-        view.SetRowCellValue(index, colArrangeDetail, val2);
-        view.SetRowCellValue(index + 1, colArrangeDetail, val1);
-
-        (view.GetRow(index) as Detail).SaveObject();
-        (view.GetRow(index + 1) as Detail).SaveObject();
-
-        view.FocusedRowHandle = index + 1;
         view.RefreshData();
+        view.FocusedRowHandle = index + 1;
       }
     }
 
@@ -277,11 +276,6 @@ namespace Impressio.Controls
     public void DeleteDetailRow(object sender, ItemClickEventArgs e)
     {
       DeleteDetailRow();
-    }
-
-    public void DeleteRow(object sender, ItemClickEventArgs e)
-    {
-      DeleteRow();
     }
 
     public void ReloadControl(object sender, ItemClickEventArgs e)
@@ -300,18 +294,17 @@ namespace Impressio.Controls
         if (_ribbonGroup == null)
         {
           _ribbonGroup = new RibbonPageGroup();
+          DeleteButton.ItemClick += DeleteRow;
+          DeleteDetailButton.ItemClick += DeleteDetailRow;
+          RefreshButton.ItemClick += ReloadControl;
+
+          _ribbonGroup.ItemLinks.Clear();
+          _ribbonGroup.ItemLinks.Add(DeleteButton);
+          _ribbonGroup.ItemLinks.Add(DeleteDetailButton);
+          _ribbonGroup.ItemLinks.Add(RefreshButton);
+
+          _ribbonPage.Groups.Add(_ribbonGroup);
         }
-        DeleteButton.ItemClick += DeleteRow;
-        DeleteDetailButton.ItemClick += DeleteDetailRow;
-        RefreshButton.ItemClick += ReloadControl;
-
-        _ribbonGroup.ItemLinks.Clear();
-        _ribbonGroup.ItemLinks.Add(DeleteButton);
-        _ribbonGroup.ItemLinks.Add(DeleteDetailButton);
-        _ribbonGroup.ItemLinks.Add(RefreshButton);
-
-        _ribbonPage.Groups.Add(_ribbonGroup);
-
         return _ribbonPage;
       }
     }

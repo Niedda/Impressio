@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
+using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 using Type = Impressio.Models.Type;
 
 namespace Impressio.Controls
 {
-  public partial class PositionControl : PositionControlBase
+  public partial class PositionControl : ControlBase, IGridControl
   {
     public PositionControl()
     {
@@ -18,21 +19,9 @@ namespace Impressio.Controls
       InitializeBase();
     }
 
-    public override GridView GridView
+    public Position FocusedRow
     {
-      get { return viewPosition; }
-    }
-
-    public override List<GridColumn> ColumnsToCheck
-    {
-      get
-      {
-        return _columns ?? (_columns = new List<GridColumn>
-                                             {
-                                               colName,
-                                               colType,
-                                             });
-      }
+      get { return viewPosition.GetFocusedRow() as Position; }
     }
 
     public override List<object> EditorsToCheck
@@ -49,30 +38,101 @@ namespace Impressio.Controls
 
     public override void ReloadControl()
     {
-      if (Order != null)
+      if (Order == null) { throw new InvalidOperationException("Order cannot be null"); }
+
+      _position.OrderId = Order.Identity;
+
+      _state.ClearObjectList();
+      _position.ClearPositions();
+      _position.ClearPredefinedObjects();
+
+      Order.LoadSingleObject();
+      orderBindingSource.DataSource = Order;
+      typeCombo.Items.Clear();
+      typeCombo.Items.AddEnum(typeof(Type));
+      var predefObjects = _position.PredefinedObjects.Select(b => b.Name).Distinct();
+      predefinedCombo.Items.AddRange(predefObjects.ToArray());
+      _position.LoadPositions();
+      positionBindingSource.DataSource = _position.Objects;
+
+      stateBindingSource.DataSource = _state.LoadObjectList();
+      clientBindingSource.DataSource = Order.AvaibleClients;
+      addressBindingSource.DataSource = Order.AvaibleAddress;
+
+      viewPosition.RefreshData();
+    }
+
+    public override bool ValidateControl()
+    {
+      CheckEditors();
+
+      if (ValidateRow() && !ErrorProvider.HasErrors)
       {
-        _position.ClearObjectList();
-        _position.ClearPredefinedObjects();
-        _position.Identity = Order.Identity;
-        _position.LoadPositions();
-        _position.LoadPredefined();
-        _state.ClearObjectList();
-
-        orderBindingSource.DataSource = Order;
-        typeCombo.Items.Clear();
-        typeCombo.Items.AddEnum(typeof(Type));
-        var predefObjects = _position.PredefinedObjects.Select(b => b.Name).Distinct();
-        predefinedCombo.Items.AddRange(predefObjects.ToArray());
-        positionBindingSource.DataSource = _position.Objects;
-        stateBindingSource.DataSource = _state.LoadObjectList();
-        clientBindingSource.DataSource = Order.AvaibleClients;
-        addressBindingSource.DataSource = Order.AvaibleAddress;
-
+        return true;
+      }
+      return false;
+    }
+    
+    public void DeleteRow()
+    {
+      if (FocusedRow != null)
+      {
+        switch (FocusedRow.Type)
+        {
+          case Type.Datenaufbereitung:
+            FocusedRow.ToType<Data>().DeleteObject();
+            break;
+          case Type.Digitaldruck:
+            FocusedRow.ToType<Print>().DeleteObject();
+            break;
+          case Type.Offsetdruck:
+            FocusedRow.ToType<Offset>().DeleteObject();
+            break;
+          case Type.Weiterverarbeitung:
+            FocusedRow.ToType<Finish>().DeleteObject();
+            break;
+        }
         viewPosition.RefreshData();
       }
     }
 
+    public bool ValidateRow()
+    {
+      if (!string.IsNullOrEmpty(FocusedRow.Name))
+      {
+        UpdateRow();
+        return true;
+      }
+      return false;
+    }
+
+    public void UpdateRow()
+    {
+      FocusedRow.FkOrder = Order.Identity;
+
+      switch (FocusedRow.Type)
+      {
+        case Type.Datenaufbereitung:
+          FocusedRow.ToType<Data>().SaveObject();
+          break;
+        case Type.Digitaldruck:
+          FocusedRow.ToType<Print>().SaveObject();
+          break;
+        case Type.Offsetdruck:
+          FocusedRow.ToType<Offset>().SaveObject();
+          break;
+        case Type.Weiterverarbeitung:
+          FocusedRow.ToType<Finish>().SaveObject();
+          break;
+      }
+    }
+
     public Order Order;
+
+    private void PositionControlLoad(object sender, EventArgs e)
+    {
+      ReloadControl();
+    }
 
     private void ViewPositionInitNewRow(object sender, InitNewRowEventArgs e)
     {
@@ -171,18 +231,26 @@ namespace Impressio.Controls
         e.Cancel = true;
       }
     }
-    
+
     private void PositionControlValidated(object sender, System.EventArgs e)
     {
       Order.SaveObject();
     }
 
+    private void ViewPositionValidateRow(object sender, ValidateRowEventArgs e)
+    {
+      e.Valid = ValidateRow();
+    }
+
+    private void ViewPositionInvalidRowException(object sender, InvalidRowExceptionEventArgs e)
+    {
+      e.ExceptionMode = ExceptionMode.NoAction;
+    }
+
     private readonly Position _position = new Position();
 
     private readonly State _state = new State();
-
-    private List<GridColumn> _columns;
-
+    
     private List<object> _editors;
   }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using Impressio.Models;
 using Impressio.Models.Tools;
 using Impressio.Views;
 
@@ -74,11 +73,11 @@ namespace Impressio.Controls
 
     public void Delete(object sender, EventArgs e)
     {
-      if (DetailControl != null && ReferenceEquals(DetailControl, typeof(ClientControl)))
+      if (DetailControl != null && DetailControl is ClientControl)
       {
         ((ClientControl)DetailControl).DeleteRow();
       }
-      else if (DetailControl != null && ReferenceEquals(DetailControl, typeof(AddressControl)))
+      else if (DetailControl != null && DetailControl is AddressControl)
       {
         ((AddressControl)DetailControl).DeleteRow();
       }

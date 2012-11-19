@@ -30,9 +30,8 @@ namespace Impressio.Controls
         /// </summary>
         private void InitializeComponent()
         {
-      this.components = new System.ComponentModel.Container();
       this.gridPosition = new DevExpress.XtraGrid.GridControl();
-      this.positionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.positionBindingSource = new System.Windows.Forms.BindingSource();
       this.viewPosition = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -44,6 +43,7 @@ namespace Impressio.Controls
       this.colIsPredefined = new DevExpress.XtraGrid.Columns.GridColumn();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.userEdited = new DevExpress.XtraEditors.TextEdit();
+      this.orderBindingSource = new System.Windows.Forms.BindingSource();
       this.userCreated = new DevExpress.XtraEditors.TextEdit();
       this.dateEdited = new DevExpress.XtraEditors.TextEdit();
       this.dateCreated = new DevExpress.XtraEditors.TextEdit();
@@ -52,17 +52,16 @@ namespace Impressio.Controls
       this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
       this.orderNameEdit = new DevExpress.XtraEditors.TextEdit();
-      this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
       this.stateLookUp = new DevExpress.XtraEditors.LookUpEdit();
-      this.stateBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.stateBindingSource = new System.Windows.Forms.BindingSource();
       this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
       this.addressLookUp = new DevExpress.XtraEditors.LookUpEdit();
-      this.addressBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.addressBindingSource = new System.Windows.Forms.BindingSource();
       this.clientLookUp = new DevExpress.XtraEditors.LookUpEdit();
-      this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.clientBindingSource = new System.Windows.Forms.BindingSource();
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPosition)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.positionBindingSource)).BeginInit();
@@ -71,11 +70,11 @@ namespace Impressio.Controls
       ((System.ComponentModel.ISupportInitialize)(this.typeCombo)).BeginInit();
       this.groupBox1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.userEdited.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.userCreated.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dateEdited.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dateCreated.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.orderNameEdit.Properties)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.stateLookUp.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.stateBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.addressLookUp.Properties)).BeginInit();
@@ -95,7 +94,7 @@ namespace Impressio.Controls
       this.gridPosition.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.predefinedCombo,
             this.typeCombo});
-      this.gridPosition.Size = new System.Drawing.Size(790, 118);
+      this.gridPosition.Size = new System.Drawing.Size(812, 219);
       this.gridPosition.TabIndex = 0;
       this.gridPosition.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.viewPosition});
@@ -127,6 +126,8 @@ namespace Impressio.Controls
       this.viewPosition.RowHeight = 30;
       this.viewPosition.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewPositionInitNewRow);
       this.viewPosition.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.ViewPositionFocusedRowChanged);
+      this.viewPosition.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewPositionInvalidRowException);
+      this.viewPosition.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewPositionValidateRow);
       // 
       // colIdentity
       // 
@@ -161,7 +162,7 @@ namespace Impressio.Controls
       this.colPriceTotal.Caption = "Total Position";
       this.colPriceTotal.DisplayFormat.FormatString = "c";
       this.colPriceTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-      this.colPriceTotal.FieldName = "PriceTotal";
+      this.colPriceTotal.FieldName = "PositionTotal";
       this.colPriceTotal.Name = "colPriceTotal";
       this.colPriceTotal.OptionsColumn.AllowEdit = false;
       this.colPriceTotal.Visible = true;
@@ -213,7 +214,7 @@ namespace Impressio.Controls
       this.groupBox1.Font = new System.Drawing.Font("Tahoma", 8.25F);
       this.groupBox1.Location = new System.Drawing.Point(0, 0);
       this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(790, 229);
+      this.groupBox1.Size = new System.Drawing.Size(812, 229);
       this.groupBox1.TabIndex = 1;
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Auftragsdetails";
@@ -241,6 +242,10 @@ namespace Impressio.Controls
       this.userEdited.Properties.ReadOnly = true;
       this.userEdited.Size = new System.Drawing.Size(162, 20);
       this.userEdited.TabIndex = 22;
+      // 
+      // orderBindingSource
+      // 
+      this.orderBindingSource.DataSource = typeof(Impressio.Models.Order);
       // 
       // userCreated
       // 
@@ -355,10 +360,6 @@ namespace Impressio.Controls
       this.orderNameEdit.Properties.Appearance.Options.UseFont = true;
       this.orderNameEdit.Size = new System.Drawing.Size(295, 20);
       this.orderNameEdit.TabIndex = 7;
-      // 
-      // orderBindingSource
-      // 
-      this.orderBindingSource.DataSource = typeof(Impressio.Models.Order);
       // 
       // labelControl4
       // 
@@ -490,7 +491,8 @@ namespace Impressio.Controls
       this.Controls.Add(this.gridPosition);
       this.Controls.Add(this.groupBox1);
       this.Name = "PositionControl";
-      this.Size = new System.Drawing.Size(790, 347);
+      this.Size = new System.Drawing.Size(812, 448);
+      this.Load += new System.EventHandler(this.PositionControlLoad);
       this.Validated += new System.EventHandler(this.PositionControlValidated);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPosition)).EndInit();
@@ -501,11 +503,11 @@ namespace Impressio.Controls
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.userEdited.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.userCreated.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.dateEdited.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.dateCreated.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.orderNameEdit.Properties)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.stateLookUp.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.stateBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.addressLookUp.Properties)).EndInit();

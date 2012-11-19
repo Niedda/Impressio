@@ -72,19 +72,17 @@ namespace Impressio.Controls
         if (_ribbonGroup == null)
         {
           _ribbonGroup = new RibbonPageGroup();
+          _ribbonGroup.ItemLinks.Clear();
+          _ribbonGroup.ItemLinks.Add(DeleteButton);
+          _ribbonGroup.ItemLinks.Add(RefreshButton);
+          _ribbonGroup.ItemLinks.Add(ImportButton);
+
+          DeleteButton.ItemClick += DeleteRow;
+          RefreshButton.ItemClick += ReloadControl;
+          ImportButton.ItemClick += LoadFromExcel;
+
+          _ribbonPage.Groups.Add(_ribbonGroup);
         }
-
-        _ribbonGroup.ItemLinks.Clear();
-        _ribbonGroup.ItemLinks.Add(DeleteButton);
-        _ribbonGroup.ItemLinks.Add(RefreshButton);
-        _ribbonGroup.ItemLinks.Add(ImportButton);
-
-        DeleteButton.ItemClick += DeleteRow;
-        RefreshButton.ItemClick += ReloadControl;
-        ImportButton.ItemClick += LoadFromExcel;
-
-        _ribbonPage.Groups.Add(_ribbonGroup);
-
         return _ribbonPage;
       }
     }

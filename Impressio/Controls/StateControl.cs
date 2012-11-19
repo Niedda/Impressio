@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
@@ -38,14 +39,30 @@ namespace Impressio.Controls
       stateBindingSource.DataSource = _state.LoadObjectList();
       viewState.RefreshData();
     }
-    
+
+    public override void DeleteRow()
+    {
+      if (FocusedRow != null)
+      {
+        if (FocusedRow.HasOrders())
+        {
+          XtraMessageBox.Show("Status ist noch Aufträgen zugewiesen. Bitte diese zuerst umschreiben.", "Fehler");
+        }
+        else
+        {
+          FocusedRow.DeleteObject();
+          viewState.DeleteSelectedRows();
+        }
+      }
+    }
+
     #region Ribbons
-    
+
     public void ReloadControl(object sender, ItemClickEventArgs e)
     {
       ReloadControl();
     }
-    
+
     public override RibbonPage RibbonPage
     {
       get
@@ -57,17 +74,15 @@ namespace Impressio.Controls
         if (_ribbonGroup == null)
         {
           _ribbonGroup = new RibbonPageGroup();
+          _ribbonGroup.ItemLinks.Clear();
+          _ribbonGroup.ItemLinks.Add(DeleteButton);
+          _ribbonGroup.ItemLinks.Add(RefreshButton);
+
+          DeleteButton.ItemClick += DeleteRow;
+          RefreshButton.ItemClick += ReloadControl;
+
+          _ribbonPage.Groups.Add(_ribbonGroup);
         }
-
-        _ribbonGroup.ItemLinks.Clear();
-        _ribbonGroup.ItemLinks.Add(DeleteButton);
-        _ribbonGroup.ItemLinks.Add(RefreshButton);
-
-        DeleteButton.ItemClick += DeleteRow;
-        RefreshButton.ItemClick += ReloadControl;
-
-        _ribbonPage.Groups.Add(_ribbonGroup);
-
         return _ribbonPage;
       }
     }
@@ -107,7 +122,7 @@ namespace Impressio.Controls
     private BarButtonItem _refreshButton;
 
     private BarButtonItem _deleteButton;
-    
+
     #endregion
 
     private readonly State _state = new State();

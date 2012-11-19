@@ -1,4 +1,4 @@
-﻿namespace Impressio.Models
+﻿namespace Impressio.Controls
 {
   /// <summary>
   /// Provides some standard methods for controls

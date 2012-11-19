@@ -50,10 +50,10 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.DatabaseCommand.Reader["CompanyId"].GetInt();
-      CompanyName = Database.DatabaseCommand.Reader["CompanyName"] as string;
-      Addition = Database.DatabaseCommand.Reader["Addition"] as string;
-      Remark = Database.DatabaseCommand.Reader["Remark"] as string;
+      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
+      CompanyName = Database.DatabaseCommand.Reader[Columns.CompanyName.ToString()] as string;
+      Addition = Database.DatabaseCommand.Reader[Columns.Addition.ToString()] as string;
+      Remark = Database.DatabaseCommand.Reader[Columns.Remark.ToString()] as string;
     }
 
     public override Dictionary<Enum, object> GetObject()
@@ -73,7 +73,12 @@ namespace Impressio.Models
         var query = new Query(Order.Columns.FkOrderCompany, new DatabaseOperator(DatabaseOperator.Operator.Equal), Identity);
         var queryBuilder = new QueryBuilder("Order", query);
         Database.DatabaseCommand.Reader = queryBuilder.GetQuery().ExecuteReader();
-        return Database.DatabaseCommand.Reader.HasRows;
+        
+        while (Database.DatabaseCommand.Reader.Read())
+        {
+          return true;
+        }
+        return false;
       }
       catch
       {

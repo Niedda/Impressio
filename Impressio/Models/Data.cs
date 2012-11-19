@@ -53,7 +53,6 @@ namespace Impressio.Models
     public Type Type
     {
       get { return Type.Datenaufbereitung; }
-      set { }
     }
 
     public void LoadPredefined()
