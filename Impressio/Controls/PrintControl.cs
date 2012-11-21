@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using Impressio.Models;
+using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
@@ -13,8 +15,17 @@ namespace Impressio.Controls
       InitializeComponent();
       InitializeBase();
     }
-
-    public Print Print;
+    
+    public override RibbonPage RibbonPage
+    {
+      get
+      {
+        return _ribbonPage ?? (_ribbonPage = RibbonTools.GetSimplePage(new List<BarButtonItem>
+                                                                         {
+                                                                           RibbonTools.GetRefreshButton(ReloadControl),
+                                                                         }, "Digitaldruck"));
+      }
+    }
 
     public override void ReloadControl()
     {
@@ -37,13 +48,15 @@ namespace Impressio.Controls
     {
       ValidateChildren();
 
-      if(!ErrorProvider.HasErrors)
+      if (!ErrorProvider.HasErrors)
       {
         Print.SaveObject();
         return true;
       }
       return false;
     }
+    
+    public Print Print;
 
     private void SavePrint(object sender, EventArgs e)
     {
@@ -82,57 +95,8 @@ namespace Impressio.Controls
         Print.SaveObject();
       }
     }
-
-    #region Ribbon
-
-    public void ReloadControl(object sender, ItemClickEventArgs e)
-    {
-      ReloadControl();
-    }
-
-    public override RibbonPage RibbonPage
-    {
-      get
-      {
-        if (_ribbonPage == null)
-        {
-          _ribbonPage = new RibbonPage("Digitaldruck");
-        }
-        if (_ribbonGroup == null)
-        {
-          _ribbonGroup = new RibbonPageGroup();
-        }
-
-        _ribbonGroup.ItemLinks.Clear();
-        _ribbonGroup.ItemLinks.Add(RefreshButton);
-        _refreshButton.ItemClick += ReloadControl;
-        _ribbonPage.Groups.Add(_ribbonGroup);
-
-        return _ribbonPage;
-      }
-    }
-
-    public BarButtonItem RefreshButton
-    {
-      get
-      {
-        return _refreshButton ?? (_refreshButton = new BarButtonItem
-        {
-          Caption = "Aktualisieren",
-          Id = 3,
-          LargeGlyph = Properties.Resources.refresh,
-          LargeWidth = 80,
-        });
-      }
-    }
-
-    private RibbonPageGroup _ribbonGroup;
-
+    
     private RibbonPage _ribbonPage;
-
-    private BarButtonItem _refreshButton;
-
-    #endregion
 
     private bool _isLoaded;
 

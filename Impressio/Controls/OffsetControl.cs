@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using Impressio.Models;
+using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
@@ -12,6 +14,17 @@ namespace Impressio.Controls
     {
       InitializeComponent();
       InitializeBase();
+    }
+
+    public override RibbonPage RibbonPage
+    {
+      get
+      {
+        return _ribbonPage ?? (_ribbonPage = RibbonTools.GetSimplePage(new List<BarButtonItem>
+                                                                         {
+                                                                           RibbonTools.GetRefreshButton(ReloadControl),
+                                                                         }, "Offsetdruck"));
+      }
     }
 
     public override void ReloadControl()
@@ -74,56 +87,7 @@ namespace Impressio.Controls
       Offset.SaveObject();
     }
 
-    #region Ribbon
-
-    public void ReloadControl(object sender, ItemClickEventArgs e)
-    {
-      ReloadControl();
-    }
-
-    public override RibbonPage RibbonPage
-    {
-      get
-      {
-        if (_ribbonPage == null)
-        {
-          _ribbonPage = new RibbonPage("Offsetdruck");
-        }
-        if (_ribbonGroup == null)
-        {
-          _ribbonGroup = new RibbonPageGroup();
-        }
-
-        _ribbonGroup.ItemLinks.Clear();
-        _ribbonGroup.ItemLinks.Add(RefreshButton);
-        _refreshButton.ItemClick += ReloadControl;
-        _ribbonPage.Groups.Add(_ribbonGroup);
-
-        return _ribbonPage;
-      }
-    }
-
-    public BarButtonItem RefreshButton
-    {
-      get
-      {
-        return _refreshButton ?? (_refreshButton = new BarButtonItem
-        {
-          Caption = "Aktualisieren",
-          Id = 3,
-          LargeGlyph = Properties.Resources.refresh,
-          LargeWidth = 80,
-        });
-      }
-    }
-
-    private RibbonPageGroup _ribbonGroup;
-
     private RibbonPage _ribbonPage;
-
-    private BarButtonItem _refreshButton;
-
-    #endregion
 
     private bool _isLoaded;
 

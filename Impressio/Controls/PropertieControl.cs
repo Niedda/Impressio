@@ -49,6 +49,8 @@ namespace Impressio.Controls
       if (_isLoaded)
       {
         ServiceLocator.Instance.ConfigFile.SetConnectionString(dbConnectionString.Text);
+        databaseCheckResult.ForeColor = Color.Black;
+        databaseCheckResult.Text = "Um die Einstellungen zu übernehmen müssen Sie die Anwendung neu starten.";
       }
     }
 
@@ -57,6 +59,8 @@ namespace Impressio.Controls
       if (_isLoaded)
       {
         ServiceLocator.Instance.ConfigFile.SetDatabaseEngine((ServiceLocator.DatabaseEngine)Enum.Parse(typeof(ServiceLocator.DatabaseEngine), database.Text));
+        databaseCheckResult.ForeColor = Color.Black;
+        databaseCheckResult.Text = "Um die Einstellungen zu übernehmen müssen Sie die Anwendung neu starten.";
       }
     }
 
@@ -66,7 +70,7 @@ namespace Impressio.Controls
 
       if (ServiceLocator.Instance.Database.Usable())
       {
-        databaseCheckResult.Text = "Datenbank erfolgreich überprüft.";
+        databaseCheckResult.Text = "Datenbank erfolgreich überprüft. \n Um die Einstellungen zu übernehmen müssen Sie die Anwendung neu starten.";
         databaseCheckResult.ForeColor = Color.Green;
       }
       else

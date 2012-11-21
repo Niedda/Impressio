@@ -2,7 +2,6 @@
 using Impressio.Models;
 using Impressio.Models.Tools;
 using Impressio.Views;
-using Type = Impressio.Models.Type;
 
 namespace Impressio.Controls
 {
@@ -193,7 +192,7 @@ namespace Impressio.Controls
         ActiveControl = (_predefinedPositionControl = new PredefinedPositionControl());
         _mainView.RegisterControl(_predefinedPositionControl);
         _predefinedPositionControl.OpenPositionButton.ItemClick += OpenPositionClick;
-        _mainView.RegisterRibbon(_predefinedPositionControl.RibbonPage);        
+        _mainView.RegisterRibbon(_predefinedPositionControl.RibbonPage);
       }
     }
 
@@ -201,23 +200,24 @@ namespace Impressio.Controls
     {
       if (_predefinedPositionControl.FocusedRow != null && _predefinedPositionControl.FocusedRow.Usable())
       {
-        switch (_predefinedPositionControl.FocusedRow.Type)
-        {
-          case Type.Datenaufbereitung:
-            DetailControl = ((new DataControl { Data = new Data { Identity = _predefinedPositionControl.FocusedRow.Identity } }));
-            break;
-          case Type.Digitaldruck:
-            DetailControl = ((new PrintControl { Print = new Print { Identity = _predefinedPositionControl.FocusedRow.Identity } }));
-            break;
-          case Type.Offsetdruck:
-            DetailControl = ((new OffsetControl { Offset = new Offset { Identity = _predefinedPositionControl.FocusedRow.Identity } }));
-            break;
-          case Type.Weiterverarbeitung:
-            DetailControl = (new FinishControl { Finish = new Finish { Identity = _predefinedPositionControl.FocusedRow.Identity } });
-            break;
-        }
+        DetailControl = _predefinedPositionControl.FocusedRow.AssignedControl;
         _mainView.RegisterControl(DetailControl);
         _mainView.RegisterRibbon(DetailControl.RibbonPage);
+      }
+    }
+
+    public void GetPredefinedOrder(object sender, EventArgs e)
+    {
+      if (Validate())
+      {
+        if (ActiveControl != _propertieControl)
+        {
+          _mainView.UnregisterRibbon(ActiveControl.RibbonPage);
+          _mainView.UnregisterControl(ActiveControl);
+        }
+        ActiveControl = (new PredefinedOrderControl());
+        _mainView.RegisterControl(ActiveControl);
+        _mainView.RegisterRibbon(ActiveControl.RibbonPage);
       }
     }
 

@@ -40,7 +40,7 @@
       // 
       this.label1.AutoSize = true;
       this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label1.Location = new System.Drawing.Point(209, 9);
+      this.label1.Location = new System.Drawing.Point(297, 154);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(90, 19);
       this.label1.TabIndex = 1;
@@ -49,16 +49,16 @@
       // pictureBox1
       // 
       this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-      this.pictureBox1.Location = new System.Drawing.Point(-3, -2);
+      this.pictureBox1.Location = new System.Drawing.Point(1, -1);
       this.pictureBox1.Name = "pictureBox1";
-      this.pictureBox1.Size = new System.Drawing.Size(206, 145);
+      this.pictureBox1.Size = new System.Drawing.Size(286, 282);
       this.pictureBox1.TabIndex = 0;
       this.pictureBox1.TabStop = false;
       // 
       // task
       // 
       this.task.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-      this.task.Location = new System.Drawing.Point(214, 81);
+      this.task.Location = new System.Drawing.Point(301, 225);
       this.task.Name = "task";
       this.task.Size = new System.Drawing.Size(0, 13);
       this.task.TabIndex = 3;
@@ -66,9 +66,9 @@
       // marqueeProgressBarControl1
       // 
       this.marqueeProgressBarControl1.EditValue = 0;
-      this.marqueeProgressBarControl1.Location = new System.Drawing.Point(213, 106);
+      this.marqueeProgressBarControl1.Location = new System.Drawing.Point(298, 244);
       this.marqueeProgressBarControl1.Name = "marqueeProgressBarControl1";
-      this.marqueeProgressBarControl1.Size = new System.Drawing.Size(250, 25);
+      this.marqueeProgressBarControl1.Size = new System.Drawing.Size(284, 25);
       this.marqueeProgressBarControl1.TabIndex = 4;
       // 
       // StartScreen
@@ -76,7 +76,7 @@
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.White;
-      this.ClientSize = new System.Drawing.Size(475, 143);
+      this.ClientSize = new System.Drawing.Size(594, 281);
       this.ControlBox = false;
       this.Controls.Add(this.marqueeProgressBarControl1);
       this.Controls.Add(this.task);

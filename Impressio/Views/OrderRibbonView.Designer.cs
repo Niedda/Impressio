@@ -37,6 +37,9 @@
       this.refresh = new DevExpress.XtraBars.BarButtonItem();
       this.printOrder = new DevExpress.XtraBars.BarButtonItem();
       this.printOffer = new DevExpress.XtraBars.BarButtonItem();
+      this.fileLink = new DevExpress.XtraBars.BarButtonItem();
+      this.resetFileLink = new DevExpress.XtraBars.BarButtonItem();
+      this.predefOrder = new DevExpress.XtraBars.BarButtonItem();
       this.orderPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
       this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -50,6 +53,7 @@
       // 
       this.ribbon.AllowMinimizeRibbon = false;
       this.ribbon.ApplicationButtonText = null;
+      this.ribbon.ApplicationIcon = ((System.Drawing.Bitmap)(resources.GetObject("ribbon.ApplicationIcon")));
       // 
       // 
       // 
@@ -63,9 +67,12 @@
             this.deletePosition,
             this.refresh,
             this.printOrder,
-            this.printOffer});
+            this.printOffer,
+            this.fileLink,
+            this.resetFileLink,
+            this.predefOrder});
       this.ribbon.Location = new System.Drawing.Point(0, 0);
-      this.ribbon.MaxItemId = 16;
+      this.ribbon.MaxItemId = 19;
       this.ribbon.Name = "ribbon";
       this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.orderPage});
@@ -137,6 +144,28 @@
       this.printOffer.LargeWidth = 80;
       this.printOffer.Name = "printOffer";
       // 
+      // fileLink
+      // 
+      this.fileLink.Caption = "Daten";
+      this.fileLink.Id = 16;
+      this.fileLink.LargeGlyph = global::Impressio.Properties.Resources.Adobe;
+      this.fileLink.LargeWidth = 80;
+      this.fileLink.Name = "fileLink";
+      // 
+      // resetFileLink
+      // 
+      this.resetFileLink.Caption = "Datenpfad zurücksetzten";
+      this.resetFileLink.Id = 17;
+      this.resetFileLink.LargeGlyph = global::Impressio.Properties.Resources.delete;
+      this.resetFileLink.Name = "resetFileLink";
+      // 
+      // predefOrder
+      // 
+      this.predefOrder.Caption = "Auftrag speichern";
+      this.predefOrder.Id = 18;
+      this.predefOrder.LargeGlyph = global::Impressio.Properties.Resources.order;
+      this.predefOrder.Name = "predefOrder";
+      // 
       // orderPage
       // 
       this.orderPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -153,6 +182,9 @@
       this.ribbonPageGroup1.ItemLinks.Add(this.openPosition);
       this.ribbonPageGroup1.ItemLinks.Add(this.description);
       this.ribbonPageGroup1.ItemLinks.Add(this.delivery);
+      this.ribbonPageGroup1.ItemLinks.Add(this.fileLink);
+      this.ribbonPageGroup1.ItemLinks.Add(this.predefOrder);
+      this.ribbonPageGroup1.ItemLinks.Add(this.resetFileLink);
       this.ribbonPageGroup1.ItemLinks.Add(this.deletePosition);
       this.ribbonPageGroup1.Name = "ribbonPageGroup1";
       this.ribbonPageGroup1.ShowCaptionButton = false;
@@ -217,5 +249,8 @@
     private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
     private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
     public DevExpress.XtraBars.Ribbon.RibbonPage orderPage;
+    private DevExpress.XtraBars.BarButtonItem fileLink;
+    private DevExpress.XtraBars.BarButtonItem resetFileLink;
+    private DevExpress.XtraBars.BarButtonItem predefOrder;
   }
 }

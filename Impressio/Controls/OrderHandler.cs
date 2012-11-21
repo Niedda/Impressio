@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using Impressio.Models;
 using Impressio.Views;
-using Type = Impressio.Models.Type;
 
 namespace Impressio.Controls
 {
@@ -76,21 +77,7 @@ namespace Impressio.Controls
     {
       if (_positionControl.FocusedRow != null)
       {
-        switch (_positionControl.FocusedRow.Type)
-        {
-          case Type.Datenaufbereitung:
-            ActiveControl = new DataControl { Data = new Data { Identity = _positionControl.FocusedRow.Identity, } };
-            break;
-          case Type.Digitaldruck:
-            ActiveControl = new PrintControl { Print = new Print { Identity = _positionControl.FocusedRow.Identity, } };
-            break;
-          case Type.Offsetdruck:
-            ActiveControl = new OffsetControl { Offset = new Offset { Identity = _positionControl.FocusedRow.Identity, } };
-            break;
-          case Type.Weiterverarbeitung:
-            ActiveControl = new FinishControl { Finish = new Finish { Identity = _positionControl.FocusedRow.Identity, } };
-            break;
-        }
+        ActiveControl = _positionControl.FocusedRow.AssignedControl;
         _orderView.RegisterControl(ActiveControl);
         _orderView.RegisterRibbon(ActiveControl.RibbonPage);
       }
@@ -134,6 +121,36 @@ namespace Impressio.Controls
         _orderView.RegisterControl(DetailControl);
         _orderView.RegisterRibbon(DetailControl.RibbonPage);
       }
+    }
+
+    public void OpenFileFolder(object sender, ItemClickEventArgs e)
+    {
+      if(string.IsNullOrEmpty(_order.FolderPath))
+      {
+        var dialog = new FolderBrowserDialog();
+
+        if(dialog.ShowDialog() == DialogResult.OK)
+        {
+          _order.FolderPath = dialog.SelectedPath;
+          Process.Start(dialog.SelectedPath);
+        }
+        return;
+      }
+      Process.Start(_order.FolderPath);
+    }
+
+    public void ResetFileFolder(object sender, ItemClickEventArgs e)
+    {
+      _order.FolderPath = string.Empty;
+      OpenFileFolder(sender, e);
+    }
+
+    public void ParamOrder(object sender, ItemClickEventArgs e)
+    {
+      new OrderParam
+        {
+          OrderId = _order.Identity,
+        }.ShowDialog();
     }
 
     private DeliveryOverviewControl _deliveryOverviewControl;

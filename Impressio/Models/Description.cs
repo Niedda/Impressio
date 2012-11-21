@@ -5,6 +5,9 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
+  /// <summary>
+  /// Description for the order - contains also the final price
+  /// </summary>
   public class Description : DatabaseObjectBase<Description>, IPredefined<Description>
   {
     #region Columns enum
@@ -103,6 +106,9 @@ namespace Impressio.Models
     private readonly List<Description> _predefinedDescriptions = new List<Description>();
   }
 
+  /// <summary>
+  /// Positons contained by the descriptions
+  /// </summary>
   public class Detail : DatabaseObjectBase<Detail>
   {
     #region Columns enum

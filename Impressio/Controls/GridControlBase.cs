@@ -27,7 +27,7 @@ namespace Impressio.Controls
         GridView.CellValueChanged += CheckColumn;
         GridView.InvalidRowException += InvalidRowException;
         GridView.KeyDown += GridKeyDown;
-        Load += LoadControl;
+        Load += ReloadControl;
       }
     }
 
@@ -227,7 +227,12 @@ namespace Impressio.Controls
       Update();
     }
 
-    public void LoadControl(object sender, EventArgs e)
+    public void ReloadControl(object sender, ItemClickEventArgs e)
+    {
+      ReloadControl();
+    }
+
+    public void ReloadControl(object sender, EventArgs e)
     {
       ReloadControl();
     }
@@ -237,7 +242,7 @@ namespace Impressio.Controls
     public readonly DXErrorProvider ErrorProvider = new DXErrorProvider();
   }
 
-  #region Designer Files
+  #region Designer Classes
 
   public class ClientControlBase : GridControlBase<Client>
   { }
@@ -279,6 +284,9 @@ namespace Impressio.Controls
   { }
 
   public class DeliveryOverviewBase : GridControlBase<Delivery>
+  { }
+
+  public class PredefinedOrderBase : GridControlBase<PredefinedOrder>
   { }
 
   #endregion

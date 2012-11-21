@@ -41,7 +41,7 @@ namespace Impressio.Controls
       _state.ClearObjectList();
 
       companiesBindingSource.DataSource = _company.LoadObjectList();
-      orderBindingSource.DataSource = Order.LoadObjectList();
+      orderBindingSource.DataSource = Order.LoadObjectList(Order.Columns.IsPredefined, false);
       stateBindingSource.DataSource = _state.LoadObjectList();
       viewOrder.RefreshData();
     }
@@ -54,23 +54,7 @@ namespace Impressio.Controls
       }
     }
 
-    public void LoadReport()
-    {
-      if (FocusedRow != null)
-      {
-        FocusedRow.LoadOrderReport();
-      }
-    }
-
-    public void LoadOffer()
-    {
-      if (FocusedRow != null)
-      {
-        FocusedRow.LoadOfferReport();
-      }
-    }
-
-    public Order Order = new Order();
+    public readonly Order Order = new Order();
 
     private void CompanySearchLookUpEditEditValueChanging(object sender, ChangingEventArgs e)
     {

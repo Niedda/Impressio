@@ -5,6 +5,9 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
+  /// <summary>
+  /// Offset print machine class containig the basic parameters of the machine
+  /// </summary>
   public class Machine : DatabaseObjectBase<Machine>
   {
     #region Columns enum

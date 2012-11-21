@@ -30,20 +30,23 @@ namespace Impressio.Controls
         /// </summary>
         private void InitializeComponent()
         {
+      this.components = new System.ComponentModel.Container();
       this.gridPosition = new DevExpress.XtraGrid.GridControl();
-      this.positionBindingSource = new System.Windows.Forms.BindingSource();
+      this.positionBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewPosition = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
       this.predefinedCombo = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+      this.colDisplayName = new DevExpress.XtraGrid.Columns.GridColumn();
+      this.lookUpTypes = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
       this.colFkOrder = new DevExpress.XtraGrid.Columns.GridColumn();
-      this.colPriceTotal = new DevExpress.XtraGrid.Columns.GridColumn();
-      this.colType = new DevExpress.XtraGrid.Columns.GridColumn();
-      this.typeCombo = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
+      this.colPositionTotal = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colIsPredefined = new DevExpress.XtraGrid.Columns.GridColumn();
+      this.colAssignedControl = new DevExpress.XtraGrid.Columns.GridColumn();
+      this.typeCombo = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.userEdited = new DevExpress.XtraEditors.TextEdit();
-      this.orderBindingSource = new System.Windows.Forms.BindingSource();
+      this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.userCreated = new DevExpress.XtraEditors.TextEdit();
       this.dateEdited = new DevExpress.XtraEditors.TextEdit();
       this.dateCreated = new DevExpress.XtraEditors.TextEdit();
@@ -54,19 +57,20 @@ namespace Impressio.Controls
       this.orderNameEdit = new DevExpress.XtraEditors.TextEdit();
       this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
       this.stateLookUp = new DevExpress.XtraEditors.LookUpEdit();
-      this.stateBindingSource = new System.Windows.Forms.BindingSource();
+      this.stateBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
       this.addressLookUp = new DevExpress.XtraEditors.LookUpEdit();
-      this.addressBindingSource = new System.Windows.Forms.BindingSource();
+      this.addressBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.clientLookUp = new DevExpress.XtraEditors.LookUpEdit();
-      this.clientBindingSource = new System.Windows.Forms.BindingSource();
+      this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPosition)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.positionBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewPosition)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.predefinedCombo)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.lookUpTypes)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.typeCombo)).BeginInit();
       this.groupBox1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.userEdited.Properties)).BeginInit();
@@ -93,7 +97,8 @@ namespace Impressio.Controls
       this.gridPosition.Name = "gridPosition";
       this.gridPosition.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.predefinedCombo,
-            this.typeCombo});
+            this.typeCombo,
+            this.lookUpTypes});
       this.gridPosition.Size = new System.Drawing.Size(812, 219);
       this.gridPosition.TabIndex = 0;
       this.gridPosition.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -109,10 +114,11 @@ namespace Impressio.Controls
       this.viewPosition.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colName,
+            this.colDisplayName,
             this.colFkOrder,
-            this.colPriceTotal,
-            this.colType,
-            this.colIsPredefined});
+            this.colPositionTotal,
+            this.colIsPredefined,
+            this.colAssignedControl});
       this.viewPosition.GridControl = this.gridPosition;
       this.viewPosition.IndicatorWidth = 50;
       this.viewPosition.Name = "viewPosition";
@@ -124,7 +130,7 @@ namespace Impressio.Controls
       this.viewPosition.OptionsView.ShowDetailButtons = false;
       this.viewPosition.OptionsView.ShowGroupPanel = false;
       this.viewPosition.RowHeight = 30;
-      this.viewPosition.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewPositionInitNewRow);
+      this.viewPosition.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
       this.viewPosition.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.ViewPositionFocusedRowChanged);
       this.viewPosition.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewPositionInvalidRowException);
       this.viewPosition.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewPositionValidateRow);
@@ -136,6 +142,7 @@ namespace Impressio.Controls
       // 
       // colName
       // 
+      this.colName.Caption = "Name";
       this.colName.ColumnEdit = this.predefinedCombo;
       this.colName.FieldName = "Name";
       this.colName.Name = "colName";
@@ -152,45 +159,59 @@ namespace Impressio.Controls
       this.predefinedCombo.Tag = "<Null>";
       this.predefinedCombo.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.PredefinedComboEditValueChanging);
       // 
+      // colDisplayName
+      // 
+      this.colDisplayName.Caption = "Typ";
+      this.colDisplayName.ColumnEdit = this.lookUpTypes;
+      this.colDisplayName.FieldName = "DisplayName";
+      this.colDisplayName.Name = "colDisplayName";
+      this.colDisplayName.Visible = true;
+      this.colDisplayName.VisibleIndex = 1;
+      // 
+      // lookUpTypes
+      // 
+      this.lookUpTypes.AutoHeight = false;
+      this.lookUpTypes.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+      this.lookUpTypes.Name = "lookUpTypes";
+      this.lookUpTypes.NullText = "";
+      this.lookUpTypes.ShowFooter = false;
+      this.lookUpTypes.ShowHeader = false;
+      // 
       // colFkOrder
       // 
       this.colFkOrder.FieldName = "FkOrder";
       this.colFkOrder.Name = "colFkOrder";
       // 
-      // colPriceTotal
+      // colPositionTotal
       // 
-      this.colPriceTotal.Caption = "Total Position";
-      this.colPriceTotal.DisplayFormat.FormatString = "c";
-      this.colPriceTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-      this.colPriceTotal.FieldName = "PositionTotal";
-      this.colPriceTotal.Name = "colPriceTotal";
-      this.colPriceTotal.OptionsColumn.AllowEdit = false;
-      this.colPriceTotal.Visible = true;
-      this.colPriceTotal.VisibleIndex = 2;
+      this.colPositionTotal.Caption = "Position Total";
+      this.colPositionTotal.DisplayFormat.FormatString = "c";
+      this.colPositionTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.colPositionTotal.FieldName = "PositionTotal";
+      this.colPositionTotal.Name = "colPositionTotal";
+      this.colPositionTotal.OptionsColumn.ReadOnly = true;
+      this.colPositionTotal.Visible = true;
+      this.colPositionTotal.VisibleIndex = 2;
       // 
-      // colType
+      // colIsPredefined
       // 
-      this.colType.Caption = "Typ";
-      this.colType.ColumnEdit = this.typeCombo;
-      this.colType.FieldName = "Type";
-      this.colType.Name = "colType";
-      this.colType.Visible = true;
-      this.colType.VisibleIndex = 1;
+      this.colIsPredefined.FieldName = "IsPredefined";
+      this.colIsPredefined.Name = "colIsPredefined";
+      // 
+      // colAssignedControl
+      // 
+      this.colAssignedControl.FieldName = "AssignedControl";
+      this.colAssignedControl.Name = "colAssignedControl";
+      this.colAssignedControl.OptionsColumn.ReadOnly = true;
       // 
       // typeCombo
       // 
       this.typeCombo.AutoHeight = false;
       this.typeCombo.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-      this.typeCombo.DropDownRows = 4;
+      this.typeCombo.DropDownRows = 8;
       this.typeCombo.Name = "typeCombo";
-      this.typeCombo.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.TypeComboEditValueChanging);
-      // 
-      // colIsPredefined
-      // 
-      this.colIsPredefined.FieldName = "IsPredefined";
-      this.colIsPredefined.Name = "colIsPredefined";
-      this.colIsPredefined.OptionsColumn.ShowInCustomizationForm = false;
       // 
       // groupBox1
       // 
@@ -499,6 +520,7 @@ namespace Impressio.Controls
       ((System.ComponentModel.ISupportInitialize)(this.positionBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewPosition)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.predefinedCombo)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.lookUpTypes)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.typeCombo)).EndInit();
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();
@@ -543,14 +565,16 @@ namespace Impressio.Controls
         public DevExpress.XtraGrid.GridControl gridPosition;
         public DevExpress.XtraGrid.Views.Grid.GridView viewPosition;
         private System.Windows.Forms.BindingSource positionBindingSource;
-        private DevExpress.XtraGrid.Columns.GridColumn colIdentity;
-        private DevExpress.XtraGrid.Columns.GridColumn colName;
-        private DevExpress.XtraGrid.Columns.GridColumn colFkOrder;
-        private DevExpress.XtraGrid.Columns.GridColumn colPriceTotal;
-        private DevExpress.XtraGrid.Columns.GridColumn colType;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox predefinedCombo;
-        private DevExpress.XtraGrid.Columns.GridColumn colIsPredefined;
         private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox typeCombo;
         private System.Windows.Forms.BindingSource orderBindingSource;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookUpTypes;
+        private DevExpress.XtraGrid.Columns.GridColumn colIdentity;
+        private DevExpress.XtraGrid.Columns.GridColumn colName;
+        private DevExpress.XtraGrid.Columns.GridColumn colDisplayName;
+        private DevExpress.XtraGrid.Columns.GridColumn colFkOrder;
+        private DevExpress.XtraGrid.Columns.GridColumn colPositionTotal;
+        private DevExpress.XtraGrid.Columns.GridColumn colIsPredefined;
+        private DevExpress.XtraGrid.Columns.GridColumn colAssignedControl;
     }
 }

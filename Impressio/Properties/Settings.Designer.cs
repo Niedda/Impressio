@@ -25,49 +25,13 @@ namespace Impressio.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Fabrizio")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Username")]
         public string User {
             get {
                 return ((string)(this["User"]));
             }
             set {
                 this["User"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("file")]
-        public string loggerEngine {
-            get {
-                return ((string)(this["loggerEngine"]));
-            }
-            set {
-                this["loggerEngine"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n\t\t\t\t\tC:\\Users\\bizzi\\Desktop\\Development\\AAA Digital Rape\r\n\t\t\t\t")]
-        public string logPath {
-            get {
-                return ((string)(this["logPath"]));
-            }
-            set {
-                this["logPath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n\t\t\t\t\tC:\\Users\\bizzi\\testfolder\\\r\n\t\t\t\t")]
-        public string folderPath {
-            get {
-                return ((string)(this["folderPath"]));
-            }
-            set {
-                this["folderPath"] = value;
             }
         }
         

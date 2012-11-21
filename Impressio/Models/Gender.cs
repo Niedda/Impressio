@@ -5,6 +5,9 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
+  /// <summary>
+  /// Gender contained by the client class
+  /// </summary>
   public class Gender : DatabaseObjectBase<Gender>
   {
     #region Columns enum

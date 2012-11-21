@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using Subvento.DatabaseObject;
 
@@ -54,43 +52,13 @@ namespace Impressio.Models.Tools
       return false;
     }
 
-    public static bool Usable(this Position position)
+    public static bool Usable(this IPosition position)
     {
       if (position != null && !string.IsNullOrEmpty(position.Name))
       {
         return true;
       }
       return false;
-    }
-
-    public static Position ToPosition<T>(this T position) where T : IPosition
-    {
-      return new Position
-               {
-                 Identity = position.Identity,
-                 Name = position.Name,
-                 FkOrder = position.FkOrder,
-                 PositionTotal = position.PositionTotal,
-                 Type = position.Type,
-               };
-    }
-
-    public static List<Position> ToPosition<T>(this List<T> positions) where T : IPosition
-    {
-      return positions.Select(position => position.ToPosition()).ToList();
-    }
-
-    public static T ToType<T>(this Position position) where T : IPosition, new()
-    {
-      if (position == null) { throw new InvalidOperationException("Position is null"); }
-
-      return new T
-               {
-                 Identity = position.Identity,
-                 FkOrder = position.FkOrder,
-                 Name = position.Name,
-                 IsPredefined = position.IsPredefined,
-               };
     }
   }
 

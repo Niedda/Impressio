@@ -5,6 +5,7 @@ using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
+using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
@@ -45,6 +46,19 @@ namespace Impressio.Controls
       }
     }
 
+    public override RibbonPage RibbonPage
+    {
+      get
+      {
+        return _ribbonPage ?? (_ribbonPage = RibbonTools.GetSimplePage(new List<BarButtonItem>
+                                                                         {
+                                                                           RibbonTools.GetRefreshButton(ReloadControl),
+                                                                           RibbonTools.GetPrintButton("Lieferschein drucken", PrintDelivery),
+                                                                           RibbonTools.GetDeleteButton(DeleteRow),
+                                                                         }, "Lieferschein"));
+      }
+    }
+    
     public override void ReloadControl()
     {
       if (Delivery == null) { throw new InvalidOperationException("Delivery cannot be null"); }
@@ -77,95 +91,12 @@ namespace Impressio.Controls
       viewDeliveryPosition.SetFocusedRowCellValue(colFkDeliveryPositionDelivery, Delivery.Identity);
     }
 
-    #region Ribbon
-
-    public void PrintDelivery(object sender, ItemClickEventArgs e)
+    private void PrintDelivery(object sender, ItemClickEventArgs e)
     {
       Delivery.LoadDeliveryReport();
     }
 
-    private void ReloadControl(object sender, ItemClickEventArgs e)
-    {
-      ReloadControl();
-    }
-
-    public override RibbonPage RibbonPage
-    {
-      get
-      {
-        if (_ribbonPage == null)
-        {
-          _ribbonPage = new RibbonPage("Lieferschein");
-        }
-        if (_ribbonGroup == null)
-        {
-          _ribbonGroup = new RibbonPageGroup();
-          _ribbonGroup.ItemLinks.Clear();
-          PrintButton.ItemClick += PrintDelivery;
-          DeleteButton.ItemClick += DeleteRow;
-          RefreshButton.ItemClick += ReloadControl;
-          _ribbonGroup.ItemLinks.Add(RefreshButton);
-          _ribbonGroup.ItemLinks.Add(PrintButton);
-          _ribbonGroup.ItemLinks.Add(DeleteButton);
-          _ribbonPage.Groups.Add(_ribbonGroup);
-        }
-        return _ribbonPage;
-      }
-    }
-    
-    public BarButtonItem PrintButton
-    {
-      get
-      {
-        return _printButton ?? (_printButton = new BarButtonItem
-        {
-          Caption = "Lieferschein drucken",
-          Id = 3,
-          LargeGlyph = Properties.Resources.printglyph,
-          LargeWidth = 80,
-        });
-      }
-    }
-
-    public BarButtonItem DeleteButton
-    {
-      get
-      {
-        return _deleteButton ?? (_deleteButton = new BarButtonItem
-        {
-          Caption = "Position löschen",
-          Id = 3,
-          LargeGlyph = Properties.Resources.delete,
-          LargeWidth = 80,
-        });
-      }
-    }
-    
-    public BarButtonItem RefreshButton
-    {
-      get
-      {
-        return _refreshButton ?? (_refreshButton = new BarButtonItem
-        {
-          Caption = "Aktualisieren",
-          Id = 3,
-          LargeGlyph = Properties.Resources.refresh,
-          LargeWidth = 80,
-        });
-      }
-    }
-
-    private RibbonPageGroup _ribbonGroup;
-
     private RibbonPage _ribbonPage;
-
-    private BarButtonItem _printButton;
-
-    private BarButtonItem _deleteButton;
-
-    private BarButtonItem _refreshButton;
-
-    #endregion
 
     private readonly DeliveryPosition _deliveryPosition = new DeliveryPosition();
 

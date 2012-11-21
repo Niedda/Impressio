@@ -5,6 +5,9 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
+  /// <summary>
+  /// State class for defining order states
+  /// </summary>
   public class State : DatabaseObjectBase<State>
   {
     #region Columns enum

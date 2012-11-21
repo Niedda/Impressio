@@ -1,147 +1,179 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Impressio.Controls;
 using Impressio.Models.Tools;
-using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
-  public class Position : IPosition
+  /// <summary>
+  /// Base class for Positions
+  /// </summary>
+  public class Position : PositionBase
   {
-    public int OrderId { get; set; }
+    public override int Identity { get; set; }
 
-    public int Identity { get; set; }
+    public override string Name { get; set; }
 
-    public string Name { get; set; }
+    public override string DisplayName { get; set; }
 
-    public int FkOrder { get; set; }
+    public override int FkOrder { get; set; }
 
-    public bool IsPredefined { get; set; }
+    public override int PositionTotal { get; set; }
 
-    public int PositionTotal { get; set; }
+    public override bool IsPredefined { get; set; }
 
-    public Type Type { get; set; }
-
-    public List<Position> Objects
-    {
-      get { return _objects; }
-    }
-
-    public List<Position> PredefinedObjects
-    {
-      get { return _predefinedObjects; }
-    }
-
-    public List<Offset> Offsets
-    {
-      get { return _offsets ?? (_offsets = (new Offset().LoadObjectList(Offset.Columns.FkOffsetOrder, OrderId))); }
-    }
-
-    public List<Print> Prints
-    {
-      get { return _prints ?? (_prints = (new Print().LoadObjectList(Print.Columns.FkPrintOrder, OrderId))); }
-    }
-
-    public List<Data> Datas
+    public override IControl AssignedControl
     {
       get
       {
-        return _datas ?? (_datas = (new Data().LoadObjectList(Data.Columns.FkDataOrder, OrderId)));
+        if (!string.IsNullOrEmpty(DisplayName) && !string.IsNullOrEmpty(Name) && Identity > 0)
+        {
+          var typeList = ReflectionTools.GetClassByInterface(Type.GetType("Impressio.Models.IPosition"));
+          typeList.Remove(Type.GetType("Impressio.Models.PositionBase"));
+          typeList.Remove(Type.GetType("Impressio.Models.Position"));
+
+          foreach (var pos in typeList.Select(type => (IPosition)Activator.CreateInstance(type)).Where(pos => pos.DisplayName == DisplayName))
+          {
+            pos.FkOrder = FkOrder;
+            pos.Identity = Identity;
+            return pos.AssignedControl;
+          }
+        }
+        throw new InvalidOperationException("Invalid call for Control");
       }
     }
 
-    public List<Finish> Finishes
+    public List<Position> Positions
     {
-      get { return _finishes ?? (_finishes = (new Finish().LoadObjectList(Finish.Columns.FkFinishOrder, OrderId))); }
+      get { return _positions ?? (_positions = LoadPositions()); }
+      set { _positions = value; }
     }
 
-    public List<Offset> PredefinedOffsets
+    public List<Position> PredefinedPosition
     {
-      get { return _predefinedOffsets ?? (_predefinedOffsets = (new Offset().LoadObjectList(Offset.Columns.IsPredefined, true))); }
-    }
+      get { return _predefinedPositions ?? (_predefinedPositions = LoadPredefinedPositions()); }
+      set { _predefinedPositions = value; }
+    } 
 
-    public List<Print> PredefinedPrints
+    public override List<Position> LoadPositions()
     {
-      get { return _predefinedPrints ?? (_predefinedPrints = (new Print().LoadObjectList(Print.Columns.IsPredefined, true))); }
-    }
+      var typeList = ReflectionTools.GetClassByInterface(Type.GetType("Impressio.Models.IPosition"));
+      typeList.Remove(Type.GetType("Impressio.Models.PositionBase"));
+      typeList.Remove(Type.GetType("Impressio.Models.Position"));
+      var list = new List<Position>();
 
-    public List<Data> PredefinedDatas
-    {
-      get
+      foreach (var position in typeList.Select(type => (Position)Activator.CreateInstance(type)))
       {
-        return _predefinedDatas ?? (_predefinedDatas = (new Data().LoadObjectList(Data.Columns.IsPredefined, true)));
+        position.FkOrder = FkOrder;
+        list.AddRange(position.LoadPositions());
       }
+      return list;
     }
 
-    public List<Finish> PredefinedFinishes
+    public override List<Position> LoadPredefinedPositions()
     {
-      get { return _predefinedFinishes ?? (_predefinedFinishes = (new Finish().LoadObjectList(Finish.Columns.IsPredefined, true))); }
-    }
+      var typeList = ReflectionTools.GetClassByInterface(Type.GetType("Impressio.Models.IPosition"));
+      typeList.Remove(Type.GetType("Impressio.Models.PositionBase"));
+      typeList.Remove(Type.GetType("Impressio.Models.Position"));
+      var list = new List<Position>();
 
-    public void LoadPositions()
-    {
-      if (OrderId <= 0)
+      foreach (var position in typeList.Select(type => (Position)Activator.CreateInstance(type)))
       {
-        throw new InvalidOperationException("Order Id out of range");
+        list.AddRange(position.LoadPredefinedPositions());
       }
-
-      _objects.AddRange(Datas.ToPosition());
-      _objects.AddRange(Prints.ToPosition());
-      _objects.AddRange(Offsets.ToPosition());
-      _objects.AddRange(Finishes.ToPosition());
+      return list;
     }
 
-    public void ClearPositions()
+    public override void ClearPredefinedObjects()
     {
-      _datas = null;
-      _prints = null;
-      _offsets = null;
-      _finishes = null;
-      _objects.Clear();
+      _predefinedPositions = null;
     }
 
-    public void LoadPredefinedObjects()
+    public override void ClearObjects()
     {
-      _predefinedObjects.AddRange(PredefinedDatas.ToPosition());
-      _predefinedObjects.AddRange(PredefinedPrints.ToPosition());
-      _predefinedObjects.AddRange(PredefinedOffsets.ToPosition());
-      _predefinedObjects.AddRange(PredefinedFinishes.ToPosition());
+      _positions = null;
     }
 
-    public void ClearPredefinedObjects()
+    public override void DeletePosition()
     {
-      _predefinedDatas = null;
-      _predefinedFinishes = null;
-      _predefinedOffsets = null;
-      _predefinedPrints = null;
-      _predefinedObjects.Clear();
+      if (Identity > 0 && !string.IsNullOrEmpty(DisplayName))
+      {
+        var typeList = ReflectionTools.GetClassByInterface(Type.GetType("Impressio.Models.IPosition"));
+        typeList.Remove(Type.GetType("Impressio.Models.PositionBase"));
+        typeList.Remove(Type.GetType("Impressio.Models.Position"));
+
+        foreach (var type in typeList)
+        {
+          var pos = (IPosition)Activator.CreateInstance(type);
+
+          if (pos.DisplayName == DisplayName)
+          {
+            pos = this;
+            pos.DeletePosition();
+          }
+        }
+      }
+      throw new InvalidOperationException("Position could not be deleted");
     }
-    
-    private readonly List<Position> _objects = new List<Position>();
 
-    private readonly List<Position> _predefinedObjects = new List<Position>();
+    public override int SavePosition()
+    {
+      if (!string.IsNullOrEmpty(DisplayName))
+      {
+        var typeList = ReflectionTools.GetClassByInterface(Type.GetType("Impressio.Models.IPosition"));
+        typeList.Remove(Type.GetType("Impressio.Models.PositionBase"));
+        typeList.Remove(Type.GetType("Impressio.Models.Position"));
 
-    private List<Finish> _finishes;
+        foreach (var type in typeList)
+        {
+          var pos = (IPosition)Activator.CreateInstance(type);
 
-    private List<Data> _datas;
+          if (pos.DisplayName == DisplayName)
+          {
+            var conPos = (IPosition)Activator.CreateInstance(type);
+            conPos.FkOrder = FkOrder;
+            conPos.IsPredefined = IsPredefined;
+            conPos.Name = Name;
+            return conPos.SavePosition();
+          }
+        }
+      }
+      throw new InvalidOperationException("Position does not exist");
+    }
 
-    private List<Print> _prints;
+    public override int CopyPosition(int orderId)
+    {
+      Identity = 0;
+      IsPredefined = false;
+      FkOrder = orderId;
+      return SavePosition();
+    }
 
-    private List<Offset> _offsets;
+    public static List<string> AvailablePositions()
+    {
+      var typeList = ReflectionTools.GetClassByInterface(Type.GetType("Impressio.Models.IPosition"));
+      typeList.Remove(Type.GetType("Impressio.Models.PositionBase"));
+      typeList.Remove(Type.GetType("Impressio.Models.Position"));
+      return typeList.Select(type => (IPosition)Activator.CreateInstance(type)).Select(pos => pos.DisplayName).ToList();
+    }
 
-    private List<Finish> _predefinedFinishes;
+    public static List<string> AvailableTypes()
+    {
+      var typeList = ReflectionTools.GetClassByInterface(Type.GetType("Impressio.Models.IPosition"));
+      typeList.Remove(Type.GetType("Impressio.Models.PositionBase"));
+      typeList.Remove(Type.GetType("Impressio.Models.Position"));
+      var list = new List<string>();
+      foreach (var type in typeList)
+      {
+        var pos = (Position)Activator.CreateInstance(type);
+        list.Add(pos.DisplayName);
+      }
+      return list;
+    }
 
-    private List<Data> _predefinedDatas;
+    private List<Position> _positions;
 
-    private List<Print> _predefinedPrints;
-
-    private List<Offset> _predefinedOffsets;
-  }
-
-  public enum Type
-  {
-    Datenaufbereitung,
-    Digitaldruck,
-    Offsetdruck,
-    Weiterverarbeitung,
-  }
+    private List<Position> _predefinedPositions;
+  } 
 }

@@ -5,6 +5,9 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
+  /// <summary>
+  /// Clickcosts for digital printing systems
+  /// </summary>
   public class ClickCost : DatabaseObjectBase<ClickCost>
   {
     #region Columns enum
@@ -24,10 +27,7 @@ namespace Impressio.Models
       get { return "ClickCostId"; }
     }
 
-    public override string Table
-    {
-      get { return "ClickCost"; }
-    }
+    public override string Table { get { return "ClickCost"; } }
 
     public string Name { get; set; }
 

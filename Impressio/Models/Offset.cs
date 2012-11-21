@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using Impressio.Controls;
 using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
-  public class Offset : DatabaseObjectBase<Offset>, IPosition, IPredefined<Offset>
+  /// <summary>
+  /// Offset Position for calculating offset prints
+  /// </summary>
+  public class Offset : Position, IDatabaseObject<Offset>
   {
     #region Columns enum
 
@@ -31,19 +35,16 @@ namespace Impressio.Models
 
     public override int Identity { get; set; }
 
-    public string Name { get; set; }
+    public override string Name { get; set; }
 
-    public int PositionTotal
+    public override int PositionTotal
     {
-      get
-      {
-        _positionTotal = PrintTotal + PaperCostTotal;
-        return _positionTotal;
-      }
-      set { _positionTotal = value; }
+      get { return PrintTotal + PaperCostTotal; }
     }
 
-    public int FkOrder { get; set; }
+    public override string DisplayName { get { return "Offsetdruck"; } }
+
+    public override int FkOrder { get; set; }
 
     public int PaperPricePer { get; set; }
 
@@ -55,40 +56,20 @@ namespace Impressio.Models
 
     public int PrintType { get; set; }
 
-    public string PrintTypeString
-    {
-      get
-      {
-        switch (PrintType)
-        {
-          case 0:
-            return "Einseitig";
-          case 1:
-            return "Umschlagen";
-          case 2:
-            return "Umstülpen";
-          case 3:
-            return "SD/WD";
-          default:
-            return "";
-        }
-      }
-    }
-
     public int ColorAmount { get; set; }
 
     public int OffsetQuantity { get; set; }
 
     public int PrintQuantity { get; set; }
 
-    public bool IsPredefined { get; set; }
+    public override bool IsPredefined { get; set; }
 
-    public override string IdentityColumn
+    public string IdentityColumn
     {
       get { return "OffsetId"; }
     }
 
-    public override string Table
+    public string Table
     {
       get { return "Offset"; }
     }
@@ -101,7 +82,7 @@ namespace Impressio.Models
       {
         if (FkOffsetPaper != 0)
         {
-          if(_paper == null || _paper.Identity == FkOffsetPaper)
+          if (_paper == null || _paper.Identity == FkOffsetPaper)
           {
             return (_paper = (Paper)new Paper { Identity = FkOffsetPaper, }.LoadSingleObject());
           }
@@ -119,7 +100,7 @@ namespace Impressio.Models
       {
         if (FkOffsetMachine != 0)
         {
-          if(_machine == null || FkOffsetMachine != _machine.Identity)
+          if (_machine == null || FkOffsetMachine != _machine.Identity)
           {
             return (_machine = (Machine)new Machine { Identity = FkOffsetMachine }.LoadSingleObject());
           }
@@ -173,7 +154,7 @@ namespace Impressio.Models
       }
     }
 
-    public override List<Offset> Objects
+    public List<Offset> Objects
     {
       get
       {
@@ -181,29 +162,46 @@ namespace Impressio.Models
       }
     }
 
-    public Type Type
+    public override IControl AssignedControl
     {
-      get { return Type.Offsetdruck; }
-      set { }
+      get { return new OffsetControl { Offset = new Offset { Identity = Identity }, }; }
     }
 
-    public void LoadPredefined()
+    public override List<Position> LoadPositions()
     {
-      var offset = new Offset();
-      _predefinedOffset.AddRange(offset.LoadObjectList(Columns.IsPredefined, true));
+      if (FkOrder <= 0)
+      {
+        throw new InvalidOperationException("Fk Order can not be null");
+      }
+      return this.LoadObjectList(Columns.FkOffsetOrder, FkOrder).ConvertAll(conv => (Position)conv);
     }
 
-    public List<Offset> PredefinedObjects
+    public override List<Position> LoadPredefinedPositions()
     {
-      get { return _predefinedOffset; }
+      return this.LoadObjectList(Columns.IsPredefined, true).ConvertAll(conv => (Position)conv);
     }
 
-    public void ClearPredefinedObjects()
+    public override void ClearPredefinedObjects()
     {
-      _predefinedOffset.Clear();
+      _offsets.Clear();
     }
 
-    public override void SetObject()
+    public override void ClearObjects()
+    {
+      ClearObjectList();
+    }
+
+    public override void DeletePosition()
+    {
+      this.DeleteObject();
+    }
+
+    public override int SavePosition()
+    {
+      return this.SaveObject();
+    }
+
+    public void SetObject()
     {
       Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
       FkOffsetPaper = Database.DatabaseCommand.Reader[Columns.FkOffsetPaper.ToString()].GetInt();
@@ -218,12 +216,10 @@ namespace Impressio.Models
       OffsetQuantity = Database.DatabaseCommand.Reader[Columns.OffsetQuantity.ToString()].GetInt();
       FkOrder = Database.DatabaseCommand.Reader[Columns.FkOffsetOrder.ToString()].GetInt();
       Name = Database.DatabaseCommand.Reader[Columns.PositionName.ToString()] as string;
-      PositionTotal = Database.DatabaseCommand.Reader[Columns.PositionTotal.ToString()].GetInt();
-      IsPredefined = (bool) Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
-      Type = Type.Offsetdruck;
+      IsPredefined = (bool)Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
     }
 
-    public override Dictionary<Enum, object> GetObject()
+    public Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>
                {
@@ -244,7 +240,7 @@ namespace Impressio.Models
                };
     }
 
-    public override void ClearObjectList()
+    public void ClearObjectList()
     {
       _offsets.Clear();
     }

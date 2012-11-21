@@ -55,7 +55,7 @@ namespace Impressio.Views
       showAddress.ItemClick += _customerHandler.Address;
       showPerson.ItemClick += _customerHandler.Client;
       showCompanies.ItemClick += _customerHandler.Company;
-      deleteEntry.ItemClick += _customerHandler.Delete;
+      deleteCustomer.ItemClick += _customerHandler.Delete;
 
       _propertyHandler = new PropertyHandler(this);
       properties.ItemClick += _propertyHandler.GetProperty;
@@ -69,8 +69,10 @@ namespace Impressio.Views
       editOrder.ItemClick += _propertyHandler.GetOrderEdit;
       editOffer.ItemClick += _propertyHandler.GetOfferEdit;
       editDelivery.ItemClick += _propertyHandler.GetDeliveryEdit;
-
+      predefinedOrder.ItemClick += _propertyHandler.GetPredefinedOrder;
+      
       RegisterControl(_ordersControl);
+      ribbon.SelectedPage = ribbonPageOrder;
     }
 
     private void RibbonSelectedPageChanging(object sender, RibbonPageChangingEventArgs e)
@@ -143,5 +145,14 @@ namespace Impressio.Views
     private PropertyHandler _propertyHandler;
 
     private readonly OrdersControl _ordersControl = new OrdersControl();
+
+    private void CreateOrderWizardItemClick(object sender, ItemClickEventArgs e)
+    {
+      var wiz = new OrderWizard();
+      if(wiz.ShowDialog() != DialogResult.Cancel)
+      {
+        new OrderRibbonView(wiz.Order).Show();
+      }
+    }
   }
 }

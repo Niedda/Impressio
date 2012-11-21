@@ -24,12 +24,17 @@
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>6</ApplicationRevision>
+    <MapFileExtensions>false</MapFileExtensions>
+    <TargetCulture>de-CH</TargetCulture>
+    <ProductName>Impressio</ProductName>
+    <PublisherName>Fabrizio Niedda</PublisherName>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>11</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperEnabled>false</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -42,16 +47,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>0</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>logoimpressio.ico</ApplicationIcon>
+    <ApplicationIcon>ImpressioLogo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>27AF8D9693BB5246F20E533DB9FA9893DB26148A</ManifestCertificateThumbprint>
@@ -66,67 +73,36 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup />
+  <PropertyGroup>
+    <StartupObject>Impressio.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files (x86)\DevExpress 2010.2\Components\Sources\DevExpress.DLL\DevExpress.BonusSkins.v10.2.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Charts.v10.2.Core, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.CodeParser.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files (x86)\DevExpress 2010.2\Components\Sources\DevExpress.DLL\DevExpress.CodeParser.v10.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Data.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.OfficeSkins.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files (x86)\DevExpress 2010.2\Components\Sources\DevExpress.DLL\DevExpress.OfficeSkins.v10.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.PivotGrid.v10.2.Core, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.RichEdit.v10.2.Core, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraBars.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraCharts.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraCharts.v10.2.Extensions, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files (x86)\DevExpress 2010.2\Components\Sources\DevExpress.DLL\DevExpress.XtraCharts.v10.2.Extensions.dll</HintPath>
-    </Reference>
     <Reference Include="DevExpress.XtraEditors.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraLayout.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraNavBar.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraPivotGrid.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraReports.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraReports.v10.2.Extensions, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files (x86)\DevExpress 2010.2\Components\Sources\DevExpress.DLL\DevExpress.XtraReports.v10.2.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.XtraRichEdit.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraVerticalGrid.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files (x86)\DevExpress 2010.2\Components\Sources\DevExpress.DLL\DevExpress.XtraVerticalGrid.v10.2.dll</HintPath>
-    </Reference>
     <Reference Include="DevExpress.XtraWizard.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="Npgsql">
-      <HintPath>..\Externals\npgsql\Npgsql.dll</HintPath>
-    </Reference>
-    <Reference Include="Subvento">
-      <HintPath>..\..\Subvento\Subvento\bin\Debug\Subvento.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SqlServerCe, Version=3.5.1.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft SQL Server Compact Edition\v3.5\Private\System.Data.SqlServerCe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SqlServerCe.Entity, Version=3.5.1.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft SQL Server Compact Edition\v3.5\Private\System.Data.SqlServerCe.Entity.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
+    <Reference Include="System.Data.SqlServerCe, Version=3.5.1.50, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -225,6 +201,12 @@
     <Compile Include="Controls\PositionControl.Designer.cs">
       <DependentUpon>PositionControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PredefinedOrderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PredefinedOrderControl.Designer.cs">
+      <DependentUpon>PredefinedOrderControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PredefinedPositionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -244,6 +226,11 @@
       <DependentUpon>PropertieControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\PropertyHandler.cs" />
+    <Compile Include="Models\DatabaseAttribute.cs" />
+    <Compile Include="Models\PositionBase.cs" />
+    <Compile Include="Models\PredefinedOrder.cs" />
+    <Compile Include="Models\Tools\ReflectionTools.cs" />
+    <Compile Include="Models\Tools\RibbonTools.cs" />
     <Compile Include="Controls\StateControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -270,9 +257,6 @@
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\IPredefined.cs" />
     <Compile Include="Controls\IRibbon.cs" />
-    <Compile Include="Models\Log\DatabaseLogger.cs" />
-    <Compile Include="Models\Log\FileLogger.cs" />
-    <Compile Include="Models\Log\ILogger.cs" />
     <Compile Include="Models\Machine.cs" />
     <Compile Include="Models\Offset.cs" />
     <Compile Include="Models\Order.cs" />
@@ -288,26 +272,34 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Reports\DeliveryReport.cs">
-      <SubType>Component</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Compile Include="Views\OrderParam.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\DeliveryReport.Designer.cs">
+    <Compile Include="Views\OrderParam.Designer.cs">
+      <DependentUpon>OrderParam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\OrderWizard.Designer.cs">
+      <DependentUpon>OrderWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\DeliveryReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Reports\DeliveryReport.Designer.cs">
       <DependentUpon>DeliveryReport.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Reports\OfferReport.cs">
+    <Compile Include="Views\Reports\OfferReport.cs">
       <SubType>Component</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Reports\OfferReport.Designer.cs">
+    <Compile Include="Views\Reports\OfferReport.Designer.cs">
       <DependentUpon>OfferReport.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Reports\OrderReport.cs">
+    <Compile Include="Views\Reports\OrderReport.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\OrderReport.Designer.cs">
+    <Compile Include="Views\Reports\OrderReport.Designer.cs">
       <DependentUpon>OrderReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\MainViewRibbon.cs">
@@ -335,24 +327,82 @@
     <Compile Include="Views\StartupWizard.Designer.cs">
       <DependentUpon>StartupWizard.cs</DependentUpon>
     </Compile>
+    <Content Include="AMD64\sqlceca35.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AMD64\sqlcecompact35.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AMD64\sqlceer35EN.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AMD64\sqlceme35.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AMD64\sqlceoledb35.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AMD64\sqlceqp35.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AMD64\sqlcese35.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="System.Data.SqlServerCe.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\sqlceca35.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\sqlcecompact35.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\sqlceer35EN.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\sqlceme35.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\sqlceoledb35.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\sqlceqp35.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\sqlcese35.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Controls\PredefinedOrderControl.resx">
+      <DependentUpon>PredefinedOrderControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\OrderParam.resx">
+      <DependentUpon>OrderParam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\OrderWizard.resx">
+      <DependentUpon>OrderWizard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\StartScreen.resx">
       <DependentUpon>StartScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\StartupWizard.resx">
       <DependentUpon>StartupWizard.cs</DependentUpon>
     </EmbeddedResource>
+    <Content Include="Database\dbImpressio.sqlce" />
     <None Include="Properties\DataSources\Impressio.Models.Address1.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.Client1.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.IPosition.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.Offset.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.Position1.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.PositionBase.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.PredefinedOrder.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.Print.datasource" />
-    <None Include="Reports\deliveryReport.repx">
+    <None Include="Views\Reports\deliveryReport.repx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Reports\offerReport.repx">
+    <None Include="Views\Reports\offerReport.repx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Reports\orderReport.repx">
+    <None Include="Views\Reports\orderReport.repx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\state.png" />
@@ -419,15 +469,13 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\DeliveryReport.resx">
+    <EmbeddedResource Include="Views\Reports\DeliveryReport.resx">
       <DependentUpon>DeliveryReport.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\OfferReport.resx">
+    <EmbeddedResource Include="Views\Reports\OfferReport.resx">
       <DependentUpon>OfferReport.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\OrderReport.resx">
+    <EmbeddedResource Include="Views\Reports\OrderReport.resx">
       <DependentUpon>OrderReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MainViewRibbon.resx">
@@ -493,30 +541,11 @@
     <None Include="Resources\copy.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="System.Data.SqlServerCe.Entity.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\sqlceca35.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\sqlcecompact35.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\sqlceer35EN.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\sqlceme35.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\sqlceoledb35.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\sqlceqp35.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\sqlcese35.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Database\dbImpressio.sql" />
+    <Content Include="ImpressioLogo.ico" />
+    <None Include="Resources\Adobe.png" />
+    <None Include="Resources\order.png" />
+    <None Include="Resources\wizard.png" />
     <None Include="Resources\open.png" />
     <None Include="Resources\printglyph.png" />
     <None Include="Resources\person.png" />
@@ -526,35 +555,13 @@
     <None Include="Resources\offsetprint.png" />
     <None Include="Resources\coins.png" />
     <None Include="Resources\gender.png" />
-    <Content Include="AMD64\sqlceca35.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="AMD64\sqlcecompact35.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="AMD64\sqlceer35EN.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="AMD64\sqlceme35.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="AMD64\sqlceoledb35.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="AMD64\sqlceqp35.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="AMD64\sqlcese35.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="logoimpressio.ico" />
     <None Include="Resources\excel.png" />
     <None Include="Resources\refresh.png" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -567,13 +574,245 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
-      <Visible>False</Visible>
-      <ProductName>Windows Installer 3.1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <PublishFile Include="DevExpress.BonusSkins.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.Charts.v10.2.Core">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.CodeParser.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.Data.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.OfficeSkins.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.PivotGrid.v10.2.Core">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.RichEdit.v10.2.Core">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.Utils.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraBars.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraCharts.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraCharts.v10.2.Extensions">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraEditors.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraGrid.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraLayout.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraNavBar.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraPivotGrid.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraPrinting.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraReports.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraReports.v10.2.Extensions">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraRichEdit.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraTreeList.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraVerticalGrid.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraWizard.v10.2">
+      <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Subvento\Subvento.csproj">
+      <Project>{BC8254A1-A248-4BA5-A6FD-3E8E733D3850}</Project>
+      <Name>Subvento</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

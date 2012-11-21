@@ -10,6 +10,9 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
+  /// <summary>
+  /// Delivery class for creating and editing deliveries
+  /// </summary>
   public class Delivery : DatabaseObjectBase<Delivery>
   {
     #region Columns enum
@@ -27,7 +30,9 @@ namespace Impressio.Models
 
     #region Reports
 
-    //previews of the documents
+    /// <summary>
+    /// Load a preview of the delivery
+    /// </summary>
     public void LoadDeliveryReport()
     {
       _deliveryPosition = null;
@@ -42,7 +47,9 @@ namespace Impressio.Models
       report.ShowRibbonPreview();
     }
 
-    //designer for the documents
+    /// <summary>
+    /// Load the designer for the delivery
+    /// </summary>
     public static void LoadDeliveryDesigner()
     {
       var form = new XRDesignRibbonForm();
@@ -234,6 +241,9 @@ namespace Impressio.Models
     private readonly List<Delivery> _deliveries = new List<Delivery>();
   }
 
+  /// <summary>
+  /// Positions contained by a delivery
+  /// </summary>
   public class DeliveryPosition : DatabaseObjectBase<DeliveryPosition>
   {
     #region Columns enum

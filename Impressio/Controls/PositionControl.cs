@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
-using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
-using Type = Impressio.Models.Type;
 
 namespace Impressio.Controls
 {
@@ -19,9 +16,9 @@ namespace Impressio.Controls
       InitializeBase();
     }
 
-    public Position FocusedRow
+    public IPosition FocusedRow
     {
-      get { return viewPosition.GetFocusedRow() as Position; }
+      get { return viewPosition.GetFocusedRow() as IPosition; }
     }
 
     public override List<object> EditorsToCheck
@@ -38,27 +35,27 @@ namespace Impressio.Controls
 
     public override void ReloadControl()
     {
-      if (Order == null) { throw new InvalidOperationException("Order cannot be null"); }
+      if (Order == null || Order.Identity <= 0)
+      {
+        throw new InvalidOperationException("Order cannot be null");
+      }
 
-      _position.OrderId = Order.Identity;
-
-      _state.ClearObjectList();
-      _position.ClearPositions();
+      _position.ClearObjects();
       _position.ClearPredefinedObjects();
+      predefinedCombo.Items.Clear();
+      _state.ClearObjectList();
 
       Order.LoadSingleObject();
       orderBindingSource.DataSource = Order;
-      typeCombo.Items.Clear();
-      typeCombo.Items.AddEnum(typeof(Type));
-      var predefObjects = _position.PredefinedObjects.Select(b => b.Name).Distinct();
-      predefinedCombo.Items.AddRange(predefObjects.ToArray());
-      _position.LoadPositions();
-      positionBindingSource.DataSource = _position.Objects;
-
+      _position.FkOrder = Order.Identity;
+      lookUpTypes.DataSource = Position.AvailableTypes();
+      lookUpTypes.DropDownRows = Position.AvailablePositions().Count > 10 ? 10 : Position.AvailablePositions().Count;
+      positionBindingSource.DataSource = _position.Positions;
+      predefinedCombo.Items.AddRange(_position.PredefinedPosition.Select(a => a.Name).Distinct().ToList());
+      predefinedCombo.DropDownRows = _position.PredefinedPosition.Count > 10 ? 10 : _position.PredefinedPosition.Count;
       stateBindingSource.DataSource = _state.LoadObjectList();
       clientBindingSource.DataSource = Order.AvaibleClients;
       addressBindingSource.DataSource = Order.AvaibleAddress;
-
       viewPosition.RefreshData();
     }
 
@@ -72,59 +69,51 @@ namespace Impressio.Controls
       }
       return false;
     }
-    
+
     public void DeleteRow()
     {
       if (FocusedRow != null)
       {
-        switch (FocusedRow.Type)
-        {
-          case Type.Datenaufbereitung:
-            FocusedRow.ToType<Data>().DeleteObject();
-            break;
-          case Type.Digitaldruck:
-            FocusedRow.ToType<Print>().DeleteObject();
-            break;
-          case Type.Offsetdruck:
-            FocusedRow.ToType<Offset>().DeleteObject();
-            break;
-          case Type.Weiterverarbeitung:
-            FocusedRow.ToType<Finish>().DeleteObject();
-            break;
-        }
+        FocusedRow.DeletePosition();
+        viewPosition.DeleteSelectedRows();
         viewPosition.RefreshData();
       }
     }
 
     public bool ValidateRow()
     {
-      if (!string.IsNullOrEmpty(FocusedRow.Name))
+      if (!viewPosition.FocusedRowModified)
       {
-        UpdateRow();
         return true;
       }
-      return false;
+      if (string.IsNullOrEmpty(FocusedRow.Name))
+      {
+        viewPosition.SetColumnError(colName, "Bitte einen gültigen Wert angeben");
+      }
+      else
+      {
+        viewPosition.SetColumnError(colName, "");
+      }
+      if (string.IsNullOrEmpty(FocusedRow.DisplayName))
+      {
+        viewPosition.SetColumnError(colDisplayName, "Bitte einen gültigen Wert angeben");
+      }
+      else
+      {
+        viewPosition.SetColumnError(colDisplayName, "");
+      }
+      if (viewPosition.HasColumnErrors)
+      {
+        return false;
+      }
+      UpdateRow();
+      return true;
     }
 
     public void UpdateRow()
     {
       FocusedRow.FkOrder = Order.Identity;
-
-      switch (FocusedRow.Type)
-      {
-        case Type.Datenaufbereitung:
-          FocusedRow.ToType<Data>().SaveObject();
-          break;
-        case Type.Digitaldruck:
-          FocusedRow.ToType<Print>().SaveObject();
-          break;
-        case Type.Offsetdruck:
-          FocusedRow.ToType<Offset>().SaveObject();
-          break;
-        case Type.Weiterverarbeitung:
-          FocusedRow.ToType<Finish>().SaveObject();
-          break;
-      }
+      FocusedRow.Identity = FocusedRow.SavePosition();
     }
 
     public Order Order;
@@ -134,23 +123,19 @@ namespace Impressio.Controls
       ReloadControl();
     }
 
-    private void ViewPositionInitNewRow(object sender, InitNewRowEventArgs e)
-    {
-      viewPosition.SetRowCellValue(e.RowHandle, colFkOrder, Order.Identity);
-    }
-
     private void ViewPositionFocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
     {
-      if (viewPosition.IsNewItemRow(e.FocusedRowHandle))
+      if (viewPosition.IsNewItemRow(viewPosition.FocusedRowHandle))
       {
-        foreach (var predefinedPosition in _position.PredefinedObjects)
-        {
-          predefinedCombo.Items.Add(predefinedPosition.Name);
-        }
+        colName.ColumnEdit = predefinedCombo;
+        colDisplayName.OptionsColumn.AllowEdit = true;
+        colDisplayName.ColumnEdit = lookUpTypes;
       }
       else
       {
-        predefinedCombo.Items.Clear();
+        colName.ColumnEdit = null;
+        colDisplayName.OptionsColumn.AllowEdit = false;
+        colDisplayName.ColumnEdit = null;
       }
     }
 
@@ -160,75 +145,15 @@ namespace Impressio.Controls
       {
         if (e.NewValue != null)
         {
-          var position = (from pos in _position.PredefinedObjects where pos.Name == e.NewValue.ToString() select pos).FirstOrDefault();
+          var position = (from pos in _position.PredefinedPosition where pos.Name == e.NewValue.ToString() select pos).FirstOrDefault();
 
           if (position != null)
           {
-            int id;
-
-            switch (position.Type)
-            {
-              case Type.Datenaufbereitung:
-                var data = new Data { Identity = position.Identity, };
-                data.LoadSingleObject();
-                var dataPositions = data.DataPositions;
-                data.Identity = 0;
-                data.FkOrder = Order.Identity;
-                data.IsPredefined = false;
-                id = data.SaveObject();
-
-                foreach (var dataPosition in dataPositions)
-                {
-                  dataPosition.FkDataDataPosition = id;
-                  dataPosition.Identity = 0;
-                  dataPosition.SaveObject();
-                }
-                break;
-              case Type.Weiterverarbeitung:
-                var finish = new Finish { Identity = position.Identity, };
-                finish.LoadSingleObject();
-                var finishPositions = finish.FinishPositions;
-                finish.Identity = 0;
-                finish.FkOrder = Order.Identity;
-                finish.IsPredefined = false;
-                id = finish.SaveObject();
-
-                foreach (var finishPosition in finishPositions)
-                {
-                  finishPosition.FkFinishFinishPosition = id;
-                  finishPosition.Identity = 0;
-                  finishPosition.SaveObject();
-                }
-                break;
-              case Type.Digitaldruck:
-                var print = new Print { Identity = position.Identity, };
-                print.LoadSingleObject();
-                print.Identity = 0;
-                print.FkOrder = Order.Identity;
-                print.IsPredefined = false;
-                print.SaveObject();
-                break;
-              case Type.Offsetdruck:
-                var offset = new Offset { Identity = position.Identity, };
-                offset.LoadSingleObject();
-                offset.Identity = 0;
-                offset.FkOrder = Order.Identity;
-                offset.IsPredefined = false;
-                offset.SaveObject();
-                break;
-            }
+            position.CopyPosition(Order.Identity);
             viewPosition.DeleteSelectedRows();
             ReloadControl();
           }
         }
-      }
-    }
-
-    private void TypeComboEditValueChanging(object sender, ChangingEventArgs e)
-    {
-      if (!viewPosition.IsNewItemRow(viewPosition.FocusedRowHandle))
-      {
-        e.Cancel = true;
       }
     }
 
@@ -247,10 +172,10 @@ namespace Impressio.Controls
       e.ExceptionMode = ExceptionMode.NoAction;
     }
 
+    private readonly State _state = new State();
+
     private readonly Position _position = new Position();
 
-    private readonly State _state = new State();
-    
     private List<object> _editors;
   }
 }

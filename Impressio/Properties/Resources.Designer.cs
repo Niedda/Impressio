@@ -73,6 +73,16 @@ namespace Impressio.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Adobe {
+            get {
+                object obj = ResourceManager.GetObject("Adobe", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap coins {
             get {
                 object obj = ResourceManager.GetObject("coins", resourceCulture);
@@ -153,16 +163,6 @@ namespace Impressio.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap gender1 {
-            get {
-                object obj = ResourceManager.GetObject("gender1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap offsetprint {
             get {
                 object obj = ResourceManager.GetObject("offsetprint", resourceCulture);
@@ -183,6 +183,16 @@ namespace Impressio.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap order {
+            get {
+                object obj = ResourceManager.GetObject("order", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap paperplane {
             get {
                 object obj = ResourceManager.GetObject("paperplane", resourceCulture);
@@ -196,16 +206,6 @@ namespace Impressio.Properties {
         internal static System.Drawing.Bitmap person {
             get {
                 object obj = ResourceManager.GetObject("person", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap person1 {
-            get {
-                object obj = ResourceManager.GetObject("person1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -266,6 +266,16 @@ namespace Impressio.Properties {
         internal static System.Drawing.Bitmap state {
             get {
                 object obj = ResourceManager.GetObject("state", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap wizard {
+            get {
+                object obj = ResourceManager.GetObject("wizard", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

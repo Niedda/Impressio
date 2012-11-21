@@ -21,6 +21,9 @@ namespace Impressio.Views
       printOrder.ItemClick += _orderHandler.PrintOrder;
       ribbon.SelectedPageChanging += _orderHandler.PageChanging;
       ribbon.SelectedPageChanged += _orderHandler.PageChanged;
+      fileLink.ItemClick += _orderHandler.OpenFileFolder;
+      resetFileLink.ItemClick += _orderHandler.ResetFileFolder;
+      predefOrder.ItemClick += _orderHandler.ParamOrder;
     }
 
     public void RegisterControl(IControl control)

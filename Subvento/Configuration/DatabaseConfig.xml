@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Database>
+		<ConnectionString>connection</ConnectionString>
+		<DatabaseEngine>engine</DatabaseEngine>
+		<ExceptionMode>1</ExceptionMode>
+		<ExceptionLog>1</ExceptionLog>
+</Database>

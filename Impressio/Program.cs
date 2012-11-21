@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Impressio.Models;
 using Impressio.Properties;
 using Impressio.Views;
 

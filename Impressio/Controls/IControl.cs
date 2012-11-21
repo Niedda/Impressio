@@ -1,4 +1,6 @@
-﻿namespace Impressio.Controls
+﻿using DevExpress.XtraBars;
+
+namespace Impressio.Controls
 {
   /// <summary>
   /// Provides some standard methods for controls
@@ -15,5 +17,7 @@
     /// </summary>
     /// <returns>True if the control is valid and can be closed</returns>
     bool ValidateControl();
+
+    void ReloadControl(object sender, ItemClickEventArgs e);
   }
 }

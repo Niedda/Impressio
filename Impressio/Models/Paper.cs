@@ -9,6 +9,9 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
+  /// <summary>
+  /// Paper class containing basic parameters for papers
+  /// </summary>
   public class Paper : DatabaseObjectBase<Paper>
   {
     #region Columns enum
@@ -151,6 +154,11 @@ namespace Impressio.Models
                };
     }
 
+    /// <summary>
+    /// Load papers from excel files a predefined excel included in the application folder
+    /// </summary>
+    /// <param name="filePath">Path to the file</param>
+    /// <returns>true if succsessful</returns>
     public static bool LoadFromExcel(string filePath)
     {
       try

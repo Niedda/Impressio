@@ -8,6 +8,8 @@ using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
+using Impressio.Models.Tools;
+using Impressio.Properties;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
@@ -36,6 +38,24 @@ namespace Impressio.Controls
       get { return viewDescription; }
     }
 
+    public override RibbonPage RibbonPage
+    {
+      get
+      {
+        return _ribbonPage ?? (_ribbonPage = RibbonTools.GetSimplePage(new List<BarButtonItem>
+                                                                           {
+                                                                             RibbonTools.GetRefreshButton(ReloadControl),
+                                                                             RibbonTools.GetDeleteButton(DeleteRow),
+                                                                             RibbonTools.GetCustomButton("Detail löschen", Resources.delete,DeleteDetailRow),
+                                                                           }, "Beschreibungen"));
+      }
+    }
+
+    public Detail FocusedRowDetail
+    {
+      get { return viewDetail.GetFocusedRow() as Detail; }
+    }
+
     public override bool ValidateControl()
     {
       if (FocusedRowDetail != null)
@@ -57,6 +77,8 @@ namespace Impressio.Controls
       }
       else
       {
+        if (Order == null) { throw new InvalidOperationException("Order cannot be null"); }
+
         descriptionBindingSource.DataSource = _description.LoadObjectList(Description.Columns.FkDescriptionOrder, Order.Identity);
         predefinedDescriptionCombo.Items.Clear();
         predefinedDescriptionCombo.Items.AddRange(_description.PredefinedObjects.Select(a => a.JobTitle).ToList());
@@ -105,11 +127,6 @@ namespace Impressio.Controls
         }
         FocusedRowDetail.Identity = FocusedRowDetail.SaveObject();
       }
-    }
-
-    public Detail FocusedRowDetail
-    {
-      get { return viewDetail.GetFocusedRow() as Detail; }
     }
 
     public bool IsPredefinedMode;
@@ -271,97 +288,12 @@ namespace Impressio.Controls
       }
     }
 
-    #region Ribbons
-
     public void DeleteDetailRow(object sender, ItemClickEventArgs e)
     {
       DeleteDetailRow();
     }
 
-    public void ReloadControl(object sender, ItemClickEventArgs e)
-    {
-      ReloadControl();
-    }
-
-    public override RibbonPage RibbonPage
-    {
-      get
-      {
-        if (_ribbonPage == null)
-        {
-          _ribbonPage = new RibbonPage("Beschreibungen");
-        }
-        if (_ribbonGroup == null)
-        {
-          _ribbonGroup = new RibbonPageGroup();
-          DeleteButton.ItemClick += DeleteRow;
-          DeleteDetailButton.ItemClick += DeleteDetailRow;
-          RefreshButton.ItemClick += ReloadControl;
-
-          _ribbonGroup.ItemLinks.Clear();
-          _ribbonGroup.ItemLinks.Add(DeleteButton);
-          _ribbonGroup.ItemLinks.Add(DeleteDetailButton);
-          _ribbonGroup.ItemLinks.Add(RefreshButton);
-
-          _ribbonPage.Groups.Add(_ribbonGroup);
-        }
-        return _ribbonPage;
-      }
-    }
-
-    public BarButtonItem RefreshButton
-    {
-      get
-      {
-        return _refreshButton ?? (_refreshButton = new BarButtonItem
-        {
-          Caption = "Aktualisieren",
-          Id = 3,
-          LargeGlyph = Properties.Resources.refresh,
-          LargeWidth = 80,
-        });
-      }
-    }
-
-    public BarButtonItem DeleteButton
-    {
-      get
-      {
-        return _deleteButton ?? (_deleteButton = new BarButtonItem
-        {
-          Caption = "Löschen",
-          Id = 2,
-          LargeGlyph = Properties.Resources.delete,
-          LargeWidth = 80,
-        });
-      }
-    }
-
-    public BarButtonItem DeleteDetailButton
-    {
-      get
-      {
-        return _deleteDetailButton ?? (_deleteDetailButton = new BarButtonItem
-                                                               {
-                                                                 Caption = "Detail löschen",
-                                                                 Id = 3,
-                                                                 LargeGlyph = Properties.Resources.delete,
-                                                                 LargeWidth = 80,
-                                                               });
-      }
-    }
-
-    private RibbonPageGroup _ribbonGroup;
-
     private RibbonPage _ribbonPage;
-
-    private BarButtonItem _refreshButton;
-
-    private BarButtonItem _deleteButton;
-
-    private BarButtonItem _deleteDetailButton;
-
-    #endregion
 
     private List<GridColumn> _columns;
 

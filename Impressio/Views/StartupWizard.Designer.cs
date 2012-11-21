@@ -28,6 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartupWizard));
       this.wizardControl = new DevExpress.XtraWizard.WizardControl();
       this.validateDatabase = new DevExpress.XtraEditors.LabelControl();
       this.welcomeWizardPage = new DevExpress.XtraWizard.WelcomeWizardPage();
@@ -38,7 +39,6 @@
       this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
       this.completionWizardPage = new DevExpress.XtraWizard.CompletionWizardPage();
       this.wizardPageDatabase = new DevExpress.XtraWizard.WizardPage();
-      this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
       this.createCompact = new DevExpress.XtraEditors.SimpleButton();
       this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
@@ -73,7 +73,11 @@
             this.wizardPageDatabase,
             this.completionWizardPage});
       this.wizardControl.Size = new System.Drawing.Size(634, 334);
+      this.wizardControl.Text = "Impressio";
+      this.wizardControl.TitleImage = ((System.Drawing.Image)(resources.GetObject("wizardControl.TitleImage")));
+      this.wizardControl.WizardStyle = DevExpress.XtraWizard.WizardStyle.WizardAero;
       this.wizardControl.FinishClick += new System.ComponentModel.CancelEventHandler(this.WizardControlFinishClick);
+      this.wizardControl.NextClick += new DevExpress.XtraWizard.WizardCommandButtonClickEventHandler(this.WizardControlNextClick);
       // 
       // validateDatabase
       // 
@@ -87,9 +91,8 @@
       this.welcomeWizardPage.IntroductionText = "Dieser Wizard hilft Ihnen beim aufsetzten Ihrer Impressio Installation.";
       this.welcomeWizardPage.Name = "welcomeWizardPage";
       this.welcomeWizardPage.ProceedText = "";
-      this.welcomeWizardPage.Size = new System.Drawing.Size(417, 201);
+      this.welcomeWizardPage.Size = new System.Drawing.Size(574, 172);
       this.welcomeWizardPage.Text = "Impressio";
-      this.welcomeWizardPage.Enter += new System.EventHandler(this.WelcomeWizardPageEnter);
       // 
       // wizardPagePersonalInformation
       // 
@@ -100,14 +103,14 @@
       this.wizardPagePersonalInformation.Controls.Add(this.labelControl1);
       this.wizardPagePersonalInformation.DescriptionText = "";
       this.wizardPagePersonalInformation.Name = "wizardPagePersonalInformation";
-      this.wizardPagePersonalInformation.Size = new System.Drawing.Size(602, 189);
+      this.wizardPagePersonalInformation.Size = new System.Drawing.Size(574, 172);
       this.wizardPagePersonalInformation.Text = "Ihre persönlichen Daten";
       // 
       // logoEdit
       // 
       this.logoEdit.Location = new System.Drawing.Point(241, 72);
       this.logoEdit.Name = "logoEdit";
-      this.logoEdit.Size = new System.Drawing.Size(341, 20);
+      this.logoEdit.Size = new System.Drawing.Size(306, 20);
       this.logoEdit.TabIndex = 3;
       this.logoEdit.Enter += new System.EventHandler(this.LogoEditEnter);
       // 
@@ -123,7 +126,7 @@
       // 
       this.userEdit.Location = new System.Drawing.Point(241, 27);
       this.userEdit.Name = "userEdit";
-      this.userEdit.Size = new System.Drawing.Size(341, 20);
+      this.userEdit.Size = new System.Drawing.Size(306, 20);
       this.userEdit.TabIndex = 1;
       this.userEdit.EditValueChanged += new System.EventHandler(this.UserEditEditValueChanged);
       // 
@@ -140,12 +143,11 @@
       this.completionWizardPage.FinishText = "Viel Spass mit Ihrer Installation von Impressio";
       this.completionWizardPage.Name = "completionWizardPage";
       this.completionWizardPage.ProceedText = "";
-      this.completionWizardPage.Size = new System.Drawing.Size(417, 201);
+      this.completionWizardPage.Size = new System.Drawing.Size(574, 172);
       this.completionWizardPage.Text = "Wizard erfolgreich beendet";
       // 
       // wizardPageDatabase
       // 
-      this.wizardPageDatabase.Controls.Add(this.labelControl6);
       this.wizardPageDatabase.Controls.Add(this.labelControl5);
       this.wizardPageDatabase.Controls.Add(this.createCompact);
       this.wizardPageDatabase.Controls.Add(this.labelControl4);
@@ -155,21 +157,13 @@
       this.wizardPageDatabase.Controls.Add(this.connectionString);
       this.wizardPageDatabase.DescriptionText = "";
       this.wizardPageDatabase.Name = "wizardPageDatabase";
-      this.wizardPageDatabase.Size = new System.Drawing.Size(602, 189);
+      this.wizardPageDatabase.Size = new System.Drawing.Size(574, 172);
       this.wizardPageDatabase.Text = "Datenbank konfigurieren";
       this.wizardPageDatabase.PageValidating += new DevExpress.XtraWizard.WizardPageValidatingEventHandler(this.WizardPageDatabasePageValidating);
       // 
-      // labelControl6
-      // 
-      this.labelControl6.Location = new System.Drawing.Point(196, 142);
-      this.labelControl6.Name = "labelControl6";
-      this.labelControl6.Size = new System.Drawing.Size(99, 13);
-      this.labelControl6.TabIndex = 7;
-      this.labelControl6.Text = "Name für Datenbank";
-      // 
       // labelControl5
       // 
-      this.labelControl5.Location = new System.Drawing.Point(24, 142);
+      this.labelControl5.Location = new System.Drawing.Point(15, 137);
       this.labelControl5.Name = "labelControl5";
       this.labelControl5.Size = new System.Drawing.Size(97, 13);
       this.labelControl5.TabIndex = 6;
@@ -177,7 +171,7 @@
       // 
       // createCompact
       // 
-      this.createCompact.Location = new System.Drawing.Point(471, 138);
+      this.createCompact.Location = new System.Drawing.Point(433, 132);
       this.createCompact.Name = "createCompact";
       this.createCompact.Size = new System.Drawing.Size(112, 23);
       this.createCompact.TabIndex = 5;
@@ -186,7 +180,7 @@
       // 
       // labelControl4
       // 
-      this.labelControl4.Location = new System.Drawing.Point(24, 102);
+      this.labelControl4.Location = new System.Drawing.Point(15, 97);
       this.labelControl4.Name = "labelControl4";
       this.labelControl4.Size = new System.Drawing.Size(114, 13);
       this.labelControl4.TabIndex = 4;
@@ -194,18 +188,18 @@
       // 
       // databaseEngine
       // 
-      this.databaseEngine.Location = new System.Drawing.Point(196, 99);
+      this.databaseEngine.Location = new System.Drawing.Point(187, 94);
       this.databaseEngine.Name = "databaseEngine";
       this.databaseEngine.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
       this.databaseEngine.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-      this.databaseEngine.Size = new System.Drawing.Size(387, 20);
+      this.databaseEngine.Size = new System.Drawing.Size(358, 20);
       this.databaseEngine.TabIndex = 3;
       this.databaseEngine.SelectedIndexChanged += new System.EventHandler(this.DatabaseEngineSelectedIndexChanged);
       // 
       // labelControl3
       // 
-      this.labelControl3.Location = new System.Drawing.Point(24, 25);
+      this.labelControl3.Location = new System.Drawing.Point(15, 20);
       this.labelControl3.Name = "labelControl3";
       this.labelControl3.Size = new System.Drawing.Size(158, 13);
       this.labelControl3.TabIndex = 2;
@@ -213,16 +207,16 @@
       // 
       // compactName
       // 
-      this.compactName.Location = new System.Drawing.Point(313, 139);
+      this.compactName.Location = new System.Drawing.Point(187, 134);
       this.compactName.Name = "compactName";
-      this.compactName.Size = new System.Drawing.Size(152, 20);
+      this.compactName.Size = new System.Drawing.Size(227, 20);
       this.compactName.TabIndex = 1;
       // 
       // connectionString
       // 
-      this.connectionString.Location = new System.Drawing.Point(196, 22);
+      this.connectionString.Location = new System.Drawing.Point(187, 17);
       this.connectionString.Name = "connectionString";
-      this.connectionString.Size = new System.Drawing.Size(387, 58);
+      this.connectionString.Size = new System.Drawing.Size(358, 58);
       this.connectionString.TabIndex = 0;
       this.connectionString.EditValueChanged += new System.EventHandler(this.ConnectionStringEditValueChanged);
       // 
@@ -267,7 +261,6 @@
     private DevExpress.XtraEditors.TextEdit logoEdit;
     private DevExpress.XtraEditors.LabelControl labelControl2;
     private DevExpress.XtraWizard.WizardPage wizardPageDatabase;
-    private DevExpress.XtraEditors.LabelControl labelControl6;
     private DevExpress.XtraEditors.LabelControl labelControl5;
     private DevExpress.XtraEditors.SimpleButton createCompact;
     private DevExpress.XtraEditors.LabelControl labelControl4;

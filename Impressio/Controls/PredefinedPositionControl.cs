@@ -1,12 +1,12 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
-using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraEditors.Controls;
 using Impressio.Models;
 using Impressio.Models.Tools;
-using Subvento.DatabaseObject;
-using Type = Impressio.Models.Type;
 
 namespace Impressio.Controls
 {
@@ -18,70 +18,98 @@ namespace Impressio.Controls
       Dock = DockStyle.Fill;
     }
 
-    public Position FocusedRow
+    public IPosition FocusedRow
     {
-      get { return viewPosition.GetFocusedRow() as Position; }
+      get { return viewPosition.GetFocusedRow() as IPosition; }
+    }
+
+    public RibbonPage RibbonPage
+    {
+      get
+      {
+        return _ribbonPage ?? (_ribbonPage = RibbonTools.GetSimplePage(new List<BarButtonItem>
+                                                                         {
+                                                                           RibbonTools.GetRefreshButton(ReloadControl),
+                                                                           OpenPositionButton,
+                                                                           RibbonTools.GetDeleteButton(DeleteRow),
+                                                                         }, "Positionen"));
+      }
+    }
+
+    public BarButtonItem OpenPositionButton
+    {
+      get
+      {
+        return _openPosition ?? (_openPosition = RibbonTools.GetOpenButton());
+      }
     }
 
     public void ReloadControl()
     {
       _position.ClearPredefinedObjects();
-      typeCombo.Items.Clear();
-      typeCombo.Items.AddEnum(typeof(Type));
-      _position.LoadPredefinedObjects();
-      positionBindingSource.DataSource = _position.PredefinedObjects;
-      viewPosition.RefreshData();
+      positionBindingSource.DataSource = _position.PredefinedPosition;
+      lookUpTypes.DataSource = Position.AvailableTypes();
+      lookUpTypes.DropDownRows = Position.AvailablePositions().Count > 10 ? 10 : Position.AvailablePositions().Count;
     }
 
     public void DeleteRow()
     {
       if (FocusedRow != null)
       {
-        switch (FocusedRow.Type)
-        {
-          case Type.Datenaufbereitung:
-            FocusedRow.ToType<Data>().DeleteObject();
-            break;
-          case Type.Digitaldruck:
-            FocusedRow.ToType<Print>().DeleteObject();
-            break;
-          case Type.Offsetdruck:
-            FocusedRow.ToType<Offset>().DeleteObject();
-            break;
-          case Type.Weiterverarbeitung:
-            FocusedRow.ToType<Finish>().DeleteObject();
-            break;
-        }
+        FocusedRow.DeletePosition();
+        viewPosition.DeleteSelectedRows();
       }
     }
 
     public bool ValidateRow()
     {
-      if (FocusedRow != null && !string.IsNullOrEmpty(FocusedRow.Name))
+      if(!viewPosition.FocusedRowModified)
       {
-        UpdateRow();
         return true;
       }
-      return FocusedRow == null;
+      if (FocusedRow != null)
+      {
+        if(string.IsNullOrEmpty(FocusedRow.Name))
+        {
+          viewPosition.SetColumnError(colName, "Bitte einen gültigen Namen eintragen");
+        }
+        else
+        {
+          viewPosition.SetColumnError(colName, "");
+        }
+        if(string.IsNullOrEmpty(FocusedRow.DisplayName))
+        {
+          viewPosition.SetColumnError(colDisplayName, "Bitte einen gültigen Typ eintragen");
+        }
+        else
+        {
+          viewPosition.SetColumnError(colDisplayName, "");
+        }
+        if (viewPosition.IsNewItemRow(viewPosition.FocusedRowHandle) && !viewPosition.HasColumnErrors)
+        {
+          var match = (from pos in _position.PredefinedPosition where pos.Name == FocusedRow.Name select pos).Count();
+          if (match == 1)
+          {
+            viewPosition.SetColumnError(colName, "");
+          }
+          else
+          {
+            viewPosition.SetColumnError(colName, "Eine Position mit diesem Namen existiert bereits");
+          }
+        }
+        if (!viewPosition.HasColumnErrors)
+        {
+          UpdateRow();
+          return true;
+        }
+      }
+      return false;
     }
 
     public void UpdateRow()
     {
-      switch (FocusedRow.Type)
-      {
-        case Type.Datenaufbereitung:
-          FocusedRow.ToType<Data>().SaveObject();
-          break;
-        case Type.Digitaldruck:
-          FocusedRow.ToType<Print>().SaveObject();
-          break;
-        case Type.Offsetdruck:
-          FocusedRow.ToType<Offset>().SaveObject();
-          break;
-        case Type.Weiterverarbeitung:
-          FocusedRow.ToType<Finish>().SaveObject();
-          break;
-      }
+      FocusedRow.IsPredefined = true;
+      FocusedRow.Identity = FocusedRow.SavePosition();
     }
 
     public bool ValidateControl()
@@ -91,15 +119,19 @@ namespace Impressio.Controls
 
     private void ViewPositionValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
     {
-      ValidateRow();
+      e.Valid = ValidateRow();
     }
 
-    private void ViewPositionInitNewRow(object sender, InitNewRowEventArgs e)
+    private void ViewPositionFocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
     {
-      viewPosition.SetFocusedRowCellValue(colIsPredefined, true);
+      colDisplayName.ColumnEdit = viewPosition.IsNewItemRow(e.FocusedRowHandle) ? lookUpTypes : null;
+      colDisplayName.OptionsColumn.AllowEdit = viewPosition.IsNewItemRow(e.FocusedRowHandle);
     }
 
-    #region Ribbon
+    private void ViewPositionInvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
+    {
+      e.ExceptionMode = ExceptionMode.NoAction;
+    }
 
     public void DeleteRow(object sender, ItemClickEventArgs e)
     {
@@ -111,87 +143,9 @@ namespace Impressio.Controls
       ReloadControl();
     }
 
-    public RibbonPage RibbonPage
-    {
-      get
-      {
-        if (_ribbonPage == null)
-        {
-          _ribbonPage = new RibbonPage("Vordefinierte Positionen");
-        }
-        if (_ribbonGroup == null)
-        {
-          _ribbonGroup = new RibbonPageGroup();
-        }
-        _ribbonGroup.ItemLinks.Clear();
-        _ribbonGroup.ItemLinks.Add(DeleteButton);
-        _ribbonGroup.ItemLinks.Add(RefreshButton);
-        _ribbonGroup.ItemLinks.Add(OpenPositionButton);
-        _refreshButton.ItemClick += ReloadControl;
-        _deleteButton.ItemClick += DeleteRow;
-
-        _ribbonPage.Groups.Add(_ribbonGroup);
-
-        return _ribbonPage;
-      }
-    }
-
-    public BarButtonItem OpenPositionButton
-    {
-      get
-      {
-        return _openPosition ?? (_openPosition = new BarButtonItem
-        {
-          Caption = "Position öffnen",
-          Id = 1,
-          LargeGlyph = Properties.Resources.open,
-          LargeWidth = 80,
-          Name = "positionOpen"
-        });
-      }
-    }
-
-    public BarButtonItem RefreshButton
-    {
-      get
-      {
-        return _refreshButton ?? (_refreshButton = new BarButtonItem
-        {
-          Caption = "Aktualisieren",
-          Id = 3,
-          LargeGlyph = Properties.Resources.refresh,
-          LargeWidth = 80,
-          Name = "positionRefresh"
-        });
-      }
-    }
-
-    public BarButtonItem DeleteButton
-    {
-      get
-      {
-        return _deleteButton ?? (_deleteButton = new BarButtonItem
-        {
-          Caption = "Löschen",
-          Id = 2,
-          LargeGlyph = Properties.Resources.delete,
-          LargeWidth = 80,
-          Name = "positionDelete",
-        });
-      }
-    }
-
-    private RibbonPageGroup _ribbonGroup;
-
     private RibbonPage _ribbonPage;
 
     private BarButtonItem _openPosition;
-
-    private BarButtonItem _refreshButton;
-
-    private BarButtonItem _deleteButton;
-
-    #endregion
 
     private readonly Position _position = new Position();
   }

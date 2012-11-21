@@ -4,6 +4,7 @@ using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using Impressio.Models;
+using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Controls
@@ -33,6 +34,28 @@ namespace Impressio.Controls
       }
     }
 
+    public override RibbonPage RibbonPage
+    {
+      get
+      {
+        return _ribbonPage ?? (_ribbonPage = RibbonTools.GetSimplePage(new List<BarButtonItem>
+                                                                         {
+                                                                           RibbonTools.GetRefreshButton(ReloadControl),
+                                                                           OpenDelivery,
+                                                                           RibbonTools.GetDeleteButton(DeleteRow),
+                                                                           RibbonTools.GetPrintButton("Lieferschein drucken", PrintDelivery),
+                                                                         }, "Lieferscheine"));
+      }
+    }
+
+    public BarButtonItem OpenDelivery
+    {
+      get
+      {
+        return _openDelivery ?? (_openDelivery = RibbonTools.GetOpenButton());
+      }
+    }
+
     public override void ReloadControl()
     {
       if (Order != null)
@@ -51,93 +74,18 @@ namespace Impressio.Controls
     {
       viewDelivery.SetFocusedRowCellValue(colFkDeliveryOrder, Order.Identity);
     }
-
-    #region Ribbon
-
-    public void ReloadControl(object sender, ItemClickEventArgs e)
-    {
-      ReloadControl();
-    }
     
-    public override RibbonPage RibbonPage
+    private void PrintDelivery(object sender, ItemClickEventArgs e)
     {
-      get
+      if(FocusedRow != null)
       {
-        if (_ribbonPage == null)
-        {
-          _ribbonPage = new RibbonPage("Lieferscheine")
-                          {
-                            Name = "overview",
-                          };
-        }
-        if (_ribbonGroup == null)
-        {
-          _ribbonGroup = new RibbonPageGroup();
-          _ribbonGroup.ItemLinks.Clear();
-          DeleteButton.ItemClick += DeleteRow;
-          RefreshButton.ItemClick += ReloadControl;
-          _ribbonGroup.ItemLinks.Add(DeleteButton);
-          _ribbonGroup.ItemLinks.Add(RefreshButton);
-          _ribbonGroup.ItemLinks.Add(OpenDelivery);
-          _ribbonPage.Groups.Add(_ribbonGroup);
-        }
-        return _ribbonPage;
+        FocusedRow.LoadDeliveryReport();
       }
     }
-
-    public BarButtonItem OpenDelivery
-    {
-      get
-      {
-        return _openDelivery ?? (_openDelivery = new BarButtonItem
-        {
-          Caption = "Position öffnen",
-          Id = 1,
-          LargeGlyph = Properties.Resources.open,
-          LargeWidth = 80,
-        });
-      }
-    }
-
-    public BarButtonItem RefreshButton
-    {
-      get
-      {
-        return _refreshButton ?? (_refreshButton = new BarButtonItem
-        {
-          Caption = "Aktualisieren",
-          Id = 3,
-          LargeGlyph = Properties.Resources.refresh,
-          LargeWidth = 80,
-        });
-      }
-    }
-
-    public BarButtonItem DeleteButton
-    {
-      get
-      {
-        return _deleteButton ?? (_deleteButton = new BarButtonItem
-        {
-          Caption = "Löschen",
-          Id = 2,
-          LargeGlyph = Properties.Resources.delete,
-          LargeWidth = 80,
-        });
-      }
-    }
-
-    private RibbonPageGroup _ribbonGroup;
 
     private RibbonPage _ribbonPage;
 
     private BarButtonItem _openDelivery;
-
-    private BarButtonItem _refreshButton;
-
-    private BarButtonItem _deleteButton;
-
-    #endregion
 
     private readonly Company _company = new Company();
 

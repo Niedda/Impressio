@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using Impressio.Controls;
 using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
-  public class Print : DatabaseObjectBase<Print>, IPosition, IPredefined<Print>
+  /// <summary>
+  /// Print position for calculating digital printing jobs
+  /// </summary>
+  public class Print : Position, IDatabaseObject<Print>
   {
     #region Columns enum
 
@@ -27,9 +31,9 @@ namespace Impressio.Models
 
     #endregion
 
-    public override string IdentityColumn { get { return "PrintId"; } }
+    public string IdentityColumn { get { return "PrintId"; } }
 
-    public override string Table { get { return "Print"; } }
+    public string Table { get { return "Print"; } }
 
     public override int Identity { get; set; }
 
@@ -101,11 +105,13 @@ namespace Impressio.Models
 
     public int PaperUsePer { get; set; }
 
-    public bool IsPredefined { get; set; }
+    public override bool IsPredefined { get; set; }
 
-    public string Name { get; set; }
+    public override string Name { get; set; }
 
-    public int FkOrder { get; set; }
+    public override string DisplayName { get { return "Digitaldruck"; } }
+
+    public override int FkOrder { get; set; }
 
     public decimal PaperCostTotal
     {
@@ -132,11 +138,11 @@ namespace Impressio.Models
             return Math.Round(total * 2, 1);
           }
         }
-        return Math.Round(total,1);
+        return Math.Round(total, 1);
       }
     }
 
-    public int PositionTotal
+    public override int PositionTotal
     {
       get
       {
@@ -144,29 +150,48 @@ namespace Impressio.Models
       }
     }
 
-    public Type Type
+    public override IControl AssignedControl
     {
-      get { return Type.Digitaldruck; }
-      set { }
+      get { return new PrintControl { Print = new Print { Identity = Identity }, }; }
     }
 
-    public void LoadPredefined()
+    public override List<Position> LoadPositions()
     {
-      var prints = new Print();
-      prints.LoadObjectList(Columns.IsPredefined, true);
-      _predefinedPrints.AddRange(prints.Objects);
+      if (FkOrder <= 0)
+      {
+        throw new InvalidOperationException("Fk Order can not be null");
+      }
+      return this.LoadObjectList(Columns.FkPrintOrder, FkOrder).ConvertAll(conv => (Position)conv);
     }
 
-    public List<Print> PredefinedObjects { get { return _predefinedPrints; } }
+    public override List<Position> LoadPredefinedPositions()
+    {
+      return this.LoadObjectList(Columns.IsPredefined, true).ConvertAll(conv => (Position)conv);
+    }
 
-    public void ClearPredefinedObjects()
+    public override void ClearPredefinedObjects()
     {
       _predefinedPrints.Clear();
     }
 
-    public override List<Print> Objects { get { return _prints; } }
+    public override void ClearObjects()
+    {
+      ClearObjectList();
+    }
 
-    public override void SetObject()
+    public override void DeletePosition()
+    {
+      this.DeleteObject();
+    }
+
+    public override int SavePosition()
+    {
+      return this.SaveObject();
+    }
+
+    public List<Print> Objects { get { return _prints; } }
+
+    public void SetObject()
     {
       IsPredefined = (bool)Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
       Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
@@ -182,7 +207,7 @@ namespace Impressio.Models
       Name = Database.DatabaseCommand.Reader[Columns.PositionName.ToString()] as string;
     }
 
-    public override Dictionary<Enum, object> GetObject()
+    public Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>
                {
@@ -201,7 +226,7 @@ namespace Impressio.Models
                };
     }
 
-    public override void ClearObjectList()
+    public void ClearObjectList()
     {
       _prints.Clear();
     }

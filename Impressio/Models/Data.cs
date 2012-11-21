@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Impressio.Controls;
 using Impressio.Models.Tools;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
-  public class Data : DatabaseObjectBase<Data>, IPosition, IPredefined<Data>
+  /// <summary>
+  /// Data Position class for premedia costs
+  /// </summary>
+  public class Data : Position, IDatabaseObject<Data>
   {
     #region Columns enum
 
@@ -21,27 +25,34 @@ namespace Impressio.Models
 
     #endregion
 
-    public override string IdentityColumn { get { return "DataId"; } }
+    public string IdentityColumn { get { return "DataId"; } }
 
-    public override string Table { get { return "Data"; } }
+    public string Table { get { return "Data"; } }
 
     public override int Identity { get; set; }
 
-    public int FkOrder { get; set; }
+    public override string DisplayName { get { return "Datenaufbereitung"; } }
 
-    public string Name { get; set; }
+    public override int FkOrder { get; set; }
 
-    public int PositionTotal
+    public override string Name { get; set; }
+
+    public override int PositionTotal
     {
       get { return DataPositions.Sum(data => data.PositionTotal); }
     }
 
-    public bool IsPredefined { get; set; }
+    public override bool IsPredefined { get; set; }
 
     public string Remark { get; set; }
 
-    public override List<Data> Objects { get { return _datas; } }
+    public List<Data> Objects { get { return _datas; } }
 
+    public List<Data> PredefinedObjects
+    {
+      get { return _predefinedData; }
+    }
+    
     public List<DataPosition> DataPositions
     {
       get
@@ -50,28 +61,65 @@ namespace Impressio.Models
       }
     }
 
-    public Type Type
+    public override IControl AssignedControl
     {
-      get { return Type.Datenaufbereitung; }
+      get { return new DataControl { Data = new Data { Identity = Identity }, }; }
     }
 
-    public void LoadPredefined()
+    public override List<Position> LoadPositions()
     {
-      var data = new Data();
-      _predefinedData.AddRange(data.LoadObjectList(Columns.IsPredefined, true));
+      if (FkOrder <= 0)
+      {
+        throw new InvalidOperationException("Fk Order can not be null");
+      }
+      return this.LoadObjectList(Columns.FkDataOrder, FkOrder).ConvertAll(conv => (Position)conv);
     }
 
-    public List<Data> PredefinedObjects
+    public override List<Position> LoadPredefinedPositions()
     {
-      get { return _predefinedData; }
+      return this.LoadObjectList(Columns.IsPredefined, true).ConvertAll(conv => (Position)conv);
     }
 
-    public void ClearPredefinedObjects()
+    public override void ClearPredefinedObjects()
     {
       _predefinedData.Clear();
     }
 
-    public override void SetObject()
+    public override void ClearObjects()
+    {
+      ClearObjectList();
+    }
+
+    public override void DeletePosition()
+    {
+      this.DeleteObject();
+    }
+
+    public override int SavePosition()
+    {
+      return this.SaveObject();
+    }
+
+    public override int CopyPosition(int orderId)
+    {
+      this.LoadSingleObject();
+      var id = base.CopyPosition(FkOrder);
+      
+      foreach (var dataPosition in DataPositions)
+      {
+        dataPosition.Identity = 0;
+        dataPosition.FkDataDataPosition = id;
+        dataPosition.SaveObject();
+      }
+      return id;
+    }
+
+    public void ClearObjectList()
+    {
+      _datas.Clear();
+    }
+
+    public void SetObject()
     {
       Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
       FkOrder = Database.DatabaseCommand.Reader[Columns.FkDataOrder.ToString()].GetInt();
@@ -80,7 +128,7 @@ namespace Impressio.Models
       IsPredefined = (bool)Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
     }
 
-    public override Dictionary<Enum, object> GetObject()
+    public Dictionary<Enum, object> GetObject()
     {
       return new Dictionary<Enum, object>
                {
@@ -92,11 +140,6 @@ namespace Impressio.Models
                };
     }
 
-    public override void ClearObjectList()
-    {
-      _datas.Clear();
-    }
-
     private List<DataPosition> _dataPosition;
 
     private readonly List<Data> _datas = new List<Data>();
@@ -104,6 +147,9 @@ namespace Impressio.Models
     private readonly List<Data> _predefinedData = new List<Data>();
   }
 
+  /// <summary>
+  /// Positions contained by the data class
+  /// </summary>
   public class DataPosition : DatabaseObjectBase<DataPosition>
   {
     #region Columns enum

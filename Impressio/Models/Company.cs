@@ -5,6 +5,9 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
+  /// <summary>
+  /// Customer Company class
+  /// </summary>
   public class Company : DatabaseObjectBase<Company>
   {
     #region Columns enum

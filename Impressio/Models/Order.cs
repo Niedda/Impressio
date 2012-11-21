@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using DevExpress.XtraReports.UI;
 using DevExpress.XtraReports.UserDesigner;
 using Impressio.Models.Tools;
 using Impressio.Properties;
@@ -11,6 +9,9 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
+  /// <summary>
+  /// Order class containing descriptions, position and deliveries
+  /// </summary>
   public class Order : DatabaseObjectBase<Order>
   {
     #region Columns enum
@@ -231,10 +232,7 @@ namespace Impressio.Models
 
     public int FkOrderAddress { get; set; }
 
-    public string FolderPath
-    {
-      get { return Settings.Default.folderPath + Identity; }
-    }
+    public string FolderPath { get; set; }
 
     public Client Client
     {
@@ -344,17 +342,17 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
-      _dateCreated = Database.DatabaseCommand.Reader[Columns.DateCreated.ToString()] as string;
-      DateModified = Database.DatabaseCommand.Reader[Columns.DateModified.ToString()] as string;
-      _userCreated = Database.DatabaseCommand.Reader[Columns.UserCreated.ToString()] as string;
-      UserModified = Database.DatabaseCommand.Reader[Columns.UserModified.ToString()] as string;
-      OrderName = Database.DatabaseCommand.Reader[Columns.OrderName.ToString()] as string;
-      FkOrderCompany = Database.DatabaseCommand.Reader[Columns.FkOrderCompany.ToString()].GetInt();
-      FkOrderState = Database.DatabaseCommand.Reader[Columns.FkOrderState.ToString()].GetInt();
-      FkOrderAddress = Database.DatabaseCommand.Reader[Columns.FkOrderAddress.ToString()].GetInt();
-      FkOrderClient = Database.DatabaseCommand.Reader[Columns.FkOrderClient.ToString()].GetInt();
-      IsPredefined = (bool)Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
+        Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
+        _dateCreated = Database.DatabaseCommand.Reader[Columns.DateCreated.ToString()] as string;
+        DateModified = Database.DatabaseCommand.Reader[Columns.DateModified.ToString()] as string;
+        _userCreated = Database.DatabaseCommand.Reader[Columns.UserCreated.ToString()] as string;
+        UserModified = Database.DatabaseCommand.Reader[Columns.UserModified.ToString()] as string;
+        OrderName = Database.DatabaseCommand.Reader[Columns.OrderName.ToString()] as string;
+        FkOrderCompany = Database.DatabaseCommand.Reader[Columns.FkOrderCompany.ToString()].GetInt();
+        FkOrderState = Database.DatabaseCommand.Reader[Columns.FkOrderState.ToString()].GetInt();
+        FkOrderAddress = Database.DatabaseCommand.Reader[Columns.FkOrderAddress.ToString()].GetInt();
+        FkOrderClient = Database.DatabaseCommand.Reader[Columns.FkOrderClient.ToString()].GetInt();
+        IsPredefined = (bool)Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
     }
 
     public override Dictionary<Enum, object> GetObject()
@@ -379,16 +377,7 @@ namespace Impressio.Models
       _orders.Clear();
     }
 
-    public void OpenFolder()
-    {
-      if (!Directory.Exists(FolderPath))
-      {
-        Directory.CreateDirectory(FolderPath);
-      }
-      Process.Start("explorer.exe", FolderPath);
-    }
-
-    public void CopyOrder()
+    public int CopyOrder()
     {
       var descriptions = Descriptions;
       var prints = Prints;
@@ -476,6 +465,7 @@ namespace Impressio.Models
           deliveryPosition.SaveObject();
         }
       }
+      return Identity;
     }
 
     private string _dateCreated;

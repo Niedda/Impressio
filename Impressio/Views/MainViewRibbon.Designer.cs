@@ -53,6 +53,9 @@
       this.editOffer = new DevExpress.XtraBars.BarButtonItem();
       this.editOrder = new DevExpress.XtraBars.BarButtonItem();
       this.editDelivery = new DevExpress.XtraBars.BarButtonItem();
+      this.predefinedOrder = new DevExpress.XtraBars.BarButtonItem();
+      this.createOrderWizard = new DevExpress.XtraBars.BarButtonItem();
+      this.deleteCustomer = new DevExpress.XtraBars.BarButtonItem();
       this.ribbonPageOrder = new DevExpress.XtraBars.Ribbon.RibbonPage();
       this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -72,6 +75,7 @@
       // 
       this.ribbon.AllowTrimPageText = false;
       this.ribbon.ApplicationButtonText = null;
+      this.ribbon.ApplicationIcon = ((System.Drawing.Bitmap)(resources.GetObject("ribbon.ApplicationIcon")));
       // 
       // 
       // 
@@ -101,15 +105,18 @@
             this.state,
             this.editOffer,
             this.editOrder,
-            this.editDelivery});
+            this.editDelivery,
+            this.predefinedOrder,
+            this.createOrderWizard,
+            this.deleteCustomer});
       this.ribbon.Location = new System.Drawing.Point(0, 0);
-      this.ribbon.MaxItemId = 26;
+      this.ribbon.MaxItemId = 30;
       this.ribbon.Name = "ribbon";
       this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageOrder,
             this.ribbonPageCustomer,
             this.ribbonPageProperties});
-      this.ribbon.SelectedPage = this.ribbonPageOrder;
+      this.ribbon.SelectedPage = this.ribbonPageProperties;
       this.ribbon.ShowToolbarCustomizeItem = false;
       this.ribbon.Size = new System.Drawing.Size(825, 145);
       this.ribbon.StatusBar = this.ribbonStatusBar;
@@ -158,7 +165,7 @@
       // 
       this.barButtonItem6.Caption = "barButtonItem6";
       this.barButtonItem6.Id = 7;
-      this.barButtonItem6.LargeGlyph = global::Impressio.Properties.Resources.refresh;
+      this.barButtonItem6.LargeGlyph = global::Impressio.Properties.Resources.printglyph;
       this.barButtonItem6.Name = "barButtonItem6";
       // 
       // printOrder
@@ -214,7 +221,7 @@
       this.showPerson.Caption = "Personen ";
       this.showPerson.Id = 13;
       this.showPerson.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Postponed;
-      this.showPerson.LargeGlyph = global::Impressio.Properties.Resources.person1;
+      this.showPerson.LargeGlyph = global::Impressio.Properties.Resources.person;
       this.showPerson.LargeWidth = 80;
       this.showPerson.Name = "showPerson";
       // 
@@ -286,7 +293,7 @@
       this.genders.Caption = "Anreden";
       this.genders.Id = 21;
       this.genders.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Postponed;
-      this.genders.LargeGlyph = global::Impressio.Properties.Resources.gender1;
+      this.genders.LargeGlyph = global::Impressio.Properties.Resources.gender;
       this.genders.LargeWidth = 80;
       this.genders.Name = "genders";
       // 
@@ -296,6 +303,7 @@
       this.state.Id = 22;
       this.state.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Postponed;
       this.state.LargeGlyph = global::Impressio.Properties.Resources.state;
+      this.state.LargeWidth = 90;
       this.state.Name = "state";
       // 
       // editOffer
@@ -303,7 +311,8 @@
       this.editOffer.Caption = "Offerte bearbeiten";
       this.editOffer.Id = 23;
       this.editOffer.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Postponed;
-      this.editOffer.LargeGlyph = global::Impressio.Properties.Resources.description;
+      this.editOffer.LargeGlyph = global::Impressio.Properties.Resources.printglyph;
+      this.editOffer.LargeWidth = 80;
       this.editOffer.Name = "editOffer";
       // 
       // editOrder
@@ -311,7 +320,8 @@
       this.editOrder.Caption = "Lauftasche bearbeiten";
       this.editOrder.Id = 24;
       this.editOrder.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Postponed;
-      this.editOrder.LargeGlyph = global::Impressio.Properties.Resources.description;
+      this.editOrder.LargeGlyph = global::Impressio.Properties.Resources.printglyph;
+      this.editOrder.LargeWidth = 80;
       this.editOrder.Name = "editOrder";
       // 
       // editDelivery
@@ -319,8 +329,34 @@
       this.editDelivery.Caption = "Lieferschein bearbeiten";
       this.editDelivery.Id = 25;
       this.editDelivery.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Postponed;
-      this.editDelivery.LargeGlyph = global::Impressio.Properties.Resources.description;
+      this.editDelivery.LargeGlyph = global::Impressio.Properties.Resources.printglyph;
+      this.editDelivery.LargeWidth = 80;
       this.editDelivery.Name = "editDelivery";
+      // 
+      // predefinedOrder
+      // 
+      this.predefinedOrder.Caption = "Aufträge";
+      this.predefinedOrder.Id = 27;
+      this.predefinedOrder.LargeGlyph = global::Impressio.Properties.Resources.order;
+      this.predefinedOrder.LargeWidth = 80;
+      this.predefinedOrder.Name = "predefinedOrder";
+      // 
+      // createOrderWizard
+      // 
+      this.createOrderWizard.Caption = "Wizard";
+      this.createOrderWizard.Id = 28;
+      this.createOrderWizard.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("createOrderWizard.LargeGlyph")));
+      this.createOrderWizard.LargeWidth = 80;
+      this.createOrderWizard.Name = "createOrderWizard";
+      this.createOrderWizard.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CreateOrderWizardItemClick);
+      // 
+      // deleteCustomer
+      // 
+      this.deleteCustomer.Caption = "Löschen";
+      this.deleteCustomer.Id = 29;
+      this.deleteCustomer.LargeGlyph = global::Impressio.Properties.Resources.delete;
+      this.deleteCustomer.LargeWidth = 80;
+      this.deleteCustomer.Name = "deleteCustomer";
       // 
       // ribbonPageOrder
       // 
@@ -335,8 +371,9 @@
       this.ribbonPageGroup1.AllowMinimize = false;
       this.ribbonPageGroup1.ItemLinks.Add(this.refreshOrder);
       this.ribbonPageGroup1.ItemLinks.Add(this.openOrder);
-      this.ribbonPageGroup1.ItemLinks.Add(this.copyOrder);
       this.ribbonPageGroup1.ItemLinks.Add(this.deleteOrder);
+      this.ribbonPageGroup1.ItemLinks.Add(this.copyOrder);
+      this.ribbonPageGroup1.ItemLinks.Add(this.createOrderWizard);
       this.ribbonPageGroup1.Name = "ribbonPageGroup1";
       this.ribbonPageGroup1.ShowCaptionButton = false;
       this.ribbonPageGroup1.Text = "Aufträge";
@@ -344,8 +381,8 @@
       // ribbonPageGroup2
       // 
       this.ribbonPageGroup2.AllowMinimize = false;
-      this.ribbonPageGroup2.ItemLinks.Add(this.printOrder);
       this.ribbonPageGroup2.ItemLinks.Add(this.printOffer);
+      this.ribbonPageGroup2.ItemLinks.Add(this.printOrder);
       this.ribbonPageGroup2.Name = "ribbonPageGroup2";
       this.ribbonPageGroup2.ShowCaptionButton = false;
       this.ribbonPageGroup2.Text = "Dokumente";
@@ -362,9 +399,9 @@
       this.ribbonPageGroup3.AllowMinimize = false;
       this.ribbonPageGroup3.AllowTextClipping = false;
       this.ribbonPageGroup3.ItemLinks.Add(this.showCompanies);
-      this.ribbonPageGroup3.ItemLinks.Add(this.showAddress);
       this.ribbonPageGroup3.ItemLinks.Add(this.showPerson);
-      this.ribbonPageGroup3.ItemLinks.Add(this.deleteEntry);
+      this.ribbonPageGroup3.ItemLinks.Add(this.showAddress);
+      this.ribbonPageGroup3.ItemLinks.Add(this.deleteCustomer);
       this.ribbonPageGroup3.Name = "ribbonPageGroup3";
       this.ribbonPageGroup3.ShowCaptionButton = false;
       this.ribbonPageGroup3.Text = "Kunden";
@@ -391,6 +428,7 @@
       // 
       this.ribbonPageGroup5.AllowMinimize = false;
       this.ribbonPageGroup5.AllowTextClipping = false;
+      this.ribbonPageGroup5.ItemLinks.Add(this.predefinedOrder);
       this.ribbonPageGroup5.ItemLinks.Add(this.predefinedPositions);
       this.ribbonPageGroup5.ItemLinks.Add(this.predefinedDescription);
       this.ribbonPageGroup5.Name = "ribbonPageGroup5";
@@ -402,10 +440,10 @@
       this.ribbonPageGroup6.AllowMinimize = false;
       this.ribbonPageGroup6.AllowTextClipping = false;
       this.ribbonPageGroup6.ItemLinks.Add(this.papers);
-      this.ribbonPageGroup6.ItemLinks.Add(this.machines);
       this.ribbonPageGroup6.ItemLinks.Add(this.clickCosts);
-      this.ribbonPageGroup6.ItemLinks.Add(this.genders);
+      this.ribbonPageGroup6.ItemLinks.Add(this.machines);
       this.ribbonPageGroup6.ItemLinks.Add(this.state);
+      this.ribbonPageGroup6.ItemLinks.Add(this.genders);
       this.ribbonPageGroup6.ItemLinks.Add(this.editOffer);
       this.ribbonPageGroup6.ItemLinks.Add(this.editOrder);
       this.ribbonPageGroup6.ItemLinks.Add(this.editDelivery);
@@ -437,7 +475,6 @@
       this.Controls.Add(this.mainPanel);
       this.Controls.Add(this.ribbonStatusBar);
       this.Controls.Add(this.ribbon);
-      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.MinimumSize = new System.Drawing.Size(696, 380);
       this.Name = "MainViewRibbon";
       this.Ribbon = this.ribbon;
@@ -487,5 +524,8 @@
     private DevExpress.XtraBars.BarButtonItem editOffer;
     private DevExpress.XtraBars.BarButtonItem editOrder;
     private DevExpress.XtraBars.BarButtonItem editDelivery;
+    private DevExpress.XtraBars.BarButtonItem predefinedOrder;
+    private DevExpress.XtraBars.BarButtonItem createOrderWizard;
+    private DevExpress.XtraBars.BarButtonItem deleteCustomer;
   }
 }

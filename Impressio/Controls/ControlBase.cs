@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.DXErrorProvider;
@@ -84,7 +85,12 @@ namespace Impressio.Controls
       Update();
     }
 
-    public virtual void ReloadControl(object sender, EventArgs e)
+    public void ReloadControl(object sender, EventArgs e)
+    {
+      ReloadControl();
+    }
+
+    public void ReloadControl(object sender, ItemClickEventArgs e)
     {
       ReloadControl();
     }
@@ -93,7 +99,7 @@ namespace Impressio.Controls
     {
       return !ErrorProvider.HasErrors;
     }
-
+    
     private void ValidateControl(object sender, CancelEventArgs e)
     {
       ValidateControl();

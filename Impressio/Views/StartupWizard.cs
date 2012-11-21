@@ -35,8 +35,6 @@ namespace Impressio.Views
 
     private void WizardPageDatabasePageValidating(object sender, DevExpress.XtraWizard.WizardPageValidatingEventArgs e)
     {
-      validateDatabase.Text = "";
-      validateDatabase.Update();
       validateDatabase.ForeColor = Color.Gold;
       validateDatabase.Text = "Validierung der Eingaben...";
       validateDatabase.Update();
@@ -83,6 +81,7 @@ namespace Impressio.Views
         databaseEngine.Update();
         validateDatabase.Text = "Compact Datenbank erfolgreich erstellt";
         validateDatabase.ForeColor = Color.Green;
+        ServiceLocator.ResetDatabase();
       }
     }
 
@@ -95,13 +94,14 @@ namespace Impressio.Views
       }
     }
 
-    private void WelcomeWizardPageEnter(object sender, EventArgs e)
+    private void WizardControlNextClick(object sender, DevExpress.XtraWizard.WizardCommandButtonClickEventArgs e)
     {
       userEdit.Text = Settings.Default.User;
       logoEdit.Text = Settings.Default.logoImage;
       databaseEngine.Properties.Items.Clear();
       connectionString.Text = ServiceLocator.Instance.ConfigFile.ConnectionString;
-      databaseEngine.Properties.Items.AddRange(Enum.GetNames(typeof(ServiceLocator.DatabaseEngine)));
+      object[] databases = Enum.GetNames(typeof(ServiceLocator.DatabaseEngine));
+      databaseEngine.Properties.Items.AddRange(databases);
       databaseEngine.Text = ServiceLocator.Instance.ConfigFile.DatabaseEngine.ToString();
     }
   }
