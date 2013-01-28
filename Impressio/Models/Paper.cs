@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using DevExpress.XtraEditors;
 using Impressio.Models.Tools;
+using Impressio.Views;
 using Subvento.DatabaseObject;
 
 namespace Impressio.Models
@@ -126,6 +128,7 @@ namespace Impressio.Models
       SizeL = Database.DatabaseCommand.Reader[Columns.SizeL.ToString()].GetInt();
       Name = Database.DatabaseCommand.Reader[Columns.PaperName.ToString()] as string;
       Weight = Database.DatabaseCommand.Reader[Columns.Weight.ToString()].GetInt();
+      Vendor = Database.DatabaseCommand.Reader[Columns.Vendor.ToString()] as string;
     }
 
     public override void ClearObjectList()
@@ -167,36 +170,45 @@ namespace Impressio.Models
         {
           string extension = Path.GetExtension(filePath);
           var xlConn = new OleDbConnection();
-          var paper = new Paper();
-          paper.LoadObjectList();
 
           if (extension != null && extension.Equals(".xls"))
           {
             xlConn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + filePath +
-                                      "; Extended Properties=Excel 8.0;";
+                                      "; Extended Properties='Excel 8.0;HDR=Yes;IMEX=1'";
           }
           else if (extension != null && extension.Equals(".xlsx"))
           {
-            xlConn.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + filePath +
-                                      "; Extended Properties=\"Excel 12.0;\";";
+            xlConn.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + filePath + @"; Extended Properties='Excel 12.0;HDR=Yes;IMEX=1'";
           }
           else
           {
             return false;
           }
-
           xlConn.Open();
 
+          var schema = xlConn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+          var listSheet = (from DataRow drSheet in schema.Rows where drSheet["TABLE_NAME"].ToString().Contains("$") select drSheet["TABLE_NAME"].ToString()).ToList();
+          new ExcelImportView
+                         {
+                           ExcelSheets = listSheet,
+                           Connection = xlConn,
+                         }.Show();
+          return true;
+
+
           var command = new OleDbCommand("SELECT * FROM [Papier$]", xlConn);
-          OleDbDataReader reader = command.ExecuteReader();
+          var reader = command.ExecuteReader();
+
+          var paper = new Paper();
+          paper.LoadObjectList();
 
           while (reader != null && reader.Read())
           {
             paper.Identity = 0;
-            paper.Price1 = reader["Preis1"].GetInt();
-            paper.Price2 = reader["Preis2"].GetInt();
-            paper.Price3 = reader["Preis3"].GetInt();
-            paper.Price4 = reader["Preis4"].GetInt();
+            paper.Price1 = Convert.ToInt32(reader["Preis1"]);
+            paper.Price2 = Convert.ToInt32(reader["Preis2"]);
+            paper.Price3 = Convert.ToInt32(reader["Preis3"]);
+            paper.Price4 = Convert.ToInt32(reader["Preis4"]);
             paper.Amount1 = reader["Menge1"].GetInt();
             paper.Amount2 = reader["Menge2"].GetInt();
             paper.Amount3 = reader["Menge3"].GetInt();
@@ -206,6 +218,7 @@ namespace Impressio.Models
             paper.SizeL = reader["Länge"].GetInt();
             paper.Name = reader["Name"] as string;
             paper.Weight = reader["Grammatur"].GetInt();
+            paper.Vendor = reader["Verkäufer"] as string;
 
             if (paper.ItemNumber != 0)
             {

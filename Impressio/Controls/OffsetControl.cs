@@ -43,6 +43,18 @@ namespace Impressio.Controls
       _isLoaded = true;
     }
 
+    public override bool ValidateControl()
+    {
+      ValidateChildren();
+
+      if (!ErrorProvider.HasErrors)
+      {
+        Offset.SaveObject();
+        return true;
+      }
+      return false;
+    }
+
     public Offset Offset;
 
     private void PaperSearchLookUpEditValueChanged(object sender, EventArgs e)
@@ -68,7 +80,7 @@ namespace Impressio.Controls
     {
       if (paperQuantity.Value != 0 && paperUsePer.Value != 0 && _isLoaded)
       {
-        Offset.PaperQuantity = (int)paperQuantity.Value * (int)paperUsePer.Value;
+        Offset.PaperQuantity = paperQuantity.Value.GetInt() * paperUsePer.Value.GetInt();
         Offset.SaveObject();
       }
     }
@@ -77,7 +89,7 @@ namespace Impressio.Controls
     {
       if (_isLoaded)
       {
-        Offset.PrintQuantity = (int)offsetColorAmount.Value * (int)offsetPaperQuantity.Value;
+        Offset.PrintQuantity = offsetColorAmount.Value.GetInt() * offsetPaperQuantity.Value.GetInt();
         Offset.SaveObject();
       }
     }

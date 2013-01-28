@@ -56,6 +56,26 @@ namespace Impressio.Models
 
     public int PrintType { get; set; }
 
+    public string PrintTypeString
+    {
+      get
+      {
+        switch (PrintType)
+        {
+          case 0:
+            return "Einseitig";
+          case 1:
+            return "Umschlagen";
+          case 2:
+            return "Umstülpen";
+          case 3:
+            return "SD/WD";
+          default:
+            return "";
+        }
+      }
+    }
+
     public int ColorAmount { get; set; }
 
     public int OffsetQuantity { get; set; }

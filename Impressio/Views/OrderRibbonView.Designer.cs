@@ -78,7 +78,7 @@
             this.orderPage});
       this.ribbon.SelectedPage = this.orderPage;
       this.ribbon.ShowToolbarCustomizeItem = false;
-      this.ribbon.Size = new System.Drawing.Size(716, 145);
+      this.ribbon.Size = new System.Drawing.Size(790, 145);
       this.ribbon.StatusBar = this.ribbonStatusBar;
       this.ribbon.Toolbar.ShowCustomizeItem = false;
       // 
@@ -202,28 +202,29 @@
       // 
       // ribbonStatusBar
       // 
-      this.ribbonStatusBar.Location = new System.Drawing.Point(0, 418);
+      this.ribbonStatusBar.Location = new System.Drawing.Point(0, 468);
       this.ribbonStatusBar.Name = "ribbonStatusBar";
       this.ribbonStatusBar.Ribbon = this.ribbon;
-      this.ribbonStatusBar.Size = new System.Drawing.Size(716, 31);
+      this.ribbonStatusBar.Size = new System.Drawing.Size(790, 31);
       // 
       // mainPanel
       // 
       this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
       this.mainPanel.Location = new System.Drawing.Point(0, 145);
       this.mainPanel.Name = "mainPanel";
-      this.mainPanel.Size = new System.Drawing.Size(716, 273);
+      this.mainPanel.Size = new System.Drawing.Size(790, 323);
       this.mainPanel.TabIndex = 2;
       // 
       // OrderRibbonView
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(716, 449);
+      this.ClientSize = new System.Drawing.Size(790, 499);
       this.Controls.Add(this.mainPanel);
       this.Controls.Add(this.ribbonStatusBar);
       this.Controls.Add(this.ribbon);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+      this.MinimumSize = new System.Drawing.Size(800, 500);
       this.Name = "OrderRibbonView";
       this.Ribbon = this.ribbon;
       this.StatusBar = this.ribbonStatusBar;

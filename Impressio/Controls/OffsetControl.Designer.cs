@@ -30,14 +30,13 @@ namespace Impressio.Controls
     /// </summary>
     private void InitializeComponent()
     {
-      this.components = new System.ComponentModel.Container();
-      DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-      DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
       DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+      DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+      DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
       this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
       this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
       this.paperCostTotal = new DevExpress.XtraEditors.SpinEdit();
-      this.offsetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.offsetBindingSource = new System.Windows.Forms.BindingSource();
       this.paperUsePer = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
@@ -49,7 +48,7 @@ namespace Impressio.Controls
       this.paperPricePer = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
       this.paperSearchLookUp = new DevExpress.XtraEditors.SearchLookUpEdit();
-      this.paperBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.paperBindingSource = new System.Windows.Forms.BindingSource();
       this.viewPaper = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -83,7 +82,7 @@ namespace Impressio.Controls
       this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
       this.offsetMachineSearchLookUp = new DevExpress.XtraEditors.SearchLookUpEdit();
-      this.machineBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.machineBindingSource = new System.Windows.Forms.BindingSource();
       this.viewMachine = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity1 = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -93,6 +92,7 @@ namespace Impressio.Controls
       this.colName1 = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colPlateCost = new DevExpress.XtraGrid.Columns.GridColumn();
       this.offsetPrintType = new DevExpress.XtraEditors.ComboBoxEdit();
+      this.colWeight = new DevExpress.XtraGrid.Columns.GridColumn();
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
       this.groupControl1.SuspendLayout();
@@ -171,7 +171,7 @@ namespace Impressio.Controls
       this.paperCostTotal.Properties.AppearanceReadOnly.Options.UseBackColor = true;
       this.paperCostTotal.Properties.AppearanceReadOnly.Options.UseBorderColor = true;
       this.paperCostTotal.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
       this.paperCostTotal.Properties.DisplayFormat.FormatString = "c";
       this.paperCostTotal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.paperCostTotal.Properties.ReadOnly = true;
@@ -322,14 +322,12 @@ namespace Impressio.Controls
       // paperSearchLookUp
       // 
       this.paperSearchLookUp.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "FkOffsetPaper", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-      this.paperSearchLookUp.EditValue = "";
       this.paperSearchLookUp.Location = new System.Drawing.Point(112, 51);
       this.paperSearchLookUp.Name = "paperSearchLookUp";
       this.paperSearchLookUp.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
       this.paperSearchLookUp.Properties.DataSource = this.paperBindingSource;
       this.paperSearchLookUp.Properties.DisplayMember = "Name";
-      this.paperSearchLookUp.Properties.NullText = "";
       this.paperSearchLookUp.Properties.ValueMember = "Identity";
       this.paperSearchLookUp.Properties.View = this.viewPaper;
       this.paperSearchLookUp.Size = new System.Drawing.Size(350, 20);
@@ -359,7 +357,8 @@ namespace Impressio.Controls
             this.colDirectionString,
             this.colSizeL,
             this.colSizeB,
-            this.colSize});
+            this.colSize,
+            this.colWeight});
       this.viewPaper.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
       this.viewPaper.Name = "viewPaper";
       this.viewPaper.OptionsBehavior.ReadOnly = true;
@@ -527,7 +526,7 @@ namespace Impressio.Controls
       this.priceTotal.Properties.AppearanceReadOnly.Options.UseBackColor = true;
       this.priceTotal.Properties.AppearanceReadOnly.Options.UseBorderColor = true;
       this.priceTotal.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
       this.priceTotal.Properties.DisplayFormat.FormatString = "c";
       this.priceTotal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.priceTotal.Properties.ReadOnly = true;
@@ -573,7 +572,7 @@ namespace Impressio.Controls
       this.offsetPrintTotal.Properties.AppearanceReadOnly.Options.UseBackColor = true;
       this.offsetPrintTotal.Properties.AppearanceReadOnly.Options.UseBorderColor = true;
       this.offsetPrintTotal.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
       this.offsetPrintTotal.Properties.DisplayFormat.FormatString = "c";
       this.offsetPrintTotal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.offsetPrintTotal.Properties.ReadOnly = true;
@@ -704,7 +703,6 @@ namespace Impressio.Controls
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
       this.offsetMachineSearchLookUp.Properties.DataSource = this.machineBindingSource;
       this.offsetMachineSearchLookUp.Properties.DisplayMember = "Name";
-      this.offsetMachineSearchLookUp.Properties.NullText = "";
       this.offsetMachineSearchLookUp.Properties.ValueMember = "Identity";
       this.offsetMachineSearchLookUp.Properties.View = this.viewMachine;
       this.offsetMachineSearchLookUp.Size = new System.Drawing.Size(350, 20);
@@ -802,6 +800,15 @@ namespace Impressio.Controls
       this.offsetPrintType.Size = new System.Drawing.Size(100, 20);
       this.offsetPrintType.TabIndex = 11;
       this.offsetPrintType.EditValueChanged += new System.EventHandler(this.SaveOffset);
+      // 
+      // colWeight
+      // 
+      this.colWeight.Caption = "Grammatur";
+      this.colWeight.FieldName = "Weight";
+      this.colWeight.Name = "colWeight";
+      this.colWeight.OptionsColumn.AllowEdit = false;
+      this.colWeight.Visible = true;
+      this.colWeight.VisibleIndex = 5;
       // 
       // OffsetControl
       // 
@@ -902,5 +909,6 @@ namespace Impressio.Controls
     private DevExpress.XtraGrid.Columns.GridColumn colName1;
     private DevExpress.XtraGrid.Columns.GridColumn colPlateCost;
     private System.Windows.Forms.BindingSource offsetBindingSource;
+    private DevExpress.XtraGrid.Columns.GridColumn colWeight;
   }
 }

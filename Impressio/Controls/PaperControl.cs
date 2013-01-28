@@ -32,8 +32,6 @@ namespace Impressio.Controls
                                          {
                                            colName,
                                            colPrice1,
-                                           colSizeB,
-                                           colSizeL,
                                          });
       }
     }
@@ -60,7 +58,7 @@ namespace Impressio.Controls
 
     public void LoadFromExcel(object sender, ItemClickEventArgs e)
     {
-      var fileDialog = new OpenFileDialog { Filter = "Excel Worksheets|*.xls | *.xlsx" };
+      var fileDialog = new OpenFileDialog { Filter = "Excel Worksheets(*.xls;*.xlsx) | *.xls;*.xlsx" };
       var result = fileDialog.ShowDialog();
 
       if (result == DialogResult.OK)
