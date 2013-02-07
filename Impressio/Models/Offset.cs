@@ -143,7 +143,6 @@ namespace Impressio.Models
           if (PrintType == 0)
           {
             var color = (decimal)ColorAmount * (Machine.PlateCost + Machine.PricePerColor);
-            total = (int)(quantity + color);
             total = (OffsetQuantity / Machine.Speed * Machine.PricePerHour) +
                     (ColorAmount * (Machine.PlateCost + Machine.PricePerColor));
           }

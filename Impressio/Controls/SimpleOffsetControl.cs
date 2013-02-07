@@ -31,40 +31,40 @@ namespace Impressio.Controls
 
     public override void ReloadControl()
     {
-      if (SimpleOffset == null) { throw new InvalidOperationException("SimpleOffset cannot be null"); }
+      //if (SimpleOffset == null) { throw new InvalidOperationException("SimpleOffset cannot be null"); }
 
-      _isLoaded = false;
+      //_isLoaded = false;
 
-      SimpleOffset.LoadSingleObject();
-      _machine.ClearObjectList();
-      _paper.ClearObjectList();
+      //SimpleOffset.LoadSingleObject();
+      //_machine.ClearObjectList();
+      //_paper.ClearObjectList();
 
-      paperSizesBindingSource.DataSource = PaperSizes.GetEndSizes();
-      machineBindingSource.DataSource = _machine.LoadObjectList();
-      paperBindingSource.DataSource = _paper.LoadObjectList();
+      //paperSizesBindingSource.DataSource = PaperSizes.GetEndSizes();
+      //machineBindingSource.DataSource = _machine.LoadObjectList();
+      //paperBindingSource.DataSource = _paper.LoadObjectList();
 
-      if (_useSimpleOffsets.Count == 0)
-      {
-        _useSimpleOffsets.Add(new UseSimpleOffset { UseName = "Sorte 1" });
-      }
-      useSimpleOffsetBindingSource.DataSource = _useSimpleOffsets;
+      //if (_useSimpleOffsets.Count == 0)
+      //{
+      //  _useSimpleOffsets.Add(new UseSimpleOffset { UseName = "Sorte 1" });
+      //}
+      //useSimpleOffsetBindingSource.DataSource = _useSimpleOffsets;
 
-      _isLoaded = true;
+      //_isLoaded = true;
     }
 
     public override bool ValidateControl()
     {
-      ValidateChildren();
+      //ValidateChildren();
 
-      if (!ErrorProvider.HasErrors)
-      {
-        SimpleOffset.SaveObject();
-        return true;
-      }
+      //if (!ErrorProvider.HasErrors)
+      //{
+      //  SimpleOffset.SaveObject();
+      //  return true;
+      //}
       return false;
     }
 
-    public SimpleOffset SimpleOffset;
+    //public SimpleOffset SimpleOffset;
 
     private void EndPaperSizeLookUpEditValueChanged(object sender, EventArgs e)
     {
