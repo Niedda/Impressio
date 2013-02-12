@@ -94,7 +94,23 @@ namespace Impressio.Models
         }
       }
     }
-    
+
+    public int Quantity { get; set; }
+
+    public int Width { get; set; }
+
+    public int Height { get; set; }
+
+    public int ColorFront { get; set; }
+
+    public int ColorBack { get; set; }
+
+    public int PrintFormatWidth { get; set; }
+
+    public int PrintFormatHeight { get; set; }
+
+    public int PaperAddition { get; set; }
+
     public override bool IsPredefined { get; set; }
 
     public string IdentityColumn

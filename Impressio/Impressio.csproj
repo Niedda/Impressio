@@ -70,7 +70,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
@@ -239,11 +239,19 @@
     <Compile Include="Controls\SimpleOffsetControl.Designer.cs">
       <DependentUpon>SimpleOffsetControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SingleOffsetControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SingleOffsetControl.Designer.cs">
+      <DependentUpon>SingleOffsetControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DatabaseAttribute.cs" />
     <Compile Include="Models\PaperSizes.cs" />
     <Compile Include="Models\PositionBase.cs" />
     <Compile Include="Models\PredefinedOrder.cs" />
+    <Compile Include="Models\PriceClass.cs" />
     <Compile Include="Models\SimpleOffset.cs" />
+    <Compile Include="Models\SingleOffset.cs" />
     <Compile Include="Models\Tools\ReflectionTools.cs" />
     <Compile Include="Models\Tools\RibbonTools.cs" />
     <Compile Include="Controls\StateControl.cs">
@@ -403,6 +411,9 @@
     <EmbeddedResource Include="Controls\SimpleOffsetControl.resx">
       <DependentUpon>SimpleOffsetControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SingleOffsetControl.resx">
+      <DependentUpon>SingleOffsetControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ExcelImportView.resx">
       <DependentUpon>ExcelImportView.cs</DependentUpon>
     </EmbeddedResource>
@@ -431,6 +442,7 @@
     <None Include="Properties\DataSources\Impressio.Models.PositionBase.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.PredefinedOrder.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.Print.datasource" />
+    <None Include="Properties\DataSources\Impressio.Models.SingleOffset.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.UseSimpleOffset.datasource" />
     <None Include="Views\Reports\deliveryReport.repx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

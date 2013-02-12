@@ -9,7 +9,7 @@ using DevExpress.XtraEditors;
 
 namespace Impressio.Controls
 {
-  public partial class SingleOffsetControl : DevExpress.XtraEditors.XtraUserControl
+  public partial class SingleOffsetControl : XtraUserControl
   {
     public SingleOffsetControl()
     {

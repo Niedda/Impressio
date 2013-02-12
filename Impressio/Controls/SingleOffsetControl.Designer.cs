@@ -28,6 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.singleOffsetWizard = new DevExpress.XtraWizard.WizardControl();
       this.wizardPageBasicProperties = new DevExpress.XtraWizard.WelcomeWizardPage();
       this.colorBack = new DevExpress.XtraEditors.SpinEdit();
@@ -35,14 +36,12 @@
       this.finishSizeLookUp = new DevExpress.XtraEditors.LookUpEdit();
       this.finishSizeL = new DevExpress.XtraEditors.SpinEdit();
       this.finishSizeH = new DevExpress.XtraEditors.SpinEdit();
-      this.name = new DevExpress.XtraEditors.TextEdit();
       this.quantity = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-      this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
       this.wizardPageSheetSetup = new DevExpress.XtraWizard.WizardPage();
       this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
       this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
@@ -60,6 +59,8 @@
       this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
       this.completionWizardPage1 = new DevExpress.XtraWizard.CompletionWizardPage();
       this.wizardPagePaper = new DevExpress.XtraWizard.WizardPage();
+      this.usePerSheet = new DevExpress.XtraEditors.SpinEdit();
+      this.labelControl21 = new DevExpress.XtraEditors.LabelControl();
       this.paperTotalPrice = new DevExpress.XtraEditors.SpinEdit();
       this.paperQuantity = new DevExpress.XtraEditors.SpinEdit();
       this.pricePaper = new DevExpress.XtraEditors.SpinEdit();
@@ -72,16 +73,15 @@
       this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
       this.wizardPage1 = new DevExpress.XtraWizard.WizardPage();
+      this.spinEdit16 = new DevExpress.XtraEditors.SpinEdit();
+      this.spinEdit15 = new DevExpress.XtraEditors.SpinEdit();
+      this.spinEdit14 = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl20 = new DevExpress.XtraEditors.LabelControl();
       this.checkedListBoxControl1 = new DevExpress.XtraEditors.CheckedListBoxControl();
       this.labelControl19 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
-      this.spinEdit14 = new DevExpress.XtraEditors.SpinEdit();
-      this.spinEdit15 = new DevExpress.XtraEditors.SpinEdit();
-      this.spinEdit16 = new DevExpress.XtraEditors.SpinEdit();
-      this.usePerSheet = new DevExpress.XtraEditors.SpinEdit();
-      this.labelControl21 = new DevExpress.XtraEditors.LabelControl();
+      this.singleOffsetBindingSource = new System.Windows.Forms.BindingSource(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.singleOffsetWizard)).BeginInit();
       this.singleOffsetWizard.SuspendLayout();
       this.wizardPageBasicProperties.SuspendLayout();
@@ -90,7 +90,6 @@
       ((System.ComponentModel.ISupportInitialize)(this.finishSizeLookUp.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.finishSizeL.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.finishSizeH.Properties)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.name.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.quantity.Properties)).BeginInit();
       this.wizardPageSheetSetup.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -104,6 +103,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.spinEdit6.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.spinEdit7.Properties)).BeginInit();
       this.wizardPagePaper.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.usePerSheet.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperTotalPrice.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperQuantity.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pricePaper.Properties)).BeginInit();
@@ -111,11 +111,11 @@
       ((System.ComponentModel.ISupportInitialize)(this.paperSearchLook.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
       this.wizardPage1.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControl1)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.spinEdit14.Properties)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.spinEdit15.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.spinEdit16.Properties)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.usePerSheet.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.spinEdit15.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.spinEdit14.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControl1)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.singleOffsetBindingSource)).BeginInit();
       this.SuspendLayout();
       // 
       // singleOffsetWizard
@@ -149,14 +149,12 @@
       this.wizardPageBasicProperties.Controls.Add(this.finishSizeLookUp);
       this.wizardPageBasicProperties.Controls.Add(this.finishSizeL);
       this.wizardPageBasicProperties.Controls.Add(this.finishSizeH);
-      this.wizardPageBasicProperties.Controls.Add(this.name);
       this.wizardPageBasicProperties.Controls.Add(this.quantity);
       this.wizardPageBasicProperties.Controls.Add(this.labelControl6);
       this.wizardPageBasicProperties.Controls.Add(this.labelControl5);
       this.wizardPageBasicProperties.Controls.Add(this.labelControl4);
       this.wizardPageBasicProperties.Controls.Add(this.labelControl3);
       this.wizardPageBasicProperties.Controls.Add(this.labelControl2);
-      this.wizardPageBasicProperties.Controls.Add(this.labelControl1);
       this.wizardPageBasicProperties.Name = "wizardPageBasicProperties";
       this.wizardPageBasicProperties.Size = new System.Drawing.Size(707, 325);
       this.wizardPageBasicProperties.Text = "Bitte geben Sie die Grundangaben ein";
@@ -168,7 +166,7 @@
             0,
             0,
             0});
-      this.colorBack.Location = new System.Drawing.Point(157, 158);
+      this.colorBack.Location = new System.Drawing.Point(157, 129);
       this.colorBack.Name = "colorBack";
       this.colorBack.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -184,7 +182,7 @@
             0,
             0,
             0});
-      this.colorFront.Location = new System.Drawing.Point(157, 125);
+      this.colorFront.Location = new System.Drawing.Point(157, 96);
       this.colorFront.Name = "colorFront";
       this.colorFront.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -195,7 +193,7 @@
       // 
       // finishSizeLookUp
       // 
-      this.finishSizeLookUp.Location = new System.Drawing.Point(157, 92);
+      this.finishSizeLookUp.Location = new System.Drawing.Point(157, 63);
       this.finishSizeLookUp.Name = "finishSizeLookUp";
       this.finishSizeLookUp.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -210,7 +208,7 @@
             0,
             0,
             0});
-      this.finishSizeL.Location = new System.Drawing.Point(245, 92);
+      this.finishSizeL.Location = new System.Drawing.Point(245, 63);
       this.finishSizeL.Name = "finishSizeL";
       this.finishSizeL.Properties.IsFloatValue = false;
       this.finishSizeL.Properties.Mask.EditMask = "N00";
@@ -224,19 +222,12 @@
             0,
             0,
             0});
-      this.finishSizeH.Location = new System.Drawing.Point(321, 92);
+      this.finishSizeH.Location = new System.Drawing.Point(321, 63);
       this.finishSizeH.Name = "finishSizeH";
       this.finishSizeH.Properties.IsFloatValue = false;
       this.finishSizeH.Properties.Mask.EditMask = "N00";
       this.finishSizeH.Size = new System.Drawing.Size(70, 20);
       this.finishSizeH.TabIndex = 8;
-      // 
-      // name
-      // 
-      this.name.Location = new System.Drawing.Point(157, 26);
-      this.name.Name = "name";
-      this.name.Size = new System.Drawing.Size(234, 20);
-      this.name.TabIndex = 7;
       // 
       // quantity
       // 
@@ -245,7 +236,7 @@
             0,
             0,
             0});
-      this.quantity.Location = new System.Drawing.Point(157, 59);
+      this.quantity.Location = new System.Drawing.Point(157, 30);
       this.quantity.Name = "quantity";
       this.quantity.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -256,7 +247,7 @@
       // 
       // labelControl6
       // 
-      this.labelControl6.Location = new System.Drawing.Point(37, 194);
+      this.labelControl6.Location = new System.Drawing.Point(37, 165);
       this.labelControl6.Name = "labelControl6";
       this.labelControl6.Size = new System.Drawing.Size(48, 13);
       this.labelControl6.TabIndex = 5;
@@ -264,7 +255,7 @@
       // 
       // labelControl5
       // 
-      this.labelControl5.Location = new System.Drawing.Point(37, 161);
+      this.labelControl5.Location = new System.Drawing.Point(37, 132);
       this.labelControl5.Name = "labelControl5";
       this.labelControl5.Size = new System.Drawing.Size(83, 13);
       this.labelControl5.TabIndex = 4;
@@ -272,7 +263,7 @@
       // 
       // labelControl4
       // 
-      this.labelControl4.Location = new System.Drawing.Point(37, 128);
+      this.labelControl4.Location = new System.Drawing.Point(37, 99);
       this.labelControl4.Name = "labelControl4";
       this.labelControl4.Size = new System.Drawing.Size(92, 13);
       this.labelControl4.TabIndex = 3;
@@ -280,7 +271,7 @@
       // 
       // labelControl3
       // 
-      this.labelControl3.Location = new System.Drawing.Point(37, 95);
+      this.labelControl3.Location = new System.Drawing.Point(37, 66);
       this.labelControl3.Name = "labelControl3";
       this.labelControl3.Size = new System.Drawing.Size(34, 13);
       this.labelControl3.TabIndex = 2;
@@ -288,19 +279,11 @@
       // 
       // labelControl2
       // 
-      this.labelControl2.Location = new System.Drawing.Point(37, 62);
+      this.labelControl2.Location = new System.Drawing.Point(37, 33);
       this.labelControl2.Name = "labelControl2";
       this.labelControl2.Size = new System.Drawing.Size(37, 13);
       this.labelControl2.TabIndex = 1;
       this.labelControl2.Text = "Auflage";
-      // 
-      // labelControl1
-      // 
-      this.labelControl1.Location = new System.Drawing.Point(37, 29);
-      this.labelControl1.Name = "labelControl1";
-      this.labelControl1.Size = new System.Drawing.Size(27, 13);
-      this.labelControl1.TabIndex = 0;
-      this.labelControl1.Text = "Name";
       // 
       // wizardPageSheetSetup
       // 
@@ -340,6 +323,7 @@
       // 
       // usePerVertical
       // 
+      this.usePerVertical.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "UsePerVertical", true));
       this.usePerVertical.EditValue = new decimal(new int[] {
             1,
             0,
@@ -364,6 +348,7 @@
       // 
       // usePerHorizontal
       // 
+      this.usePerHorizontal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "UsePerHorizontal", true));
       this.usePerHorizontal.EditValue = new decimal(new int[] {
             1,
             0,
@@ -388,6 +373,8 @@
       // 
       // printTypeCombo
       // 
+      this.printTypeCombo.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "PrintType", true));
+      this.printTypeCombo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.singleOffsetBindingSource, "PrintTypeString", true));
       this.printTypeCombo.Location = new System.Drawing.Point(133, 83);
       this.printTypeCombo.Name = "printTypeCombo";
       this.printTypeCombo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -397,6 +384,7 @@
       // 
       // machineLookUp
       // 
+      this.machineLookUp.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "FkMachine", true));
       this.machineLookUp.Location = new System.Drawing.Point(133, 52);
       this.machineLookUp.Name = "machineLookUp";
       this.machineLookUp.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -507,6 +495,41 @@
       this.wizardPagePaper.Size = new System.Drawing.Size(707, 325);
       this.wizardPagePaper.Text = "Papier";
       // 
+      // usePerSheet
+      // 
+      this.usePerSheet.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "PaperUsePer", true));
+      this.usePerSheet.EditValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+      this.usePerSheet.Location = new System.Drawing.Point(167, 54);
+      this.usePerSheet.Name = "usePerSheet";
+      this.usePerSheet.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.usePerSheet.Properties.IsFloatValue = false;
+      this.usePerSheet.Properties.Mask.EditMask = "N00";
+      this.usePerSheet.Properties.MaxValue = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+      this.usePerSheet.Properties.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+      this.usePerSheet.Size = new System.Drawing.Size(100, 20);
+      this.usePerSheet.TabIndex = 11;
+      // 
+      // labelControl21
+      // 
+      this.labelControl21.Location = new System.Drawing.Point(31, 57);
+      this.labelControl21.Name = "labelControl21";
+      this.labelControl21.Size = new System.Drawing.Size(86, 13);
+      this.labelControl21.TabIndex = 10;
+      this.labelControl21.Text = "Rohbogen Nutzen";
+      // 
       // paperTotalPrice
       // 
       this.paperTotalPrice.EditValue = new decimal(new int[] {
@@ -539,6 +562,7 @@
       // 
       // pricePaper
       // 
+      this.pricePaper.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "PaperPrice", true));
       this.pricePaper.EditValue = new decimal(new int[] {
             0,
             0,
@@ -573,6 +597,7 @@
       // 
       // paperSearchLook
       // 
+      this.paperSearchLook.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "FkPaper", true));
       this.paperSearchLook.Location = new System.Drawing.Point(167, 23);
       this.paperSearchLook.Name = "paperSearchLook";
       this.paperSearchLook.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -643,6 +668,51 @@
       this.wizardPage1.Size = new System.Drawing.Size(707, 325);
       this.wizardPage1.Text = "Details";
       // 
+      // spinEdit16
+      // 
+      this.spinEdit16.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "DifficultColorChange", true));
+      this.spinEdit16.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+      this.spinEdit16.Location = new System.Drawing.Point(167, 91);
+      this.spinEdit16.Name = "spinEdit16";
+      this.spinEdit16.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.spinEdit16.Size = new System.Drawing.Size(112, 20);
+      this.spinEdit16.TabIndex = 7;
+      // 
+      // spinEdit15
+      // 
+      this.spinEdit15.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "EasyColorChange", true));
+      this.spinEdit15.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+      this.spinEdit15.Location = new System.Drawing.Point(167, 57);
+      this.spinEdit15.Name = "spinEdit15";
+      this.spinEdit15.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.spinEdit15.Size = new System.Drawing.Size(112, 20);
+      this.spinEdit15.TabIndex = 6;
+      // 
+      // spinEdit14
+      // 
+      this.spinEdit14.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "PlateQuantity", true));
+      this.spinEdit14.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+      this.spinEdit14.Location = new System.Drawing.Point(167, 23);
+      this.spinEdit14.Name = "spinEdit14";
+      this.spinEdit14.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.spinEdit14.Size = new System.Drawing.Size(112, 20);
+      this.spinEdit14.TabIndex = 5;
+      // 
       // labelControl20
       // 
       this.labelControl20.Location = new System.Drawing.Point(33, 128);
@@ -686,81 +756,9 @@
       this.labelControl17.TabIndex = 0;
       this.labelControl17.Text = "Platten";
       // 
-      // spinEdit14
+      // singleOffsetBindingSource
       // 
-      this.spinEdit14.EditValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-      this.spinEdit14.Location = new System.Drawing.Point(167, 23);
-      this.spinEdit14.Name = "spinEdit14";
-      this.spinEdit14.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-      this.spinEdit14.Size = new System.Drawing.Size(112, 20);
-      this.spinEdit14.TabIndex = 5;
-      // 
-      // spinEdit15
-      // 
-      this.spinEdit15.EditValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-      this.spinEdit15.Location = new System.Drawing.Point(167, 57);
-      this.spinEdit15.Name = "spinEdit15";
-      this.spinEdit15.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-      this.spinEdit15.Size = new System.Drawing.Size(112, 20);
-      this.spinEdit15.TabIndex = 6;
-      // 
-      // spinEdit16
-      // 
-      this.spinEdit16.EditValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-      this.spinEdit16.Location = new System.Drawing.Point(167, 91);
-      this.spinEdit16.Name = "spinEdit16";
-      this.spinEdit16.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-      this.spinEdit16.Size = new System.Drawing.Size(112, 20);
-      this.spinEdit16.TabIndex = 7;
-      // 
-      // usePerSheet
-      // 
-      this.usePerSheet.EditValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-      this.usePerSheet.Location = new System.Drawing.Point(167, 54);
-      this.usePerSheet.Name = "usePerSheet";
-      this.usePerSheet.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-      this.usePerSheet.Properties.IsFloatValue = false;
-      this.usePerSheet.Properties.Mask.EditMask = "N00";
-      this.usePerSheet.Properties.MaxValue = new decimal(new int[] {
-            999,
-            0,
-            0,
-            0});
-      this.usePerSheet.Properties.MinValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-      this.usePerSheet.Size = new System.Drawing.Size(100, 20);
-      this.usePerSheet.TabIndex = 11;
-      // 
-      // labelControl21
-      // 
-      this.labelControl21.Location = new System.Drawing.Point(31, 57);
-      this.labelControl21.Name = "labelControl21";
-      this.labelControl21.Size = new System.Drawing.Size(86, 13);
-      this.labelControl21.TabIndex = 10;
-      this.labelControl21.Text = "Rohbogen Nutzen";
+      this.singleOffsetBindingSource.DataSource = typeof(Impressio.Models.SingleOffset);
       // 
       // SingleOffsetControl
       // 
@@ -778,7 +776,6 @@
       ((System.ComponentModel.ISupportInitialize)(this.finishSizeLookUp.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.finishSizeL.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.finishSizeH.Properties)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.name.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.quantity.Properties)).EndInit();
       this.wizardPageSheetSetup.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
@@ -794,6 +791,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.spinEdit7.Properties)).EndInit();
       this.wizardPagePaper.ResumeLayout(false);
       this.wizardPagePaper.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.usePerSheet.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperTotalPrice.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperQuantity.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pricePaper.Properties)).EndInit();
@@ -802,11 +800,11 @@
       ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
       this.wizardPage1.ResumeLayout(false);
       this.wizardPage1.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControl1)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.spinEdit14.Properties)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.spinEdit15.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.spinEdit16.Properties)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.usePerSheet.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.spinEdit15.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.spinEdit14.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControl1)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.singleOffsetBindingSource)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -822,14 +820,12 @@
     private DevExpress.XtraEditors.LookUpEdit finishSizeLookUp;
     private DevExpress.XtraEditors.SpinEdit finishSizeL;
     private DevExpress.XtraEditors.SpinEdit finishSizeH;
-    private DevExpress.XtraEditors.TextEdit name;
     private DevExpress.XtraEditors.SpinEdit quantity;
     private DevExpress.XtraEditors.LabelControl labelControl6;
     private DevExpress.XtraEditors.LabelControl labelControl5;
     private DevExpress.XtraEditors.LabelControl labelControl4;
     private DevExpress.XtraEditors.LabelControl labelControl3;
     private DevExpress.XtraEditors.LabelControl labelControl2;
-    private DevExpress.XtraEditors.LabelControl labelControl1;
     private DevExpress.XtraEditors.PanelControl panelControl2;
     private DevExpress.XtraEditors.PanelControl panelControl1;
     private DevExpress.XtraEditors.LabelControl labelControl11;
@@ -867,5 +863,6 @@
     private DevExpress.XtraEditors.SpinEdit spinEdit14;
     private DevExpress.XtraEditors.SpinEdit usePerSheet;
     private DevExpress.XtraEditors.LabelControl labelControl21;
+    private System.Windows.Forms.BindingSource singleOffsetBindingSource;
   }
 }
