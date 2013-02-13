@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
+using Subvento.Configuration;
 using Subvento.DatabaseException;
 using Subvento.DatabaseObject;
 
@@ -39,6 +40,7 @@ namespace Subvento.Database
         {
           return false;
         }
+        ServiceLocator.ResetDatabase();
         return DatabaseConnection.OpenConnection(true);
       }
       catch (Exception)

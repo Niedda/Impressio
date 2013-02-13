@@ -7,7 +7,7 @@ namespace Subvento.Tools
 {
   internal static class DatabaseConfigTools
   {
-    internal static bool CheckForConfigFile()
+    private static bool CheckForConfigFile()
     {
       if (!File.Exists(FilePath))
       {
@@ -31,7 +31,7 @@ namespace Subvento.Tools
 
     internal static void LoadConfig(this DatabaseConfig config)
     {
-      if (!CheckForConfigFile()) { return; }
+      CheckForConfigFile();
 
       using (var xmlReader = new XmlTextReader(FilePath))
       {

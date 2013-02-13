@@ -1,6 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.Common;
-using Subvento.DatabaseException;
 
 namespace Subvento.Database
 {
@@ -34,30 +34,30 @@ namespace Subvento.Database
 
     public bool OpenConnection()
     {
-      if (DbConnection.State == ConnectionState.Open || DbConnection.State == ConnectionState.Connecting || DbConnection.State == ConnectionState.Fetching || DbConnection.State == ConnectionState.Executing)
-      {
-        return true;
-      }
-
       try
       {
+
+        if (DbConnection.State == ConnectionState.Open || DbConnection.State == ConnectionState.Connecting ||
+            DbConnection.State == ConnectionState.Fetching || DbConnection.State == ConnectionState.Executing)
+        {
+          return true;
+        }
         DbConnection.Open();
         return true;
       }
-      catch (DbException exception)
+      catch (Exception)
       {
-        new ExceptionHandler(exception);
-        throw;
+        return false;
       }
     }
 
     public bool OpenConnection(bool reOpen)
     {
-      if (reOpen == false)
+      if (reOpen)
       {
+
         return OpenConnection();
       }
-      DbConnection.Close();
       return OpenConnection();
     }
 
