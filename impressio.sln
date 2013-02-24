@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impressio", "Impressio\Impressio.csproj", "{97FA1D0D-FE7A-4C47-BD25-02603064C14D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BC8254A1-A248-4BA5-A6FD-3E8E733D3850} = {BC8254A1-A248-4BA5-A6FD-3E8E733D3850}

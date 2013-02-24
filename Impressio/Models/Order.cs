@@ -72,6 +72,7 @@ namespace Impressio.Models
 
         if (File.Exists(Settings.Default.logoImage))
         {
+          
           report.logoBox.ImageUrl = Settings.Default.logoImage;
         }
 

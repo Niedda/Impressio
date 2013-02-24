@@ -38,7 +38,7 @@ namespace Impressio.Controls
 
       machineBindingSource.DataSource = _machine.LoadObjectList();
       paperBindingSource.DataSource = _paper.LoadObjectList();
-      offsetBindingSource.DataSource = Offset.LoadSingleObject();
+      singleOffsetBindingSource.DataSource = Offset.LoadSingleObject();
 
       _isLoaded = true;
     }

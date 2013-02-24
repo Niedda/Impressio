@@ -30,13 +30,14 @@ namespace Impressio.Controls
     /// </summary>
     private void InitializeComponent()
     {
-      DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+      this.components = new System.ComponentModel.Container();
       DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
       DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+      DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
       this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
       this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
       this.paperCostTotal = new DevExpress.XtraEditors.SpinEdit();
-      this.offsetBindingSource = new System.Windows.Forms.BindingSource();
+      this.singleOffsetBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.paperUsePer = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
@@ -48,7 +49,7 @@ namespace Impressio.Controls
       this.paperPricePer = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
       this.paperSearchLookUp = new DevExpress.XtraEditors.SearchLookUpEdit();
-      this.paperBindingSource = new System.Windows.Forms.BindingSource();
+      this.paperBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewPaper = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -67,6 +68,7 @@ namespace Impressio.Controls
       this.colSizeL = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colSizeB = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colSize = new DevExpress.XtraGrid.Columns.GridColumn();
+      this.colWeight = new DevExpress.XtraGrid.Columns.GridColumn();
       this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
       this.priceTotal = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
@@ -76,13 +78,12 @@ namespace Impressio.Controls
       this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
       this.offsetPaperQuantity = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
-      this.labelPriceOffset = new DevExpress.XtraEditors.LabelControl();
       this.offsetColorAmount = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
       this.offsetMachineSearchLookUp = new DevExpress.XtraEditors.SearchLookUpEdit();
-      this.machineBindingSource = new System.Windows.Forms.BindingSource();
+      this.machineBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewMachine = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity1 = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -92,12 +93,22 @@ namespace Impressio.Controls
       this.colName1 = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colPlateCost = new DevExpress.XtraGrid.Columns.GridColumn();
       this.offsetPrintType = new DevExpress.XtraEditors.ComboBoxEdit();
-      this.colWeight = new DevExpress.XtraGrid.Columns.GridColumn();
+      this.checkedListBoxControl1 = new DevExpress.XtraEditors.CheckedListBoxControl();
+      this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
+      this.easyColorChange = new DevExpress.XtraEditors.SpinEdit();
+      this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
+      this.difficultColorChange = new DevExpress.XtraEditors.SpinEdit();
+      this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
+      this.spinEdit1 = new DevExpress.XtraEditors.SpinEdit();
+      this.labelControl14 = new DevExpress.XtraEditors.LabelControl();
+      this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+      this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
+      this.plates = new DevExpress.XtraEditors.SpinEdit();
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
       this.groupControl1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.paperCostTotal.Properties)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.offsetBindingSource)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.singleOffsetBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperUsePer.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperQuantity.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperAddition.Properties)).BeginInit();
@@ -116,12 +127,17 @@ namespace Impressio.Controls
       ((System.ComponentModel.ISupportInitialize)(this.machineBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewMachine)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.offsetPrintType.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControl1)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.easyColorChange.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.difficultColorChange.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
+      this.groupControl3.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.plates.Properties)).BeginInit();
       this.SuspendLayout();
       // 
       // groupControl1
       // 
-      this.groupControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
       this.groupControl1.Controls.Add(this.labelControl6);
       this.groupControl1.Controls.Add(this.paperCostTotal);
       this.groupControl1.Controls.Add(this.paperUsePer);
@@ -135,15 +151,16 @@ namespace Impressio.Controls
       this.groupControl1.Controls.Add(this.paperPricePer);
       this.groupControl1.Controls.Add(this.labelControl1);
       this.groupControl1.Controls.Add(this.paperSearchLookUp);
-      this.groupControl1.Location = new System.Drawing.Point(2, 3);
+      this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
+      this.groupControl1.Location = new System.Drawing.Point(0, 0);
       this.groupControl1.Name = "groupControl1";
-      this.groupControl1.Size = new System.Drawing.Size(2656, 199);
+      this.groupControl1.Size = new System.Drawing.Size(852, 163);
       this.groupControl1.TabIndex = 0;
       this.groupControl1.Text = "Papier";
       // 
       // labelControl6
       // 
-      this.labelControl6.Location = new System.Drawing.Point(553, 148);
+      this.labelControl6.Location = new System.Drawing.Point(551, 124);
       this.labelControl6.Name = "labelControl6";
       this.labelControl6.Size = new System.Drawing.Size(66, 13);
       this.labelControl6.TabIndex = 12;
@@ -151,14 +168,14 @@ namespace Impressio.Controls
       // 
       // paperCostTotal
       // 
-      this.paperCostTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "PaperCostTotal", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.paperCostTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "PaperCostTotal", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.paperCostTotal.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
       this.paperCostTotal.Enabled = false;
-      this.paperCostTotal.Location = new System.Drawing.Point(625, 145);
+      this.paperCostTotal.Location = new System.Drawing.Point(623, 121);
       this.paperCostTotal.Name = "paperCostTotal";
       this.paperCostTotal.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White;
       this.paperCostTotal.Properties.AppearanceDisabled.BackColor2 = System.Drawing.Color.White;
@@ -171,7 +188,7 @@ namespace Impressio.Controls
       this.paperCostTotal.Properties.AppearanceReadOnly.Options.UseBackColor = true;
       this.paperCostTotal.Properties.AppearanceReadOnly.Options.UseBorderColor = true;
       this.paperCostTotal.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
       this.paperCostTotal.Properties.DisplayFormat.FormatString = "c";
       this.paperCostTotal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.paperCostTotal.Properties.ReadOnly = true;
@@ -179,19 +196,19 @@ namespace Impressio.Controls
       this.paperCostTotal.TabIndex = 11;
       this.paperCostTotal.EditValueChanged += new System.EventHandler(this.SaveOffset);
       // 
-      // offsetBindingSource
+      // singleOffsetBindingSource
       // 
-      this.offsetBindingSource.DataSource = typeof(Impressio.Models.Offset);
+      this.singleOffsetBindingSource.DataSource = typeof(Impressio.Models.SingleOffset);
       // 
       // paperUsePer
       // 
-      this.paperUsePer.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "PaperUsePer", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.paperUsePer.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "PaperUsePer", true));
       this.paperUsePer.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-      this.paperUsePer.Location = new System.Drawing.Point(362, 145);
+      this.paperUsePer.Location = new System.Drawing.Point(360, 121);
       this.paperUsePer.Name = "paperUsePer";
       this.paperUsePer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -207,7 +224,7 @@ namespace Impressio.Controls
       // 
       // labelControl5
       // 
-      this.labelControl5.Location = new System.Drawing.Point(261, 148);
+      this.labelControl5.Location = new System.Drawing.Point(259, 124);
       this.labelControl5.Name = "labelControl5";
       this.labelControl5.Size = new System.Drawing.Size(34, 13);
       this.labelControl5.TabIndex = 9;
@@ -215,7 +232,7 @@ namespace Impressio.Controls
       // 
       // labelControl4
       // 
-      this.labelControl4.Location = new System.Drawing.Point(25, 148);
+      this.labelControl4.Location = new System.Drawing.Point(23, 124);
       this.labelControl4.Name = "labelControl4";
       this.labelControl4.Size = new System.Drawing.Size(32, 13);
       this.labelControl4.TabIndex = 8;
@@ -223,13 +240,13 @@ namespace Impressio.Controls
       // 
       // paperQuantity
       // 
-      this.paperQuantity.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "PaperQuantity", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.paperQuantity.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "PaperQuantity", true));
       this.paperQuantity.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-      this.paperQuantity.Location = new System.Drawing.Point(112, 145);
+      this.paperQuantity.Location = new System.Drawing.Point(110, 121);
       this.paperQuantity.Name = "paperQuantity";
       this.paperQuantity.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -245,7 +262,7 @@ namespace Impressio.Controls
       // 
       // labelPricePaper
       // 
-      this.labelPricePaper.Location = new System.Drawing.Point(554, 54);
+      this.labelPricePaper.Location = new System.Drawing.Point(552, 44);
       this.labelPricePaper.Name = "labelPricePaper";
       this.labelPricePaper.Size = new System.Drawing.Size(58, 13);
       this.labelPricePaper.TabIndex = 6;
@@ -253,7 +270,7 @@ namespace Impressio.Controls
       // 
       // labelControl3
       // 
-      this.labelControl3.Location = new System.Drawing.Point(261, 101);
+      this.labelControl3.Location = new System.Drawing.Point(259, 85);
       this.labelControl3.Name = "labelControl3";
       this.labelControl3.Size = new System.Drawing.Size(67, 13);
       this.labelControl3.TabIndex = 5;
@@ -261,7 +278,7 @@ namespace Impressio.Controls
       // 
       // labelControl2
       // 
-      this.labelControl2.Location = new System.Drawing.Point(25, 101);
+      this.labelControl2.Location = new System.Drawing.Point(23, 85);
       this.labelControl2.Name = "labelControl2";
       this.labelControl2.Size = new System.Drawing.Size(71, 13);
       this.labelControl2.TabIndex = 4;
@@ -269,13 +286,13 @@ namespace Impressio.Controls
       // 
       // paperAddition
       // 
-      this.paperAddition.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "PaperAddition", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.paperAddition.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "PaperAddition", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.paperAddition.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-      this.paperAddition.Location = new System.Drawing.Point(362, 98);
+      this.paperAddition.Location = new System.Drawing.Point(360, 82);
       this.paperAddition.Name = "paperAddition";
       this.paperAddition.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -291,13 +308,13 @@ namespace Impressio.Controls
       // 
       // paperPricePer
       // 
-      this.paperPricePer.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "PaperPricePer", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.paperPricePer.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "PaperPrice", true));
       this.paperPricePer.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-      this.paperPricePer.Location = new System.Drawing.Point(112, 98);
+      this.paperPricePer.Location = new System.Drawing.Point(110, 82);
       this.paperPricePer.Name = "paperPricePer";
       this.paperPricePer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -313,7 +330,7 @@ namespace Impressio.Controls
       // 
       // labelControl1
       // 
-      this.labelControl1.Location = new System.Drawing.Point(25, 54);
+      this.labelControl1.Location = new System.Drawing.Point(23, 44);
       this.labelControl1.Name = "labelControl1";
       this.labelControl1.Size = new System.Drawing.Size(30, 13);
       this.labelControl1.TabIndex = 1;
@@ -321,13 +338,14 @@ namespace Impressio.Controls
       // 
       // paperSearchLookUp
       // 
-      this.paperSearchLookUp.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "FkOffsetPaper", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-      this.paperSearchLookUp.Location = new System.Drawing.Point(112, 51);
+      this.paperSearchLookUp.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "FkPaper", true));
+      this.paperSearchLookUp.Location = new System.Drawing.Point(110, 41);
       this.paperSearchLookUp.Name = "paperSearchLookUp";
       this.paperSearchLookUp.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
       this.paperSearchLookUp.Properties.DataSource = this.paperBindingSource;
       this.paperSearchLookUp.Properties.DisplayMember = "Name";
+      this.paperSearchLookUp.Properties.NullText = "";
       this.paperSearchLookUp.Properties.ValueMember = "Identity";
       this.paperSearchLookUp.Properties.View = this.viewPaper;
       this.paperSearchLookUp.Size = new System.Drawing.Size(350, 20);
@@ -478,11 +496,19 @@ namespace Impressio.Controls
       this.colSize.Visible = true;
       this.colSize.VisibleIndex = 4;
       // 
+      // colWeight
+      // 
+      this.colWeight.Caption = "Grammatur";
+      this.colWeight.FieldName = "Weight";
+      this.colWeight.Name = "colWeight";
+      this.colWeight.OptionsColumn.AllowEdit = false;
+      this.colWeight.Visible = true;
+      this.colWeight.VisibleIndex = 5;
+      // 
       // groupControl2
       // 
-      this.groupControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+      this.groupControl2.Controls.Add(this.spinEdit1);
+      this.groupControl2.Controls.Add(this.labelControl14);
       this.groupControl2.Controls.Add(this.priceTotal);
       this.groupControl2.Controls.Add(this.labelControl13);
       this.groupControl2.Controls.Add(this.labelControl12);
@@ -491,29 +517,29 @@ namespace Impressio.Controls
       this.groupControl2.Controls.Add(this.labelControl11);
       this.groupControl2.Controls.Add(this.offsetPaperQuantity);
       this.groupControl2.Controls.Add(this.labelControl10);
-      this.groupControl2.Controls.Add(this.labelPriceOffset);
       this.groupControl2.Controls.Add(this.offsetColorAmount);
       this.groupControl2.Controls.Add(this.labelControl9);
       this.groupControl2.Controls.Add(this.labelControl8);
       this.groupControl2.Controls.Add(this.labelControl7);
       this.groupControl2.Controls.Add(this.offsetMachineSearchLookUp);
       this.groupControl2.Controls.Add(this.offsetPrintType);
-      this.groupControl2.Location = new System.Drawing.Point(2, 208);
+      this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.groupControl2.Location = new System.Drawing.Point(0, 299);
       this.groupControl2.Name = "groupControl2";
-      this.groupControl2.Size = new System.Drawing.Size(2656, 250);
+      this.groupControl2.Size = new System.Drawing.Size(852, 201);
       this.groupControl2.TabIndex = 1;
       this.groupControl2.Text = "Druck";
       // 
       // priceTotal
       // 
-      this.priceTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "PositionTotal", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.priceTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "PositionTotal", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.priceTotal.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
       this.priceTotal.Enabled = false;
-      this.priceTotal.Location = new System.Drawing.Point(625, 199);
+      this.priceTotal.Location = new System.Drawing.Point(624, 160);
       this.priceTotal.Name = "priceTotal";
       this.priceTotal.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White;
       this.priceTotal.Properties.AppearanceDisabled.BackColor2 = System.Drawing.Color.White;
@@ -526,7 +552,7 @@ namespace Impressio.Controls
       this.priceTotal.Properties.AppearanceReadOnly.Options.UseBackColor = true;
       this.priceTotal.Properties.AppearanceReadOnly.Options.UseBorderColor = true;
       this.priceTotal.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
       this.priceTotal.Properties.DisplayFormat.FormatString = "c";
       this.priceTotal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.priceTotal.Properties.ReadOnly = true;
@@ -536,7 +562,7 @@ namespace Impressio.Controls
       // 
       // labelControl13
       // 
-      this.labelControl13.Location = new System.Drawing.Point(554, 202);
+      this.labelControl13.Location = new System.Drawing.Point(553, 163);
       this.labelControl13.Name = "labelControl13";
       this.labelControl13.Size = new System.Drawing.Size(28, 13);
       this.labelControl13.TabIndex = 21;
@@ -544,7 +570,7 @@ namespace Impressio.Controls
       // 
       // labelControl12
       // 
-      this.labelControl12.Location = new System.Drawing.Point(553, 141);
+      this.labelControl12.Location = new System.Drawing.Point(552, 122);
       this.labelControl12.Name = "labelControl12";
       this.labelControl12.Size = new System.Drawing.Size(63, 13);
       this.labelControl12.TabIndex = 20;
@@ -552,14 +578,14 @@ namespace Impressio.Controls
       // 
       // offsetPrintTotal
       // 
-      this.offsetPrintTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "PrintTotal", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.offsetPrintTotal.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "PrintTotal", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.offsetPrintTotal.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
       this.offsetPrintTotal.Enabled = false;
-      this.offsetPrintTotal.Location = new System.Drawing.Point(625, 138);
+      this.offsetPrintTotal.Location = new System.Drawing.Point(624, 119);
       this.offsetPrintTotal.Name = "offsetPrintTotal";
       this.offsetPrintTotal.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White;
       this.offsetPrintTotal.Properties.AppearanceDisabled.BackColor2 = System.Drawing.Color.White;
@@ -572,7 +598,7 @@ namespace Impressio.Controls
       this.offsetPrintTotal.Properties.AppearanceReadOnly.Options.UseBackColor = true;
       this.offsetPrintTotal.Properties.AppearanceReadOnly.Options.UseBorderColor = true;
       this.offsetPrintTotal.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
       this.offsetPrintTotal.Properties.DisplayFormat.FormatString = "c";
       this.offsetPrintTotal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.offsetPrintTotal.Properties.ReadOnly = true;
@@ -582,13 +608,13 @@ namespace Impressio.Controls
       // 
       // offsetPrintQuantity
       // 
-      this.offsetPrintQuantity.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "PrintQuantity", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.offsetPrintQuantity.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "PrintQuantity", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.offsetPrintQuantity.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-      this.offsetPrintQuantity.Location = new System.Drawing.Point(362, 138);
+      this.offsetPrintQuantity.Location = new System.Drawing.Point(361, 119);
       this.offsetPrintQuantity.Name = "offsetPrintQuantity";
       this.offsetPrintQuantity.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -604,7 +630,7 @@ namespace Impressio.Controls
       // 
       // labelControl11
       // 
-      this.labelControl11.Location = new System.Drawing.Point(261, 141);
+      this.labelControl11.Location = new System.Drawing.Point(260, 122);
       this.labelControl11.Name = "labelControl11";
       this.labelControl11.Size = new System.Drawing.Size(46, 13);
       this.labelControl11.TabIndex = 17;
@@ -612,13 +638,13 @@ namespace Impressio.Controls
       // 
       // offsetPaperQuantity
       // 
-      this.offsetPaperQuantity.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "OffsetQuantity", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.offsetPaperQuantity.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "OffsetQuantity", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.offsetPaperQuantity.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-      this.offsetPaperQuantity.Location = new System.Drawing.Point(112, 138);
+      this.offsetPaperQuantity.Location = new System.Drawing.Point(111, 119);
       this.offsetPaperQuantity.Name = "offsetPaperQuantity";
       this.offsetPaperQuantity.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -634,29 +660,21 @@ namespace Impressio.Controls
       // 
       // labelControl10
       // 
-      this.labelControl10.Location = new System.Drawing.Point(25, 141);
+      this.labelControl10.Location = new System.Drawing.Point(24, 122);
       this.labelControl10.Name = "labelControl10";
       this.labelControl10.Size = new System.Drawing.Size(57, 13);
       this.labelControl10.TabIndex = 15;
       this.labelControl10.Text = "Druckbogen";
       // 
-      // labelPriceOffset
-      // 
-      this.labelPriceOffset.Location = new System.Drawing.Point(553, 52);
-      this.labelPriceOffset.Name = "labelPriceOffset";
-      this.labelPriceOffset.Size = new System.Drawing.Size(37, 13);
-      this.labelPriceOffset.TabIndex = 14;
-      this.labelPriceOffset.Text = "Kosten:";
-      // 
       // offsetColorAmount
       // 
-      this.offsetColorAmount.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "ColorAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.offsetColorAmount.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "ColorAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.offsetColorAmount.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-      this.offsetColorAmount.Location = new System.Drawing.Point(362, 95);
+      this.offsetColorAmount.Location = new System.Drawing.Point(361, 79);
       this.offsetColorAmount.Name = "offsetColorAmount";
       this.offsetColorAmount.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -672,15 +690,15 @@ namespace Impressio.Controls
       // 
       // labelControl9
       // 
-      this.labelControl9.Location = new System.Drawing.Point(261, 98);
+      this.labelControl9.Location = new System.Drawing.Point(260, 82);
       this.labelControl9.Name = "labelControl9";
-      this.labelControl9.Size = new System.Drawing.Size(84, 13);
+      this.labelControl9.Size = new System.Drawing.Size(49, 13);
       this.labelControl9.TabIndex = 12;
-      this.labelControl9.Text = "Farben einrichten";
+      this.labelControl9.Text = "Farben VS";
       // 
       // labelControl8
       // 
-      this.labelControl8.Location = new System.Drawing.Point(25, 98);
+      this.labelControl8.Location = new System.Drawing.Point(24, 82);
       this.labelControl8.Name = "labelControl8";
       this.labelControl8.Size = new System.Drawing.Size(41, 13);
       this.labelControl8.TabIndex = 10;
@@ -688,7 +706,7 @@ namespace Impressio.Controls
       // 
       // labelControl7
       // 
-      this.labelControl7.Location = new System.Drawing.Point(25, 52);
+      this.labelControl7.Location = new System.Drawing.Point(24, 42);
       this.labelControl7.Name = "labelControl7";
       this.labelControl7.Size = new System.Drawing.Size(71, 13);
       this.labelControl7.TabIndex = 9;
@@ -696,13 +714,14 @@ namespace Impressio.Controls
       // 
       // offsetMachineSearchLookUp
       // 
-      this.offsetMachineSearchLookUp.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.offsetBindingSource, "FkOffsetMachine", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-      this.offsetMachineSearchLookUp.Location = new System.Drawing.Point(112, 49);
+      this.offsetMachineSearchLookUp.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "FkMachine", true));
+      this.offsetMachineSearchLookUp.Location = new System.Drawing.Point(111, 39);
       this.offsetMachineSearchLookUp.Name = "offsetMachineSearchLookUp";
       this.offsetMachineSearchLookUp.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
       this.offsetMachineSearchLookUp.Properties.DataSource = this.machineBindingSource;
       this.offsetMachineSearchLookUp.Properties.DisplayMember = "Name";
+      this.offsetMachineSearchLookUp.Properties.NullText = "";
       this.offsetMachineSearchLookUp.Properties.ValueMember = "Identity";
       this.offsetMachineSearchLookUp.Properties.View = this.viewMachine;
       this.offsetMachineSearchLookUp.Size = new System.Drawing.Size(350, 20);
@@ -784,9 +803,10 @@ namespace Impressio.Controls
       // 
       // offsetPrintType
       // 
-      this.offsetPrintType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.offsetBindingSource, "PrintTypeString", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.offsetPrintType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.singleOffsetBindingSource, "PrintTypeString", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.offsetPrintType.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "FkPrintType", true));
       this.offsetPrintType.EditValue = "Einseitig";
-      this.offsetPrintType.Location = new System.Drawing.Point(112, 95);
+      this.offsetPrintType.Location = new System.Drawing.Point(111, 79);
       this.offsetPrintType.Name = "offsetPrintType";
       this.offsetPrintType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -801,20 +821,164 @@ namespace Impressio.Controls
       this.offsetPrintType.TabIndex = 11;
       this.offsetPrintType.EditValueChanged += new System.EventHandler(this.SaveOffset);
       // 
-      // colWeight
+      // checkedListBoxControl1
       // 
-      this.colWeight.Caption = "Grammatur";
-      this.colWeight.FieldName = "Weight";
-      this.colWeight.Name = "colWeight";
-      this.colWeight.OptionsColumn.AllowEdit = false;
-      this.colWeight.Visible = true;
-      this.colWeight.VisibleIndex = 5;
+      this.checkedListBoxControl1.Items.AddRange(new DevExpress.XtraEditors.Controls.CheckedListBoxItem[] {
+            new DevExpress.XtraEditors.Controls.CheckedListBoxItem(null, "Einfach"),
+            new DevExpress.XtraEditors.Controls.CheckedListBoxItem(null, "Aufwendig"),
+            new DevExpress.XtraEditors.Controls.CheckedListBoxItem(null, "Ohne")});
+      this.checkedListBoxControl1.Location = new System.Drawing.Point(112, 40);
+      this.checkedListBoxControl1.Name = "checkedListBoxControl1";
+      this.checkedListBoxControl1.Size = new System.Drawing.Size(100, 53);
+      this.checkedListBoxControl1.TabIndex = 23;
+      // 
+      // labelControl16
+      // 
+      this.labelControl16.Location = new System.Drawing.Point(25, 40);
+      this.labelControl16.Name = "labelControl16";
+      this.labelControl16.Size = new System.Drawing.Size(47, 13);
+      this.labelControl16.TabIndex = 26;
+      this.labelControl16.Text = "Einrichten";
+      // 
+      // easyColorChange
+      // 
+      this.easyColorChange.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "EasyColorChange", true));
+      this.easyColorChange.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+      this.easyColorChange.Location = new System.Drawing.Point(391, 37);
+      this.easyColorChange.Name = "easyColorChange";
+      this.easyColorChange.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.easyColorChange.Properties.DisplayFormat.FormatString = "N00";
+      this.easyColorChange.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.easyColorChange.Properties.EditFormat.FormatString = "N00";
+      this.easyColorChange.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.easyColorChange.Properties.IsFloatValue = false;
+      this.easyColorChange.Properties.Mask.EditMask = "N00";
+      this.easyColorChange.Size = new System.Drawing.Size(71, 20);
+      this.easyColorChange.TabIndex = 32;
+      // 
+      // labelControl17
+      // 
+      this.labelControl17.Location = new System.Drawing.Point(261, 40);
+      this.labelControl17.Name = "labelControl17";
+      this.labelControl17.Size = new System.Drawing.Size(108, 13);
+      this.labelControl17.TabIndex = 31;
+      this.labelControl17.Text = "Einfacher Farbwechsel";
+      // 
+      // difficultColorChange
+      // 
+      this.difficultColorChange.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "DifficultColorChange", true));
+      this.difficultColorChange.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+      this.difficultColorChange.Location = new System.Drawing.Point(391, 69);
+      this.difficultColorChange.Name = "difficultColorChange";
+      this.difficultColorChange.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.difficultColorChange.Properties.DisplayFormat.FormatString = "N00";
+      this.difficultColorChange.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.difficultColorChange.Properties.EditFormat.FormatString = "N00";
+      this.difficultColorChange.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.difficultColorChange.Properties.IsFloatValue = false;
+      this.difficultColorChange.Properties.Mask.EditMask = "N00";
+      this.difficultColorChange.Size = new System.Drawing.Size(71, 20);
+      this.difficultColorChange.TabIndex = 34;
+      // 
+      // labelControl18
+      // 
+      this.labelControl18.Location = new System.Drawing.Point(261, 72);
+      this.labelControl18.Name = "labelControl18";
+      this.labelControl18.Size = new System.Drawing.Size(124, 13);
+      this.labelControl18.TabIndex = 33;
+      this.labelControl18.Text = "Aufwendiger Farbwechsel";
+      // 
+      // spinEdit1
+      // 
+      this.spinEdit1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "PrintQuantity", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.spinEdit1.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+      this.spinEdit1.Location = new System.Drawing.Point(362, 254);
+      this.spinEdit1.Name = "spinEdit1";
+      this.spinEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.spinEdit1.Properties.DisplayFormat.FormatString = "N00";
+      this.spinEdit1.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.spinEdit1.Properties.EditFormat.FormatString = "N00";
+      this.spinEdit1.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.spinEdit1.Properties.IsFloatValue = false;
+      this.spinEdit1.Properties.Mask.EditMask = "N00";
+      this.spinEdit1.Size = new System.Drawing.Size(100, 20);
+      this.spinEdit1.TabIndex = 36;
+      // 
+      // labelControl14
+      // 
+      this.labelControl14.Location = new System.Drawing.Point(261, 257);
+      this.labelControl14.Name = "labelControl14";
+      this.labelControl14.Size = new System.Drawing.Size(34, 13);
+      this.labelControl14.TabIndex = 35;
+      this.labelControl14.Text = "Platten";
+      // 
+      // groupControl3
+      // 
+      this.groupControl3.Controls.Add(this.labelControl15);
+      this.groupControl3.Controls.Add(this.plates);
+      this.groupControl3.Controls.Add(this.checkedListBoxControl1);
+      this.groupControl3.Controls.Add(this.labelControl16);
+      this.groupControl3.Controls.Add(this.difficultColorChange);
+      this.groupControl3.Controls.Add(this.labelControl18);
+      this.groupControl3.Controls.Add(this.labelControl17);
+      this.groupControl3.Controls.Add(this.easyColorChange);
+      this.groupControl3.Dock = System.Windows.Forms.DockStyle.Top;
+      this.groupControl3.Location = new System.Drawing.Point(0, 163);
+      this.groupControl3.Name = "groupControl3";
+      this.groupControl3.Size = new System.Drawing.Size(852, 136);
+      this.groupControl3.TabIndex = 37;
+      this.groupControl3.Text = "Material und Einrichten";
+      // 
+      // labelControl15
+      // 
+      this.labelControl15.Location = new System.Drawing.Point(261, 104);
+      this.labelControl15.Name = "labelControl15";
+      this.labelControl15.Size = new System.Drawing.Size(34, 13);
+      this.labelControl15.TabIndex = 35;
+      this.labelControl15.Text = "Platten";
+      // 
+      // plates
+      // 
+      this.plates.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "PlateQuantity", true));
+      this.plates.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+      this.plates.Location = new System.Drawing.Point(391, 101);
+      this.plates.Name = "plates";
+      this.plates.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.plates.Properties.DisplayFormat.FormatString = "N00";
+      this.plates.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.plates.Properties.EditFormat.FormatString = "N00";
+      this.plates.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.plates.Properties.IsFloatValue = false;
+      this.plates.Properties.Mask.EditMask = "N00";
+      this.plates.Size = new System.Drawing.Size(71, 20);
+      this.plates.TabIndex = 36;
       // 
       // OffsetControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.groupControl2);
+      this.Controls.Add(this.groupControl3);
       this.Controls.Add(this.groupControl1);
       this.MinimumSize = new System.Drawing.Size(800, 500);
       this.Name = "OffsetControl";
@@ -824,7 +988,7 @@ namespace Impressio.Controls
       this.groupControl1.ResumeLayout(false);
       this.groupControl1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.paperCostTotal.Properties)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.offsetBindingSource)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.singleOffsetBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperUsePer.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperQuantity.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperAddition.Properties)).EndInit();
@@ -844,6 +1008,14 @@ namespace Impressio.Controls
       ((System.ComponentModel.ISupportInitialize)(this.machineBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewMachine)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.offsetPrintType.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControl1)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.easyColorChange.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.difficultColorChange.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
+      this.groupControl3.ResumeLayout(false);
+      this.groupControl3.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.plates.Properties)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -872,7 +1044,6 @@ namespace Impressio.Controls
     private DevExpress.XtraEditors.LabelControl labelControl11;
     private DevExpress.XtraEditors.SpinEdit offsetPaperQuantity;
     private DevExpress.XtraEditors.LabelControl labelControl10;
-    private DevExpress.XtraEditors.LabelControl labelPriceOffset;
     private DevExpress.XtraEditors.SpinEdit offsetColorAmount;
     private DevExpress.XtraEditors.LabelControl labelControl9;
     private DevExpress.XtraEditors.LabelControl labelControl8;
@@ -908,7 +1079,18 @@ namespace Impressio.Controls
     private DevExpress.XtraGrid.Columns.GridColumn colCostPerHour;
     private DevExpress.XtraGrid.Columns.GridColumn colName1;
     private DevExpress.XtraGrid.Columns.GridColumn colPlateCost;
-    private System.Windows.Forms.BindingSource offsetBindingSource;
+    private System.Windows.Forms.BindingSource singleOffsetBindingSource;
     private DevExpress.XtraGrid.Columns.GridColumn colWeight;
+    private DevExpress.XtraEditors.LabelControl labelControl16;
+    private DevExpress.XtraEditors.CheckedListBoxControl checkedListBoxControl1;
+    private DevExpress.XtraEditors.SpinEdit difficultColorChange;
+    private DevExpress.XtraEditors.LabelControl labelControl18;
+    private DevExpress.XtraEditors.SpinEdit easyColorChange;
+    private DevExpress.XtraEditors.LabelControl labelControl17;
+    private DevExpress.XtraEditors.SpinEdit spinEdit1;
+    private DevExpress.XtraEditors.LabelControl labelControl14;
+    private DevExpress.XtraEditors.GroupControl groupControl3;
+    private DevExpress.XtraEditors.LabelControl labelControl15;
+    private DevExpress.XtraEditors.SpinEdit plates;
   }
 }

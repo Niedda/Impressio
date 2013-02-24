@@ -33,6 +33,10 @@ namespace Impressio.Controls
                    colPricePerColor,
                    colSpeed,
                    colCostPerHour,
+                   colDifficultColor,
+                   colDifficultSetup,
+                   colEasySetup,
+                   colPlateSetup,
                  });
       }
     }

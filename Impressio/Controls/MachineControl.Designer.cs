@@ -39,10 +39,16 @@
       this.colPricePerColor = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colSpeed = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colCostPerHour = new DevExpress.XtraGrid.Columns.GridColumn();
+      this.colEasySetup = new DevExpress.XtraGrid.Columns.GridColumn();
+      this.colDifficultSetup = new DevExpress.XtraGrid.Columns.GridColumn();
+      this.colDifficultColor = new DevExpress.XtraGrid.Columns.GridColumn();
+      this.colPlateSetup = new DevExpress.XtraGrid.Columns.GridColumn();
+      this.timeEdit = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridMachine)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.machineBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewMachine)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.timeEdit)).BeginInit();
       this.SuspendLayout();
       // 
       // gridMachine
@@ -52,6 +58,8 @@
       this.gridMachine.Location = new System.Drawing.Point(0, 0);
       this.gridMachine.MainView = this.viewMachine;
       this.gridMachine.Name = "gridMachine";
+      this.gridMachine.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.timeEdit});
       this.gridMachine.Size = new System.Drawing.Size(747, 355);
       this.gridMachine.TabIndex = 0;
       this.gridMachine.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -60,6 +68,7 @@
       // machineBindingSource
       // 
       this.machineBindingSource.DataSource = typeof(Impressio.Models.Machine);
+      this.machineBindingSource.Position = 0;
       // 
       // viewMachine
       // 
@@ -71,7 +80,11 @@
             this.colPlateCost,
             this.colPricePerColor,
             this.colSpeed,
-            this.colCostPerHour});
+            this.colCostPerHour,
+            this.colEasySetup,
+            this.colDifficultSetup,
+            this.colDifficultColor,
+            this.colPlateSetup});
       this.viewMachine.GridControl = this.gridMachine;
       this.viewMachine.IndicatorWidth = 30;
       this.viewMachine.Name = "viewMachine";
@@ -110,17 +123,16 @@
       this.colPlateCost.FieldName = "PlateCost";
       this.colPlateCost.Name = "colPlateCost";
       this.colPlateCost.Visible = true;
-      this.colPlateCost.VisibleIndex = 4;
+      this.colPlateCost.VisibleIndex = 3;
       // 
       // colPricePerColor
       // 
-      this.colPricePerColor.Caption = "Preis per Farbe einrichten";
-      this.colPricePerColor.DisplayFormat.FormatString = "c";
-      this.colPricePerColor.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.colPricePerColor.Caption = "Einfacher Farbwechsel";
+      this.colPricePerColor.ColumnEdit = this.timeEdit;
       this.colPricePerColor.FieldName = "PricePerColor";
       this.colPricePerColor.Name = "colPricePerColor";
       this.colPricePerColor.Visible = true;
-      this.colPricePerColor.VisibleIndex = 1;
+      this.colPricePerColor.VisibleIndex = 5;
       // 
       // colSpeed
       // 
@@ -135,12 +147,58 @@
       // colCostPerHour
       // 
       this.colCostPerHour.Caption = "Stundensatz";
+      this.colCostPerHour.ColumnEdit = this.timeEdit;
       this.colCostPerHour.DisplayFormat.FormatString = "c";
       this.colCostPerHour.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
       this.colCostPerHour.FieldName = "PricePerHour";
       this.colCostPerHour.Name = "colCostPerHour";
       this.colCostPerHour.Visible = true;
-      this.colCostPerHour.VisibleIndex = 3;
+      this.colCostPerHour.VisibleIndex = 1;
+      // 
+      // colEasySetup
+      // 
+      this.colEasySetup.Caption = "Einfaches Einrichten";
+      this.colEasySetup.ColumnEdit = this.timeEdit;
+      this.colEasySetup.FieldName = "EasySetup";
+      this.colEasySetup.Name = "colEasySetup";
+      this.colEasySetup.Visible = true;
+      this.colEasySetup.VisibleIndex = 7;
+      // 
+      // colDifficultSetup
+      // 
+      this.colDifficultSetup.Caption = "Schweres Einrichten";
+      this.colDifficultSetup.ColumnEdit = this.timeEdit;
+      this.colDifficultSetup.FieldName = "DifficultSetup";
+      this.colDifficultSetup.Name = "colDifficultSetup";
+      this.colDifficultSetup.Visible = true;
+      this.colDifficultSetup.VisibleIndex = 8;
+      // 
+      // colDifficultColor
+      // 
+      this.colDifficultColor.Caption = "Aufwendiger Farbwechsel";
+      this.colDifficultColor.ColumnEdit = this.timeEdit;
+      this.colDifficultColor.FieldName = "DifficultColor";
+      this.colDifficultColor.Name = "colDifficultColor";
+      this.colDifficultColor.Visible = true;
+      this.colDifficultColor.VisibleIndex = 6;
+      // 
+      // colPlateSetup
+      // 
+      this.colPlateSetup.Caption = "Platte einrichten";
+      this.colPlateSetup.ColumnEdit = this.timeEdit;
+      this.colPlateSetup.FieldName = "PlateSetup";
+      this.colPlateSetup.Name = "colPlateSetup";
+      this.colPlateSetup.Visible = true;
+      this.colPlateSetup.VisibleIndex = 4;
+      // 
+      // timeEdit
+      // 
+      this.timeEdit.AutoHeight = false;
+      this.timeEdit.DisplayFormat.FormatString = "{0} min";
+      this.timeEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.timeEdit.IsFloatValue = false;
+      this.timeEdit.Mask.EditMask = "N00";
+      this.timeEdit.Name = "timeEdit";
       // 
       // MachineControl
       // 
@@ -153,6 +211,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.gridMachine)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.machineBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.viewMachine)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.timeEdit)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -169,5 +228,10 @@
     private DevExpress.XtraGrid.Columns.GridColumn colSpeed;
     private DevExpress.XtraGrid.Columns.GridColumn colCostPerHour;
     public DevExpress.XtraGrid.Views.Grid.GridView viewMachine;
+    private DevExpress.XtraGrid.Columns.GridColumn colEasySetup;
+    private DevExpress.XtraGrid.Columns.GridColumn colDifficultSetup;
+    private DevExpress.XtraGrid.Columns.GridColumn colDifficultColor;
+    private DevExpress.XtraGrid.Columns.GridColumn colPlateSetup;
+    private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit timeEdit;
   }
 }

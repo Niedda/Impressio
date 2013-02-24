@@ -1,12 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Impressio.Models.Tools;
+using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
-  public class PaperSizes
+  public class PaperSizes : DatabaseObjectBase<PaperSizes>
   {
+    #region Columns
+
+    public enum Columns
+    {
+      Width,
+      Height,
+      Name,
+      IsFinishSize,
+    }
+
+    #endregion
+
     public int Width { get; set; }
 
     public int Height { get; set; }
@@ -15,34 +27,41 @@ namespace Impressio.Models
 
     public string Name { get; set; }
 
-    public static List<PaperSizes> GetEndSizes()
+    public bool IsFinishSize { get; set; }
+    
+    public override int Identity { get; set; }
+
+    public override string IdentityColumn { get { return "PaperSizesId"; } }
+
+    public override string Table { get { return "PaperSizes"; } }
+
+    public override List<PaperSizes> Objects { get { return _paperSizes; } }
+
+    public override void SetObject()
     {
-      return new List<PaperSizes>
+      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
+      Name = Database.DatabaseCommand.Reader[Columns.Name.ToString()] as string;
+      Width = Database.DatabaseCommand.Reader[Columns.Width.ToString()].GetInt();
+      Height = Database.DatabaseCommand.Reader[Columns.Height.ToString()].GetInt();
+      IsFinishSize = (bool)Database.DatabaseCommand.Reader[Columns.IsFinishSize.ToString()];
+    }
+
+    public override void ClearObjectList()
+    {
+      _paperSizes.Clear();
+    }
+
+    public override Dictionary<Enum, object> GetObject()
+    {
+      return new Dictionary<Enum, object>
                {
-                 new PaperSizes{Name = "A1", Height = 594, Width = 841},
-                 new PaperSizes{Name = "A2", Height = 420, Width = 594},
-                 new PaperSizes{Name = "A3", Height = 297, Width = 420},
-                 new PaperSizes{Name = "A4", Height = 210, Width = 297},
-                 new PaperSizes{Name = "A5", Height = 148, Width = 210},
-                 new PaperSizes{Name = "A6", Height = 105, Width = 210},
-                 new PaperSizes{Name = "A7", Height = 74, Width = 105},
-                 new PaperSizes{Name = "VK", Height = 55, Width = 85},
-                 new PaperSizes{Name = "C4", Height = 229, Width = 324},
-                 new PaperSizes{Name = "C5", Height = 162, Width = 229},
+                 {Columns.Name, Name},
+                 {Columns.Width, Width},
+                 {Columns.Height, Height},
+                 {Columns.IsFinishSize, IsFinishSize},
                };
     }
 
-    public static List<PaperSizes> GetPrintSizes()
-    {
-      return new List<PaperSizes>
-               {
-                 new PaperSizes{Name = "SRA4", Height = 225, Width = 320},
-                 new PaperSizes{Name = "SRA3", Height = 320, Width = 450},
-                 new PaperSizes{Name = "", Height = 320, Width = 460},
-                 new PaperSizes{Name = "", Height = 350, Width = 500},
-                 new PaperSizes{Name = "", Height = 460, Width = 640},
-                 new PaperSizes{Name = "", Height = 500, Width = 700},
-               };
-    }
+    private List<PaperSizes> _paperSizes = new List<PaperSizes>();
   }
 }

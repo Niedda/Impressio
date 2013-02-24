@@ -19,6 +19,10 @@ namespace Impressio.Models
       Speed,
       PricePerColor,
       PricePerHour,
+      EasySetup,
+      DifficultSetup,
+      DifficultColor,
+      PlateSetup
     }
 
     #endregion
@@ -37,9 +41,17 @@ namespace Impressio.Models
 
     public int PricePerHour { get; set; }
 
+    public int DifficultColor { get; set; }
+
+    public int DifficultSetup { get; set; }
+
+    public int EasySetup { get; set; }
+
     public string Name { get; set; }
 
     public int PlateCost { get; set; }
+
+    public int PlateSetup { get; set; }
 
     public override List<Machine> Objects { get { return _machines; } }
 
@@ -51,6 +63,10 @@ namespace Impressio.Models
       PricePerColor = Database.DatabaseCommand.Reader[Columns.PricePerColor.ToString()].GetInt();
       PlateCost = Database.DatabaseCommand.Reader[Columns.PlateCost.ToString()].GetInt();
       PricePerHour = Database.DatabaseCommand.Reader[Columns.PricePerHour.ToString()].GetInt();
+      DifficultColor = Database.DatabaseCommand.Reader[Columns.DifficultColor.ToString()].GetInt();
+      EasySetup = Database.DatabaseCommand.Reader[Columns.EasySetup.ToString()].GetInt();
+      DifficultSetup = Database.DatabaseCommand.Reader[Columns.DifficultSetup.ToString()].GetInt();
+      PlateSetup = Database.DatabaseCommand.Reader[Columns.PlateSetup.ToString()].GetInt();
     }
 
     public override void ClearObjectList()
@@ -67,6 +83,10 @@ namespace Impressio.Models
                  {Columns.Speed, Speed},
                  {Columns.PricePerColor, PricePerColor},
                  {Columns.PricePerHour, PricePerHour},
+                 {Columns.DifficultColor, DifficultColor},
+                 {Columns.EasySetup, EasySetup},
+                 {Columns.DifficultSetup, DifficultSetup},
+                 {Columns.PlateSetup, PlateSetup},
                };
     }
   }
