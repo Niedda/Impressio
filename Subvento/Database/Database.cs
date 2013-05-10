@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
-using Subvento.Configuration;
 using Subvento.DatabaseException;
 using Subvento.DatabaseObject;
 
@@ -34,14 +33,10 @@ namespace Subvento.Database
 
     public bool Usable()
     {
+      ServiceLocator.ResetDatabase();
       try
       {
-        if (DatabaseConnection.ConnectionString.Contains("Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword;"))
-        {
-          return false;
-        }
-        ServiceLocator.ResetDatabase();
-        return DatabaseConnection.OpenConnection(true);
+        return DatabaseConnection.OpenConnection();
       }
       catch (Exception)
       {
@@ -52,7 +47,7 @@ namespace Subvento.Database
     public abstract string GetEscapedTableName(string tableName);
 
     public abstract string ConvertValueToSql(object value);
-    
+
     public abstract bool CheckIfFieldsExist(ref List<string> list);
 
     public abstract string LastAddedValue { get; }
@@ -84,8 +79,8 @@ namespace Subvento.Database
       }
       catch (SqlException exception)
       {
-        new ExceptionHandler(exception);
-        throw;
+        ServiceLocator.Instance.ExceptionHandler.LogException(exception);
+        return 0;
       }
     }
 
@@ -115,8 +110,8 @@ namespace Subvento.Database
       }
       catch (SqlException exception)
       {
-        new ExceptionHandler(exception);
-        throw;
+        ServiceLocator.Instance.ExceptionHandler.LogException(exception);
+        return false;
       }
     }
 
@@ -134,8 +129,8 @@ namespace Subvento.Database
       }
       catch (SqlException exception)
       {
-        new ExceptionHandler(exception);
-        throw;
+        ServiceLocator.Instance.ExceptionHandler.LogException(exception);
+        return false;
       }
     }
 

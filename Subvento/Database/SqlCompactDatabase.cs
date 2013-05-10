@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
-using Subvento.DatabaseException;
 using Subvento.DatabaseObject;
 
 namespace Subvento.Database
@@ -53,8 +52,8 @@ namespace Subvento.Database
       }
       catch (SqlException exception)
       {
-        new ExceptionHandler(exception);
-        throw;
+        ServiceLocator.Instance.ExceptionHandler.LogException(exception);
+        return false;
       }
       finally
       {
@@ -106,8 +105,8 @@ namespace Subvento.Database
       }
       catch (SqlException exception)
       {
-        new ExceptionHandler(exception);
-        throw;
+        ServiceLocator.Instance.ExceptionHandler.LogException(exception);
+        return 0;
       }
     }
     
@@ -137,8 +136,8 @@ namespace Subvento.Database
       }
       catch (SqlException exception)
       {
-        new ExceptionHandler(exception);
-        throw;
+        ServiceLocator.Instance.ExceptionHandler.LogException(exception);
+        return false;
       }
     }
   }

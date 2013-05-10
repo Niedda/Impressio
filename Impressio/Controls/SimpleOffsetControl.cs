@@ -198,8 +198,8 @@ namespace Impressio.Controls
 
       if (pap != null)
       {
-        printFormatWidth.Value = pap.SizeB;
-        printFormatHeight.Value = pap.SizeL;
+        printFormatWidth.Value = pap.SizeH;
+        printFormatHeight.Value = pap.SizeW;
         paperprice.Value = pap.Price1;
 
         paperPriceLabel.Text = string.Format("Papierpreise:{0}{1}.- Fr.{0}{2}.- Fr. ab {3} Bogen{0}{4}.- Fr. ab {5} Bogen{0}{6}.- Fr. ab {7} Bogen", Environment.NewLine, pap.Price1, pap.Price2, pap.Amount1, pap.Price3, pap.Amount2, pap.Price4, pap.Amount3);

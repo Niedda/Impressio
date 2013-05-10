@@ -61,8 +61,8 @@ namespace Subvento.DatabaseObject
       }
       catch (DbException exception)
       {
-        new ExceptionHandler(exception);
-        throw;
+        ServiceLocator.Instance.ExceptionHandler.LogException(exception);
+        return null;
       }
       finally
       {
@@ -92,8 +92,8 @@ namespace Subvento.DatabaseObject
       }
       catch (DbException exception)
       {
-        new ExceptionHandler(exception);
-        throw;
+        ServiceLocator.Instance.ExceptionHandler.LogException(exception);
+        return null;
       }
       finally
       {
@@ -125,8 +125,8 @@ namespace Subvento.DatabaseObject
       }
       catch (DbException exception)
       {
-        new ExceptionHandler(exception);
-        throw;
+        ServiceLocator.Instance.ExceptionHandler.LogException(exception);
+        return null;
       }
       finally
       {
@@ -159,8 +159,8 @@ namespace Subvento.DatabaseObject
       }
       catch (DbException exception)
       {
-        new ExceptionHandler(exception);
-        throw;
+        ServiceLocator.Instance.ExceptionHandler.LogException(exception);
+        return null;
       }
       finally
       {
@@ -193,8 +193,8 @@ namespace Subvento.DatabaseObject
       }
       catch (DbException exception)
       {
-        new ExceptionHandler(exception);
-        throw;
+        ServiceLocator.Instance.ExceptionHandler.LogException(exception);
+        return null;
       }
       finally
       {

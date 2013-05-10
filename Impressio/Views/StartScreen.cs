@@ -54,7 +54,7 @@ namespace Impressio.Views
       listToCheck.AddRange(Enum.GetNames(typeof(Description.Columns)));
       listToCheck.AddRange(Enum.GetNames(typeof(Finish.Columns)));
       listToCheck.AddRange(Enum.GetNames(typeof(Gender.Columns)));
-      listToCheck.AddRange(Enum.GetNames(typeof(Offset.Columns)));
+      //listToCheck.AddRange(Enum.GetNames(typeof(Offset.Columns)));
       listToCheck.AddRange(Enum.GetNames(typeof(Order.Columns)));
       listToCheck.AddRange(Enum.GetNames(typeof(Paper.Columns)));
       listToCheck.AddRange(Enum.GetNames(typeof(Print.Columns)));

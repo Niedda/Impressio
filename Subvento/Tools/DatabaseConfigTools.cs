@@ -7,7 +7,7 @@ namespace Subvento.Tools
 {
   internal static class DatabaseConfigTools
   {
-    private static bool CheckForConfigFile()
+    private static void CheckForConfigFile()
     {
       if (!File.Exists(FilePath))
       {
@@ -16,17 +16,11 @@ namespace Subvento.Tools
           xmlWriter.WriteStartDocument();
           xmlWriter.WriteStartElement("DatabaseConfig");
           xmlWriter.WriteElementString("DatabaseEngine", "MicrosoftSql");
-          xmlWriter.WriteElementString("ConnectionString",
-                                       "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword;");
-          xmlWriter.WriteElementString("ExceptionMode", "true");
-          xmlWriter.WriteElementString("ExceptionLog", "true");
-          xmlWriter.WriteElementString("SuppressException", "true");
+          xmlWriter.WriteElementString("ConnectionString", "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword;");
           xmlWriter.WriteEndElement();
           xmlWriter.WriteEndDocument();
-          return false;
         }
       }
-      return true;
     }
 
     internal static void LoadConfig(this DatabaseConfig config)
@@ -50,18 +44,6 @@ namespace Subvento.Tools
                 Enum.TryParse(xmlReader.ReadString(), out value);
                 config.DatabaseEngine = value;
                 break;
-              case "ExceptionLog":
-                xmlReader.MoveToContent();
-                config.ExceptionLog = xmlReader.ReadString() == "true";
-                break;
-              case "ExceptionMode":
-                xmlReader.MoveToContent();
-                config.ExceptionMode = xmlReader.ReadString() == "true";
-                break;
-              case "SuppressException":
-                xmlReader.MoveToContent();
-                config.SuppressException = xmlReader.ReadString() == "true";
-                break;
             }
           }
         }
@@ -76,14 +58,17 @@ namespace Subvento.Tools
         xmlWriter.WriteStartElement("DatabaseConfig");
         xmlWriter.WriteElementString("DatabaseEngine", ServiceLocator.Instance.ConfigFile.DatabaseEngine.ToString());
         xmlWriter.WriteElementString("ConnectionString", ServiceLocator.Instance.ConfigFile.ConnectionString);
-        xmlWriter.WriteElementString("ExceptionMode", ServiceLocator.Instance.ConfigFile.ExceptionMode.ToString());
-        xmlWriter.WriteElementString("ExceptionLog", ServiceLocator.Instance.ConfigFile.ExceptionLog.ToString());
-        xmlWriter.WriteElementString("SuppressException", ServiceLocator.Instance.ConfigFile.SuppressException.ToString());
         xmlWriter.WriteEndElement();
         xmlWriter.WriteEndDocument();
       }
     }
 
-    private const string FilePath = "DatabaseConfig.xml";
+    private static string FilePath
+    {
+      get
+      {
+        return AppDomain.CurrentDomain.BaseDirectory + "DatabaseConfig.xml";
+      }
+    }
   }
 }

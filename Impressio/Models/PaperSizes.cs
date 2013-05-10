@@ -55,7 +55,7 @@ namespace Impressio.Models
     {
       return new Dictionary<Enum, object>
                {
-                 {Columns.Name, Name},
+                 {Columns.Name, Name.SetStringDbNull()},
                  {Columns.Width, Width},
                  {Columns.Height, Height},
                  {Columns.IsFinishSize, IsFinishSize},

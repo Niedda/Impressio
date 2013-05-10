@@ -9,7 +9,5 @@ namespace Subvento.Database
     DbConnection DbConnection { get; set; }
     
     bool OpenConnection();
-
-    bool OpenConnection(bool reOpen);
   }
 }

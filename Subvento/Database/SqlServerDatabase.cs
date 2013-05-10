@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
-using Subvento.DatabaseException;
 
 namespace Subvento.Database
 {
@@ -58,8 +57,8 @@ namespace Subvento.Database
       }
       catch (SqlException exception)
       {
-        new ExceptionHandler(exception);
-        throw;
+        ServiceLocator.Instance.ExceptionHandler.LogException(exception);
+        return false;
       }
       finally
       {

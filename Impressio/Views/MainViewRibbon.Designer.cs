@@ -67,6 +67,7 @@
       this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
       this.mainPanel = new DevExpress.XtraEditors.PanelControl();
+      this.paperSizes = new DevExpress.XtraBars.BarButtonItem();
       ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
       this.SuspendLayout();
@@ -108,9 +109,10 @@
             this.editDelivery,
             this.predefinedOrder,
             this.createOrderWizard,
-            this.deleteCustomer});
+            this.deleteCustomer,
+            this.paperSizes});
       this.ribbon.Location = new System.Drawing.Point(0, 0);
-      this.ribbon.MaxItemId = 30;
+      this.ribbon.MaxItemId = 31;
       this.ribbon.Name = "ribbon";
       this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageOrder,
@@ -447,6 +449,7 @@
       this.ribbonPageGroup6.ItemLinks.Add(this.editOffer);
       this.ribbonPageGroup6.ItemLinks.Add(this.editOrder);
       this.ribbonPageGroup6.ItemLinks.Add(this.editDelivery);
+      this.ribbonPageGroup6.ItemLinks.Add(this.paperSizes);
       this.ribbonPageGroup6.Name = "ribbonPageGroup6";
       this.ribbonPageGroup6.ShowCaptionButton = false;
       this.ribbonPageGroup6.Text = "Grundeinstellungen verwalten";
@@ -465,6 +468,13 @@
       this.mainPanel.Name = "mainPanel";
       this.mainPanel.Size = new System.Drawing.Size(825, 203);
       this.mainPanel.TabIndex = 2;
+      // 
+      // paperSizes
+      // 
+      this.paperSizes.Caption = "Papierformate bearbeiten";
+      this.paperSizes.Id = 30;
+      this.paperSizes.LargeGlyph = global::Impressio.Properties.Resources.paperplane;
+      this.paperSizes.Name = "paperSizes";
       // 
       // MainViewRibbon
       // 
@@ -527,5 +537,6 @@
     private DevExpress.XtraBars.BarButtonItem predefinedOrder;
     private DevExpress.XtraBars.BarButtonItem createOrderWizard;
     private DevExpress.XtraBars.BarButtonItem deleteCustomer;
+    private DevExpress.XtraBars.BarButtonItem paperSizes;
   }
 }

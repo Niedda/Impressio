@@ -82,7 +82,10 @@ namespace Impressio.Controls
       // 
       // viewPaper
       // 
-      this.viewPaper.ColumnPanelRowHeight = 30;
+      this.viewPaper.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+      this.viewPaper.Appearance.EvenRow.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+      this.viewPaper.Appearance.EvenRow.Options.UseBackColor = true;
+      this.viewPaper.ColumnPanelRowHeight = 25;
       this.viewPaper.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colTable,
@@ -109,9 +112,11 @@ namespace Impressio.Controls
       this.viewPaper.OptionsDetail.EnableMasterViewMode = false;
       this.viewPaper.OptionsDetail.ShowDetailTabs = false;
       this.viewPaper.OptionsDetail.SmartDetailExpand = false;
+      this.viewPaper.OptionsView.EnableAppearanceEvenRow = true;
       this.viewPaper.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewPaper.OptionsView.ShowAutoFilterRow = true;
-      this.viewPaper.RowHeight = 30;
+      this.viewPaper.OptionsView.ShowIndicator = false;
+      this.viewPaper.RowHeight = 25;
       // 
       // colIdentity
       // 
@@ -252,7 +257,7 @@ namespace Impressio.Controls
       this.colSizeL.Caption = "Länge";
       this.colSizeL.DisplayFormat.FormatString = "{0} mm";
       this.colSizeL.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-      this.colSizeL.FieldName = "SizeL";
+      this.colSizeL.FieldName = "SizeW";
       this.colSizeL.Name = "colSizeL";
       this.colSizeL.Visible = true;
       this.colSizeL.VisibleIndex = 11;
@@ -262,7 +267,7 @@ namespace Impressio.Controls
       this.colSizeB.Caption = "Breite";
       this.colSizeB.DisplayFormat.FormatString = "{0} mm";
       this.colSizeB.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-      this.colSizeB.FieldName = "SizeB";
+      this.colSizeB.FieldName = "SizeH";
       this.colSizeB.Name = "colSizeB";
       this.colSizeB.Visible = true;
       this.colSizeB.VisibleIndex = 12;

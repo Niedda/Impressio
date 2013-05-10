@@ -36,29 +36,18 @@ namespace Subvento.Database
     {
       try
       {
-
-        if (DbConnection.State == ConnectionState.Open || DbConnection.State == ConnectionState.Connecting ||
-            DbConnection.State == ConnectionState.Fetching || DbConnection.State == ConnectionState.Executing)
+        if (DbConnection.State != ConnectionState.Closed)
         {
-          return true;
+          DbConnection.Close();
         }
         DbConnection.Open();
         return true;
       }
-      catch (Exception)
+      catch (Exception exception)
       {
+        ServiceLocator.Instance.ExceptionHandler.LogException(exception);
         return false;
       }
-    }
-
-    public bool OpenConnection(bool reOpen)
-    {
-      if (reOpen)
-      {
-
-        return OpenConnection();
-      }
-      return OpenConnection();
     }
 
     private DbConnection _dbConnection;

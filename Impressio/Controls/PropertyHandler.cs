@@ -134,6 +134,21 @@ namespace Impressio.Controls
       }
     }
 
+    public void GetPaperSizes(object sender, EventArgs e)
+    {
+      if (Validate())
+      {
+        if (ActiveControl != _propertieControl)
+        {
+          _mainView.UnregisterRibbon(ActiveControl.RibbonPage);
+          _mainView.UnregisterControl(ActiveControl);
+        }
+        ActiveControl = (new PaperSizeControl());
+        _mainView.RegisterControl(ActiveControl);
+        _mainView.RegisterRibbon(ActiveControl.RibbonPage);
+      }
+    }
+
     public void GetMachine(object sender, EventArgs e)
     {
       if (Validate())

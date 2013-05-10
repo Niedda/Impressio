@@ -28,15 +28,16 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.gridPredefindedOrder = new DevExpress.XtraGrid.GridControl();
-      this.predefinedOrderBindingSource = new System.Windows.Forms.BindingSource();
+      this.predefinedOrderBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewPredefinedOrder = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colIdentityColumn = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colFkOrderId = new DevExpress.XtraGrid.Columns.GridColumn();
       this.orderSearchLookUp = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
-      this.orderBindingSource = new System.Windows.Forms.BindingSource();
+      this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity1 = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colIdentityColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -93,7 +94,10 @@
       // 
       // viewPredefinedOrder
       // 
-      this.viewPredefinedOrder.ColumnPanelRowHeight = 30;
+      this.viewPredefinedOrder.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+      this.viewPredefinedOrder.Appearance.EvenRow.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+      this.viewPredefinedOrder.Appearance.EvenRow.Options.UseBackColor = true;
+      this.viewPredefinedOrder.ColumnPanelRowHeight = 25;
       this.viewPredefinedOrder.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colIdentityColumn,
@@ -107,7 +111,7 @@
             this.colDatabase,
             this.colQuantity});
       this.viewPredefinedOrder.GridControl = this.gridPredefindedOrder;
-      this.viewPredefinedOrder.GroupRowHeight = 30;
+      this.viewPredefinedOrder.GroupRowHeight = 25;
       this.viewPredefinedOrder.IndicatorWidth = 30;
       this.viewPredefinedOrder.Name = "viewPredefinedOrder";
       this.viewPredefinedOrder.OptionsDetail.AllowZoomDetail = false;
@@ -115,8 +119,10 @@
       this.viewPredefinedOrder.OptionsDetail.ShowDetailTabs = false;
       this.viewPredefinedOrder.OptionsDetail.SmartDetailExpand = false;
       this.viewPredefinedOrder.OptionsFind.AlwaysVisible = true;
+      this.viewPredefinedOrder.OptionsView.EnableAppearanceEvenRow = true;
       this.viewPredefinedOrder.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
-      this.viewPredefinedOrder.RowHeight = 30;
+      this.viewPredefinedOrder.OptionsView.ShowIndicator = false;
+      this.viewPredefinedOrder.RowHeight = 25;
       // 
       // colIdentity
       // 

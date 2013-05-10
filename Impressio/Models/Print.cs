@@ -39,6 +39,18 @@ namespace Impressio.Models
 
     public int FkPrintPaper { get; set; }
 
+    public override int CostPerK
+    {
+      get
+      {
+        return base.CostPerK;
+      }
+      set
+      {
+        base.CostPerK = value;
+      }
+    }
+
     public Paper Paper
     {
       get

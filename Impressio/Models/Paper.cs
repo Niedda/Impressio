@@ -98,13 +98,13 @@ namespace Impressio.Models
 
     public int Weight { get; set; }
 
-    public int SizeL { get; set; }
+    public int SizeW { get; set; }
 
-    public int SizeB { get; set; }
+    public int SizeH { get; set; }
 
     public string Size
     {
-      get { return SizeB + " x " + SizeL; }
+      get { return SizeH + " x " + SizeW; }
     }
 
     public override List<Paper> Objects
@@ -124,8 +124,8 @@ namespace Impressio.Models
       Amount3 = Database.DatabaseCommand.Reader[Columns.Amount3.ToString()].GetInt();
       Direction = Database.DatabaseCommand.Reader[Columns.Direction.ToString()].GetInt();
       ItemNumber = Database.DatabaseCommand.Reader[Columns.ItemNumber.ToString()].GetInt();
-      SizeB = Database.DatabaseCommand.Reader[Columns.SizeB.ToString()].GetInt();
-      SizeL = Database.DatabaseCommand.Reader[Columns.SizeL.ToString()].GetInt();
+      SizeH = Database.DatabaseCommand.Reader[Columns.SizeB.ToString()].GetInt();
+      SizeW = Database.DatabaseCommand.Reader[Columns.SizeL.ToString()].GetInt();
       Name = Database.DatabaseCommand.Reader[Columns.PaperName.ToString()] as string;
       Weight = Database.DatabaseCommand.Reader[Columns.Weight.ToString()].GetInt();
       Vendor = Database.DatabaseCommand.Reader[Columns.Vendor.ToString()] as string;
@@ -151,8 +151,8 @@ namespace Impressio.Models
                  {Columns.Amount2, Amount2.SetIntDbNull()},
                  {Columns.Amount3, Amount3.SetIntDbNull()},
                  {Columns.Direction, Direction.SetIntDbNull()},
-                 {Columns.SizeL, SizeL.ToString()},
-                 {Columns.SizeB, SizeB.ToString()},
+                 {Columns.SizeL, SizeW.ToString()},
+                 {Columns.SizeB, SizeH.ToString()},
                  {Columns.Weight, Weight.ToString()},
                };
     }
@@ -214,8 +214,8 @@ namespace Impressio.Models
             paper.Amount3 = reader["Menge3"].GetInt();
             paper.Direction = reader["Laufrichtung"].GetInt();
             paper.ItemNumber = reader["Artikelnummer"].GetInt();
-            paper.SizeB = reader["Breite"].GetInt();
-            paper.SizeL = reader["Länge"].GetInt();
+            paper.SizeH = reader["Breite"].GetInt();
+            paper.SizeW = reader["Länge"].GetInt();
             paper.Name = reader["Name"] as string;
             paper.Weight = reader["Grammatur"].GetInt();
             paper.Vendor = reader["Verkäufer"] as string;

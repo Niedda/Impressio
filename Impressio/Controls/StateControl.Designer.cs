@@ -59,7 +59,10 @@
       // 
       // viewState
       // 
-      this.viewState.ColumnPanelRowHeight = 30;
+      this.viewState.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+      this.viewState.Appearance.EvenRow.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+      this.viewState.Appearance.EvenRow.Options.UseBackColor = true;
+      this.viewState.ColumnPanelRowHeight = 25;
       this.viewState.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colTable,
@@ -71,9 +74,11 @@
       this.viewState.OptionsDetail.EnableMasterViewMode = false;
       this.viewState.OptionsDetail.ShowDetailTabs = false;
       this.viewState.OptionsDetail.SmartDetailExpand = false;
+      this.viewState.OptionsView.EnableAppearanceEvenRow = true;
       this.viewState.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewState.OptionsView.ShowGroupPanel = false;
-      this.viewState.RowHeight = 30;
+      this.viewState.OptionsView.ShowIndicator = false;
+      this.viewState.RowHeight = 25;
       // 
       // colIdentity
       // 

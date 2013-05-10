@@ -1,21 +1,19 @@
 ﻿using System.Drawing;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
 
 namespace Impressio.Models.Tools
 {
   public static class Drawing
   {
-    public static void Draw(PanelControl drawPanel, int printFormatWidth, int printFormatHeight, int width, int height, int useVertical, int useHorizontal, bool flipped = false, bool drawBorder = true)
+    public static void Draw(Graphics graphic, int printFormatWidth, int printFormatHeight, int width, int height, int useVertical, int useHorizontal, bool flipped = false, bool drawBorder = true)
     {
-      var graphic = drawPanel.CreateGraphics();
       graphic.Clear(Color.White);
+
       var pen = new Pen(Color.Black, 1);
       int div = 1;
-      while (drawPanel.Height < printFormatHeight)
+      while (graphic.VisibleClipBounds.Height < printFormatHeight)
       {
         div++;
-        if ((printFormatHeight / div) < drawPanel.Height)
+        if ((printFormatHeight / div) < (int)graphic.VisibleClipBounds.Height)
         {
           break;
         }
@@ -42,8 +40,8 @@ namespace Impressio.Models.Tools
       }
 
       var distance = (float)(drawBorder ? 4 / div : 0);
-      var leftDistance = (float)10 / div;
-      var heightDistance = (float)10 / div;
+      var leftDistance = (float)10;
+      var heightDistance = (float)10;
       var totalW = drawW + distance;
       var totalH = drawH + distance;
       pen.Color = useVertical * totalH > (float)printFormatHeight / div || totalW * useHorizontal > (float)printFormatWidth / div ? Color.Red : Color.Blue;

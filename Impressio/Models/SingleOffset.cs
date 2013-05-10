@@ -6,6 +6,9 @@ using Subvento.DatabaseObject;
 
 namespace Impressio.Models
 {
+  /// <summary>
+  /// Simple Wizard for calculating offset prints
+  /// </summary>
   public class SingleOffset : Position, IDatabaseObject<SingleOffset>
   {
     #region Columns enum
@@ -53,7 +56,9 @@ namespace Impressio.Models
       get { return PaperCostTotal + PlateCost + ColorCostTotal + SetupCostTotal + PlateSetupCostTotal + PrintCostTotal; }
     }
 
-    public override string DisplayName { get { return "Einfacher Wizard"; } }
+    public override int CostPerK { get { return CostPerKTotal(); } }
+
+    public override string DisplayName { get { return "Offsetdruck"; } }
 
     public override int FkOrder { get; set; }
 
@@ -85,6 +90,26 @@ namespace Impressio.Models
 
     public int FkPrintType { get; set; }
 
+    public string PrintType
+    {
+      get
+      {
+        switch (FkPrintType)
+        {
+          case 0:
+            return "SD / WD";
+          case 1:
+            return "Umschlagen";
+          case 2:
+            return "Umstülpen";
+          case 3:
+            return "SD WD in einem Durchgang";
+          default:
+            return "ND";
+        }
+      }
+    }
+
     public int Quantity { get; set; }
 
     public int Width { get; set; }
@@ -105,8 +130,30 @@ namespace Impressio.Models
 
     public int PaperPriceAdditon { get; set; }
 
+    public int RawPaperTotal
+    {
+      get { return PaperAddition + Quantity; }
+    }
+
+    public int PrintQuantity
+    {
+      get
+      {
+        switch (FkPrintType)
+        {
+          case 1:
+            return PaperQuantity * ColorFront;
+          case 4:
+            return PaperQuantity * (ColorFront + ColorBack);
+          default:
+            var colors = ColorFront > ColorBack ? ColorFront : ColorBack;
+            return PaperQuantity * colors;
+        }
+      }
+    }
+
     public override bool IsPredefined { get; set; }
-    
+
     public string IdentityColumn
     {
       get { return "SingleOffsetId"; }
@@ -123,7 +170,7 @@ namespace Impressio.Models
       {
         if (FkPaper != 0)
         {
-          if (_paper == null || _paper.Identity == FkPaper)
+          if (_paper == null || _paper.Identity != FkPaper)
           {
             return (_paper = (Paper)new Paper { Identity = FkPaper, }.LoadSingleObject());
           }
@@ -166,7 +213,9 @@ namespace Impressio.Models
     {
       get
       {
-        return Paper != null ? PaperPrice * (PaperQuantity / 1000) : 0;
+        var price = (PaperPrice * (((float)PaperPriceAdditon / 100) + 1));
+        var paper = (((PaperAddition + ((float)Quantity / (UsePerHorizontal * UsePerVertical))) / PaperUsePer) / 1000);
+        return Paper != null ? (int)(paper * price) : 0;
       }
     }
 
@@ -208,19 +257,45 @@ namespace Impressio.Models
           switch (FkPrintType)
           {
             case 1:
-              return (((Quantity / (UsePerHorizontal * UsePerVertical) + PaperAddition) * ColorFront) / Machine.Speed) *
-                     Machine.PricePerHour;
+              return (int)(((float)PrintQuantity / Machine.Speed) * Machine.PricePerHour);
             case 4:
-              return (((Quantity / (UsePerHorizontal * UsePerVertical) + PaperAddition) * (ColorFront + ColorBack)) /
-                      Machine.Speed) * Machine.PricePerHour;
+              return (int)(((float)PrintQuantity / Machine.Speed) * Machine.PricePerHour);
             default:
-              var colors = ColorFront > ColorBack ? ColorFront : ColorBack;
-              return (((Quantity / (UsePerHorizontal * UsePerVertical) + PaperAddition) * (colors)) /
-                      Machine.Speed) * Machine.PricePerHour;
+              return (int)(((float)PrintQuantity / Machine.Speed) * Machine.PricePerHour);
           }
         }
         return 0;
       }
+    }
+
+    public int CostPerKTotal()
+    {
+      if (PaperUsePer == 0 || Machine == null || Paper == null || UsePerVertical == 0)
+      {
+        return 0;
+      }
+      var price = (PaperPrice * (((float)PaperPriceAdditon / 100) + 1));
+      var paperUses = 1000 / PaperUsePer;
+      var reqSheet = (((float)paperUses / (UsePerVertical * UsePerHorizontal)) * price) / 1000;
+      var sheets = ((float)paperUses / (UsePerVertical * UsePerHorizontal));
+      float print = 0;
+      if (Machine != null)
+      {
+        switch (FkPrintType)
+        {
+          case 1:
+            print = ((sheets * ColorFront) / Machine.Speed) * Machine.PricePerHour;
+            break;
+          case 4:
+            print = ((PaperQuantity * (ColorFront + ColorBack)) / Machine.Speed) * Machine.PricePerHour;
+            break;
+          default:
+            var colors = ColorFront > ColorBack ? ColorFront : ColorBack;
+            print = ((PaperQuantity * (colors)) / Machine.Speed) * Machine.PricePerHour;
+            break;
+        }
+      }
+      return Convert.ToInt32(print + reqSheet);
     }
 
     public override List<Position> LoadPositions()

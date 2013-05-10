@@ -305,7 +305,7 @@
       // 
       this.colSizeL.Caption = "Länge";
       this.colSizeL.ColumnEdit = this.columnsExcel;
-      this.colSizeL.FieldName = "SizeL";
+      this.colSizeL.FieldName = "SizeW";
       this.colSizeL.Name = "colSizeL";
       this.colSizeL.Visible = true;
       this.colSizeL.VisibleIndex = 12;
@@ -314,7 +314,7 @@
       // 
       this.colSizeB.Caption = "Breite";
       this.colSizeB.ColumnEdit = this.columnsExcel;
-      this.colSizeB.FieldName = "SizeB";
+      this.colSizeB.FieldName = "SizeH";
       this.colSizeB.Name = "colSizeB";
       this.colSizeB.Visible = true;
       this.colSizeB.VisibleIndex = 13;

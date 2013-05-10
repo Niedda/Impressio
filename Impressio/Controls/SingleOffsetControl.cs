@@ -69,29 +69,34 @@ namespace Impressio.Controls
       return false;
     }
 
-    public void DrawFinishSheet()
+    public void DrawFinishSheet(Graphics graphic)
     {
-      Drawing.Draw(panelControl2, (int)printFormatWidth.Value, (int)printFormatHeight.Value, (int)finishSizeL.Value, (int)finishSizeH.Value, (int)usePerVertical.Value, (int)usePerHorizontal.Value, flipUsePer.Checked);
+      Drawing.Draw(graphic, (int)printFormatWidth.Value, (int)printFormatHeight.Value, (int)finishSizeL.Value, (int)finishSizeH.Value, (int)usePerVertical.Value, (int)usePerHorizontal.Value, flipUsePer.Checked);
     }
 
-    public void DrawPaperSheet()
+    public void DrawPaperSheet(Graphics graphic)
     {
-      var comp1 = (SingleOffset.Paper.SizeB / printFormatWidth.Value) * (SingleOffset.Paper.SizeL / printFormatHeight.Value);
-      var comp2 = (SingleOffset.Paper.SizeB / printFormatHeight.Value) * (SingleOffset.Paper.SizeL / printFormatWidth.Value);
+      if (SingleOffset.Paper == null) { return; }
+      var comp1 = (int)(SingleOffset.Paper.SizeH / printFormatWidth.Value) * (int)(SingleOffset.Paper.SizeW / printFormatHeight.Value);
+      var comp2 = (int)(SingleOffset.Paper.SizeH / printFormatHeight.Value) * (int)(SingleOffset.Paper.SizeW / printFormatWidth.Value);
 
       if (comp1 > comp2)
       {
-        var heightUse = (int)(SingleOffset.Paper.SizeL / printFormatHeight.Value);
-        var widthUse = (int)(SingleOffset.Paper.SizeB / printFormatWidth.Value);
-        Drawing.Draw(panelControl4, SingleOffset.Paper.SizeL, SingleOffset.Paper.SizeB, (int)printFormatWidth.Value, (int)printFormatHeight.Value, widthUse, heightUse, false, false);
-        usePerSheetLabel.Text = comp1 == usePerSheet.Value ? "" : string.Format("Anzahl Nutzen passt nicht.{0}Empfohlen wären {1} Nutzen.", Environment.NewLine, (int)comp1);
+        var widthUse = (int)(SingleOffset.Paper.SizeW / printFormatHeight.Value);
+        var heightUse = (int)(SingleOffset.Paper.SizeH / printFormatWidth.Value);
+        var flipped = widthUse * printFormatHeight.Value > SingleOffset.Paper.SizeW || heightUse * printFormatWidth.Value > SingleOffset.Paper.SizeH;
+        Drawing.Draw(graphic, SingleOffset.Paper.SizeW, SingleOffset.Paper.SizeH, (int)printFormatHeight.Value, (int)printFormatWidth.Value, heightUse, widthUse, false, false);
+        usePerSheetLabel.Text = comp1 == usePerSheet.Value ? "" : string.Format("Anzahl Nutzen passt nicht.{0}Empfohlen wären {1} Nutzen.", Environment.NewLine, comp1);
+        usePerSheetLabel.Update();
       }
       else
       {
-        var heightUse = (int)(SingleOffset.Paper.SizeB / printFormatHeight.Value);
-        var widthUse = (int)(SingleOffset.Paper.SizeL / printFormatWidth.Value);
-        Drawing.Draw(panelControl4, SingleOffset.Paper.SizeL, SingleOffset.Paper.SizeB, (int)printFormatWidth.Value, (int)printFormatHeight.Value, widthUse, heightUse, false, false);
-        usePerSheetLabel.Text = comp2 == usePerSheet.Value ? "" : string.Format("Anzahl Nutzen passt nicht.{0}Empfohlen wären {1} Nutzen.", Environment.NewLine, (int)comp1);
+        var heightUse = (int)(SingleOffset.Paper.SizeH / printFormatHeight.Value);
+        var widthUse = (int)(SingleOffset.Paper.SizeW / printFormatWidth.Value);
+        var flipped = widthUse * printFormatWidth.Value > SingleOffset.Paper.SizeW || heightUse * printFormatHeight.Value > SingleOffset.Paper.SizeH;
+        Drawing.Draw(graphic, SingleOffset.Paper.SizeW, SingleOffset.Paper.SizeH, (int)printFormatWidth.Value, (int)printFormatHeight.Value, widthUse, heightUse, false, false);
+        usePerSheetLabel.Text = comp2 == usePerSheet.Value ? "" : string.Format("Anzahl Nutzen passt nicht.{0}Empfohlen wären {1} Nutzen.", Environment.NewLine, comp2);
+        usePerSheetLabel.Update();
       }
     }
 
@@ -156,13 +161,8 @@ namespace Impressio.Controls
       if (e.Valid)
       {
         simpleColor.Value = colorFront.Value > colorBack.Value ? colorFront.Value : colorBack.Value;
-        Drawing.Draw(panelControl2, (int)printFormatWidth.Value, (int)printFormatHeight.Value, (int)finishSizeL.Value, (int)finishSizeH.Value, (int)usePerVertical.Value, (int)usePerHorizontal.Value, flipUsePer.Checked);
+        Drawing.Draw(finishSheetPanel.CreateGraphics(), (int)printFormatWidth.Value, (int)printFormatHeight.Value, (int)finishSizeL.Value, (int)finishSizeH.Value, (int)usePerVertical.Value, (int)usePerHorizontal.Value, flipUsePer.Checked);
       }
-    }
-
-    private void drawSheet_Click(object sender, EventArgs e)
-    {
-      Drawing.Draw(panelControl2, (int)printFormatWidth.Value, (int)printFormatHeight.Value, (int)finishSizeL.Value, (int)finishSizeH.Value, (int)usePerVertical.Value, (int)usePerHorizontal.Value, flipUsePer.Checked);
     }
 
     private void wizardPageSheetSetup_PageValidating(object sender, WizardPageValidatingEventArgs e)
@@ -210,16 +210,6 @@ namespace Impressio.Controls
       SingleOffset.IsFlipped = flipUsePer.Checked;
     }
 
-    private void SingleOffsetControl_Paint(object sender, PaintEventArgs e)
-    {
-      Drawing.Draw(panelControl2, (int)printFormatWidth.Value, (int)printFormatHeight.Value, (int)finishSizeL.Value, (int)finishSizeH.Value, (int)usePerVertical.Value, (int)usePerHorizontal.Value, flipUsePer.Checked);
-    }
-
-    private void panelControl2_Paint(object sender, PaintEventArgs e)
-    {
-      Drawing.Draw(panelControl2, (int)printFormatWidth.Value, (int)printFormatHeight.Value, (int)finishSizeL.Value, (int)finishSizeH.Value, (int)usePerVertical.Value, (int)usePerHorizontal.Value, flipUsePer.Checked);
-    }
-
     private void wizardPagePaper_PageValidating(object sender, WizardPageValidatingEventArgs e)
     {
       ErrorProvider.SetError(paperSearchLook, (int)paperSearchLook.EditValue == 0 ? "Bitte ein Papier auswählen" : "");
@@ -231,16 +221,20 @@ namespace Impressio.Controls
     {
       if (_isLoaded && (int)paperSearchLook.EditValue > 0)
       {
+        SingleOffset.FkPaper = (int)paperSearchLook.EditValue;
         var pap = new Paper { Identity = (int)paperSearchLook.EditValue };
         pap.LoadSingleObject();
         paperDesc.Text = string.Format("ab 1 Bogen:{1}.00 Fr.{0}ab {2} Bogen: {3}.00 Fr.{0}ab {4} Bogen: {5}.00 Fr.{0}ab {6} Bogen: {7}.00 Fr.",
                            Environment.NewLine, pap.Price1, pap.Amount1, pap.Price2, pap.Amount2, pap.Price3, pap.Amount3, pap.Price4);
         pricePaper.Value = pap.Price1;
         SingleOffset.PaperPrice = pap.Price1;
-        var comp1 = (pap.SizeB / printFormatWidth.Value) * (pap.SizeL / printFormatHeight.Value);
-        var comp2 = (pap.SizeB / printFormatHeight.Value) * (pap.SizeL / printFormatWidth.Value);
-        SingleOffset.PaperUsePer = (int)(comp1 > comp2 ? comp1 : comp2);
+        var comp1 = (int)(pap.SizeH / printFormatWidth.Value) * (int)(pap.SizeW / printFormatHeight.Value);
+        var comp2 = (int)(pap.SizeH / printFormatHeight.Value) * (int)(pap.SizeW / printFormatWidth.Value);
+        SingleOffset.PaperUsePer = (comp1 > comp2 ? comp1 : comp2);
         usePerSheet.Value = comp1 > comp2 ? comp1 : comp2;
+        paperDesc.Update();
+        DrawPaperSheet(paperSheetPanel.CreateGraphics());
+        CalculatePaperQuantity();
       }
       else
       {
@@ -273,7 +267,7 @@ namespace Impressio.Controls
         treeList1.AppendNode(new object[] { "Fortdruck", paperQuantity.Value * (colors), null, SingleOffset.PrintCostTotal }, rootPrint);
 
         var rootTotal = treeList1.AppendNode(new object[] { "Total", null, null, SingleOffset.PositionTotal }, 99);
-        
+
         treeList1.EndUnboundLoad();
         treeList1.ExpandAll();
       }
@@ -297,32 +291,13 @@ namespace Impressio.Controls
 
     private void CalculatePaperQuantity()
     {
-      if (_isLoaded)
+      if (_isLoaded && usePerSheet.Value != 0)
       {
-        SingleOffset.PaperQuantity = (int)(quantity.Value / (usePerHorizontal.Value * usePerVertical.Value) + (additionPaper.Value / usePerSheet.Value));
-        paperQuantity.Value = quantity.Value / (usePerHorizontal.Value * usePerVertical.Value) + (additionPaper.Value / usePerSheet.Value);
-        paperTotalPrice.Value = (paperQuantity.Value / 1000) * pricePaper.Value;
+        SingleOffset.PaperQuantity = (int)(((quantity.Value / (usePerHorizontal.Value * usePerVertical.Value)) + additionPaper.Value) / usePerSheet.Value);
+        paperQuantity.Value = (int)(((quantity.Value / (usePerHorizontal.Value * usePerVertical.Value)) + additionPaper.Value) / usePerSheet.Value);
+        var addition = ((float)paperQuantity.Value / 1000) * (float)pricePaper.Value;
+        paperTotalPrice.Value = (int)addition;
       }
-    }
-    
-    private void panelControl1_MouseHover(object sender, EventArgs e)
-    {
-      DrawFinishSheet();
-    }
-
-    private void panelControl2_MouseHover(object sender, EventArgs e)
-    {
-      DrawFinishSheet();
-    }
-
-    private void panelControl3_MouseHover(object sender, EventArgs e)
-    {
-      DrawPaperSheet();
-    }
-
-    private void panelControl4_MouseHover(object sender, EventArgs e)
-    {
-      DrawPaperSheet();
     }
 
     private void treeList1_NodeCellStyle(object sender, DevExpress.XtraTreeList.GetCustomNodeCellStyleEventArgs e)
@@ -345,6 +320,30 @@ namespace Impressio.Controls
       e.NextButton.Location = e.CancelButton.Location;
       e.FinishButton.Location = e.CancelButton.Location;
       e.FinishButton.Text = "Anfang >";
+    }
+
+    private void drawSheet_Click(object sender, EventArgs e)
+    {
+      DrawFinishSheet(finishSheetPanel.CreateGraphics());
+    }
+
+    private void finishSheetPanel_Paint(object sender, PaintEventArgs e)
+    {
+      DrawFinishSheet(e.Graphics);
+    }
+
+    private void paperSheetPanel_Paint(object sender, PaintEventArgs e)
+    {
+      DrawPaperSheet(e.Graphics);
+    }
+
+    private void usePerSheet_EditValueChanged(object sender, EventArgs e)
+    {
+      if (_isLoaded)
+      {
+        DrawPaperSheet(paperSheetPanel.CreateGraphics());
+        CalculatePaperQuantity(); 
+      }
     }
 
     private readonly PaperSizes _paperSizes = new PaperSizes();

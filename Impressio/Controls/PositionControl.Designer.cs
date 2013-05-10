@@ -65,6 +65,7 @@ namespace Impressio.Controls
       this.addressBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.clientLookUp = new DevExpress.XtraEditors.LookUpEdit();
       this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.colCostPerK = new DevExpress.XtraGrid.Columns.GridColumn();
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridPosition)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.positionBindingSource)).BeginInit();
@@ -110,7 +111,10 @@ namespace Impressio.Controls
       // 
       // viewPosition
       // 
-      this.viewPosition.ColumnPanelRowHeight = 30;
+      this.viewPosition.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+      this.viewPosition.Appearance.EvenRow.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+      this.viewPosition.Appearance.EvenRow.Options.UseBackColor = true;
+      this.viewPosition.ColumnPanelRowHeight = 25;
       this.viewPosition.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colName,
@@ -118,7 +122,8 @@ namespace Impressio.Controls
             this.colFkOrder,
             this.colPositionTotal,
             this.colIsPredefined,
-            this.colAssignedControl});
+            this.colAssignedControl,
+            this.colCostPerK});
       this.viewPosition.GridControl = this.gridPosition;
       this.viewPosition.IndicatorWidth = 50;
       this.viewPosition.Name = "viewPosition";
@@ -126,10 +131,12 @@ namespace Impressio.Controls
       this.viewPosition.OptionsDetail.EnableMasterViewMode = false;
       this.viewPosition.OptionsDetail.ShowDetailTabs = false;
       this.viewPosition.OptionsDetail.SmartDetailExpand = false;
+      this.viewPosition.OptionsView.EnableAppearanceEvenRow = true;
       this.viewPosition.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewPosition.OptionsView.ShowDetailButtons = false;
       this.viewPosition.OptionsView.ShowGroupPanel = false;
-      this.viewPosition.RowHeight = 30;
+      this.viewPosition.OptionsView.ShowIndicator = false;
+      this.viewPosition.RowHeight = 25;
       this.viewPosition.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
       this.viewPosition.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.ViewPositionFocusedRowChanged);
       this.viewPosition.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewPositionInvalidRowException);
@@ -192,7 +199,7 @@ namespace Impressio.Controls
       this.colPositionTotal.Name = "colPositionTotal";
       this.colPositionTotal.OptionsColumn.ReadOnly = true;
       this.colPositionTotal.Visible = true;
-      this.colPositionTotal.VisibleIndex = 2;
+      this.colPositionTotal.VisibleIndex = 3;
       // 
       // colIsPredefined
       // 
@@ -505,6 +512,17 @@ namespace Impressio.Controls
       // 
       this.clientBindingSource.DataSource = typeof(Impressio.Models.Client);
       // 
+      // colCostPerK
+      // 
+      this.colCostPerK.Caption = "Kosten w. 1\'000";
+      this.colCostPerK.DisplayFormat.FormatString = "c";
+      this.colCostPerK.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.colCostPerK.FieldName = "CostPerK";
+      this.colCostPerK.Name = "colCostPerK";
+      this.colCostPerK.OptionsColumn.ReadOnly = true;
+      this.colCostPerK.Visible = true;
+      this.colCostPerK.VisibleIndex = 2;
+      // 
       // PositionControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -576,5 +594,6 @@ namespace Impressio.Controls
         private DevExpress.XtraGrid.Columns.GridColumn colPositionTotal;
         private DevExpress.XtraGrid.Columns.GridColumn colIsPredefined;
         private DevExpress.XtraGrid.Columns.GridColumn colAssignedControl;
+        private DevExpress.XtraGrid.Columns.GridColumn colCostPerK;
     }
 }

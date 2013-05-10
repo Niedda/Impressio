@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ImpressioSetup", "ImpressioSetup.vdproj", "{2041A3EB-EADF-4DE0-B50E-588AD2FE68EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2041A3EB-EADF-4DE0-B50E-588AD2FE68EF}.Debug|Default.ActiveCfg = Debug
+		{2041A3EB-EADF-4DE0-B50E-588AD2FE68EF}.Debug|Default.Build.0 = Debug
+		{2041A3EB-EADF-4DE0-B50E-588AD2FE68EF}.Release|Default.ActiveCfg = Release
+		{2041A3EB-EADF-4DE0-B50E-588AD2FE68EF}.Release|Default.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

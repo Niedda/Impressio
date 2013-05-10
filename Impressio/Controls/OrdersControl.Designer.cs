@@ -91,7 +91,10 @@ namespace Impressio.Controls
       // 
       // viewOrder
       // 
-      this.viewOrder.ColumnPanelRowHeight = 30;
+      this.viewOrder.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+      this.viewOrder.Appearance.EvenRow.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+      this.viewOrder.Appearance.EvenRow.Options.UseBackColor = true;
+      this.viewOrder.ColumnPanelRowHeight = 25;
       this.viewOrder.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colFkOrderCompany,
@@ -117,12 +120,14 @@ namespace Impressio.Controls
       this.viewOrder.OptionsFilter.ShowAllTableValuesInFilterPopup = true;
       this.viewOrder.OptionsFind.AlwaysVisible = true;
       this.viewOrder.OptionsFind.ShowCloseButton = false;
+      this.viewOrder.OptionsView.EnableAppearanceEvenRow = true;
       this.viewOrder.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewOrder.OptionsView.ShowAutoFilterRow = true;
       this.viewOrder.OptionsView.ShowDetailButtons = false;
       this.viewOrder.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.ShowAlways;
       this.viewOrder.OptionsView.ShowGroupPanel = false;
-      this.viewOrder.RowHeight = 30;
+      this.viewOrder.OptionsView.ShowIndicator = false;
+      this.viewOrder.RowHeight = 25;
       // 
       // colIdentity
       // 

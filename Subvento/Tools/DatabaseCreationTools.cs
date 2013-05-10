@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Subvento.DatabaseException;
 
 namespace Subvento.Tools
 {
@@ -48,7 +47,7 @@ namespace Subvento.Tools
             }
             catch (Exception exception)
             {
-              DefaultLogger.Instance.WriteToLog(exception + Environment.NewLine);
+              ServiceLocator.Instance.ExceptionHandler.LogException(exception);
               return false;
             }
           }

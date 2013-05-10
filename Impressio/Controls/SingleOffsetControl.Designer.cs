@@ -39,13 +39,12 @@
       this.finishSizeL = new DevExpress.XtraEditors.SpinEdit();
       this.finishSizeH = new DevExpress.XtraEditors.SpinEdit();
       this.quantity = new DevExpress.XtraEditors.SpinEdit();
-      this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.wizardPageSheetSetup = new DevExpress.XtraWizard.WizardPage();
-      this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+      this.finishSheetPanel = new DevExpress.XtraEditors.PanelControl();
       this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
       this.flipUsePer = new DevExpress.XtraEditors.CheckEdit();
       this.drawSheet = new DevExpress.XtraEditors.SimpleButton();
@@ -71,8 +70,11 @@
       this.colPrice = new DevExpress.XtraTreeList.Columns.TreeListColumn();
       this.colTotal = new DevExpress.XtraTreeList.Columns.TreeListColumn();
       this.wizardPagePaper = new DevExpress.XtraWizard.WizardPage();
-      this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
+      this.paperSheetPanel = new DevExpress.XtraEditors.PanelControl();
       this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
+      this.paperDesc = new DevExpress.XtraEditors.LabelControl();
+      this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+      this.paperAddition = new DevExpress.XtraEditors.SpinEdit();
       this.usePerSheetLabel = new DevExpress.XtraEditors.LabelControl();
       this.paperTotalPrice = new DevExpress.XtraEditors.SpinEdit();
       this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
@@ -108,7 +110,6 @@
       this.colDatabase = new DevExpress.XtraGrid.Columns.GridColumn();
       this.pricePaper = new DevExpress.XtraEditors.SpinEdit();
       this.additionPaper = new DevExpress.XtraEditors.SpinEdit();
-      this.paperDesc = new DevExpress.XtraEditors.LabelControl();
       this.detailsPage = new DevExpress.XtraWizard.WizardPage();
       this.difficultColor = new DevExpress.XtraEditors.SpinEdit();
       this.simpleColor = new DevExpress.XtraEditors.SpinEdit();
@@ -131,7 +132,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.finishSizeH.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.quantity.Properties)).BeginInit();
       this.wizardPageSheetSetup.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.finishSheetPanel)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
       this.panelControl1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.flipUsePer.Properties)).BeginInit();
@@ -148,9 +149,10 @@
       this.completionWizardPage1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.treeList1)).BeginInit();
       this.wizardPagePaper.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.paperSheetPanel)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
       this.panelControl3.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.paperAddition.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperTotalPrice.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.usePerSheet.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperQuantity.Properties)).BeginInit();
@@ -202,7 +204,6 @@
       this.wizardPageBasicProperties.Controls.Add(this.finishSizeL);
       this.wizardPageBasicProperties.Controls.Add(this.finishSizeH);
       this.wizardPageBasicProperties.Controls.Add(this.quantity);
-      this.wizardPageBasicProperties.Controls.Add(this.labelControl6);
       this.wizardPageBasicProperties.Controls.Add(this.labelControl5);
       this.wizardPageBasicProperties.Controls.Add(this.labelControl4);
       this.wizardPageBasicProperties.Controls.Add(this.labelControl3);
@@ -353,14 +354,6 @@
       this.quantity.Size = new System.Drawing.Size(100, 20);
       this.quantity.TabIndex = 6;
       // 
-      // labelControl6
-      // 
-      this.labelControl6.Location = new System.Drawing.Point(37, 165);
-      this.labelControl6.Name = "labelControl6";
-      this.labelControl6.Size = new System.Drawing.Size(48, 13);
-      this.labelControl6.TabIndex = 5;
-      this.labelControl6.Text = "Preisstufe";
-      // 
       // labelControl5
       // 
       this.labelControl5.Location = new System.Drawing.Point(37, 132);
@@ -395,23 +388,22 @@
       // 
       // wizardPageSheetSetup
       // 
-      this.wizardPageSheetSetup.Controls.Add(this.panelControl2);
+      this.wizardPageSheetSetup.Controls.Add(this.finishSheetPanel);
       this.wizardPageSheetSetup.Controls.Add(this.panelControl1);
       this.wizardPageSheetSetup.Name = "wizardPageSheetSetup";
       this.wizardPageSheetSetup.Size = new System.Drawing.Size(707, 325);
       this.wizardPageSheetSetup.Text = "Bogeneinteilung";
       this.wizardPageSheetSetup.PageValidating += new DevExpress.XtraWizard.WizardPageValidatingEventHandler(this.wizardPageSheetSetup_PageValidating);
       // 
-      // panelControl2
+      // finishSheetPanel
       // 
-      this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelControl2.Location = new System.Drawing.Point(391, 0);
-      this.panelControl2.LookAndFeel.UseDefaultLookAndFeel = false;
-      this.panelControl2.Name = "panelControl2";
-      this.panelControl2.Size = new System.Drawing.Size(316, 325);
-      this.panelControl2.TabIndex = 1;
-      this.panelControl2.Paint += new System.Windows.Forms.PaintEventHandler(this.panelControl2_Paint);
-      this.panelControl2.MouseHover += new System.EventHandler(this.panelControl2_MouseHover);
+      this.finishSheetPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.finishSheetPanel.Location = new System.Drawing.Point(391, 0);
+      this.finishSheetPanel.LookAndFeel.UseDefaultLookAndFeel = false;
+      this.finishSheetPanel.Name = "finishSheetPanel";
+      this.finishSheetPanel.Size = new System.Drawing.Size(316, 325);
+      this.finishSheetPanel.TabIndex = 1;
+      this.finishSheetPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.finishSheetPanel_Paint);
       // 
       // panelControl1
       // 
@@ -439,10 +431,10 @@
       this.panelControl1.Name = "panelControl1";
       this.panelControl1.Size = new System.Drawing.Size(391, 325);
       this.panelControl1.TabIndex = 0;
-      this.panelControl1.MouseHover += new System.EventHandler(this.panelControl1_MouseHover);
       // 
       // flipUsePer
       // 
+      this.flipUsePer.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "IsFlipped", true));
       this.flipUsePer.Location = new System.Drawing.Point(191, 182);
       this.flipUsePer.Name = "flipUsePer";
       this.flipUsePer.Properties.Caption = "90º Drehen";
@@ -658,6 +650,32 @@
       // 
       // treeList1
       // 
+      this.treeList1.Appearance.FocusedCell.BackColor = System.Drawing.Color.White;
+      this.treeList1.Appearance.FocusedCell.BackColor2 = System.Drawing.Color.White;
+      this.treeList1.Appearance.FocusedCell.BorderColor = System.Drawing.Color.White;
+      this.treeList1.Appearance.FocusedCell.ForeColor = System.Drawing.Color.Black;
+      this.treeList1.Appearance.FocusedCell.Options.UseBackColor = true;
+      this.treeList1.Appearance.FocusedCell.Options.UseBorderColor = true;
+      this.treeList1.Appearance.FocusedCell.Options.UseForeColor = true;
+      this.treeList1.Appearance.FocusedRow.BackColor = System.Drawing.Color.White;
+      this.treeList1.Appearance.FocusedRow.BackColor2 = System.Drawing.Color.White;
+      this.treeList1.Appearance.FocusedRow.BorderColor = System.Drawing.Color.White;
+      this.treeList1.Appearance.FocusedRow.ForeColor = System.Drawing.Color.Black;
+      this.treeList1.Appearance.FocusedRow.Options.UseBackColor = true;
+      this.treeList1.Appearance.FocusedRow.Options.UseBorderColor = true;
+      this.treeList1.Appearance.FocusedRow.Options.UseForeColor = true;
+      this.treeList1.Appearance.Row.BackColor = System.Drawing.Color.White;
+      this.treeList1.Appearance.Row.BackColor2 = System.Drawing.Color.White;
+      this.treeList1.Appearance.Row.BorderColor = System.Drawing.Color.White;
+      this.treeList1.Appearance.Row.Options.UseBackColor = true;
+      this.treeList1.Appearance.Row.Options.UseBorderColor = true;
+      this.treeList1.Appearance.SelectedRow.BackColor = System.Drawing.Color.White;
+      this.treeList1.Appearance.SelectedRow.BackColor2 = System.Drawing.Color.White;
+      this.treeList1.Appearance.SelectedRow.BorderColor = System.Drawing.Color.White;
+      this.treeList1.Appearance.SelectedRow.ForeColor = System.Drawing.Color.Black;
+      this.treeList1.Appearance.SelectedRow.Options.UseBackColor = true;
+      this.treeList1.Appearance.SelectedRow.Options.UseBorderColor = true;
+      this.treeList1.Appearance.SelectedRow.Options.UseForeColor = true;
       this.treeList1.ColumnPanelRowHeight = 25;
       this.treeList1.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
             this.colNodeName,
@@ -668,10 +686,11 @@
       this.treeList1.Location = new System.Drawing.Point(0, 0);
       this.treeList1.Name = "treeList1";
       this.treeList1.OptionsBehavior.Editable = false;
+      this.treeList1.OptionsView.ShowButtons = false;
       this.treeList1.RowHeight = 25;
       this.treeList1.Size = new System.Drawing.Size(707, 325);
       this.treeList1.TabIndex = 0;
-      this.treeList1.TreeLineStyle = DevExpress.XtraTreeList.LineStyle.Dark;
+      this.treeList1.TreeLineStyle = DevExpress.XtraTreeList.LineStyle.None;
       this.treeList1.NodeCellStyle += new DevExpress.XtraTreeList.GetCustomNodeCellStyleEventHandler(this.treeList1_NodeCellStyle);
       // 
       // colNodeName
@@ -712,25 +731,27 @@
       // 
       // wizardPagePaper
       // 
-      this.wizardPagePaper.Controls.Add(this.panelControl4);
+      this.wizardPagePaper.Controls.Add(this.paperSheetPanel);
       this.wizardPagePaper.Controls.Add(this.panelControl3);
-      this.wizardPagePaper.Controls.Add(this.paperDesc);
       this.wizardPagePaper.Name = "wizardPagePaper";
       this.wizardPagePaper.Size = new System.Drawing.Size(707, 325);
       this.wizardPagePaper.Text = "Papier";
       this.wizardPagePaper.PageValidating += new DevExpress.XtraWizard.WizardPageValidatingEventHandler(this.wizardPagePaper_PageValidating);
       // 
-      // panelControl4
+      // paperSheetPanel
       // 
-      this.panelControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelControl4.Location = new System.Drawing.Point(499, 0);
-      this.panelControl4.Name = "panelControl4";
-      this.panelControl4.Size = new System.Drawing.Size(208, 325);
-      this.panelControl4.TabIndex = 14;
-      this.panelControl4.MouseHover += new System.EventHandler(this.panelControl4_MouseHover);
+      this.paperSheetPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.paperSheetPanel.Location = new System.Drawing.Point(499, 0);
+      this.paperSheetPanel.Name = "paperSheetPanel";
+      this.paperSheetPanel.Size = new System.Drawing.Size(208, 325);
+      this.paperSheetPanel.TabIndex = 14;
+      this.paperSheetPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.paperSheetPanel_Paint);
       // 
       // panelControl3
       // 
+      this.panelControl3.Controls.Add(this.paperDesc);
+      this.panelControl3.Controls.Add(this.labelControl1);
+      this.panelControl3.Controls.Add(this.paperAddition);
       this.panelControl3.Controls.Add(this.usePerSheetLabel);
       this.panelControl3.Controls.Add(this.paperTotalPrice);
       this.panelControl3.Controls.Add(this.labelControl12);
@@ -749,11 +770,48 @@
       this.panelControl3.Name = "panelControl3";
       this.panelControl3.Size = new System.Drawing.Size(499, 325);
       this.panelControl3.TabIndex = 13;
-      this.panelControl3.MouseHover += new System.EventHandler(this.panelControl3_MouseHover);
+      // 
+      // paperDesc
+      // 
+      this.paperDesc.Location = new System.Drawing.Point(283, 117);
+      this.paperDesc.Name = "paperDesc";
+      this.paperDesc.Size = new System.Drawing.Size(0, 13);
+      this.paperDesc.TabIndex = 12;
+      // 
+      // labelControl1
+      // 
+      this.labelControl1.Location = new System.Drawing.Point(24, 149);
+      this.labelControl1.Name = "labelControl1";
+      this.labelControl1.Size = new System.Drawing.Size(64, 13);
+      this.labelControl1.TabIndex = 12;
+      this.labelControl1.Text = "Preiszuschlag";
+      // 
+      // paperAddition
+      // 
+      this.paperAddition.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "PaperPriceAdditon", true));
+      this.paperAddition.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+      this.paperAddition.Location = new System.Drawing.Point(160, 146);
+      this.paperAddition.Name = "paperAddition";
+      this.paperAddition.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.paperAddition.Properties.DisplayFormat.FormatString = "{0} %";
+      this.paperAddition.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.paperAddition.Properties.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+      this.paperAddition.Properties.IsFloatValue = false;
+      this.paperAddition.Properties.Mask.EditMask = "N00";
+      this.paperAddition.Size = new System.Drawing.Size(100, 20);
+      this.paperAddition.TabIndex = 13;
       // 
       // usePerSheetLabel
       // 
-      this.usePerSheetLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.usePerSheetLabel.Appearance.ForeColor = System.Drawing.Color.Red;
       this.usePerSheetLabel.Location = new System.Drawing.Point(283, 55);
       this.usePerSheetLabel.Name = "usePerSheetLabel";
@@ -768,7 +826,7 @@
             0,
             0,
             0});
-      this.paperTotalPrice.Location = new System.Drawing.Point(160, 199);
+      this.paperTotalPrice.Location = new System.Drawing.Point(160, 219);
       this.paperTotalPrice.Name = "paperTotalPrice";
       this.paperTotalPrice.Properties.DisplayFormat.FormatString = "c";
       this.paperTotalPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -818,6 +876,7 @@
             0});
       this.usePerSheet.Size = new System.Drawing.Size(100, 20);
       this.usePerSheet.TabIndex = 11;
+      this.usePerSheet.EditValueChanged += new System.EventHandler(this.usePerSheet_EditValueChanged);
       // 
       // labelControl14
       // 
@@ -837,7 +896,7 @@
       // 
       // labelControl15
       // 
-      this.labelControl15.Location = new System.Drawing.Point(24, 171);
+      this.labelControl15.Location = new System.Drawing.Point(24, 191);
       this.labelControl15.Name = "labelControl15";
       this.labelControl15.Size = new System.Drawing.Size(62, 13);
       this.labelControl15.TabIndex = 3;
@@ -845,7 +904,7 @@
       // 
       // labelControl16
       // 
-      this.labelControl16.Location = new System.Drawing.Point(24, 202);
+      this.labelControl16.Location = new System.Drawing.Point(24, 222);
       this.labelControl16.Name = "labelControl16";
       this.labelControl16.Size = new System.Drawing.Size(50, 13);
       this.labelControl16.TabIndex = 4;
@@ -859,7 +918,7 @@
             0,
             0,
             0});
-      this.paperQuantity.Location = new System.Drawing.Point(160, 168);
+      this.paperQuantity.Location = new System.Drawing.Point(160, 188);
       this.paperQuantity.Name = "paperQuantity";
       this.paperQuantity.Properties.IsFloatValue = false;
       this.paperQuantity.Properties.Mask.EditMask = "N00";
@@ -869,7 +928,7 @@
       // 
       // paperSearchLook
       // 
-      this.paperSearchLook.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "FkPaper", true));
+      this.paperSearchLook.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "FkPaper", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.paperSearchLook.Location = new System.Drawing.Point(160, 21);
       this.paperSearchLook.Name = "paperSearchLook";
       this.paperSearchLook.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -1014,12 +1073,12 @@
       // 
       // colSizeL
       // 
-      this.colSizeL.FieldName = "SizeL";
+      this.colSizeL.FieldName = "SizeW";
       this.colSizeL.Name = "colSizeL";
       // 
       // colSizeB
       // 
-      this.colSizeB.FieldName = "SizeB";
+      this.colSizeB.FieldName = "SizeH";
       this.colSizeB.Name = "colSizeB";
       // 
       // colSize
@@ -1061,7 +1120,7 @@
       // 
       this.additionPaper.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.singleOffsetBindingSource, "PaperAddition", true));
       this.additionPaper.EditValue = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
@@ -1076,16 +1135,14 @@
             0});
       this.additionPaper.Properties.IsFloatValue = false;
       this.additionPaper.Properties.Mask.EditMask = "N00";
+      this.additionPaper.Properties.MaxValue = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
       this.additionPaper.Size = new System.Drawing.Size(100, 20);
       this.additionPaper.TabIndex = 6;
       this.additionPaper.EditValueChanged += new System.EventHandler(this.additionPaper_EditValueChanged);
-      // 
-      // paperDesc
-      // 
-      this.paperDesc.Location = new System.Drawing.Point(307, 57);
-      this.paperDesc.Name = "paperDesc";
-      this.paperDesc.Size = new System.Drawing.Size(0, 13);
-      this.paperDesc.TabIndex = 12;
       // 
       // detailsPage
       // 
@@ -1114,6 +1171,8 @@
       this.difficultColor.Name = "difficultColor";
       this.difficultColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.difficultColor.Properties.IsFloatValue = false;
+      this.difficultColor.Properties.Mask.EditMask = "N00";
       this.difficultColor.Size = new System.Drawing.Size(112, 20);
       this.difficultColor.TabIndex = 7;
       // 
@@ -1129,6 +1188,8 @@
       this.simpleColor.Name = "simpleColor";
       this.simpleColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.simpleColor.Properties.IsFloatValue = false;
+      this.simpleColor.Properties.Mask.EditMask = "N00";
       this.simpleColor.Size = new System.Drawing.Size(112, 20);
       this.simpleColor.TabIndex = 6;
       // 
@@ -1144,6 +1205,8 @@
       this.plate.Name = "plate";
       this.plate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+      this.plate.Properties.IsFloatValue = false;
+      this.plate.Properties.Mask.EditMask = "N00";
       this.plate.Size = new System.Drawing.Size(112, 20);
       this.plate.TabIndex = 5;
       // 
@@ -1198,7 +1261,6 @@
       this.Controls.Add(this.singleOffsetWizard);
       this.Name = "SingleOffsetControl";
       this.Size = new System.Drawing.Size(767, 487);
-      this.Paint += new System.Windows.Forms.PaintEventHandler(this.SingleOffsetControl_Paint);
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.singleOffsetWizard)).EndInit();
       this.singleOffsetWizard.ResumeLayout(false);
@@ -1213,7 +1275,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.finishSizeH.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.quantity.Properties)).EndInit();
       this.wizardPageSheetSetup.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.finishSheetPanel)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
       this.panelControl1.ResumeLayout(false);
       this.panelControl1.PerformLayout();
@@ -1231,11 +1293,11 @@
       this.completionWizardPage1.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.treeList1)).EndInit();
       this.wizardPagePaper.ResumeLayout(false);
-      this.wizardPagePaper.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.paperSheetPanel)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
       this.panelControl3.ResumeLayout(false);
       this.panelControl3.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.paperAddition.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperTotalPrice.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.usePerSheet.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.paperQuantity.Properties)).EndInit();
@@ -1266,12 +1328,11 @@
     private DevExpress.XtraEditors.SpinEdit finishSizeL;
     private DevExpress.XtraEditors.SpinEdit finishSizeH;
     private DevExpress.XtraEditors.SpinEdit quantity;
-    private DevExpress.XtraEditors.LabelControl labelControl6;
     private DevExpress.XtraEditors.LabelControl labelControl5;
     private DevExpress.XtraEditors.LabelControl labelControl4;
     private DevExpress.XtraEditors.LabelControl labelControl3;
     private DevExpress.XtraEditors.LabelControl labelControl2;
-    private DevExpress.XtraEditors.PanelControl panelControl2;
+    private DevExpress.XtraEditors.PanelControl finishSheetPanel;
     private DevExpress.XtraEditors.PanelControl panelControl1;
     private DevExpress.XtraEditors.LabelControl labelControl11;
     private DevExpress.XtraEditors.LabelControl labelControl10;
@@ -1342,8 +1403,10 @@
     private DevExpress.XtraTreeList.Columns.TreeListColumn colQuantity;
     private DevExpress.XtraTreeList.Columns.TreeListColumn colPrice;
     private DevExpress.XtraTreeList.Columns.TreeListColumn colTotal;
-    private DevExpress.XtraEditors.PanelControl panelControl4;
+    private DevExpress.XtraEditors.PanelControl paperSheetPanel;
     private DevExpress.XtraEditors.PanelControl panelControl3;
     private DevExpress.XtraEditors.LabelControl usePerSheetLabel;
+    private DevExpress.XtraEditors.LabelControl labelControl1;
+    private DevExpress.XtraEditors.SpinEdit paperAddition;
   }
 }

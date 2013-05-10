@@ -70,6 +70,7 @@ namespace Impressio.Views
       editOffer.ItemClick += _propertyHandler.GetOfferEdit;
       editDelivery.ItemClick += _propertyHandler.GetDeliveryEdit;
       predefinedOrder.ItemClick += _propertyHandler.GetPredefinedOrder;
+      paperSizes.ItemClick += _propertyHandler.GetPaperSizes;
       
       RegisterControl(_ordersControl);
       ribbon.SelectedPage = ribbonPageOrder;

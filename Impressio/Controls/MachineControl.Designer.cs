@@ -37,13 +37,13 @@
       this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colPlateCost = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colPricePerColor = new DevExpress.XtraGrid.Columns.GridColumn();
+      this.timeEdit = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
       this.colSpeed = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colCostPerHour = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colEasySetup = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colDifficultSetup = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colDifficultColor = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colPlateSetup = new DevExpress.XtraGrid.Columns.GridColumn();
-      this.timeEdit = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridMachine)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.machineBindingSource)).BeginInit();
@@ -68,11 +68,13 @@
       // machineBindingSource
       // 
       this.machineBindingSource.DataSource = typeof(Impressio.Models.Machine);
-      this.machineBindingSource.Position = 0;
       // 
       // viewMachine
       // 
-      this.viewMachine.ColumnPanelRowHeight = 30;
+      this.viewMachine.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+      this.viewMachine.Appearance.EvenRow.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+      this.viewMachine.Appearance.EvenRow.Options.UseBackColor = true;
+      this.viewMachine.ColumnPanelRowHeight = 25;
       this.viewMachine.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colTable,
@@ -92,9 +94,11 @@
       this.viewMachine.OptionsDetail.EnableMasterViewMode = false;
       this.viewMachine.OptionsDetail.ShowDetailTabs = false;
       this.viewMachine.OptionsDetail.SmartDetailExpand = false;
+      this.viewMachine.OptionsView.EnableAppearanceEvenRow = true;
       this.viewMachine.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewMachine.OptionsView.ShowGroupPanel = false;
-      this.viewMachine.RowHeight = 30;
+      this.viewMachine.OptionsView.ShowIndicator = false;
+      this.viewMachine.RowHeight = 25;
       // 
       // colIdentity
       // 
@@ -133,6 +137,15 @@
       this.colPricePerColor.Name = "colPricePerColor";
       this.colPricePerColor.Visible = true;
       this.colPricePerColor.VisibleIndex = 5;
+      // 
+      // timeEdit
+      // 
+      this.timeEdit.AutoHeight = false;
+      this.timeEdit.DisplayFormat.FormatString = "{0} min";
+      this.timeEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.timeEdit.IsFloatValue = false;
+      this.timeEdit.Mask.EditMask = "N00";
+      this.timeEdit.Name = "timeEdit";
       // 
       // colSpeed
       // 
@@ -190,15 +203,6 @@
       this.colPlateSetup.Name = "colPlateSetup";
       this.colPlateSetup.Visible = true;
       this.colPlateSetup.VisibleIndex = 4;
-      // 
-      // timeEdit
-      // 
-      this.timeEdit.AutoHeight = false;
-      this.timeEdit.DisplayFormat.FormatString = "{0} min";
-      this.timeEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-      this.timeEdit.IsFloatValue = false;
-      this.timeEdit.Mask.EditMask = "N00";
-      this.timeEdit.Name = "timeEdit";
       // 
       // MachineControl
       // 

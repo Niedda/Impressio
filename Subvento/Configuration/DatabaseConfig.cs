@@ -13,12 +13,6 @@ namespace Subvento.Configuration
 
     public string ConnectionString { get; internal set; }
 
-    public bool ExceptionMode { get; internal set; }
-
-    public bool ExceptionLog { get; internal set; }
-
-    public bool SuppressException { get; internal set; }
-
     public void SetDatabaseEngine(ServiceLocator.DatabaseEngine dbEngine)
     {
       DatabaseEngine = dbEngine;
@@ -34,24 +28,6 @@ namespace Subvento.Configuration
         return true;
       }
       return false;
-    }
-
-    public void SetExceptionMode(bool showExecptions)
-    {
-      ExceptionMode = showExecptions;
-      this.SaveConfig();
-    }
-
-    public void SetExceptionLog(bool logExceptions)
-    {
-      ExceptionLog = logExceptions;
-      this.SaveConfig();
-    }
-
-    public void SetSuppressException(bool suppress)
-    {
-      SuppressException = suppress;
-      this.SaveConfig();
     }
   }
 }

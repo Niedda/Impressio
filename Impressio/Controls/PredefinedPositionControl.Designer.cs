@@ -67,7 +67,10 @@
       // 
       // viewPosition
       // 
-      this.viewPosition.ColumnPanelRowHeight = 30;
+      this.viewPosition.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+      this.viewPosition.Appearance.EvenRow.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+      this.viewPosition.Appearance.EvenRow.Options.UseBackColor = true;
+      this.viewPosition.ColumnPanelRowHeight = 25;
       this.viewPosition.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colName,
@@ -78,16 +81,18 @@
             this.colAssignedControl,
             this.colDatabase});
       this.viewPosition.GridControl = this.gridPosition;
-      this.viewPosition.GroupRowHeight = 30;
+      this.viewPosition.GroupRowHeight = 25;
       this.viewPosition.IndicatorWidth = 30;
       this.viewPosition.Name = "viewPosition";
       this.viewPosition.OptionsDetail.AllowZoomDetail = false;
       this.viewPosition.OptionsDetail.EnableMasterViewMode = false;
       this.viewPosition.OptionsDetail.ShowDetailTabs = false;
       this.viewPosition.OptionsDetail.SmartDetailExpand = false;
+      this.viewPosition.OptionsView.EnableAppearanceEvenRow = true;
       this.viewPosition.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewPosition.OptionsView.ShowGroupPanel = false;
-      this.viewPosition.RowHeight = 30;
+      this.viewPosition.OptionsView.ShowIndicator = false;
+      this.viewPosition.RowHeight = 25;
       this.viewPosition.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.ViewPositionFocusedRowChanged);
       this.viewPosition.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.ViewPositionInvalidRowException);
       this.viewPosition.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.ViewPositionValidateRow);

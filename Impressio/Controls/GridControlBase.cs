@@ -289,5 +289,8 @@ namespace Impressio.Controls
   public class PredefinedOrderBase : GridControlBase<PredefinedOrder>
   { }
 
+  public class PaperSizeBase : GridControlBase<PaperSizes>
+  { }
+
   #endregion
 }

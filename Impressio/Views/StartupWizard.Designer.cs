@@ -46,8 +46,11 @@
       this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
       this.compactName = new DevExpress.XtraEditors.TextEdit();
       this.connectionString = new DevExpress.XtraEditors.MemoEdit();
+      this.memoEdit1 = new DevExpress.XtraEditors.MemoEdit();
+      this.testDatabase = new DevExpress.XtraEditors.SimpleButton();
       ((System.ComponentModel.ISupportInitialize)(this.wizardControl)).BeginInit();
       this.wizardControl.SuspendLayout();
+      this.welcomeWizardPage.SuspendLayout();
       this.wizardPagePersonalInformation.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.logoEdit.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.userEdit.Properties)).BeginInit();
@@ -55,6 +58,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.databaseEngine.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.compactName.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.connectionString.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).BeginInit();
       this.SuspendLayout();
       // 
       // wizardControl
@@ -88,6 +92,7 @@
       // 
       // welcomeWizardPage
       // 
+      this.welcomeWizardPage.Controls.Add(this.memoEdit1);
       this.welcomeWizardPage.IntroductionText = "Dieser Wizard hilft Ihnen beim aufsetzten Ihrer Impressio Installation.";
       this.welcomeWizardPage.Name = "welcomeWizardPage";
       this.welcomeWizardPage.ProceedText = "";
@@ -148,6 +153,7 @@
       // 
       // wizardPageDatabase
       // 
+      this.wizardPageDatabase.Controls.Add(this.testDatabase);
       this.wizardPageDatabase.Controls.Add(this.labelControl5);
       this.wizardPageDatabase.Controls.Add(this.createCompact);
       this.wizardPageDatabase.Controls.Add(this.labelControl4);
@@ -159,11 +165,10 @@
       this.wizardPageDatabase.Name = "wizardPageDatabase";
       this.wizardPageDatabase.Size = new System.Drawing.Size(574, 172);
       this.wizardPageDatabase.Text = "Datenbank konfigurieren";
-      this.wizardPageDatabase.PageValidating += new DevExpress.XtraWizard.WizardPageValidatingEventHandler(this.WizardPageDatabasePageValidating);
       // 
       // labelControl5
       // 
-      this.labelControl5.Location = new System.Drawing.Point(15, 137);
+      this.labelControl5.Location = new System.Drawing.Point(15, 106);
       this.labelControl5.Name = "labelControl5";
       this.labelControl5.Size = new System.Drawing.Size(97, 13);
       this.labelControl5.TabIndex = 6;
@@ -171,7 +176,7 @@
       // 
       // createCompact
       // 
-      this.createCompact.Location = new System.Drawing.Point(433, 132);
+      this.createCompact.Location = new System.Drawing.Point(433, 101);
       this.createCompact.Name = "createCompact";
       this.createCompact.Size = new System.Drawing.Size(112, 23);
       this.createCompact.TabIndex = 5;
@@ -180,7 +185,7 @@
       // 
       // labelControl4
       // 
-      this.labelControl4.Location = new System.Drawing.Point(15, 97);
+      this.labelControl4.Location = new System.Drawing.Point(15, 78);
       this.labelControl4.Name = "labelControl4";
       this.labelControl4.Size = new System.Drawing.Size(114, 13);
       this.labelControl4.TabIndex = 4;
@@ -188,7 +193,7 @@
       // 
       // databaseEngine
       // 
-      this.databaseEngine.Location = new System.Drawing.Point(187, 94);
+      this.databaseEngine.Location = new System.Drawing.Point(187, 75);
       this.databaseEngine.Name = "databaseEngine";
       this.databaseEngine.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -207,7 +212,7 @@
       // 
       // compactName
       // 
-      this.compactName.Location = new System.Drawing.Point(187, 134);
+      this.compactName.Location = new System.Drawing.Point(187, 103);
       this.compactName.Name = "compactName";
       this.compactName.Size = new System.Drawing.Size(227, 20);
       this.compactName.TabIndex = 1;
@@ -216,9 +221,31 @@
       // 
       this.connectionString.Location = new System.Drawing.Point(187, 17);
       this.connectionString.Name = "connectionString";
-      this.connectionString.Size = new System.Drawing.Size(358, 58);
+      this.connectionString.Size = new System.Drawing.Size(358, 52);
       this.connectionString.TabIndex = 0;
       this.connectionString.EditValueChanged += new System.EventHandler(this.ConnectionStringEditValueChanged);
+      // 
+      // memoEdit1
+      // 
+      this.memoEdit1.EditValue = "Willkommen bei Ihrer Installation von Impressio. Dieser Wizard hilft Ihnen die Da" +
+    "tenbank sowie einigen Grundlegenden Einstellungen zu treffen.";
+      this.memoEdit1.Location = new System.Drawing.Point(15, 20);
+      this.memoEdit1.Name = "memoEdit1";
+      this.memoEdit1.Properties.AllowFocused = false;
+      this.memoEdit1.Properties.ReadOnly = true;
+      this.memoEdit1.Properties.ScrollBars = System.Windows.Forms.ScrollBars.None;
+      this.memoEdit1.ShowToolTips = false;
+      this.memoEdit1.Size = new System.Drawing.Size(544, 140);
+      this.memoEdit1.TabIndex = 1;
+      // 
+      // testDatabase
+      // 
+      this.testDatabase.Location = new System.Drawing.Point(433, 140);
+      this.testDatabase.Name = "testDatabase";
+      this.testDatabase.Size = new System.Drawing.Size(112, 23);
+      this.testDatabase.TabIndex = 7;
+      this.testDatabase.Text = "Testen";
+      this.testDatabase.Click += new System.EventHandler(this.TestDatabaseClick);
       // 
       // StartupWizard
       // 
@@ -237,6 +264,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.wizardControl)).EndInit();
       this.wizardControl.ResumeLayout(false);
       this.wizardControl.PerformLayout();
+      this.welcomeWizardPage.ResumeLayout(false);
       this.wizardPagePersonalInformation.ResumeLayout(false);
       this.wizardPagePersonalInformation.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.logoEdit.Properties)).EndInit();
@@ -246,6 +274,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.databaseEngine.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.compactName.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.connectionString.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -269,5 +298,7 @@
     private DevExpress.XtraEditors.TextEdit compactName;
     private DevExpress.XtraEditors.MemoEdit connectionString;
     private DevExpress.XtraEditors.LabelControl validateDatabase;
+    private DevExpress.XtraEditors.MemoEdit memoEdit1;
+    private DevExpress.XtraEditors.SimpleButton testDatabase;
   }
 }

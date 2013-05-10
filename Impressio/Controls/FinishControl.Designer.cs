@@ -45,6 +45,7 @@ namespace Impressio.Controls
       this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.remarkEdit = new DevExpress.XtraEditors.MemoEdit();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+      this.colCostPerK = new DevExpress.XtraGrid.Columns.GridColumn();
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.gridFinish)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.finishPositionBindingSource)).BeginInit();
@@ -68,10 +69,14 @@ namespace Impressio.Controls
       // finishPositionBindingSource
       // 
       this.finishPositionBindingSource.DataSource = typeof(Impressio.Models.FinishPosition);
+      this.finishPositionBindingSource.Position = 0;
       // 
       // viewFinish
       // 
-      this.viewFinish.ColumnPanelRowHeight = 30;
+      this.viewFinish.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+      this.viewFinish.Appearance.EvenRow.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+      this.viewFinish.Appearance.EvenRow.Options.UseBackColor = true;
+      this.viewFinish.ColumnPanelRowHeight = 25;
       this.viewFinish.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colTable,
@@ -79,15 +84,18 @@ namespace Impressio.Controls
             this.colDescription,
             this.colQuantity,
             this.colPricePerQuantity,
+            this.colCostPerK,
             this.colPriceTotal,
             this.colIsPredefined});
       this.viewFinish.GridControl = this.gridFinish;
       this.viewFinish.IndicatorWidth = 50;
       this.viewFinish.Name = "viewFinish";
       this.viewFinish.OptionsDetail.EnableMasterViewMode = false;
+      this.viewFinish.OptionsView.EnableAppearanceEvenRow = true;
       this.viewFinish.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewFinish.OptionsView.ShowGroupPanel = false;
-      this.viewFinish.RowHeight = 30;
+      this.viewFinish.OptionsView.ShowIndicator = false;
+      this.viewFinish.RowHeight = 25;
       this.viewFinish.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewFinishInitNewRow);
       // 
       // colIdentity
@@ -143,7 +151,7 @@ namespace Impressio.Controls
       this.colPriceTotal.OptionsColumn.AllowFocus = false;
       this.colPriceTotal.OptionsColumn.ReadOnly = true;
       this.colPriceTotal.Visible = true;
-      this.colPriceTotal.VisibleIndex = 3;
+      this.colPriceTotal.VisibleIndex = 4;
       // 
       // colIsPredefined
       // 
@@ -177,6 +185,16 @@ namespace Impressio.Controls
       this.labelControl2.Size = new System.Drawing.Size(53, 13);
       this.labelControl2.TabIndex = 2;
       this.labelControl2.Text = "Bemerkung";
+      // 
+      // colCostPerK
+      // 
+      this.colCostPerK.Caption = "Kosten w. 1\'000";
+      this.colCostPerK.DisplayFormat.FormatString = "c";
+      this.colCostPerK.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.colCostPerK.FieldName = "CostPerK";
+      this.colCostPerK.Name = "colCostPerK";
+      this.colCostPerK.Visible = true;
+      this.colCostPerK.VisibleIndex = 3;
       // 
       // FinishControl
       // 
@@ -213,5 +231,6 @@ namespace Impressio.Controls
         private DevExpress.XtraGrid.Columns.GridColumn colPricePerQuantity;
         private DevExpress.XtraGrid.Columns.GridColumn colPriceTotal;
         private DevExpress.XtraGrid.Columns.GridColumn colIsPredefined;
+        private DevExpress.XtraGrid.Columns.GridColumn colCostPerK;
     }
 }

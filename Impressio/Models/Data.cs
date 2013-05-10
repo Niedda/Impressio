@@ -21,6 +21,7 @@ namespace Impressio.Models
       PositionName,
       PositionTotal,
       Remark,
+      CostPerK,
     }
 
     #endregion
@@ -45,6 +46,8 @@ namespace Impressio.Models
     public override bool IsPredefined { get; set; }
 
     public string Remark { get; set; }
+
+    public override int CostPerK { get; set; }
 
     public List<Data> Objects { get { return _datas; } }
 
@@ -126,6 +129,7 @@ namespace Impressio.Models
       Name = Database.DatabaseCommand.Reader[Columns.PositionName.ToString()] as string;
       Remark = Database.DatabaseCommand.Reader[Columns.Remark.ToString()] as string;
       IsPredefined = (bool)Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
+      CostPerK = Database.DatabaseCommand.Reader[Columns.CostPerK.ToString()].GetInt();
     }
 
     public Dictionary<Enum, object> GetObject()
@@ -137,6 +141,7 @@ namespace Impressio.Models
                  {Columns.PositionName, Name},
                  {Columns.PositionTotal, PositionTotal},
                  {Columns.Remark, Remark.SetStringDbNull()},
+                 {Columns.CostPerK, CostPerK.SetIntDbNull()},
                };
     }
 

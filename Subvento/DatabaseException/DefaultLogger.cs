@@ -3,25 +3,28 @@ using System.IO;
 
 namespace Subvento.DatabaseException
 {
-  public class DefaultLogger
+  public class DefaultLogger : IExceptionHandler
   {
-    private DefaultLogger()
-    { }
-
-    public static DefaultLogger Instance
+    private string Filename
     {
-      get { return _instance ?? (_instance = new DefaultLogger()); }
+      get
+      {
+        return "SubventoLogFile.txt";
+      }
     }
 
-    private static DefaultLogger _instance;
-
-    private const string Filename = "SubventoLogFile.txt";
-
-    public virtual void WriteToLog(string message)
+    public void LogException(Exception exception)
     {
-      using (var streamWriter = new StreamWriter(Filename))
+      try
       {
-        streamWriter.Write(string.Format("{0}{1}{2}{1}", DateTime.Now, Environment.NewLine, message));
+        using (var streamWriter = new StreamWriter(Filename))
+        {
+          streamWriter.Write(string.Format("{0}{1}{2}{1}", DateTime.Now, Environment.NewLine, exception));
+        }
+      }
+      catch (Exception)
+      {
+        throw;
       }
     }
   }

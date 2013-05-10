@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Data.SqlServerCe;
 using Npgsql;
 using Subvento.Configuration;
 using Subvento.Database;
+using Subvento.DatabaseException;
 
 namespace Subvento
 {
@@ -22,6 +24,9 @@ namespace Subvento
         case DatabaseEngine.Compact:
           Database = new SqlCompactDatabase(new SqlCeCommand(), new SqlCeConnection());
           break;
+        case DatabaseEngine.Access:
+          Database = new AccessDatabase(new OleDbCommand(), new OleDbConnection());
+          break;
         default:
           throw new NotSupportedException(string.Format("Database {0} is not supported", ConfigFile.DatabaseEngine));
       }
@@ -32,6 +37,18 @@ namespace Subvento
     public IDatabaseConfig ConfigFile
     {
       get { return _configFile ?? (_configFile = new DatabaseConfig()); }
+    }
+
+    public IExceptionHandler ExceptionHandler
+    {
+      get
+      {
+        return _exceptionHandler ?? (_exceptionHandler = new DefaultLogger());
+      }
+      set
+      {
+        _exceptionHandler = value;
+      }
     }
 
     public static ServiceLocator Instance
@@ -50,7 +67,10 @@ namespace Subvento
       Microsoft,
       Postgres,
       Compact,
+      Access,
     }
+
+    private IExceptionHandler _exceptionHandler;
 
     private static DatabaseConfig _configFile;
 

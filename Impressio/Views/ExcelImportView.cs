@@ -78,8 +78,8 @@ namespace Impressio.Views
                           Price2 = price2.Properties.Value == null ? 0 : Convert.ToInt32(reader[price2.Properties.Value.ToString()]),
                           Price3 = price3.Properties.Value == null ? 0 : Convert.ToInt32(reader[price3.Properties.Value.ToString()]),
                           Price4 = price4.Properties.Value == null ? 0 : Convert.ToInt32(reader[price4.Properties.Value.ToString()]),
-                          SizeB = widthRow.Properties.Value == null ? 0 : Convert.ToInt32(reader[widthRow.Properties.Value.ToString()]),
-                          SizeL = lenghtRow.Properties.Value == null ? 0 : Convert.ToInt32(reader[lenghtRow.Properties.Value.ToString()]),
+                          SizeH = widthRow.Properties.Value == null ? 0 : Convert.ToInt32(reader[widthRow.Properties.Value.ToString()]),
+                          SizeW = lenghtRow.Properties.Value == null ? 0 : Convert.ToInt32(reader[lenghtRow.Properties.Value.ToString()]),
                           Vendor = vendorRow.Properties.Value == null ? null : reader[vendorRow.Properties.Value.ToString()].ToString(),
                           Weight = weightRow.Properties.Value == null ? 0 : Convert.ToInt32(reader[weightRow.Properties.Value.ToString()])
                         };
@@ -113,8 +113,8 @@ namespace Impressio.Views
               Price2 = price2.Properties.Value == null ? 0 : Convert.ToInt32(reader[price2.Properties.Value.ToString()]),
               Price3 = price3.Properties.Value == null ? 0 : Convert.ToInt32(reader[price3.Properties.Value.ToString()]),
               Price4 = price4.Properties.Value == null ? 0 : Convert.ToInt32(reader[price4.Properties.Value.ToString()]),
-              SizeB = widthRow.Properties.Value == null ? 0 : Convert.ToInt32(reader[widthRow.Properties.Value.ToString()]),
-              SizeL = lenghtRow.Properties.Value == null ? 0 : Convert.ToInt32(reader[lenghtRow.Properties.Value.ToString()]),
+              SizeH = widthRow.Properties.Value == null ? 0 : Convert.ToInt32(reader[widthRow.Properties.Value.ToString()]),
+              SizeW = lenghtRow.Properties.Value == null ? 0 : Convert.ToInt32(reader[lenghtRow.Properties.Value.ToString()]),
               Vendor = vendorRow.Properties.Value == null ? null : reader[vendorRow.Properties.Value.ToString()].ToString(),
               Weight = weightRow.Properties.Value == null ? 0 : Convert.ToInt32(reader[weightRow.Properties.Value.ToString()])
             };

@@ -69,7 +69,10 @@ namespace Impressio.Controls
       // 
       // viewClients
       // 
-      this.viewClients.ColumnPanelRowHeight = 30;
+      this.viewClients.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+      this.viewClients.Appearance.EvenRow.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+      this.viewClients.Appearance.EvenRow.Options.UseBackColor = true;
+      this.viewClients.ColumnPanelRowHeight = 25;
       this.viewClients.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colFirstName,
@@ -87,10 +90,12 @@ namespace Impressio.Controls
       this.viewClients.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
       this.viewClients.OptionsFind.AlwaysVisible = true;
       this.viewClients.OptionsFind.ShowCloseButton = false;
+      this.viewClients.OptionsView.EnableAppearanceEvenRow = true;
       this.viewClients.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewClients.OptionsView.ShowDetailButtons = false;
       this.viewClients.OptionsView.ShowGroupPanel = false;
-      this.viewClients.RowHeight = 30;
+      this.viewClients.OptionsView.ShowIndicator = false;
+      this.viewClients.RowHeight = 25;
       this.viewClients.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewClientsInitNewRow);
       // 
       // colIdentity

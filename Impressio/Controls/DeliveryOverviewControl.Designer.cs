@@ -65,7 +65,7 @@ namespace Impressio.Controls
       // 
       this.gridDelivery.DataSource = this.deliveryBindingSource;
       this.gridDelivery.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.gridDelivery.Font = new System.Drawing.Font("Frutiger LT Std 45 Light", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.gridDelivery.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.gridDelivery.Location = new System.Drawing.Point(0, 0);
       this.gridDelivery.MainView = this.viewDelivery;
       this.gridDelivery.Name = "gridDelivery";
@@ -83,7 +83,10 @@ namespace Impressio.Controls
       // 
       // viewDelivery
       // 
-      this.viewDelivery.ColumnPanelRowHeight = 30;
+      this.viewDelivery.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+      this.viewDelivery.Appearance.EvenRow.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+      this.viewDelivery.Appearance.EvenRow.Options.UseBackColor = true;
+      this.viewDelivery.ColumnPanelRowHeight = 25;
       this.viewDelivery.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colTable,
@@ -96,9 +99,11 @@ namespace Impressio.Controls
       this.viewDelivery.IndicatorWidth = 50;
       this.viewDelivery.Name = "viewDelivery";
       this.viewDelivery.OptionsDetail.EnableMasterViewMode = false;
+      this.viewDelivery.OptionsView.EnableAppearanceEvenRow = true;
       this.viewDelivery.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewDelivery.OptionsView.ShowGroupPanel = false;
-      this.viewDelivery.RowHeight = 30;
+      this.viewDelivery.OptionsView.ShowIndicator = false;
+      this.viewDelivery.RowHeight = 25;
       this.viewDelivery.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewDeliveryInitNewRow);
       // 
       // colIdentity
@@ -231,6 +236,7 @@ namespace Impressio.Controls
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
       this.deliveryDateEdit.Mask.EditMask = "";
       this.deliveryDateEdit.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None;
+      this.deliveryDateEdit.MinValue = new System.DateTime(1990, 1, 1, 0, 0, 0, 0);
       this.deliveryDateEdit.Name = "deliveryDateEdit";
       this.deliveryDateEdit.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});

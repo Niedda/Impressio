@@ -1035,7 +1035,7 @@
       // 
       // colSizeL
       // 
-      this.colSizeL.FieldName = "SizeL";
+      this.colSizeL.FieldName = "SizeW";
       this.colSizeL.Name = "colSizeL";
       this.colSizeL.OptionsColumn.AllowEdit = false;
       this.colSizeL.OptionsColumn.AllowFocus = false;
@@ -1049,7 +1049,7 @@
       // 
       // colSizeB
       // 
-      this.colSizeB.FieldName = "SizeB";
+      this.colSizeB.FieldName = "SizeH";
       this.colSizeB.Name = "colSizeB";
       this.colSizeB.OptionsColumn.AllowEdit = false;
       this.colSizeB.OptionsColumn.AllowFocus = false;

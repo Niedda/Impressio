@@ -22,6 +22,8 @@ namespace Impressio.Models
 
     public abstract bool IsPredefined { get; set; }
 
+    public abstract int CostPerK { get; set; }
+
     public abstract IControl AssignedControl { get; }
 
     public IDatabase Database { get { return ServiceLocator.Instance.Database; } }

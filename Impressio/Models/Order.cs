@@ -320,14 +320,14 @@ namespace Impressio.Models
       }
     }
 
-    public List<Offset> Offsets
+    public List<SingleOffset> Offsets
     {
       get
       {
-        return _offsets ?? (_offsets = (new Offset().LoadObjectList(Offset.Columns.FkOffsetOrder, Identity)));
+        return _offsets ?? (_offsets = (new SingleOffset().LoadObjectList(SingleOffset.Columns.FkSingleOffsetOrder, Identity)));
       }
     }
-
+    
     public List<Description> Descriptions
     {
       get
@@ -483,7 +483,7 @@ namespace Impressio.Models
 
     private List<Finish> _finishs;
 
-    private List<Offset> _offsets;
+    private List<SingleOffset> _offsets;
 
     private List<Print> _prints;
 

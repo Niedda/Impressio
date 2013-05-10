@@ -55,10 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\IDatabaseConfig.cs" />
-    <Compile Include="DatabaseException\ExceptionHandler.cs" />
+    <Compile Include="DatabaseException\IExceptionHandler.cs" />
     <Compile Include="DatabaseObject\DatabaseOperators.cs" />
     <Compile Include="DatabaseException\DefaultLogger.cs" />
     <Compile Include="DatabaseObject\Query.cs" />
+    <Compile Include="Database\AccessDatabase.cs" />
     <Compile Include="Database\Database.cs" />
     <Compile Include="Tools\DatabaseConfigTools.cs" />
     <Compile Include="Configuration\DatabaseConfig.cs" />
@@ -80,7 +81,6 @@
     <Compile Include="Tools\DatabaseCreationTools.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuration\DatabaseConfig.xml" />
     <Content Include="Reference\Mono.Security.dll" />
     <Content Include="Reference\Npgsql.dll" />
   </ItemGroup>

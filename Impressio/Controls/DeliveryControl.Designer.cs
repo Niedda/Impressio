@@ -30,18 +30,19 @@ namespace Impressio.Controls
         /// </summary>
         private void InitializeComponent()
         {
+      this.components = new System.ComponentModel.Container();
       this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
       this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
       this.deliveryDate = new DevExpress.XtraEditors.DateEdit();
-      this.deliveryBindingSource = new System.Windows.Forms.BindingSource();
+      this.deliveryBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.addressLookUp = new DevExpress.XtraEditors.LookUpEdit();
-      this.addressBindingSource = new System.Windows.Forms.BindingSource();
+      this.addressBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.clientLookUp = new DevExpress.XtraEditors.LookUpEdit();
-      this.clientBindingSource = new System.Windows.Forms.BindingSource();
+      this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.gridDeliveryPosition = new DevExpress.XtraGrid.GridControl();
-      this.deliveryPositionBindingSource = new System.Windows.Forms.BindingSource();
+      this.deliveryPositionBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewDeliveryPosition = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -202,7 +203,10 @@ namespace Impressio.Controls
       // 
       // viewDeliveryPosition
       // 
-      this.viewDeliveryPosition.ColumnPanelRowHeight = 30;
+      this.viewDeliveryPosition.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+      this.viewDeliveryPosition.Appearance.EvenRow.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+      this.viewDeliveryPosition.Appearance.EvenRow.Options.UseBackColor = true;
+      this.viewDeliveryPosition.ColumnPanelRowHeight = 25;
       this.viewDeliveryPosition.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colTable,
@@ -213,9 +217,11 @@ namespace Impressio.Controls
       this.viewDeliveryPosition.IndicatorWidth = 50;
       this.viewDeliveryPosition.Name = "viewDeliveryPosition";
       this.viewDeliveryPosition.OptionsDetail.EnableMasterViewMode = false;
+      this.viewDeliveryPosition.OptionsView.EnableAppearanceEvenRow = true;
       this.viewDeliveryPosition.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewDeliveryPosition.OptionsView.ShowGroupPanel = false;
-      this.viewDeliveryPosition.RowHeight = 30;
+      this.viewDeliveryPosition.OptionsView.ShowIndicator = false;
+      this.viewDeliveryPosition.RowHeight = 25;
       this.viewDeliveryPosition.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewDeliveryPositionInitNewRow);
       // 
       // colIdentity

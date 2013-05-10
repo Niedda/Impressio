@@ -23,6 +23,8 @@ namespace Impressio.Models
 
     public override bool IsPredefined { get; set; }
 
+    public override int CostPerK { get; set; }
+
     public override IControl AssignedControl
     {
       get

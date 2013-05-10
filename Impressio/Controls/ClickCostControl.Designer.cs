@@ -28,8 +28,9 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.gridClickCost = new DevExpress.XtraGrid.GridControl();
-      this.clickCostBindingSource = new System.Windows.Forms.BindingSource();
+      this.clickCostBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.viewClickCost = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.colIdentity = new DevExpress.XtraGrid.Columns.GridColumn();
       this.colTable = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -63,7 +64,10 @@
       // 
       // viewClickCost
       // 
-      this.viewClickCost.ColumnPanelRowHeight = 30;
+      this.viewClickCost.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+      this.viewClickCost.Appearance.EvenRow.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+      this.viewClickCost.Appearance.EvenRow.Options.UseBackColor = true;
+      this.viewClickCost.ColumnPanelRowHeight = 25;
       this.viewClickCost.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colTable,
@@ -76,9 +80,11 @@
       this.viewClickCost.OptionsDetail.EnableMasterViewMode = false;
       this.viewClickCost.OptionsDetail.ShowDetailTabs = false;
       this.viewClickCost.OptionsDetail.SmartDetailExpand = false;
+      this.viewClickCost.OptionsView.EnableAppearanceEvenRow = true;
       this.viewClickCost.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewClickCost.OptionsView.ShowGroupPanel = false;
-      this.viewClickCost.RowHeight = 30;
+      this.viewClickCost.OptionsView.ShowIndicator = false;
+      this.viewClickCost.RowHeight = 25;
       // 
       // colIdentity
       // 

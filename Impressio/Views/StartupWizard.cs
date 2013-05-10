@@ -33,33 +33,14 @@ namespace Impressio.Views
       Settings.Default.Save();
     }
 
-    private void WizardPageDatabasePageValidating(object sender, DevExpress.XtraWizard.WizardPageValidatingEventArgs e)
-    {
-      validateDatabase.ForeColor = Color.Gold;
-      validateDatabase.Text = "Validierung der Eingaben...";
-      validateDatabase.Update();
-
-      if (!ServiceLocator.Instance.Database.Usable())
-      {
-        validateDatabase.Text = "Fehler bei der Überprüfung der Datenbank";
-        validateDatabase.ForeColor = Color.Red;
-        e.Valid = false;
-      }
-      else
-      {
-        validateDatabase.Text = "Datenbank erfolgreich verbunden";
-        validateDatabase.ForeColor = Color.Green;
-      }
-    }
-
     private void ConnectionStringEditValueChanged(object sender, EventArgs e)
     {
-      ServiceLocator.Instance.ConfigFile.SetConnectionString(connectionString.Text);
+      _isValid = false;
     }
 
     private void DatabaseEngineSelectedIndexChanged(object sender, EventArgs e)
     {
-      ServiceLocator.Instance.ConfigFile.SetDatabaseEngine((ServiceLocator.DatabaseEngine)Enum.Parse(typeof(ServiceLocator.DatabaseEngine), databaseEngine.Text));
+      _isValid = false;
     }
 
     private void CreateCompactClick(object sender, EventArgs e)
@@ -87,7 +68,7 @@ namespace Impressio.Views
 
     private void WizardControlFinishClick(object sender, System.ComponentModel.CancelEventArgs e)
     {
-      if(!ServiceLocator.Instance.Database.Usable())
+      if (!ServiceLocator.Instance.Database.Usable())
       {
         e.Cancel = true;
         XtraMessageBox.Show("Bitte die Einstellungen überprüfen.", "Fehler");
@@ -104,5 +85,28 @@ namespace Impressio.Views
       databaseEngine.Properties.Items.AddRange(databases);
       databaseEngine.Text = ServiceLocator.Instance.ConfigFile.DatabaseEngine.ToString();
     }
+
+    private void TestDatabaseClick(object sender, EventArgs e)
+    {
+      Cursor.Current = Cursors.WaitCursor;
+      ServiceLocator.Instance.ConfigFile.SetConnectionString(connectionString.Text);
+      ServiceLocator.Instance.ConfigFile.SetDatabaseEngine((ServiceLocator.DatabaseEngine)Enum.Parse(typeof(ServiceLocator.DatabaseEngine), databaseEngine.Text));
+      _isValid = ServiceLocator.Instance.Database.Usable();
+
+      wizardPageDatabase.AllowNext = _isValid;
+      if (_isValid)
+      {
+        validateDatabase.Text = "Datenbank erfolgreich verbunden";
+        validateDatabase.ForeColor = Color.Green;
+      }
+      else
+      {
+        validateDatabase.Text = "Fehler bei der Überprüfung der Datenbank";
+        validateDatabase.ForeColor = Color.Red;
+      }
+      Cursor.Current = Cursors.Default;
+    }
+
+    private bool _isValid;
   }
 }

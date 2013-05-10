@@ -98,7 +98,10 @@ namespace Impressio.Controls
       // 
       // viewData
       // 
-      this.viewData.ColumnPanelRowHeight = 30;
+      this.viewData.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+      this.viewData.Appearance.EvenRow.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+      this.viewData.Appearance.EvenRow.Options.UseBackColor = true;
+      this.viewData.ColumnPanelRowHeight = 25;
       this.viewData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colTable,
@@ -113,10 +116,12 @@ namespace Impressio.Controls
       this.viewData.IndicatorWidth = 50;
       this.viewData.Name = "viewData";
       this.viewData.OptionsDetail.EnableMasterViewMode = false;
+      this.viewData.OptionsView.EnableAppearanceEvenRow = true;
       this.viewData.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewData.OptionsView.ShowFooter = true;
       this.viewData.OptionsView.ShowGroupPanel = false;
-      this.viewData.RowHeight = 30;
+      this.viewData.OptionsView.ShowIndicator = false;
+      this.viewData.RowHeight = 25;
       this.viewData.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewDataInitNewRow);
       // 
       // colIdentity

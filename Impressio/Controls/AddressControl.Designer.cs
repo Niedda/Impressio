@@ -65,8 +65,11 @@ namespace Impressio.Controls
       // 
       // viewAddress
       // 
+      this.viewAddress.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+      this.viewAddress.Appearance.EvenRow.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+      this.viewAddress.Appearance.EvenRow.Options.UseBackColor = true;
       this.viewAddress.Appearance.FocusedCell.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.viewAddress.ColumnPanelRowHeight = 30;
+      this.viewAddress.ColumnPanelRowHeight = 25;
       this.viewAddress.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIdentity,
             this.colFkAddressCompany,
@@ -83,10 +86,12 @@ namespace Impressio.Controls
       this.viewAddress.OptionsFind.AlwaysVisible = true;
       this.viewAddress.OptionsFind.ShowCloseButton = false;
       this.viewAddress.OptionsMenu.EnableColumnMenu = false;
+      this.viewAddress.OptionsView.EnableAppearanceEvenRow = true;
       this.viewAddress.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
       this.viewAddress.OptionsView.ShowDetailButtons = false;
       this.viewAddress.OptionsView.ShowGroupPanel = false;
-      this.viewAddress.RowHeight = 30;
+      this.viewAddress.OptionsView.ShowIndicator = false;
+      this.viewAddress.RowHeight = 25;
       this.viewAddress.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.ViewAddressInitNewRow);
       // 
       // colIdentity
