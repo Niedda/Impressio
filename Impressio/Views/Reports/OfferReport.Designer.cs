@@ -30,7 +30,6 @@ namespace Impressio.Reports
     /// </summary>
     private void InitializeComponent()
     {
-      this.components = new System.ComponentModel.Container();
       this.Detail = new DevExpress.XtraReports.UI.DetailBand();
       this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
       this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
@@ -44,7 +43,7 @@ namespace Impressio.Reports
       this.xrLabel11 = new DevExpress.XtraReports.UI.XRLabel();
       this.GroupFooter1 = new DevExpress.XtraReports.UI.GroupFooterBand();
       this.xrLabel10 = new DevExpress.XtraReports.UI.XRLabel();
-      this.orderBindingSourcew = new System.Windows.Forms.BindingSource(this.components);
+      this.orderBindingSourcew = new System.Windows.Forms.BindingSource();
       this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
       this.logoBox = new DevExpress.XtraReports.UI.XRPictureBox();
       this.xrLabel8 = new DevExpress.XtraReports.UI.XRLabel();
@@ -56,6 +55,7 @@ namespace Impressio.Reports
       this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
       this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
       this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+      this.userName = new DevExpress.XtraReports.UI.XRLabel();
       this.xrLabel13 = new DevExpress.XtraReports.UI.XRLabel();
       ((System.ComponentModel.ISupportInitialize)(this.orderBindingSourcew)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -328,9 +328,20 @@ namespace Impressio.Reports
       // ReportFooter
       // 
       this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.userName,
             this.xrLabel13});
       this.ReportFooter.KeepTogether = true;
       this.ReportFooter.Name = "ReportFooter";
+      // 
+      // userName
+      // 
+      this.userName.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.userName.LocationFloat = new DevExpress.Utils.PointFloat(0F, 39.58333F);
+      this.userName.Multiline = true;
+      this.userName.Name = "userName";
+      this.userName.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+      this.userName.SizeF = new System.Drawing.SizeF(233.3333F, 17.79166F);
+      this.userName.StylePriority.UseFont = false;
       // 
       // xrLabel13
       // 
@@ -339,9 +350,9 @@ namespace Impressio.Reports
       this.xrLabel13.Multiline = true;
       this.xrLabel13.Name = "xrLabel13";
       this.xrLabel13.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-      this.xrLabel13.SizeF = new System.Drawing.SizeF(233.3333F, 67.79166F);
+      this.xrLabel13.SizeF = new System.Drawing.SizeF(233.3333F, 17.79166F);
       this.xrLabel13.StylePriority.UseFont = false;
-      this.xrLabel13.Text = "Mit freundlichen Grüssen\r\n\r\n\r\n[UserModified]";
+      this.xrLabel13.Text = "Mit freundlichen Grüssen";
       // 
       // OfferReport
       // 
@@ -357,6 +368,7 @@ namespace Impressio.Reports
       this.PageWidth = 827;
       this.PaperKind = System.Drawing.Printing.PaperKind.A4;
       this.Version = "10.2";
+      this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.OfferReport_BeforePrint);
       ((System.ComponentModel.ISupportInitialize)(this.orderBindingSourcew)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
@@ -390,5 +402,6 @@ namespace Impressio.Reports
     private DevExpress.XtraReports.UI.XRLabel xrLabel13;
     private DevExpress.XtraReports.UI.GroupFooterBand GroupFooter1;
     public DevExpress.XtraReports.UI.XRPictureBox logoBox;
+    public DevExpress.XtraReports.UI.XRLabel userName;
   }
 }

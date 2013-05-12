@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using DevExpress.XtraReports.UI;
 using DevExpress.XtraReports.UserDesigner;
 using Impressio.Models.Tools;
 using Impressio.Properties;
@@ -49,11 +50,6 @@ namespace Impressio.Models
           orderBindingSource = { DataSource = this }
         };
 
-        if (File.Exists(Settings.Default.logoImage))
-        {
-          report.logoBox.ImageUrl = Settings.Default.logoImage;
-        }
-
         report.LoadLayout("Reports\\orderReport.repx");
         report.ShowRibbonPreview();
       }
@@ -66,15 +62,9 @@ namespace Impressio.Models
       if (Identity != 0)
       {
         var report = new OfferReport
-        {
-          orderBindingSourcew = { DataSource = this }
-        };
-
-        if (File.Exists(Settings.Default.logoImage))
-        {
-          
-          report.logoBox.ImageUrl = Settings.Default.logoImage;
-        }
+          {
+            orderBindingSourcew = {DataSource = this},
+          };
 
         report.LoadLayout("Reports\\offerReport.repx");
         report.ShowRibbonPreview();
@@ -327,7 +317,7 @@ namespace Impressio.Models
         return _offsets ?? (_offsets = (new SingleOffset().LoadObjectList(SingleOffset.Columns.FkSingleOffsetOrder, Identity)));
       }
     }
-    
+
     public List<Description> Descriptions
     {
       get
@@ -343,17 +333,17 @@ namespace Impressio.Models
 
     public override void SetObject()
     {
-        Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
-        _dateCreated = Database.DatabaseCommand.Reader[Columns.DateCreated.ToString()] as string;
-        DateModified = Database.DatabaseCommand.Reader[Columns.DateModified.ToString()] as string;
-        _userCreated = Database.DatabaseCommand.Reader[Columns.UserCreated.ToString()] as string;
-        UserModified = Database.DatabaseCommand.Reader[Columns.UserModified.ToString()] as string;
-        OrderName = Database.DatabaseCommand.Reader[Columns.OrderName.ToString()] as string;
-        FkOrderCompany = Database.DatabaseCommand.Reader[Columns.FkOrderCompany.ToString()].GetInt();
-        FkOrderState = Database.DatabaseCommand.Reader[Columns.FkOrderState.ToString()].GetInt();
-        FkOrderAddress = Database.DatabaseCommand.Reader[Columns.FkOrderAddress.ToString()].GetInt();
-        FkOrderClient = Database.DatabaseCommand.Reader[Columns.FkOrderClient.ToString()].GetInt();
-        IsPredefined = (bool)Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
+      Identity = Database.DatabaseCommand.Reader[IdentityColumn].GetInt();
+      _dateCreated = Database.DatabaseCommand.Reader[Columns.DateCreated.ToString()] as string;
+      DateModified = Database.DatabaseCommand.Reader[Columns.DateModified.ToString()] as string;
+      _userCreated = Database.DatabaseCommand.Reader[Columns.UserCreated.ToString()] as string;
+      UserModified = Database.DatabaseCommand.Reader[Columns.UserModified.ToString()] as string;
+      OrderName = Database.DatabaseCommand.Reader[Columns.OrderName.ToString()] as string;
+      FkOrderCompany = Database.DatabaseCommand.Reader[Columns.FkOrderCompany.ToString()].GetInt();
+      FkOrderState = Database.DatabaseCommand.Reader[Columns.FkOrderState.ToString()].GetInt();
+      FkOrderAddress = Database.DatabaseCommand.Reader[Columns.FkOrderAddress.ToString()].GetInt();
+      FkOrderClient = Database.DatabaseCommand.Reader[Columns.FkOrderClient.ToString()].GetInt();
+      IsPredefined = (bool)Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
     }
 
     public override Dictionary<Enum, object> GetObject()
@@ -430,7 +420,7 @@ namespace Impressio.Models
         print.SaveObject();
       }
 
-      foreach(var offset in offsets)
+      foreach (var offset in offsets)
       {
         offset.Identity = 0;
         offset.FkOrder = Identity;
@@ -451,7 +441,7 @@ namespace Impressio.Models
           finishPosition.SaveObject();
         }
       }
-      
+
       foreach (var delivery in deliveries)
       {
         var deliveryPositions = delivery.DeliveryPositions;
@@ -487,7 +477,7 @@ namespace Impressio.Models
 
     private List<Print> _prints;
 
-    private List<Delivery> _deliveries; 
+    private List<Delivery> _deliveries;
 
     private readonly State _state = new State();
 

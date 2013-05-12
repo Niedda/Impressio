@@ -475,8 +475,6 @@
     <EmbeddedResource Include="Views\StartupWizard.resx">
       <DependentUpon>StartupWizard.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="Database\dbImpressio.sqlce" />
-    <None Include="Database\SamplePaper.xlsx" />
     <None Include="Properties\DataSources\Impressio.Models.Address1.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.Client1.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.IPosition.datasource" />
@@ -628,7 +626,6 @@
     <None Include="Resources\copy.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\dbImpressio.sql" />
     <Content Include="ImpressioLogo.ico" />
     <None Include="Resources\Adobe.png" />
     <None Include="Resources\order.png" />
