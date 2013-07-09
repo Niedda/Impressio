@@ -1,4 +1,4 @@
 Impressio
 =========
 
-Small System for print companies to manage clients and jobs
+Small application for print companies to manage clients, calculate offers and manage orders.
