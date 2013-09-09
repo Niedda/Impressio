@@ -61,6 +61,7 @@ namespace Impressio.Controls
       this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
       this.detailMoveDownEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
       this.splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
+      this.colCostPerK = new DevExpress.XtraGrid.Columns.GridColumn();
       ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
       this.groupControl1.SuspendLayout();
@@ -121,6 +122,7 @@ namespace Impressio.Controls
             this.colMoveUp,
             this.colMoveDown,
             this.colPrice,
+            this.colCostPerK,
             this.colPredefinedDescription});
       this.viewDescription.GridControl = this.gridDescription;
       this.viewDescription.IndicatorWidth = 50;
@@ -188,7 +190,7 @@ namespace Impressio.Controls
       this.colMoveUp.ColumnEdit = this.descriptionMoveUpEdit;
       this.colMoveUp.Name = "colMoveUp";
       this.colMoveUp.Visible = true;
-      this.colMoveUp.VisibleIndex = 2;
+      this.colMoveUp.VisibleIndex = 3;
       this.colMoveUp.Width = 25;
       // 
       // descriptionMoveUpEdit
@@ -205,7 +207,7 @@ namespace Impressio.Controls
       this.colMoveDown.ColumnEdit = this.descriptionMoveDownEdit;
       this.colMoveDown.Name = "colMoveDown";
       this.colMoveDown.Visible = true;
-      this.colMoveDown.VisibleIndex = 3;
+      this.colMoveDown.VisibleIndex = 4;
       this.colMoveDown.Width = 25;
       // 
       // descriptionMoveDownEdit
@@ -379,6 +381,16 @@ namespace Impressio.Controls
       this.splitterControl1.TabIndex = 2;
       this.splitterControl1.TabStop = false;
       // 
+      // colCostPerK
+      // 
+      this.colCostPerK.Caption = "Kosten w T";
+      this.colCostPerK.DisplayFormat.FormatString = "c";
+      this.colCostPerK.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+      this.colCostPerK.FieldName = "CostPerK";
+      this.colCostPerK.Name = "colCostPerK";
+      this.colCostPerK.Visible = true;
+      this.colCostPerK.VisibleIndex = 2;
+      // 
       // DescriptionControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -442,5 +454,6 @@ namespace Impressio.Controls
     private DevExpress.XtraGrid.Columns.GridColumn colPrice;
     private DevExpress.XtraGrid.Columns.GridColumn colPredefinedDescription;
     private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryContent;
+    private DevExpress.XtraGrid.Columns.GridColumn colCostPerK;
   }
 }

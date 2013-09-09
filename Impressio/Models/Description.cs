@@ -19,6 +19,7 @@ namespace Impressio.Models
       Arrange,
       IsPredefined,
       Price,
+      CostPerK,
     }
 
     #endregion
@@ -38,6 +39,8 @@ namespace Impressio.Models
     public bool IsPredefined { get; set; }
 
     public int Price { get; set; }
+
+    public int CostPerK { get; set; }
 
     public override List<Description> Objects
     {
@@ -80,6 +83,7 @@ namespace Impressio.Models
       FkDescriptionOrder = Database.DatabaseCommand.Reader[Columns.FkDescriptionOrder.ToString()].GetInt();
       Price = Database.DatabaseCommand.Reader[Columns.Price.ToString()].GetInt();
       IsPredefined = (bool)Database.DatabaseCommand.Reader[Columns.IsPredefined.ToString()];
+      CostPerK = Database.DatabaseCommand.Reader[Columns.CostPerK.ToString()].GetInt();
     }
     
     public override Dictionary<Enum, object> GetObject()
@@ -88,9 +92,10 @@ namespace Impressio.Models
                {
                  {Columns.JobTitle, JobTitle},
                  {Columns.FkDescriptionOrder, FkDescriptionOrder.SetIntDbNull()},
-                 {Columns.Arrange, Arrange.ToString()},
+                 {Columns.Arrange, Arrange},
                  {Columns.IsPredefined, IsPredefined.ToString()},
-                 {Columns.Price, Price.ToString()},
+                 {Columns.Price, Price},
+                 {Columns.CostPerK, CostPerK}
                };
     }
 
