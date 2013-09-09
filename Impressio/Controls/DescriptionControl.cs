@@ -259,7 +259,7 @@ namespace Impressio.Controls
       {
         var row1 = view.GetFocusedRow() as Detail;
         var row2 = view.GetRow(index - 1) as Detail;
-        row1.Arrange = (int)viewDescription.GetRowCellValue(index - 1, colArrangeDetail);
+        row1.Arrange = (int)view.GetRowCellValue(index - 1, colArrangeDetail);
         row2.Arrange = index;
         row1.SaveObject();
         row2.SaveObject();
@@ -278,7 +278,8 @@ namespace Impressio.Controls
       {
         var row1 = view.GetFocusedRow() as Detail;
         var row2 = view.GetRow(index + 1) as Detail;
-        row1.Arrange = (int)viewDescription.GetRowCellValue(index + 1, colArrangeDetail);
+        
+        row1.Arrange = (int)view.GetRowCellValue(index + 1, colArrangeDetail);
         row2.Arrange = index;
         row1.SaveObject();
         row2.SaveObject();

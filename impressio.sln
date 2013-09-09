@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impressio", "Impressio\Impressio.csproj", "{97FA1D0D-FE7A-4C47-BD25-02603064C14D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BC8254A1-A248-4BA5-A6FD-3E8E733D3850} = {BC8254A1-A248-4BA5-A6FD-3E8E733D3850}
@@ -59,7 +59,7 @@ Global
 		{D55E6405-CDF0-4AF2-A6DD-F7011E0BE043}.CD_ROM|Mixed Platforms.ActiveCfg = Release
 		{D55E6405-CDF0-4AF2-A6DD-F7011E0BE043}.CD_ROM|x86.ActiveCfg = Release
 		{D55E6405-CDF0-4AF2-A6DD-F7011E0BE043}.Debug|Any CPU.ActiveCfg = Debug
-		{D55E6405-CDF0-4AF2-A6DD-F7011E0BE043}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{D55E6405-CDF0-4AF2-A6DD-F7011E0BE043}.Debug|Mixed Platforms.ActiveCfg = Release
 		{D55E6405-CDF0-4AF2-A6DD-F7011E0BE043}.Debug|x86.ActiveCfg = Debug
 		{D55E6405-CDF0-4AF2-A6DD-F7011E0BE043}.DVD-5|Any CPU.ActiveCfg = Debug
 		{D55E6405-CDF0-4AF2-A6DD-F7011E0BE043}.DVD-5|Mixed Platforms.ActiveCfg = Debug

@@ -41,7 +41,12 @@ namespace Impressio.Controls
       if (_isLoaded)
       {
         ErrorProvider.SetError(user, string.IsNullOrEmpty(user.Text) ? "Bitte einen Namen vergeben." : "");
-        Settings.Default.Save();
+
+        if (!String.IsNullOrEmpty(user.Text))
+        {
+          Settings.Default.User = user.Text;
+          Settings.Default.Save();
+        }
       }
     }
 

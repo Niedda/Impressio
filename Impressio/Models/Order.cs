@@ -50,7 +50,7 @@ namespace Impressio.Models
           orderBindingSource = { DataSource = this }
         };
 
-        report.LoadLayout("Reports\\orderReport.repx");
+        report.LoadLayout("Views\\Reports\\orderReport.repx");
         report.ShowRibbonPreview();
       }
     }
@@ -66,7 +66,7 @@ namespace Impressio.Models
             orderBindingSourcew = {DataSource = this},
           };
 
-        report.LoadLayout("Reports\\offerReport.repx");
+        report.LoadLayout("Views\\Reports\\offerReport.repx");
         report.ShowRibbonPreview();
       }
     }
@@ -79,7 +79,7 @@ namespace Impressio.Models
 
       var controler = form.DesignMdiController;
       controler.DesignPanelLoaded += OfferDesignerLoad;
-      report.LoadLayout("Reports\\offerReport.repx");
+      report.LoadLayout("Views\\Reports\\offerReport.repx");
       controler.OpenReport(report);
       form.ShowDialog();
       controler.ActiveDesignPanel.CloseReport();
@@ -112,7 +112,7 @@ namespace Impressio.Models
 
       private void Save()
       {
-        _panel.Report.SaveLayout("Reports\\offerReport.repx");
+        _panel.Report.SaveLayout("Views\\Reports\\offerReport.repx");
         _panel.ReportState = ReportState.Saved;
       }
 
@@ -126,7 +126,7 @@ namespace Impressio.Models
 
       var controler = form.DesignMdiController;
       controler.DesignPanelLoaded += OrderDesignerLoad;
-      report.LoadLayout("Reports\\orderReport.repx");
+      report.LoadLayout("Views\\Reports\\orderReport.repx");
       controler.OpenReport(report);
       form.ShowDialog();
       controler.ActiveDesignPanel.CloseReport();
@@ -159,7 +159,7 @@ namespace Impressio.Models
 
       private void Save()
       {
-        _panel.Report.SaveLayout("Reports\\orderReport.repx");
+        _panel.Report.SaveLayout("Views\\Reports\\orderReport.repx");
         _panel.ReportState = ReportState.Saved;
       }
 

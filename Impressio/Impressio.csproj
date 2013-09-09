@@ -487,9 +487,15 @@
     <None Include="Properties\DataSources\Impressio.Models.PrintType.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.SingleOffset.datasource" />
     <None Include="Properties\DataSources\Impressio.Models.UseSimpleOffset.datasource" />
-    <None Include="Views\Reports\deliveryReport.repx" />
-    <None Include="Views\Reports\offerReport.repx" />
-    <None Include="Views\Reports\orderReport.repx" />
+    <None Include="Views\Reports\deliveryReport.repx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\Reports\offerReport.repx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\Reports\orderReport.repx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\state.png" />
     <EmbeddedResource Include="Controls\AddressControl.resx">
       <DependentUpon>AddressControl.cs</DependentUpon>

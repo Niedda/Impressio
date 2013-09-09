@@ -57,7 +57,7 @@ namespace Impressio.Models
 
       var controler = form.DesignMdiController;
       controler.DesignPanelLoaded += DeliveryDesignerLoad;
-      report.LoadLayout("Reports\\deliveryReport.repx");
+      report.LoadLayout("Views\\Reports\\deliveryReport.repx");
       controler.OpenReport(report);
       form.ShowDialog();
       controler.ActiveDesignPanel.CloseReport();
@@ -90,7 +90,7 @@ namespace Impressio.Models
 
       private void Save()
       {
-        _panel.Report.SaveLayout("Reports\\deliveryReport.repx");
+        _panel.Report.SaveLayout("Views\\Reports\\deliveryReport.repx");
         _panel.ReportState = ReportState.Saved;
       }
 
